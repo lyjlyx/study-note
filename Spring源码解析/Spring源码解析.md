@@ -1387,6 +1387,69 @@ loadBeanDefinition方法从String[]->String->Resource[]->Resource，最终将Res
 
 ![image-20220901082800752](image/image-20220901082800752.png) 
 
+![image-20230107221853395](image/image-20230107221853395.png) 
+
+![image-20230107221903010](image/image-20230107221903010.png) 
+
+
+
+![image-20230107222134173](image/image-20230107222134173.png) 
+
+![image-20230107222147022](image/image-20230107222147022.png) 
+
+![image-20230107222205151](image/image-20230107222205151.png) 
+
+![image-20230107222404554](image/image-20230107222404554.png) 
+
+
+
+![image-20230107222621934](image/image-20230107222621934.png) 
+
+![image-20230107222749773](image/image-20230107222749773.png) 
+
+```
+beanDefinitionMaps 相当于是放BeanDefinition对象的map集合，他是必须要根据名字来获取BeanDefinition的而我们要根据beanDefinitionNames里面的name来获取map里面的BeanDefinition
+
+```
+
+![image-20230107223035066](image/image-20230107223035066.png) 
+
+例如下图： 所有的BeanDefinition都是通过beanDefinitionNames集合中的名字来获取的。
+
+![image-20230107223200549](image/image-20230107223200549.png) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

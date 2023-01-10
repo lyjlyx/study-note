@@ -1560,6 +1560,48 @@ getHandlerMappings() 方法与解析.schemas文件的PluggableSchemaResolver 类
 
 
 
+###  元素解析器
+
+**如果需要自定义标签的话，我们应该做以下步骤：**
+
+**1、创建一个对应的解析器处理类（在init方法中添加parser类）**
+
+**2、创建一个普通的spring.handler配置文件，让应用程序能够完成加载工作**
+
+**3、创建对应标签的parser类。（对当前标签的其他属性值进行解析工作）** 
+
+![image-20230110082957965](image/image-20230110082957965.png) 
+
+
+
+![image-20230110083230143](image/image-20230110083230143.png) 
+
+![image-20230110083238023](image/image-20230110083238023.png) 
+
+通过名称取到对应的Parser对象
+
+![image-20230110083622326](image/image-20230110083622326.png) 
+
+![image-20230110083639723](image/image-20230110083639723.png) 
+
+![image-20230110083649469](image/image-20230110083649469.png) 
+
+![image-20230110083702197](image/image-20230110083702197.png) 
+
+![image-20230110083716369](image/image-20230110083716369.png) 
+
+
+
+往beanDefinitionMaps和beanDefinitionNames集合里面放对应的属性值
+
+![image-20230110083954111](image/image-20230110083954111.png) 
+
+![image-20230110084838083](image/image-20230110084838083.png) 
+
+
+
+
+
 ### 自定义标签完成解析工作
 
 参考该类，我们就可以自定义标签

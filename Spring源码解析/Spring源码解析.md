@@ -1622,6 +1622,8 @@ Handler参考该类
 
 ![image-20220904152137797](image/image-20220904152137797.png) 
 
+![image-20230111193334523](image/image-20230111193334523.png) 
+
 
 
 **开始自定义**
@@ -1826,67 +1828,15 @@ http\://www.lyx.com/schema/user=com.msb.selftag.UserNamespaceHandler
 
 
 
+核心处理工作
+
+![image-20230111193837512](image/image-20230111193837512.png) 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## spring的bean工厂准备工作
+## Spring的bean工厂准备工作
 
 
 
@@ -1894,15 +1844,35 @@ http\://www.lyx.com/schema/user=com.msb.selftag.UserNamespaceHandler
 
 ### prepareBeanFactory
 
-![image-20220626130552669](image/image-20220626130552669.png) 
+![image-20230111194009103](image/image-20230111194009103.png) 
+
+给某些属性做一些初始化的工作
+
+![image-20230111195224901](image/image-20230111195224901.png) 
+
+
 
 
 
 SPel表达式处理流程：
 
-一开是需要一个处理类：StandardBeanExpressionResolver->在这个处理类的内部有一个Spel表达式的解析类->里面又包含了一个当前解析类所包含的配置类。
+一开始需要一个处理类：StandardBeanExpressionResolver->在这个处理类的内部有一个Spel表达式的解析类->里面又包含了一个当前解析类所包含的配置类。
 
 ![image-20220904161058236](image/image-20220904161058236.png) 
+
+
+
+![image-20230111200256310](image/image-20230111200256310.png) 
+
+![image-20230111200401799](image/image-20230111200401799.png) 
+
+![image-20230111200313607](image/image-20230111200313607.png) 
+
+
+
+
+
+
 
 
 

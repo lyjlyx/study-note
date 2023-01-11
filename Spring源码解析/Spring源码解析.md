@@ -1618,7 +1618,7 @@ Handler参考该类
 
 
 
-spring.schemas、spring.handlers两个配置文件命名问题，会因为这段代码而报错
+**spring.schemas、spring.handlers两个配置文件命名问题，会因为这段代码而报错**
 
 ![image-20220904152137797](image/image-20220904152137797.png) 
 
@@ -1636,21 +1636,193 @@ spring.schemas、spring.handlers两个配置文件命名问题，会因为这段
 
 ![image-20230110202504974](image/image-20230110202504974.png) 
 
+```java
+package com.msb.selftag;
+
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.springframework.util.StringUtils;
+import org.w3c.dom.Element;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2022/9/4 10:06
+ */
+public class UserBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+
+	@Override
+	protected void doParse(Element element, BeanDefinitionBuilder builder) {
+		//获取标签具体对应的属性值
+		String userName = element.getAttribute("userName");
+		String email = element.getAttribute("email");
+		String password = element.getAttribute("password");
+
+		if (StringUtils.hasText(userName)) {
+			builder.addPropertyValue("userName", userName);
+		}
+		if (StringUtils.hasText(email)) {
+			builder.addPropertyValue("email", email);
+		}
+		if (StringUtils.hasText(password)) {
+			builder.addPropertyValue("password", password);
+		}
+	}
+
+	//返回属性值所对应的对象
+	@Override
+	protected Class<?> getBeanClass(Element element) {
+		return User.class;
+	}
+
+}
+```
+
+```java
+package com.msb.selftag;
+
+import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2022/9/4 10:13
+ */
+public class UserNamespaceHandler extends NamespaceHandlerSupport {
+
+	@Override
+	public void init() {
+		registerBeanDefinitionParser("user", new UserBeanDefinitionParser());
+	}
+}
+
+```
+
+```java
+package com.msb.selftag;
+
+/**
+ * @author LYX
+ * @description 定义一个标签类
+ * @date 2022/9/4 10:04
+ */
+public class User {
+	private String userName;
+	private String email;
+	private String password;
 
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+}
+
+```
+
+application.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:lyx="http://www.lyx.com/schema/user"
+
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+
+		http://www.lyx.com/schema/user http://www.lyx.com/schema/user.xsd
+		http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--为什么开启这个的时候就能够识别到自己注册的类呢？-->
+	<context:component-scan base-package="com.msb"></context:component-scan>
+
+	<lyx:user id="lyx" userName="罗逸轩" email="lyx@qq.com" password="123456"/>
+
+	<!--声明这个对象为spring管理的一个bean对象-->
+<!--	<bean class="com.msb.selfBdrpp.MyBeanDefinitionPostProcessor">-->
+
+<!--	</bean>-->
+
+	<bean id="person2" class="com.msb.init.Person">
+		<constructor-arg index="0" value="1"></constructor-arg>
+		<constructor-arg index="1" value="2"></constructor-arg>
+	</bean>
 
 
+	<bean id="person" class="com.msb.init.Person">
+		<property name="id" value="1"/>
+		<property name="name" value="王八蛋"/>
+	</bean>
+	<!--该对象交由Spring来进行管理-->
+	<!--	<bean class="com.msb.MyBeanFactoryPostProcessor"></bean>-->
 
 
+<!--	<bean id="studentConverter" class="com.msb.selfconvert.StudentConverter"/>-->
+<!--	<bean id="conversionService" class="org.springframework.core.convert.support.ConversionServiceFactory">-->
+<!--		<property name="converters">-->
+<!--			<set>-->
+<!--				<ref bean="studentConverter"/>-->
+<!--			</set>-->
+<!--		</property>-->
+<!--	</bean>-->
 
+</beans>
+```
 
+user.xsd
 
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
+<!--这里就是指定自己的解析文件，我们最好指定成自己的东西-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.lyx.com/schema/user"
+		xmlns:tnx="http://www.lyx.com/schema/user"
+		elementFormDefault="qualified">
+	<element name="user">
+		<complexType>
+			<attribute name="id" type="string"/>
+			<attribute name="userName" type="string"/>
+			<attribute name="email" type="string"/>
+			<attribute name="password" type="string"/>
+		</complexType>
+	</element>
+</schema>
+```
 
+spring.schemas
 
+```
+http\://www.lyx.com/schema/user.xsd=META-INF/user.xsd
+```
 
+spring.handlers
 
-
+```
+http\://www.lyx.com/schema/user=com.msb.selftag.UserNamespaceHandler
+```
 
 
 

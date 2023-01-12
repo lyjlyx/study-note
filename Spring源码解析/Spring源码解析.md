@@ -1922,6 +1922,207 @@ SPel表达式处理流程：
 
 
 
+**开始实现自定义属性编辑器**
+
+定义对象
+
+```java
+package com.msb.secondselfeditor;
+
+/**
+ * TODO
+ *
+ * @author Karry
+ * @date 2023-01-11  20:47
+ */
+public class SecondAddress {
+
+	private String province;
+	private String city;
+	private String town;
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	@Override
+	public String toString() {
+		return "SecondAddress{" +
+				"province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", town='" + town + '\'' +
+				'}';
+	}
+}
+
+```
+
+```java
+package com.msb.secondselfeditor;
+
+import com.msb.selfEditor.Address;
+
+/**
+ * TODO
+ *
+ * @author Karry
+ * @date 2023-01-11  20:48
+ */
+public class SecondCustomer {
+	private String name;
+	private Address address;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "SecondCustomer{" +
+				"name='" + name + '\'' +
+				", address=" + address +
+				'}';
+	}
+}
+
+
+
+```
+
+自定义编辑器
+
+```java
+package com.msb.secondselfeditor;
+
+
+import java.beans.PropertyEditorSupport;
+
+/**
+ * 自定义编辑器
+ * @author Karry
+ * @date 2023-01-11  20:48
+ */
+public class SecondAddressPropertyEditor extends PropertyEditorSupport {
+
+	@Override
+	public void setAsText(String text) throws IllegalArgumentException {
+		String[] s = text.split("_");
+		SecondAddress address = new SecondAddress();
+		address.setProvince(s[0]);
+		address.setCity(s[1]);
+		address.setTown(s[2]);
+		this.setValue(address);
+	}
+
+}
+
+```
+
+自定义注册器
+
+```java
+package com.msb.secondselfeditor;
+
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.PropertyEditorRegistry;
+
+/**
+ * 定义注册器
+ * @author Karry
+ * @date 2023-01-11  20:52
+ */
+public class SecondAddressPropertyEditorRegister implements PropertyEditorRegistrar {
+	@Override
+	public void registerCustomEditors(PropertyEditorRegistry registry) {
+		registry.registerCustomEditor(SecondAddress.class, new SecondAddressPropertyEditor());
+	}
+}
+
+```
+
+xml配置文件
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--	创建一个bean-->
+	<bean id="customer" class="com.msb.secondselfeditor.SecondCustomer">
+		<property name="name" value="罗逸轩"></property>
+		<property name="address" value="福建省_龙岩市_长汀县"></property>
+	</bean>
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<bean class="com.msb.secondselfeditor.SecondAddressPropertyEditorRegister"/>
+		</property>
+	</bean>
+
+	<!--	填充我们自己的类 放到Configurer中-->
+	<!--	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+	<!--		<property name="propertyEditorRegistrars">-->
+	<!--			&lt;!&ndash;CustomEditorConfigurer类的这个属性PropertyEditorRegistrar[] propertyEditorRegistrars;是一个数组&ndash;&gt;-->
+	<!--			<list>-->
+	<!--				<bean class="com.msb.selfEditor.AddressPropertyEditorRegistrar"></bean>-->
+	<!--			</list>-->
+	<!--		</property>-->
+	<!--	</bean>-->
+
+	<!--第二种配置方式，直接通过CustomEditorConfigurer中的
+	Map<Class<?>, Class<? extends PropertyEditor>> customEditors;这个属性进行扩展-->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="com.msb.selfEditor.Address">
+					<value>com.msb.selfEditor.AddressPropertyEditor</value>
+				</entry>
+			</map>
+		</property>
+
+	</bean>
+
+</beans>
+```
+
+
+
+
+
+
+
 ### BeanFactoryPostProcessor
 
 ![image-20220626131023289](image/image-20220626131023289.png) 

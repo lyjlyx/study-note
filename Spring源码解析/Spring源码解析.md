@@ -2074,7 +2074,7 @@ public class SecondAddressPropertyEditorRegister implements PropertyEditorRegist
 
 xml配置文件
 
-```java
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -2157,13 +2157,56 @@ xml配置文件
 
 ### 其他配置方式
 
+
+
 直接通过CustomerEditors设置进去
 
 ![image-20220905111820097](image/image-20220905111820097.png)
 
 ​	
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!--	创建一个bean-->
+	<bean id="customer" class="com.msb.secondselfeditor.SecondCustomer">
+		<property name="name" value="罗逸轩"></property>
+		<property name="address" value="福建省_龙岩市_长汀县"></property>
+	</bean>
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<bean class="com.msb.secondselfeditor.SecondAddressPropertyEditorRegister"/>
+		</property>
+	</bean>
+
+	<!--	填充我们自己的类 放到Configurer中-->
+	<!--	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+	<!--		<property name="propertyEditorRegistrars">-->
+	<!--			&lt;!&ndash;CustomEditorConfigurer类的这个属性PropertyEditorRegistrar[] propertyEditorRegistrars;是一个数组&ndash;&gt;-->
+	<!--			<list>-->
+	<!--				<bean class="com.msb.selfEditor.AddressPropertyEditorRegistrar"></bean>-->
+	<!--			</list>-->
+	<!--		</property>-->
+	<!--	</bean>-->
+
+	<!--第二种配置方式，直接通过CustomEditorConfigurer中的
+	Map<Class<?>, Class<? extends PropertyEditor>> customEditors;这个属性进行扩展-->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="com.msb.selfEditor.Address">
+					<value>com.msb.selfEditor.AddressPropertyEditor</value>
+				</entry>
+			</map>
+		</property>
+
+	</bean>
+
+</beans>
+```
 
 
 

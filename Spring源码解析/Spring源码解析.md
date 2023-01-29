@@ -2155,9 +2155,26 @@ xml配置文件
 
 
 
-### 其他配置方式
+### 自定义属性编辑器的其他配置方式
 
-直接通过CustomerEditors设置进去
+原：
+
+```java
+		<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+			<property name="propertyEditorRegistrars">
+				<!--CustomEditorConfigurer类的这个属性PropertyEditorRegistrar[] propertyEditorRegistrars;是一个数组-->
+				<list>
+					<bean class="com.msb.selfEditor.AddressPropertyEditorRegistrar"></bean>
+				</list>
+			</property>
+		</bean>
+```
+
+
+
+**直接通过CustomerEditors设置进去**
+
+![image-20230129085902220](image/image-20230129085902220.png) 
 
 ![image-20220905111820097](image/image-20220905111820097.png)
 

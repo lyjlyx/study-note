@@ -88,7 +88,7 @@ spring源码的实现过程
 
 
 
-BeanDefinition实例化生成具体对象
+**BeanDefinition实例化生成具体对象**
 
 
 
@@ -121,9 +121,9 @@ PostProcessor分为两类：**BeanFactoryPostProcessor、BeanPostProcessor**
 
 ![image-20220624163457210](image/image-20220624163457210.png) 
 
-例子：PlaceholderConfigurerSupport 替换占位符用
+例子：
 
-
+PlaceholderConfigurerSupport 替换占位符用
 
 ![image-20220624163716127](image/image-20220624163716127.png)
 
@@ -133,11 +133,9 @@ PostProcessor分为两类：**BeanFactoryPostProcessor、BeanPostProcessor**
 
 ### 实例化
 
-
-
 **我们要将实例化和初始化这两个区分开来，他们不是同一个东西。**
 
-
+.
 
 Spring实例化创建对象
 
@@ -2227,21 +2225,102 @@ xml配置文件
 
 ### addBeanPostProcessor
 
-ApplicationContextAwareProcessor这里实现Aware其他相关的实现类
-
-![image-20220905112336020](image/image-20220905112336020.png) 
-
-![image-20220905112350013](image/image-20220905112350013.png) 
 
 
+**添加一个BeanPostProcessor后置处理器**
 
-定义一个MyAwareProcess实现BeanPostProcessor
-
-在postProcessorBeforeInitialization此方法中可以设置其他的属性值
+![image-20230129191820382](image/image-20230129191820382.png) 
 
 
+
+![image-20230129191938545](image/image-20230129191938545.png) 
+
+![image-20230129192018383](image/image-20230129192018383.png) 
+
+![image-20230129192030000](image/image-20230129192030000.png) 
+
+
+
+因为源码中invokeAwareMethods方法的实现及其简单，但是Aware所做到的扩展又不止这些，所以肯定会有别的地方对他进行扩展。实在invokeAwareMethod方法执行之后。
+
+![image-20230129192154236](image/image-20230129192154236.png) 
+
+
+
+**ApplicationContextAwareProcessor这里实现Aware其他相关的实现类**
+
+![image-20230129192443314](image/image-20230129192443314.png) 
+
+
+
+**如果我们的自定义类中实现了这几个接口，那么它设置值的时候是在postProcessore里面来设置的，而不是在invokeMoethods方法里面设置的。**
+
+![image-20230129192452046](image/image-20230129192452046.png) 
+
+
+
+
+
+**定义一个MyAwareProcess实现BeanPostProcessor**
+
+**在BeanPostProcessor里面有一个方法postProcessorBeforeInitialization在此方法中可以设置其他的属性值**
 
 ![image-20220905122906097](image/image-20220905122906097.png) 
+
+
+
+![image-20230129192946425](image/image-20230129192946425.png) 
+
+
+
+invokeAwareMethods的访问修饰符为private的，设计上就是这样设计的，所以扩展的时候需要上述的方法定义postProcessor来自定义扩展
+
+![image-20230129193451586](image/image-20230129193451586.png) 
+
+
+
+自定义aware接口示例
+
+```java
+public class SecondMyAwareProcessor implements BeanPostProcessor {
+
+	private final ConfigurableApplicationContext applicationContext;
+
+	/**
+	 * Create a new ApplicationContextAwareProcessor for the given context.
+	 */
+	public SecondMyAwareProcessor(ConfigurableApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
+
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		AccessControlContext acc = null;
+
+		if (System.getSecurityManager() != null) {
+			acc = this.applicationContext.getBeanFactory().getAccessControlContext();
+		}
+
+		((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
+
+		return bean;
+	}
+}
+```
+
+
+
+![image-20230129194159962](image/image-20230129194159962.png) 
+
+
+
+![image-20230129194547051](image/image-20230129194547051.png) 
+
+
+
+继承AbstractBeanFactory类，重写方法addBeanPostProcessor
+
+![image-20230129195225188](image/image-20230129195225188.png)
 
 
 

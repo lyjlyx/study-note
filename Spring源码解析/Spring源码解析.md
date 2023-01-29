@@ -2328,11 +2328,35 @@ public class SecondMyAwareProcessor implements BeanPostProcessor {
 
 ### ignoreDependencyInterface
 
-反射在进行值处理的时候有两种方式：
+**ApplicationContextAwareProcessor此类用来完成某些Aware对象的注入**
 
-1、获取该属性对应的set方法来进行操作；2、获取到该属性对象field的set方法设置
+
+
+
+
+![image-20230129200729035](image/image-20230129200729035.png) 
+
+
+
+**反射在进行值处理的时候有两种方式：**
+
+1、获取该属性对应的set方法来进行操作；
+
+2、获取到该属性对象field的set方法设置
+
+![image-20230129201240523](image/image-20230129201240523.png) 
+
+![image-20230129201529942](image/image-20230129201529942.png) 
+
+![image-20230129201536116](image/image-20230129201536116.png) 
+
+
 
 ![image-20220905141417731](image/image-20220905141417731.png) 
+
+
+
+invokeAwareMethods方法中的Aware   所以需要下面的方法对他进行处理
 
 ![image-20220905141343544](image/image-20220905141343544.png) 
 
@@ -2342,6 +2366,24 @@ public class SecondMyAwareProcessor implements BeanPostProcessor {
 ```
 
 
+
+![image-20230129201906307](image/image-20230129201906307.png) 
+
+
+
+文章：打开BeanFactory ignoreDependencyInterface方法的正确姿势
+
+```
+https://www.jianshu.com/p/3c7e0608ff1f
+```
+
+
+
+![image-20230129202500266](image/image-20230129202500266.png) 
+
+![image-20230129202511454](image/image-20230129202511454.png) 
+
+集合存取的原理
 
 
 

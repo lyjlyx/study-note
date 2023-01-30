@@ -2407,13 +2407,43 @@ https://www.jianshu.com/p/3c7e0608ff1f
 
 ### 内容回顾
 
-prepareBeanFactory()方法
+主要都是围绕prepareBeanFactory()方法来讲解的。
+
+
+
+#### postProcessBeanFactory
+
+![image-20230130084554530](image/image-20230130084554530.png) 
+
+![image-20230130084649127](image/image-20230130084649127.png) 
+
+
+
+为了让后续的子类对他进行相关扩展的，继承重写该类的方法
+
+![image-20230130084714980](image/image-20230130084714980.png) 
+
+例子
+
+![image-20230130084856309](image/image-20230130084856309.png) 
+
+![image-20230130084846543](image/image-20230130084846543.png) 
 
 
 
 
 
 ### *invokeBeanFactoryPostProcessor
+
+
+
+![image-20230130085043008](image/image-20230130085043008.png) 
+
+
+
+
+
+
 
 
 

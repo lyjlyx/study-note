@@ -2391,7 +2391,13 @@ https://www.jianshu.com/p/3c7e0608ff1f
 
 ## Spring的beanFactoryPostProcessor的执行
 
-@Autowried是通过什么方式设置进去的
+
+
+@Autowried是通过什么方式设置进去的？
+
+
+
+
 
 ### 内容回顾
 

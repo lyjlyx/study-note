@@ -2437,17 +2437,25 @@ https://www.jianshu.com/p/3c7e0608ff1f
 
 
 
+**增强器、后置处理器**
+
+主要是用来操作BeanFactory当前这个对象的
+
 ![image-20230130085043008](image/image-20230130085043008.png) 
 
 
 
+![image-20230131084702799](image/image-20230131084702799.png) 
 
 
 
+该接口处理的是**BeanDefinitionRegistry**这个类，BeanDefinitionRegistry提供了BeanDefinition的一些增删改查的操作。
 
 
 
-该接口处理的是BeanDefinitionRegistry这个类
+**BeanDefinitionRegistry所针对的是BeanDefinition，而BeanFactoryPostProcessor所针对的是BeanFactory，而BeanFactory里面包含了BeanDefinition，所以他在进行操作的时候所针对的对象是不同的，而BeanFactory里面包含了一些Bean的定义信息**
+
+
 
 registry并不是操作map和names的，因为Map里面放的是BeanDefinition，而Names里面放的是BeanDefinition的名称，他们执行两个集合，而registry是用来操作BeanDefinition的，只不过在前期的工厂对象准备的时候，我们把这些BeanDefinition设置到工厂里面去了，但具体的增删改查我们则需要从map里面取到，取到之后才能做具体的操作
 

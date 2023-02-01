@@ -2497,29 +2497,45 @@ BeanFactory包含了BeanDefinition
 
 
 
-**BeanDefinitionRegistryPostProcessor**
+**1、BeanDefinitionRegistryPostProcessor**
 
-上面这个接口集合是下面这个接口集合的子集，上面继承了下面
+上面这个接口集合是下面这个接口集合的子集，上面继承了下面的接口
 
-**BeanFactoryPostProcessor**
+**2、BeanFactoryPostProcessor**
 
 
 
-先处理子集，再处理父集
+![image-20230201090044591](image/image-20230201090044591.png) 
+
+**getBeanFactoryPostProcessor**
+
+
+
+**先处理外部集合，再处理子集，再处理父集**
+
+
 
 #### 在整个Spring的运行期间可以有多个BFPP，那么应该按照什么顺序执行呢？
 
 一般我们使用的是@Ordered来去排序他们的执行。
 
+
+
 ![image-20220905151321689](image/image-20220905151321689.png) 
 
-首先处理PriorityOrdered->再处理Ordered->最后还有一个没有实现任何排序接口的对象。
 
 
+**首先处理PriorityOrdered->再处理Ordered->最后还有一个没有实现任何排序接口的对象。**
 
 ![image-20220905151742653](image/image-20220905151742653.png) 
 
+**如果一个雷实现了BeanDefinitionRegistryPostProcessor，那么他的postProcessBeanFactory()方法可以和其他的BeanFactoryPostProcessor一起执行。**
+
 所以我们可以把它们放到一个集合里面，然后循环调用执行就行了。
+
+
+
+postProcessBeanFactory()
 
 
 

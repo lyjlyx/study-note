@@ -2541,7 +2541,15 @@ postProcessBeanFactory()
 
 ### 排序
 
+
+
 **记住，所有的Registry都是对前面这个对象的增删该查的操作**
+
+![image-20230201201949735](image/image-20230201201949735.png) 
+
+![image-20230201202109252](image/image-20230201202109252.png) 
+
+ ![image-20230201202037529](image/image-20230201202037529.png) 
 
 
 
@@ -2549,17 +2557,27 @@ postProcessBeanFactory()
 
 ![image-20220905154923563](image/image-20220905154923563.png) 
 
- ![image-20220905160310376](image/image-20220905160310376.png) 
+
+
+![image-20230201202433224](image/image-20230201202433224.png) 
 
 
 
-BeanFactoryPostProcessor是用来处理我们的BeanFactory对的，而BeanPostProcessor是用来处理我们的bean对象的。
+![image-20220905160310376](image/image-20220905160310376.png) 
+
+
+
+BeanFactoryPostProcessor是用来处理我们的BeanFactory的，而BeanPostProcessor是用来处理我们的bean对象的。
 
 当我们bean实例化完成之后，我们就要再对我们的BeanPostProcessor进行处理了。虽然在前期处理的时候往里面添加了很多BeanPostProcessor，但是只是为了后面做准备的。
 
 
 
 BeanFactoryPostProcessor我们在进行修改的时候，修改的是BeanFactory里面存在的所有对象，而BeanDefinitionRegistryPostProcessor是用来修改我们的BeanDefinition的，两个东西锁针对的对象是不同的。
+
+
+
+![image-20230201205333800](image/image-20230201205333800.png) 
 
 
 

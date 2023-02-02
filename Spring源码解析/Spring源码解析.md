@@ -2581,6 +2581,8 @@ BeanFactoryPostProcessor我们在进行修改的时候，修改的是BeanFactory
 
 
 
+
+
 ### 优先排序及回答问题
 
 ![image-20220905173349232](image/image-20220905173349232.png) 
@@ -2657,21 +2659,9 @@ regularPostProcessors集合只有一个地方用到，如果不是BeanDefinition
 
 
 
-为什么当执行到BeanFactoryPostProcessor的时候就不需要像上面一样重复去获取了？难道当他执行了invokeBeanFactoryPostProcessors的时候他不会再产生额外的BeanFactoryPostProcessor了吗？
-
-![image-20230202090831005](image/image-20230202090831005.png) 
 
 
-
-
-
-
-
-
-
-
-
-
+### 为什么再处理？
 
 
 

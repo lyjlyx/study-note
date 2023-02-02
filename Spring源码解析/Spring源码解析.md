@@ -2581,17 +2581,99 @@ BeanFactoryPostProcessor我们在进行修改的时候，修改的是BeanFactory
 
 
 
-#### 优先排序及回答问题
+### 优先排序及回答问题
 
 ![image-20220905173349232](image/image-20220905173349232.png) 
 
 
 
-#### 为什么再处理
+获取了两遍的集合 是为什么？
+
+![image-20230202082824372](image/image-20230202082824372.png) 
+
+![image-20230202082837780](image/image-20230202082837780.png) 
+
+
+
+**为什么再处理**
+
+因为在这之间执行了invokeBeanDefinitionRegistryPostProcessors() 里面有可能会有新增的BeanDefinitionRegistryPostProcessor
+
+![image-20230202083345882](image/image-20230202083345882.png) 
 
 前置条件没有满足的时候，就需要这一步骤去操作
 
 ![image-20220905202820434](image/image-20220905202820434.png) 
+
+
+
+![image-20230202083558156](image/image-20230202083558156.png) 
+
+
+
+后续还是会执行invokeBeanDefinitionRegistryPostProcessors方法，后续就不处理了吗？	
+
+![image-20230202083756791](image/image-20230202083756791.png) 
+
+后续会有收尾工作执行
+
+
+
+排序比较器
+
+![image-20230202084726351](image/image-20230202084726351.png) 
+
+![image-20230202084740558](image/image-20230202084740558.png) 
+
+![image-20230202084747294](image/image-20230202084747294.png) 
+
+
+
+![image-20230202085029525](image/image-20230202085029525.png) 
+
+
+
+调用执行postProcessBeanFactory方法（上面执行的都是postProcessBeanDefinitionRegistry()方法） 先调用子类统一方法执行再调用父类的统一方法执行。
+
+![image-20230202085107746](image/image-20230202085107746.png) 
+
+![image-20230202085118778](image/image-20230202085118778.png) 
+
+
+
+regularPostProcessors集合只有一个地方用到，如果不是BeanDefinitionRegistryPostProcessor类型的接口的话就把他加进去
+
+![image-20230202085446682](image/image-20230202085446682.png) 
+
+ registryProcessors集合是为了方便我们统一执行BeanDefinitionRegistryPostProcessor里面的postProcessBeanFactory方法
+
+
+
+
+
+刚刚获取的操作的都是BeanDefinitionRegistryPostProcessor，现在我们应该要处理BeanFactoryPostProcessor，我们在对他进行操作的时候也要遵循刚刚的处理流程。
+
+![image-20230202085925334](image/image-20230202085925334.png) 
+
+
+
+为什么当执行到BeanFactoryPostProcessor的时候就不需要像上面一样重复去获取了？难道当他执行了invokeBeanFactoryPostProcessors的时候他不会再产生额外的BeanFactoryPostProcessor了吗？
+
+![image-20230202090831005](image/image-20230202090831005.png) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

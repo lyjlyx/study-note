@@ -2663,11 +2663,115 @@ regularPostProcessors集合只有一个地方用到，如果不是BeanDefinition
 
 ### 为什么再处理？
 
+再处理是否都是处理BeanFactoryPostProcessor类型接口？
+
+
+
+如果一个bean实现了BeanDefinitionRegistryPostProcessor 里面会处理两个方法，在上面的时候会执行registry的方法，post的方法会扔到后面去执行。
+
+![image-20230202195130541](image/image-20230202195130541.png) 
+
+![image-20230202195141709](image/image-20230202195141709.png) 
+
+
+
+但是一个bean对象只实现了BeanFactoryPostProcesoor没有实现BDRPP，那么到后面就找不到这些东西了。 
+
+所以需要在后面再处理BeanFactoryPostProcessor，不然他们的方法就没东西执行了
+
+![image-20230202194711453](image/image-20230202194711453.png) 
+
+
+
+其实就是先处理BeanDefinitionRegistryPostProcessor，因为里面包含两个方法，一个是自己里面的postProcessBeanDefinitionRegistry()，还有一个就是继承了BeanFactoryPostProcessor接口的postProcessBeanFactory()方法，但是又考虑到如果一个类只实现了BeanFactoryPostProcessor接口的话postProcessBeanFactory方法没东西去执行，所以在后面又处理了一下postProcessBeanFactory()方法。
+
+
+
+#### *ConfigurationClassPostProcessor 
+
+该类是一个后置处理器的类，主要功能是参与BeanFactory的建造，主要功能如下
+   1、解析加了@Configuration的配置类
+   2、解析@ComponentScan扫描的包
+   3、解析ComponentScans扫描的包
+   4、解析*@Import注解
+
+![image-20230202195859072](image/image-20230202195859072.png) 
+
+![image-20230202195949871](image/image-20230202195949871.png) 
+
+
+
+**那么ConfigurationClassPostProcessor他是如何被识别到的呢？**
+
+当执行到prepareBeanFactory方法的时候，beanDefinitonMap里面已经包含了5个internel处理类了
+
+![image-20230202201148401](image/image-20230202201148401.png) 
+
+
+
+那么这5个处理类要去哪里找他怎么弄进去的呢？
+
+在解析这个标签的时候 component-scan的时候
+
+![image-20230202201324054](image/image-20230202201324054.png) 
+
+component-scan为自定义标签
+
+![image-20230202201816417](image/image-20230202201816417.png) 
+
+![image-20230202201931134](image/image-20230202201931134.png) 
+
+
+
+![image-20230202201918104](image/image-20230202201918104.png) 
+
+
+
+![image-20230202202740107](image/image-20230202202740107.png) 
+
+![image-20230202202835500](image/image-20230202202835500.png) 
+
+![image-20230202202926216](image/image-20230202202926216.png) 
+
+![image-20230202203005506](image/image-20230202203005506.png) 
+
+![image-20230202203039012](image/image-20230202203039012.png) 
+
+
+
+**invokeBeanFactoryPostProcessors方法执行**
+
+![image-20230202203219493](image/image-20230202203219493.png) 
+
+
+
+进到这里面的时候就相当于已经开始在执行postProcessBeanDefinitionRetistry方法了
+
+![image-20230202203319966](image/image-20230202203319966.png) 
+
+![image-20230202203447501](image/image-20230202203447501.png) 
 
 
 
 
-## spring的BeanFactoryPostProcessor的执行2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## spring的BeanFactoryPostProcessor的执行2 b
 
 
 

@@ -2855,6 +2855,34 @@ BeanFactory里面的所有东西理论上只要我们实现了**BeanFactoryPostP
 
 ![image-20220906085032861](image/image-20220906085032861.png) 
 
+![image-20230203193224945](image/image-20230203193224945.png) 
+
+
+
+ 父类BeanFactoryPostProcessor处理的时候只要实现一个方法，而BeanDefinitionRegistryPostProcessor子类实现了他，则要完成两个方法的实现。![image-20230203193335167](image/image-20230203193335167.png) 
+
+所以当我们进行判断的时候，如果你属于BeanDefinitonRegistryPostProcessor的时候会优先调用postProcessorBeanDefinitionRegistry方法，先让他开始执行。而postProcessorBeanFactory是放到后面一起执行的。
+
+
+
+执行实现了BeanDefinitionRegistryPostProcessor的接口类，在整个容器工厂中通过类型查找的。
+
+![image-20230203193910529](image/image-20230203193910529.png) 
+
+
+
+
+
+![image-20230203194405062](image/image-20230203194405062.png) 
+
+
+
+1、先找到BeanDefinitionRegistryPostProcessor对应的接口
+
+![image-20230203195015259](image/image-20230203195015259.png) 
+
+
+
 
 
 **疑问：他是如何去调用postProcessBeanFactory方法的呢？他不应该是createBean才实例化吗？没有实例化是怎么去调用方法的？**

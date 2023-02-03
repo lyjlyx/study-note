@@ -2875,7 +2875,7 @@ BeanFactory里面的所有东西理论上只要我们实现了**BeanFactoryPostP
 
 ![image-20230203194405062](image/image-20230203194405062.png) 
 
-
+![image-20230203195035623](image/image-20230203195035623.png) 
 
 1、先找到BeanDefinitionRegistryPostProcessor对应的接口
 
@@ -2883,13 +2883,53 @@ BeanFactory里面的所有东西理论上只要我们实现了**BeanFactoryPostP
 
 
 
+### postProcessBeanDefinitionResistry处理逻辑
+
+
+
+**接上节，为什么要重复识别？**
+
+![image-20230203195304131](image/image-20230203195304131.png) 
+
+
+
+为了防止在执行postProcessorBeanDefinitionRegistry方法的时候又有别的BeanDefinitionRegistryPostProcessor相关类在里面被加进去。在该方法中怎么加进去的呢？
+
+
+
+第一种设置
+
+![image-20230203195710036](image/image-20230203195710036.png) 
+
+
+
 
 
 **疑问：他是如何去调用postProcessBeanFactory方法的呢？他不应该是createBean才实例化吗？没有实例化是怎么去调用方法的？**
 
+getBeanNamesForType返回的是名称，而有了整个名称的时候我们调用了beanFactory.getBean方法
+
 ![image-20220906085358862](image/image-20220906085358862.png) 
 
+
+
 首先获取到了这些容器的名称，然后通过getBean方法去出发实例化（他里面会调用createBean方法）。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

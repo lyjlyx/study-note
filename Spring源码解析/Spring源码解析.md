@@ -2903,7 +2903,7 @@ BeanFactory里面的所有东西理论上只要我们实现了**BeanFactoryPostP
 
 
 
-
+invokeBeanFactoryPostProcessor需要先进行实例化才能再执行的
 
 **疑问：他是如何去调用postProcessBeanFactory方法的呢？他不应该是createBean才实例化吗？没有实例化是怎么去调用方法的？**
 
@@ -2911,13 +2911,13 @@ getBeanNamesForType返回的是名称，而有了整个名称的时候我们调�
 
 ![image-20220906085358862](image/image-20220906085358862.png) 
 
+有执行实例化操作
 
+![image-20230203203313531](image/image-20230203203313531.png) 
 
 首先获取到了这些容器的名称，然后通过getBean方法去出发实例化（他里面会调用createBean方法）。
 
-
-
-
+invokeBeanFactoryPostProcessor需要先进行实例化才能再执行的，而实例化就是再getBean那里触发的。
 
 
 

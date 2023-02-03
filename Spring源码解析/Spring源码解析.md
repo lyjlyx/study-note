@@ -2771,19 +2771,29 @@ component-scan为自定义标签
 
 
 
-## spring的BeanFactoryPostProcessor的执行2 b
+## Spring的BeanFactoryPostProcessor的执行2 
 
 
 
 ### BeanFactoryPostProcessor再次讲解
 
-可以理解为是一个增强类，也可以理解为是一个后置处理器
+
+
+**BeanFactoryPostProcessor可以理解为是一个增强类，也可以理解为是一个后置处理器**
 
 ![image-20220905222105034](image/image-20220905222105034.png) 
 
-BeanFactory里面的所有东西理论上只要我们实现了BeanFactoryPostProcessor这个接口我们都是可以改的
 
-他有一个子接口为BeanDefinitionRegistryPostProcessor
+
+BeanFactory里面的所有东西理论上只要我们实现了**BeanFactoryPostProcessor**这个接口我们都是可以改的
+
+他有一个子接口为**BeanDefinitionRegistryPostProcessor**
+
+
+
+最终会调用这个方法来执行postProcessBeanFactory
+
+![image-20230203084936087](image/image-20230203084936087.png) 
 
 
 
@@ -2791,11 +2801,39 @@ BeanFactory里面的所有东西理论上只要我们实现了BeanFactoryPostPro
 
 
 
-如果自定义实现了BeanFactoryPostProcessor接口，那么像让Spring识别到的话有两种方式：
+
+
+如果手动添加自定义实现了**BeanFactoryPostProcessor**接口，那么像让Spring识别到的话有两种方式：
 
 1、定义在Spring的配置文件中，让Spring自动识别
 
 2、调用具体的addBeanFactoryPostProcessor方法
+
+
+
+1、他会把他生命成一个beanDefinition此时就把他转配进去
+
+![image-20230203085337605](image/image-20230203085337605.png) 
+
+2、当我们自定义MyClassPath的时候customizeBeanFactory方法中可以调用父类方法addBeanFactoryPostProcessor添加
+
+![image-20230203085441951](image/image-20230203085441951.png) 
+
+两种方式任选其一
+
+
+
+完整的图
+
+![image-20230203085723250](image/image-20230203085723250.png) 
+
+
+
+
+
+
+
+
 
 
 

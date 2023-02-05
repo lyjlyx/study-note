@@ -2935,6 +2935,8 @@ invokeBeanFactoryPostProcessor需要先进行实例化才能再执行的，而�
 
 ### postProcessBeanFactory
 
+
+
 regularPostProcessors 存的是add进去的BFPP
 
   ![image-20220906133800045](image/image-20220906133800045.png)
@@ -2944,6 +2946,44 @@ regularPostProcessors 存的是add进去的BFPP
 ![image-20220906135243447](image/image-20220906135243447.png)
 
    
+
+getBeanNameForType在BeanDefinitionRegistryPostProcessor和BeanFactoryPostProcessor执行了多次就不会重复获取相同的，我们在下面实现了BeanFacotryPostProcessor的时候他就不会重复增加其他的BeanFactoryPostProcessor了吗？
+
+![image-20230205110658286](image/image-20230205110658286.png) 
+
+但是真实情况下面是没有的
+
+
+
+我们要看传入的参数
+
+![image-20230205111018163](image/image-20230205111018163.png) 
+
+ ConfigurableListableBeanFactory这个对象是不能添加BeanFactoryPostProcessor的，他里面没有beanFacotryPostProcessor这些东西，所以他是没办法往里面添加的。所以他不会新增中间任何处理的BFPP。
+
+
+
+子类BeanDefinitionBeanPsotProcessor可以添加bean的定义，包括BFPP，父类的定义拿到的是工厂的定义进行修改。
+
+![image-20230205111749429](image/image-20230205111749429.png) 
+
+
+
+
+
+为什么这两行代码重复执行？
+
+![image-20230205113920660](image/image-20230205113920660.png) 
+
+如果我们实现了PriorityOrdered，他算不算Ordered类的？
+
+
+
+
+
+
+
+
 
 
 

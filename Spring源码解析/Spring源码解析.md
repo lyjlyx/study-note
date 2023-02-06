@@ -3123,9 +3123,47 @@ public class PersonService {
 
 ### BeanDefinition2
 
+![image-20230206225250103](image/image-20230206225250103.png) 
 
+![image-20230206225312161](image/image-20230206225312161.png) 
+
+![image-20230206225453190](image/image-20230206225453190.png) 
+
+![image-20230206225512303](image/image-20230206225512303.png) 
 
 ![image-20220907212442049](image/image-20220907212442049.png) 
+
+
+
+![image-20230206230841232](image/image-20230206230841232.png) 
+
+![image-20230206230612363](image/image-20230206230612363.png) 
+
+![image-20230206230914963](image/image-20230206230914963.png) 
+
+
+
+
+
+其他注解的处理都比较好理解，但是@Import会比较费解一些。
+
+![image-20230206231107064](image/image-20230206231107064.png) 
+
+
+
+
+
+SpringBoot源码  ![image-20230206232119801](image/image-20230206232119801.png)
+
+
+
+
+
+
+
+
+
+
 
 
 

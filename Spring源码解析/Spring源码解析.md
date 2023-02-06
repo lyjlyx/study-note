@@ -2989,8 +2989,48 @@ getBeanNameForType在BeanDefinitionRegistryPostProcessor和BeanFactoryPostProces
 
 ### BeanDefiniton1
 
+
+
+![image-20230206142926378](image/image-20230206142926378.png) 
+
+在postProcessorBeanFactory方法中修改对象属性值
+
 ```java
-@Component//如果想让当前这个类被识别到的话应该怎么做？
+public class MySecondBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+	@Override
+	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+		System.out.println(this.getClass().getName() + "执行postProcessBeanDefinitionRegistry方法");
+
+		// 第一种设置方法
+		// bean的名称，拿到BeanDefinition
+//		 registry.registerBeanDefinition("loethin", new RootBeanDefinition(Teacher.class));
+		//第二种设置方法
+		BeanDefinitionBuilder bdb = BeanDefinitionBuilder.rootBeanDefinition(MySecondSelfBeanDefinitionRegistryPostProcessor.class);
+		bdb.addPropertyValue("name", "铁哥们");
+		registry.registerBeanDefinition("teacher", bdb.getBeanDefinition());
+		System.out.println(this.getClass().getName() + "执行了postProcessBeanDefinitionRegistry 方法");
+	}
+
+
+	@Override
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		System.out.println(this.getClass().getName() + "执行postProcessBeanFactory方法");
+		BeanDefinition msb = beanFactory.getBeanDefinition("teacher");
+		msb.getPropertyValues().getPropertyValue("name").setConvertedValue("不是铁哥们了");
+		System.out.println("执行 postProcessBeanFactory 修改name的值");
+	}
+}
+```
+
+![image-20230206143520900](image/image-20230206143520900.png) 
+
+
+
+注解配置文件混合使用的情况下
+
+```java
+//如果想让当前这个类被识别到的话应该怎么做？
+@Component
 public class PersonService {
 }
 
@@ -2999,13 +3039,31 @@ public class PersonService {
 <context:component-scan base-package="com.msb"></context:component-scan>
 ```
 
-BeanDefinition是一个接口：包含了常规的Bean定义信息，GenericBeanDefinition、RootBeanDefinition
 
 
+
+
+**BeanDefinition是一个接口：包含了常规的Bean定义信息，GenericBeanDefinition、RootBeanDefinition**
+
+
+
+![image-20230206144845306](image/image-20230206144845306.png) 
 
 注意：如果我们识别了一个被扫描的组件的话，当前这个组件的上面还应该包含一些其他的相关信息。
 
 ![image-20220907082856213](image/image-20220907082856213.png) 
+
+注解扫描类
+
+![image-20230206145131338](image/image-20230206145131338.png) 
+
+
+
+扫描注册包含注解的类，但是这只是第一步加载
+
+![image-20230206145354644](image/image-20230206145354644.png) 
+
+![image-20230206145444132](image/image-20230206145444132.png) 
 
 ![image-20220907085456042](image/image-20220907085456042.png) 
 
@@ -3017,9 +3075,49 @@ BeanDefinition是一个接口：包含了常规的Bean定义信息，GenericBean
 
 ![image-20220907083553384](image/image-20220907083553384.png) 
 
+
+
 其他的注解都是通过**ConfigurationClassPostProcessor**这个来实现的
 
 ![image-20220907083742580](image/image-20220907083742580.png) 
+
+ 
+
+
+
+ **org.springframework.context.annotation.internalConfigurationAnnotationProcessor**
+
+![image-20230206150017516](image/image-20230206150017516.png) 
+
+![image-20230206150145507](image/image-20230206150145507.png) 
+
+![image-20230206150210723](image/image-20230206150210723.png) 
+
+![image-20230206150541810](image/image-20230206150541810.png) 
+
+![image-20230206150846963](image/image-20230206150846963.png) 
+
+**holder其实就是一个BeanDefinition的包装类，里面多包涵了两个信息，是beanNam和aliases。**
+
+![image-20230206151316909](image/image-20230206151316909.png) 
+
+![image-20230206151347722](image/image-20230206151347722.png) 
+
+![image-20230206151555977](image/image-20230206151555977.png) 
+
+
+
+在Spring中，定义类的名字的时候是有一个规范的
+
+![image-20230206151755185](image/image-20230206151755185.png) 
+
+![image-20230206151808785](image/image-20230206151808785.png) 
+
+![image-20230206152043071](image/image-20230206152043071.png) 
+
+
+
+
 
 
 

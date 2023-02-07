@@ -3179,9 +3179,21 @@ SpringBoot源码  ![image-20230206232119801](image/image-20230206232119801.png)
 
 他是一个配置类的后置处理器
 
-当我们开启@ComponentScan这个注解的时候，前期会自动注入一个internalConfiguration类。
+当我们开启@ComponentScan这个注解的时候，前期会自动注入一个internalConfigurationAnnotationProcessor类。
+
+ ConfigurationClassPostProcessor优先执行的方法是 postProcessorBeanDefinitionRegistry
 
 ![image-20220908082651982](image/image-20220908082651982.png) 
+
+
+
+![image-20230207084351177](image/image-20230207084351177.png) 
+
+![image-20230207084409493](image/image-20230207084409493.png) 
+
+![image-20230207084421556](image/image-20230207084421556.png) 
+
+![image-20230207084438365](image/image-20230207084438365.png) 
 
 
 
@@ -3189,17 +3201,49 @@ SpringBoot源码  ![image-20230206232119801](image/image-20230206232119801.png)
 
 
 
-![image-20220908084235011](image/image-20220908084235011.png) 
+**如果是从配置文件中直接读的BeanDefinition那么他的名字叫GenericBeanDefinition，如果是以注解的方式注册进来的话就叫做ScannedGenericBeanDefinition**
 
 
 
-![image-20220908084539661](image/image-20220908084539661.png) 
+**获取相关元数据对象AnnotationMetadata**
 
-![image-20220908084533681](image/image-20220908084533681.png) 
+![image-20230207085930560](image/image-20230207085930560.png) 
 
 
 
-![image-20220908084558929](image/image-20220908084558929.png) 
+![image-20230207085823111](image/image-20230207085823111.png) 
+
+![image-20230207090316392](image/image-20230207090316392.png) 
+
+![image-20230207090342775](image/image-20230207090342775.png) 
+
+
+
+总体步骤：
+
+1、是否有@Configuration
+
+2、是否包含有@ComponentScan、@ComponentScan、@Import、@ImportResource
+
+3、是否包含有@Bean
+
+
+
+往当前BeanDefinition里面设置一个定义信息，
+
+![image-20220908084539661](image/image-20220908084539661.png)
+
+![image-20230207090723094](image/image-20230207090723094.png) 
+
+
+
+![image-20220908084558929](image/image-20220908084558929.png)  
+
+
+
+**得到上面的集合之后，后续就是对注解中的属性参数做相关处理解析工作了**
+
+![image-20230207091123621](image/image-20230207091123621.png) 
 
 
 

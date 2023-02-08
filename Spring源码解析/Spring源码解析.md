@@ -3395,7 +3395,45 @@ ComponentScan解析
 
 ### MyComponentScan
 
+
+
+第一个先处理外部注解的工作，再处理内部的
+
+![image-20230208125719800](image/image-20230208125719800.png) 
+
+![image-20230208130425595](image/image-20230208130425595.png) 
+
+
+
+@Configuration里面会包含一个@Component这个注解的
+
 ![image-20220909083544271](image/image-20220909083544271.png) 
+
+![image-20230208130752538](image/image-20230208130752538.png) 
+
+![image-20230208130802108](image/image-20230208130802108.png) 
+
+![image-20230208131853700](image/image-20230208131853700.png) 
+
+
+
+![image-20230208132233607](image/image-20230208132233607.png) 
+
+
+
+![image-20230208132250603](image/image-20230208132250603.png) 
+
+扫描代码很简单
+
+![image-20230208132348919](image/image-20230208132348919.png) 
+
+![image-20230208132421718](image/image-20230208132421718.png) 
+
+![image-20230208132550537](image/image-20230208132550537.png) 
+
+![image-20230208132508533](image/image-20230208132508533.png) 
+
+
 
 
 

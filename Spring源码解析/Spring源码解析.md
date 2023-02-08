@@ -3307,9 +3307,87 @@ SpringBoot源码  ![image-20230206232119801](image/image-20230206232119801.png)
 
 
 
+processConfiguration和前面parse 方法里面的processConfiguration方法是一样的，相当于是一个递归操作
+
+![image-20230208083326924](image/image-20230208083326924.png) 
+
+![image-20230208083437819](image/image-20230208083437819.png) 
+
+
+
 我们在定义注解的时候，注解里面锁包含的类有可能也包含注解，所以需要递归去调用。他是一个层层迭代的关系。
 
 ![image-20220909082610573](image/image-20220909082610573.png) 
+
+
+
+解析@PropertySource注解
+
+![image-20230208083739597](image/image-20230208083739597.png) 
+
+举例
+
+![image-20230208083855231](image/image-20230208083855231.png) 
+
+
+
+![image-20230208084252200](image/image-20230208084252200.png) 
+
+
+
+ ![image-20230208084542997](image/image-20230208084542997.png) 
+
+
+
+ComponentScan解析
+
+![image-20230208084800241](image/image-20230208084800241.png) 
+
+![image-20230208084813740](image/image-20230208084813740.png) 
+
+![image-20230208084834049](image/image-20230208084834049.png) 
+
+![image-20230208084934163](image/image-20230208084934163.png) 
+
+​	 
+
+ 通过上一步扫描包com.msb  有可能扫描粗来的bean中可能也添加了ComponentScan或者ComponentScans注解，所以这里需要循环遍历，进行 parse()的递归，继续解析，直到解析出的类上有ComponentScan或者ComponentScans 
+
+![image-20230208085152211](image/image-20230208085152211.png) 
+
+
+
+**解析Import标签**
+
+![image-20230208085315015](image/image-20230208085315015.png) 
+
+里面的方法也是一个递归的调用
+
+![image-20230208085412037](image/image-20230208085412037.png) 
+
+![image-20230208085608061](image/image-20230208085608061.png) 
+
+
+
+执行processImport方法的时候，里面的getImports()方法里面使用的collectImports方法也是有递归在里面的
+
+![image-20230208085719891](image/image-20230208085719891.png) 
+
+![image-20230208085747128](image/image-20230208085747128.png) 
+
+![image-20230208085757106](image/image-20230208085757106.png) 
+
+
+
+接口上也能定义@Bean的注解了
+
+![image-20230208085900506](image/image-20230208085900506.png) 
+
+![image-20230208090013065](image/image-20230208090013065.png) 
+
+
+
+
 
 
 

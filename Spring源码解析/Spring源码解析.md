@@ -3527,19 +3527,41 @@ xml文件开始进行解析工作->注解->解析加载
 
 
 
-## 注册BeanPostProcesser
+## Spring源码-注册BeanPostProcesser
 
 
 
 ### Import到底是如何解析的
 
-递归处理
 
-![image-20220912112820179](image/image-20220912112820179.png) 
 
-获取当前有哪些类需要进行相关的导入操作
+**ConfigurationClassPostProcessor**
 
-![image-20220912113022312](image/image-20220912113022312.png) 
+
+
+**递归处理**（在@SpringBootApplication里面中的@EnableAutoConfiguration，这两个里面都有@Import注解）
+
+![image-20230209084759589](image/image-20230209084759589.png) 
+
+![image-20230209084557920](image/image-20230209084557920.png) 
+
+
+
+getImports()
+
+![image-20230209090524067](image/image-20230209090524067.png) 
+
+
+
+
+
+**获取当前有哪些类需要进行相关的导入操作**
+
+![image-20230209090735256](image/image-20230209090735256.png) 
+
+![image-20230209090744365](image/image-20230209090744365.png) 
+
+
 
 imports用来存放import注解的类，visited 用来存放递归关系的
 
@@ -3549,9 +3571,25 @@ imports用来存放import注解的类，visited 用来存放递归关系的
 
 
 
+SpringBoot
+
+对启动类的每个注解递归的往里查，看看有没有@Import注解的类
+
+![image-20230209090930711](image/image-20230209090930711.png) 
+
+
+
+
+
 通过ImportSelector导入key，去spring.factories文件中找到对应的value 导入我们具体的配置类
 
-![image-20220912143927742](image/image-20220912143927742.png) 
+![image-20230209091431696](image/image-20230209091431696.png) 
+
+![image-20230209091451414](image/image-20230209091451414.png) 
+
+![image-20230209091510165](image/image-20230209091510165.png) 
+
+
 
 ![image-20220912143838176](image/image-20220912143838176.png) 
 

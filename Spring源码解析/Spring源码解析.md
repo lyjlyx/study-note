@@ -3693,13 +3693,42 @@ cache中有13个对应的元素，我们可以通过这个配置把它们都取�
 
 
 
+**自定义加载类**
+
+```java
+package com.mashibing;
+
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2022/9/12 14:58
+ */
+@Configuration
+public class MyAutoConfiguration {
+}
+
+```
+
+![image-20230209210825883](image/image-20230209210825883.png) 
+
+定义factories
+
+```xml
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ com.mashibing.MyAutoConfiguration
+```
+
+![image-20230209211234299](image/image-20230209211234299.png) 
+
+![image-20230209211329877](image/image-20230209211329877.png)
 
 
 
+实现类
 
-
-
-
+![image-20230209212255635](image/image-20230209212255635.png) 
 
 
 

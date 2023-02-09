@@ -3597,13 +3597,51 @@ SpringBoot
 
 processImports：导入具体的配置类，同时完成了具体的实例化工作。
 
+![image-20230209130231121](image/image-20230209130231121.png) 
 
+![image-20230209130255565](image/image-20230209130255565.png) 
 
-**AutoConfigurationImportSelector**
+该类下的jar包中的META-INF的spring.factories文件
 
+![image-20230209130346728](image/image-20230209130346728.png) 
 
+![image-20230209130433770](image/image-20230209130433770.png) 
+
+EnableAutoConfiguration
+
+![image-20230209130443410](image/image-20230209130443410.png) 
+
+![image-20230209131151339](image/image-20230209131151339.png) 
+
+**AutoConfigurationImportSelector 为了导入我们的一些配置类**
 
 getCandidateConfigurations：当我们在处理BFPP的时候里面有一个ConfigurationPostProcessor这个类主要是用来处理我们一些注解的解析工作，里面包含了@Component、@PropertySource、@ComponentScan、@Bean、@Import， 当我们在解析@Import的时候我们会在我们的启动类开始一步一步递归的查找，这个时候里面会识别到一个@ImportSelector类，在这个类进行解析的时候会有一个延迟加载的属性，在延迟加载的时候会有一个getImports方法，在这个方法里面会获取到一个AutoConfigurationEntry这个对象，在获取Entry对象的时候会调用里面的getCandidateConfigurations方法，此时能把配置文件所对应的属性值都加载回来，来完成整个自动装配的解析流程。
+
+
+
+![image-20230209131006254](image/image-20230209131006254.png) 
+
+
+
+![image-20230209131349958](image/image-20230209131349958.png) 
+
+ImportSelector
+
+![image-20230209131212515](image/image-20230209131212515.png) 
+
+此接口是Spring中导入外部配置的核心接口，根据给定的条件（通常是一个或多个注解属性）判断要导入哪个配置类如果该接口的实现类同时实现了一些Aware接口，那么在调用selectImports方法之前先调用上述接口中的回调方法如果需要在所有的@Configuration处理完再导入，可以实现DeferredImportSelector。
+
+![image-20230209131516172](image/image-20230209131516172.png) 
+
+![image-20230209131711140](image/image-20230209131711140.png) 
+
+processImports：具体作用是为了导入一些配置类，同时完成了具体类的实例化功能。
+
+
+
+![image-20230209131915127](image/image-20230209131915127.png) 
+
+
 
 
 

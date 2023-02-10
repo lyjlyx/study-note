@@ -3768,9 +3768,11 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 
 
 
+![image-20230210130824686](image/image-20230210130824686.png)
 
 
 
+BeanPostProcessor所针对的处理对象是bean，里面有两个方法一个是before 一个是after
 
 ![image-20220912162344409](image/image-20220912162344409.png) 
 
@@ -3785,6 +3787,10 @@ BeanPostProcessor所针对的处理对象是bean对象
 销毁相关：![image-20220912162658864](image/image-20220912162658864.png) 
 
 **DestructionAwareBeanPostProcessor 销毁前调用的**
+
+![image-20230210131453775](image/image-20230210131453775.png) 
+
+![image-20230210131812135](image/image-20230210131812135.png) 
 
 
 

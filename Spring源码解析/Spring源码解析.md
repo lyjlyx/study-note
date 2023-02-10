@@ -3748,7 +3748,27 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 
 
 
-![image-20220912160617665](image/image-20220912160617665.png) 
+![image-20230210084834300](image/image-20230210084834300.png) 
+
+
+
+
+
+在Spring中有两种类，一种是Spring自己的还有一种是我们定义的，所以Spring会提供属性值做校验区分
+
+![image-20230210085636581](image/image-20230210085636581.png)
+
+其实只是做了一些记录信息，没有任何的实际意义
+
+![image-20230210085740810](image/image-20230210085740810.png) 
+
+![image-20230210085756126](image/image-20230210085756126.png) 
+
+![image-20230210091514969](image/image-20230210091514969.png) 
+
+
+
+
 
 
 

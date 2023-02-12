@@ -2,19 +2,19 @@
 
 基础架构
 
-![image-20220715164121116](image/image-20220715164121116.png) 
+![image-20220715164121116](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220715164121116.png) 
 
 
 
-![image-20220715165408949](image/image-20220715165408949.png)
+![image-20220715165408949](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220715165408949.png)
 
  
 
 BossGroup只负责客户端之间的连接，Worker Group负责业务数据的读写。
 
-![image-20220715172343305](image/image-20220715172343305.png) 
+![image-20220715172343305](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220715172343305.png) 
 
-![image-20220715173700269](image/image-20220715173700269.png) 
+![image-20220715173700269](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220715173700269.png) 
 
 
 

@@ -16,7 +16,7 @@ SpringApplication
 
 
 
-![image-20220710095303125](image/image-20220710095303125.png) 
+![image-20220710095303125](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710095303125.png) 
 
 primarySources：就是你当前启动类的实例
 
@@ -32,7 +32,7 @@ setListeners：设置监听器（读取spring.factories）
 
 
 
-![image-20220710095847808](image/image-20220710095847808.png) 
+![image-20220710095847808](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710095847808.png) 
 
 
 
@@ -44,13 +44,13 @@ run()
 
 
 
-![image-20220710104843167](image/image-20220710104843167.png) 
+![image-20220710104843167](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710104843167.png) 
 
 
 
 检索当前类上是否有component这个注解
 
-![image-20220710105116865](image/image-20220710105116865.png) 
+![image-20220710105116865](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710105116865.png) 
 
 
 
@@ -72,13 +72,13 @@ run()
 
 一系列的注解解析过程	
 
-![image-20220710110640684](image/image-20220710110640684.png)
+![image-20220710110640684](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710110640684.png)
 
 
 
 **@Import：通过递归的方式来解析**
 
-![image-20220710111107359](image/image-20220710111107359.png) 
+![image-20220710111107359](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220710111107359.png) 
 
 
 

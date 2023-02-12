@@ -8,7 +8,7 @@
 
 **应用层、传输层、网络互联层、网络访问层、物理层**
 
-![image-20220629161616173](image/image-20220629161616173.png) 
+![image-20220629161616173](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629161616173.png) 
 
 **分层的好处**
 
@@ -24,7 +24,7 @@
 
 
 
-![image-20220629162113083](image/image-20220629162113083.png) 
+![image-20220629162113083](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629162113083.png) 
 
 如果只是两次的话，根本没有办法去确认客户端的接收能力，会造成连接资源的浪费
 
@@ -34,7 +34,7 @@
 
 ## 3、TCP的四次挥⼿为什么是四次？为什么不能是三次
 
-![image-20220629163311254](image/image-20220629163311254.png) 
+![image-20220629163311254](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629163311254.png) 
 
 
 
@@ -66,7 +66,7 @@ TCP的四次挥手是为了终止连接而建立的
 
 客户端大量伪造IP发送SYN包，服务端恢复的ACK+SYN去到了一个位置的IP地址，会造成服务端大量的连接处于SYN_RCVD状态，而服务器的半连接队列大小也是有限的，如果半连接队列满，也会出现无法处理正常请求的情况。
 
-![image-20220629163904521](image/image-20220629163904521.png) 
+![image-20220629163904521](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629163904521.png) 
 
 
 
@@ -80,21 +80,21 @@ TCP的四次挥手是为了终止连接而建立的
 
 ## 6、说说TCP快速打开(TFO)的原理
 
-![image-20220629164344264](image/image-20220629164344264.png) 
+![image-20220629164344264](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629164344264.png) 
 
 三次握手建立完成之后，服务端已经有客户端的cookies了
 
-![image-20220629164507309](image/image-20220629164507309.png) 
+![image-20220629164507309](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629164507309.png) 
 
 减少一个往返的RTT，防止SYN-FLOOD
 
-![image-20220629164722974](image/image-20220629164722974.png) 
+![image-20220629164722974](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629164722974.png) 
 
 
 
 ## 7、TCP报文中的时间戳有什么作用
 
-![image-20220629164919082](image/image-20220629164919082.png) 
+![image-20220629164919082](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629164919082.png) 
 
 TCP Timestamps Option由四部分组成
 
@@ -116,9 +116,9 @@ TCP具有超时重传机制，即间隔一段时间没有等到数据包的恢�
 
 这个重传间隔也叫做**超时重传时间（RTO）**
 
-![image-20220629165355634](image/image-20220629165355634.png)
+![image-20220629165355634](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629165355634.png)
 
-![image-20220629165652836](image/image-20220629165652836.png) 
+![image-20220629165652836](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629165652836.png) 
 
 
 
@@ -128,13 +128,13 @@ TCP具有超时重传机制，即间隔一段时间没有等到数据包的恢�
 
 
 
-![image-20220629165741804](image/image-20220629165741804.png) 
+![image-20220629165741804](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629165741804.png) 
 
 
 
-![image-20220629165846356](image/image-20220629165846356.png) 
+![image-20220629165846356](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629165846356.png) 
 
-![image-20220629170023431](image/image-20220629170023431.png) 
+![image-20220629170023431](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629170023431.png) 
 
 
 
@@ -156,19 +156,19 @@ TCP具有超时重传机制，即间隔一段时间没有等到数据包的恢�
 
 
 
-![image-20220629171443426](image/image-20220629171443426.png) 
+![image-20220629171443426](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629171443426.png) 
 
-![image-20220629171510447](image/image-20220629171510447.png) 
+![image-20220629171510447](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629171510447.png) 
 
 ## 12、TCP场景问题1
 
-![image-20220629171643553](image/image-20220629171643553.png)
+![image-20220629171643553](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629171643553.png)
 
 
 
 ## 13、TCP场景问题2
 
-![image-20220629171915447](image/image-20220629171915447.png) 
+![image-20220629171915447](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629171915447.png) 
 
 IP报文头中有协议标志位来区分，如果这个协议为1就是ICMP、协议为6就是TCP、协议为17就是UDP
 
@@ -176,7 +176,7 @@ IP报文头中有协议标志位来区分，如果这个协议为1就是ICMP、�
 
 ## 14、TCP场景问题3
 
-![image-20220629172056845](image/image-20220629172056845.png) 
+![image-20220629172056845](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629172056845.png) 
 
 
 
@@ -192,7 +192,7 @@ IP报文头中有协议标志位来区分，如果这个协议为1就是ICMP、�
 
 ## 16、讲⼀讲netstat的⽤法
 
-![image-20220629172232964](image/image-20220629172232964.png) 
+![image-20220629172232964](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629172232964.png) 
 
 
 
@@ -216,13 +216,13 @@ TPC是一个面向连接的、可靠的、基于字节流的传输层协议
 
 而UDP是一个面向无连接的传输协议
 
-![image-20220629172934858](image/image-20220629172934858.png) 
+![image-20220629172934858](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629172934858.png) 
 
 
 
 ## 20、如果要你来设计⼀个QQ，在⽹络协议上你会考虑 如何设计
 
-![image-20220629173150958](image/image-20220629173150958.png) 
+![image-20220629173150958](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629173150958.png) 
 
 
 

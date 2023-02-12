@@ -78,7 +78,7 @@ redis value支持的类型有，string、hashes、lists、sets、sorted sets
 
 
 
-![image-20211226151248448](image/image-20211226151248448.png) 
+![image-20211226151248448](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226151248448.png) 
 
 
 
@@ -100,17 +100,17 @@ k={x=u} k=[{},{},{}]
 
 **计算是向数据移动的**
 
-![image-20211226151435321](image/image-20211226151435321.png) 
+![image-20211226151435321](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226151435321.png) 
 
 
 
 ### redis安装
 
-![image-20211226161946495](image/image-20211226161946495.png) 
+![image-20211226161946495](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226161946495.png) 
 
 
 
-![image-20211226194938424](image/image-20211226194938424.png) 
+![image-20211226194938424](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226194938424.png) 
 
 
 
@@ -122,7 +122,7 @@ k={x=u} k=[{},{},{}]
 
 BIO时期
 
-![image-20211226162427086](image/image-20211226162427086.png) 
+![image-20211226162427086](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226162427086.png) 
 
 早期的IO是阻塞的，是一个BIO时期
 
@@ -134,7 +134,7 @@ BIO时期
 
 同步非阻塞IO
 
-![image-20211226163341207](image/image-20211226163341207.png) 
+![image-20211226163341207](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226163341207.png) 
 
 
 
@@ -150,13 +150,13 @@ nfds：fd的数量    *readfds：想读的fd结构指针  *writefds：想写的f
 
 exceptfds：异常   timeout：轮循时间
 
-![image-20211226163750849](image/image-20211226163750849.png) 
+![image-20211226163750849](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226163750849.png) 
 
 ```
 select()和pselect()允许程序监视多个文件描述符，直到其中一个或多个文件描述符“准备好”进行某种I/0操作(例如，可能的输入)。如果一个文件描述符可以在不阻塞的情况下执行相应的I/0操作(例如，读(2))，则该文件描述符被认为是就绪的。
 ```
 
-![image-20211226164043475](image/image-20211226164043475.png) 
+![image-20211226164043475](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226164043475.png) 
 
  **统一把1000个fd传给select，内核再去监控这些东西，文件描述符准备完成之后再返回给进程，线程在拿着返回的fd调用read 传进去**
 
@@ -164,7 +164,7 @@ select()和pselect()允许程序监视多个文件描述符，直到其中一个
 
 批量非阻塞（JVM c语言调用）  问题：用户空间和内核空间两个空间拷贝来拷贝去的操作导致文件描述符成为累赘
 
-![image-20211226172634233](image/image-20211226172634233.png) 
+![image-20211226172634233](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226172634233.png) 
 
 
 
@@ -176,7 +176,7 @@ select()和pselect()允许程序监视多个文件描述符，直到其中一个
 
 用户空间和内核空间合并出了一个空间
 
-![image-20211226204708107](image/image-20211226204708107.png) 
+![image-20211226204708107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226204708107.png) 
 
  有了共享空间之后，进程就不需要再单独维护进程中的文件描述符了，直接放到共享空间。内核拿到文件描述符到达的数据放到链表里面。 
 
@@ -184,7 +184,7 @@ select()和pselect()允许程序监视多个文件描述符，直到其中一个
 
 #### 零拷贝
 
-![image-20211226174138280](image/image-20211226174138280.png)
+![image-20211226174138280](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226174138280.png)
 
 
 
@@ -194,13 +194,13 @@ select()和pselect()允许程序监视多个文件描述符，直到其中一个
 
 下图是一个需要拷贝文件描述符的过程
 
-![image-20211226174551023](image/image-20211226174551023.png) 
+![image-20211226174551023](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226174551023.png) 
 
 
 
 **原先需要将数据线读到用户空间，用户空间再调用写write到内核空间而，有了sendfile之后直接调用sendfile，由内核拿到file后放到缓冲区，然后直接发出去**
 
-![image-20211226173605167](image/image-20211226173605167.png) 
+![image-20211226173605167](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226173605167.png) 
 
 
 
@@ -210,11 +210,11 @@ select()和pselect()允许程序监视多个文件描述符，直到其中一个
 
 **kafka会有网卡过来的数据，将数据写到kafka的时候就要读kafka(kafka是基于JVM的)，kafka里面会使用mmap，mmap可以挂载到我们的文件，又因为mmap做的空间和内核是共享的，所以kafka通过mmap看到的内存空间往里写了东西之后其实内核也能看到他，直接触发内核(减少系统调用，减少数据拷贝)也相当于是零拷贝。但是零拷贝不是两个文件名和服务之间的，是用户空间到内存空间减少拷贝的过程， 所直接将文件写入。还需要消费者去读kafka写入的文件，就是走的零拷贝sendfile了，sendfile的输入来自于文件，输出来自于消费者。**
 
-![image-20211226173921747](image/image-20211226173921747.png) 
+![image-20211226173921747](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226173921747.png) 
 
 消费者拿到offset来拿数据也是走的sendfile 零拷贝
 
- ![image-20211226181015327](image/image-20211226181015327.png) 
+ ![image-20211226181015327](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226181015327.png) 
 
 
 
@@ -304,7 +304,7 @@ XX：只有存在key的时候才设置成功(只能更新)
 
 **value有正反向索引的概念：**
 
-![image-20211226213140531](image/image-20211226213140531.png) 
+![image-20211226213140531](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211226213140531.png) 
 
 
 
@@ -314,25 +314,25 @@ SETBIT key offset value   通过指定key的下标 覆盖数值
 
 
 
-![image-20211227122151535](image/image-20211227122151535.png) 
+![image-20211227122151535](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227122151535.png) 
 
 ENCODING
 
-![image-20211227092711584](image/image-20211227092711584.png) 
+![image-20211227092711584](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227092711584.png) 
 
-![image-20211227092908000](image/image-20211227092908000.png) 
-
-
-
-![image-20211227121045528](image/image-20211227121045528.png) 
+![image-20211227092908000](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227092908000.png) 
 
 
 
-![image-20211227121827170](image/image-20211227121827170.png) 
+![image-20211227121045528](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227121045528.png) 
 
 
 
-![image-20211227122038221](image/image-20211227122038221.png) 
+![image-20211227121827170](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227121827170.png) 
+
+
+
+![image-20211227122038221](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227122038221.png) 
 
 
 
@@ -362,7 +362,7 @@ SETBIT
 
 offset:是二进制位的偏移量，而不是字节数组
 
-![image-20211227130037686](image/image-20211227130037686.png) 
+![image-20211227130037686](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227130037686.png) 
 
 
 
@@ -372,7 +372,7 @@ offset:是二进制位的偏移量，而不是字节数组
 
 扩展：其他字符集不再对ASCII重编码
 
-![image-20211227141341906](image/image-20211227141341906.png) 
+![image-20211227141341906](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227141341906.png) 
 
 
 
@@ -386,7 +386,7 @@ bit：0或1
 
 start和end指的是字节的索引  (下图中的圆)
 
-![image-20211227203910601](image/image-20211227203910601.png) 
+![image-20211227203910601](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211227203910601.png) 
 
 bitmap的方法
 
@@ -442,13 +442,13 @@ bitmap的方法
 
 
 
-![image-20211228093230325](image/image-20211228093230325.png)
+![image-20211228093230325](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211228093230325.png)
 
 
 
 **了解** 
 
-![image-20211228122840957](image/image-20211228122840957.png) 
+![image-20211228122840957](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211228122840957.png) 
 
 
 
@@ -574,19 +574,19 @@ Reading messages... (press Ctrl-C to quit)
 
 
 
-![image-20211231163736007](image/image-20211231163736007.png) 
+![image-20211231163736007](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231163736007.png) 
 
 
 
 如果要实现聊天记录的实时更新、能够查看近期的数据、能够查看老的数据，那么客户端发送一次消息需要向三个地方去加消息
 
-![image-20211231165150843](image/image-20211231165150843.png) 
+![image-20211231165150843](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231165150843.png) 
 
 如果客户端在三个环节中某一个环节断了之后处理方式可以用下图的方法，客户端将消息publish到一个redis中
 
 另外一个近期消息的redis 去读他，再来一个微服务去取，将该数据交给kafka存入持久化存储当中。
 
-![image-20211231164936996](image/image-20211231164936996.png) 
+![image-20211231164936996](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231164936996.png) 
 
 
 
@@ -596,15 +596,15 @@ Reading messages... (press Ctrl-C to quit)
 
 按照EXEC谁先到达的顺序来执行事务和命令
 
-![image-20211231172024350](image/image-20211231172024350.png) 
+![image-20211231172024350](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231172024350.png) 
 
-![image-20211231172130516](image/image-20211231172130516.png) 
+![image-20211231172130516](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231172130516.png) 
 
 ​	
 
 
 
-事务中为了规避报错异常，可以通过watch去监控这个key，如果这个key在他前面被改变了，那么他后续的执行命令将不会被执行![image-20211231172652391](image/image-20211231172652391.png)
+事务中为了规避报错异常，可以通过watch去监控这个key，如果这个key在他前面被改变了，那么他后续的执行命令将不会被执行![image-20211231172652391](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211231172652391.png)
 
 
 
@@ -642,11 +642,11 @@ cuckoo布谷鸟过滤器
 
 
 
-![image-20220103153843809](image/image-20220103153843809.png) 
+![image-20220103153843809](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220103153843809.png) 
 
 
 
-![image-20220103153357626](image/image-20220103153357626.png) 
+![image-20220103153357626](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220103153357626.png) 
 
 ### 穿透不了怎么办？
 
@@ -755,7 +755,7 @@ http://www.redis.cn/commands/expire.html
 
 1、阻塞：redis服务对外停止服务，开始备份文件(不适用)
 
-![image-20220103170630304](image/image-20220103170630304.png) 
+![image-20220103170630304](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220103170630304.png) 
 
 
 
@@ -859,7 +859,7 @@ echo $num
 1. 速度
 2. 内存空间够不够
 
-![image-20220103210708941](image/image-20220103210708941.png) 
+![image-20220103210708941](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220103210708941.png) 
 
 **fork()**
 
@@ -876,7 +876,7 @@ echo $num
 
 
 
-![image-20220103221520615](image/image-20220103221520615.png)  
+![image-20220103221520615](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220103221520615.png)  
 
 **复制关系指针要远快过把数据复制一份**
 
@@ -1008,7 +1008,7 @@ appendfsync no
 
 **appendonly.aof文件的数据**
 
-![image-20220104212321437](image/image-20220104212321437.png) 
+![image-20220104212321437](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220104212321437.png) 
 
 ```
 要想生成dump.rdb文件执行bgsave命令
@@ -1044,7 +1044,7 @@ OK
 
 ```
 
-![image-20220104213214711](image/image-20220104213214711.png) ![image-20220104213221469](image/image-20220104213221469.png) 
+![image-20220104213214711](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220104213214711.png) ![image-20220104213221469](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220104213221469.png) 
 
 
 
@@ -1053,7 +1053,7 @@ OK
 BGREWRITEAOF
 ```
 
-![image-20220104213437042](image/image-20220104213437042.png) 
+![image-20220104213437042](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220104213437042.png) 
 
 
 
@@ -1070,7 +1070,7 @@ aof-use-rdb-preamble yes
 
 
 
-![image-20220104214449342](image/image-20220104214449342.png) 
+![image-20220104214449342](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220104214449342.png) 
 
 **增量日志加上全量时点数据**
 
@@ -1092,7 +1092,7 @@ aof-use-rdb-preamble yes
 
 **Z轴：优先级，逻辑再拆分**
 
-![image-20220105131833159](image/image-20220105131833159.png) 
+![image-20220105131833159](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105131833159.png) 
 
 
 
@@ -1107,21 +1107,21 @@ aof-use-rdb-preamble yes
 1.容忍数据丢失一部分
 ```
 
- ![image-20220105132839124](image/image-20220105132839124.png) 
+ ![image-20220105132839124](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105132839124.png) 
 
 
 
 ### 复制和高可用
 
-![image-20220105201905551](image/image-20220105201905551.png) 
+![image-20220105201905551](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105201905551.png) 
 
-![image-20220105202217400](image/image-20220105202217400.png) 
+![image-20220105202217400](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105202217400.png) 
 
 
 
 **最终一致性也有一个问题就是当另外一个客户端去访问redis的时候有可能他还没消费kafka的数据，就会导致取到的数据不一致**
 
-![image-20220105202712342](image/image-20220105202712342.png) 
+![image-20220105202712342](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105202712342.png) 
 
 
 
@@ -1133,9 +1133,9 @@ aof-use-rdb-preamble yes
 
 最好是使用自动的故障转移，目的是代替人，需要由一个技术，程序实现，其实只要是一个程序就会出现单点故障的问题。自身也是一个一变多的集群
 
-![image-20220105211949854](image/image-20220105211949854.png) 
+![image-20220105211949854](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105211949854.png) 
 
-![image-20220105211958435](image/image-20220105211958435.png) 
+![image-20220105211958435](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220105211958435.png) 
 
 
 
@@ -1164,14 +1164,14 @@ replica-read-only yes
 repl-diskless-sync no
 ```
 
-![image-20220106132151447](image/image-20220106132151447.png)
+![image-20220106132151447](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220106132151447.png)
 
 ```
 #主和从之间的增量复制
 repl-backlog-size 1mb
 ```
 
-![image-20220106132733497](image/image-20220106132733497.png)
+![image-20220106132733497](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220106132733497.png)
 
 
 
@@ -1218,11 +1218,11 @@ sentinel monitor mymaster 127.0.0.1 6379 2
 
 
 
-![image-20220107124634375](image/image-20220107124634375.png) 
+![image-20220107124634375](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220107124634375.png) 
 
 ### 哈希环
 
-![image-20220107130555629](image/image-20220107130555629.png) 
+![image-20220107130555629](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220107130555629.png) 
 
 ### 数据倾斜的问题
 
@@ -1232,13 +1232,13 @@ sentinel monitor mymaster 127.0.0.1 6379 2
 
 ### 引出redis的连接成本很高对server端造成的问题
 
-![image-20220107131522012](image/image-20220107131522012.png) 
+![image-20220107131522012](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220107131522012.png) 
 
 
 
 
 
- ![image-20220107132512164](image/image-20220107132512164.png) 
+ ![image-20220107132512164](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220107132512164.png) 
 
 GitHub搜：
 
@@ -1254,7 +1254,7 @@ GitHub搜：
 
 可以用预分区解决
 
-![image-20220108104959761](image/image-20220108104959761.png) 
+![image-20220108104959761](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220108104959761.png) 
 
 
 
@@ -1264,7 +1264,7 @@ GitHub搜：
 
 
 
-![image-20220108105951478](image/image-20220108105951478.png) 
+![image-20220108105951478](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220108105951478.png) 
 
 
 
@@ -1296,7 +1296,7 @@ linux小技巧
 
 ### 击穿
 
-![image-20220109124403650](image/image-20220109124403650.png) 
+![image-20220109124403650](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109124403650.png) 
 
 
 
@@ -1306,7 +1306,7 @@ linux小技巧
 
 从业务接收的请求查询是你系统根本不存在的数据
 
- ![image-20220109143252074](image/image-20220109143252074.png) 
+ ![image-20220109143252074](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109143252074.png) 
 
 
 
@@ -1314,7 +1314,7 @@ linux小技巧
 
 设置失效的数据过期时间错开
 
-![image-20220109144923793](image/image-20220109144923793.png) 
+![image-20220109144923793](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109144923793.png) 
 
 
 
@@ -1346,7 +1346,7 @@ linux小技巧
 
 使用spring高级API的时候，存入到redis的key会是带序列化的key，并且如果使用StringRedisTemplate模板去创建的value只能是字符类型(其他类型运行过程中会报错)，所以需要将他的序列化给重新设置过
 
-![image-20220109203807109](image/image-20220109203807109.png) 
+![image-20220109203807109](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109203807109.png) 
 
 
 

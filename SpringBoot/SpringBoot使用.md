@@ -20,15 +20,15 @@ bootstrap.properties->bootstrap.yml->application.properties->application.yml
 
 
 
-![image-20220628215356745](image/image-20220628215356745.png) 
+![image-20220628215356745](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220628215356745.png) 
 
 
 
 ### 配置文件位置的优先级
 
-![image-20220628220314420](image/image-20220628220314420.png) 
+![image-20220628220314420](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220628220314420.png) 
 
-![image-20220628220625088](image/image-20220628220625088.png) 
+![image-20220628220625088](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220628220625088.png) 
 
 
 
@@ -142,7 +142,7 @@ public class MyHttpSessionListener implements HttpSessionListener {
 
 
 
-![image-20220628231850682](image/image-20220628231850682.png) 
+![image-20220628231850682](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220628231850682.png) 
 
 
 
@@ -162,7 +162,7 @@ public class MyHttpSessionListener implements HttpSessionListener {
 
 ThreadLocal
 
-![image-20220629195548247](image/image-20220629195548247.png) 
+![image-20220629195548247](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220629195548247.png) 
 
 
 
@@ -180,7 +180,7 @@ ThreadLocal
 
 ## SpringBoot初始参数的设置
 
-![image-20220822103630920](image/image-20220822103630920.png)
+![image-20220822103630920](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822103630920.png)
 
 
 
@@ -234,27 +234,27 @@ EventPublishingRunListener
 
 ### 准备spring环境
 
-![image-20220822145023697](image/image-20220822145023697.png) 
+![image-20220822145023697](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822145023697.png) 
 
 
 
-![image-20220822145224213](image/image-20220822145224213.png) 
+![image-20220822145224213](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822145224213.png) 
 
-![image-20220822145424999](image/image-20220822145424999.png) 
+![image-20220822145424999](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822145424999.png) 
 
- ![image-20220822145827498](image/image-20220822145827498.png) 
+ ![image-20220822145827498](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822145827498.png) 
 
 
 
-![image-20220822150217020](image/image-20220822150217020.png) 
+![image-20220822150217020](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822150217020.png) 
 
 
 
 ### 加载yaml和properties文件
 
-![image-20220822151334708](image/image-20220822151334708.png) 
+![image-20220822151334708](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822151334708.png) 
 
- ![image-20220822151348058](image/image-20220822151348058.png)	![image-20220822151410773](image/image-20220822151410773.png) 
+ ![image-20220822151348058](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822151348058.png)	![image-20220822151410773](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822151410773.png) 
 
 
 
@@ -262,27 +262,27 @@ EventPublishingRunListener
 
 
 
-![image-20220822160646758](image/image-20220822160646758.png) 
+![image-20220822160646758](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822160646758.png) 
 
-![image-20220822160659457](image/image-20220822160659457.png) 
-
-
-
-![image-20220822162135722](image/image-20220822162135722.png)
-
-![image-20220822162122353](image/image-20220822162122353.png) 
+![image-20220822160659457](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822160659457.png) 
 
 
 
-![image-20220822163126049](image/image-20220822163126049.png) 
+![image-20220822162135722](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822162135722.png)
 
-![image-20220822163145645](image/image-20220822163145645.png) 
-
-
+![image-20220822162122353](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822162122353.png) 
 
 
 
-![image-20220822163817534](image/image-20220822163817534.png) 
+![image-20220822163126049](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822163126049.png) 
+
+![image-20220822163145645](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822163145645.png) 
+
+
+
+
+
+![image-20220822163817534](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220822163817534.png) 
 
 
 

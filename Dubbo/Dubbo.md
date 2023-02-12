@@ -15,7 +15,7 @@
 </dependency>
 ```
 
-## Dubbo架构图讲解![image-20220302204754634](image/image-20220302204754634.png)
+## Dubbo架构图讲解![image-20220302204754634](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220302204754634.png)
 
 虚线表示异步，实现表示同步。异步不阻塞线程性能高，同步阻塞线程必须等待响应结果才能继续执行，相对性能低。
 
@@ -87,29 +87,29 @@ Consumer去调用Provider方法的时候肯定会去获取一个返回值，这�
 
 在Provider中的实现类，加的@Service要加上Dubbo的@Service
 
-![image-20220303135226851](image/image-20220303135226851.png) 
+![image-20220303135226851](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303135226851.png) 
 
 Consumer的@Service要用Spring注入
 
 可以看到我们的实例注册到了Zookeeper中
 
-![image-20220303210137330](image/image-20220303210137330.png) 
+![image-20220303210137330](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210137330.png) 
 
-![image-20220303210215089](image/image-20220303210215089.png)
+![image-20220303210215089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210215089.png)
 
-![image-20220303210305631](image/image-20220303210305631.png)
+![image-20220303210305631](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210305631.png)
 
 ## Dubbo的Admin界面搭建
 
-![image-20220303210325105](image/image-20220303210325105.png)
+![image-20220303210325105](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210325105.png)
 
 使用解压缩文件修改jar包中的端口号
 
-![image-20220303210507177](image/image-20220303210507177.png)
+![image-20220303210507177](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210507177.png)
 
 java -jar jar包启动
 
-![image-20220303210820029](image/image-20220303210820029.png)
+![image-20220303210820029](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220303210820029.png)
 
 ## Dubbo负载均衡效果
 
@@ -196,17 +196,17 @@ dubbo:
 
 ​	显示全部部门信息
 
-![](image/Dubbo-4.png)
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/Dubbo-4.png)
 
 
 
 ##### 1.2员工新增
 
-![](image/Dubbo-5.png)
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/Dubbo-5.png)
 
 ##### 1.3查看部门员工
 
-![](image/Dubbo-6.png)
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/Dubbo-6.png)
 
 #### 2.按照分布式架构进行设计项目
 
@@ -216,7 +216,7 @@ dubbo:
 
 
 
-![](image/Dubbo-7.png)
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/Dubbo-7.png)
 
 
 

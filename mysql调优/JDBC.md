@@ -2,7 +2,7 @@
 
 # JDBC及代码分层
 
- ![image-20220409155520655](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409155520655.png) 
+ ![image-20220409155520655](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409155520655.png) 
 
 JDBC是Java的一套访问控制数据库里面数据的一套标准，是面向接口的
 
@@ -10,27 +10,27 @@ JDBC是Java的一套访问控制数据库里面数据的一套标准，是面向
 
 
 
-![image-20220409164007754](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409164007754.png) 
+![image-20220409164007754](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409164007754.png) 
 
 
 
 厂商驱动包
 
-![image-20220409164639758](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409164639758.png) 
+![image-20220409164639758](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409164639758.png) 
 
 厂商实现了Driver接口
 
-![image-20220409164946520](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409164946520.png) 
+![image-20220409164946520](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409164946520.png) 
 
-![image-20220409165016181](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409165016181.png) 
+![image-20220409165016181](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409165016181.png) 
 
-![image-20220409165608227](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409165608227.png) 
+![image-20220409165608227](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409165608227.png) 
 
-![image-20220409165625707](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409165625707.png) 
+![image-20220409165625707](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409165625707.png) 
 
 也可以使用classes12.jar包
 
-![image-20220409171320424](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409171320424.png) 
+![image-20220409171320424](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409171320424.png) 
 
 
 
@@ -38,11 +38,11 @@ JDBC是Java的一套访问控制数据库里面数据的一套标准，是面向
 
 是jdk内置的一种服务提供发现机制。SPI是一种动态替换发现的机制，比如有个接口，想运行时动态的给他添加实现，你只需要添加一个实现。我们经常遇到的就是java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，mysql和postgresql都有不同的实现提供给用户，而Java的SPI机制可以为某个接口寻找服务实现。
 
-![SPI](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\SPI.png)
+![SPI](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/SPI.png)
 
-![image-20220409172908027](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409172908027.png) 
+![image-20220409172908027](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409172908027.png) 
 
-![image-20220409173110289](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409173110289.png) 
+![image-20220409173110289](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409173110289.png) 
 
 **statement用于执行静态SQL语句并返回其生产的结果的对象**
 
@@ -124,11 +124,11 @@ connection.setAutoCommit(true)
 
 **使用prepareStatement来防止SQL注入**
 
-![image-20220409200110052](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409200110052.png) 
+![image-20220409200110052](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409200110052.png) 
 
 
 
-![image-20220409200328075](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409200328075.png) 
+![image-20220409200328075](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409200328075.png) 
 
 
 
@@ -138,7 +138,7 @@ connection.setAutoCommit(true)
 
 不仅仅局限于公共访问修饰符，所有的访问修饰符都能够拿到
 
-![image-20220409204046726](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220409204046726.png) 
+![image-20220409204046726](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220409204046726.png) 
 
 
 
@@ -425,7 +425,7 @@ public class C3P0Test {
 
 **配置文件名必须要交c3p0.properties**
 
-![image-20220410165720549](D:\TyporaNote\马士兵教育\技术\mysql调优\JDBC.assets\image-20220410165720549.png)
+![image-20220410165720549](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410165720549.png)
 
 ```properties
 #JDBC具备自己的规范，在JDBC4之前是必须要填写驱动名称的，但之后版本不需要填写

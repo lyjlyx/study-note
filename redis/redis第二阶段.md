@@ -16,11 +16,11 @@
 
 
 
-![image-20220706211921492](image/image-20220706211921492.png) 
+![image-20220706211921492](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220706211921492.png) 
 
 
 
-![image-20220706211931599](image/image-20220706211931599.png) 
+![image-20220706211931599](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220706211931599.png) 
 
 
 

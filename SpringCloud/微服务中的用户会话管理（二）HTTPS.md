@@ -12,7 +12,7 @@
 
 **我们的一次访问都需要经过很多东西，这些东西都是有风险的**
 
-![image-20220215164132790](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220215164132790.png) 
+![image-20220215164132790](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220215164132790.png) 
 
 **访问过程中很可能出现某一层被拦截，伪造了一个新的数据**
 
@@ -22,13 +22,13 @@
 
 **加密算法(明文)=密文**
 
-![image-20220215165529847](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220215165529847.png) 
+![image-20220215165529847](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220215165529847.png) 
 
 
 
 **但是上图还是不安全，因为服务器和用户是一对多的，中间拦截商可以获得到加密算法**
 
-![image-20220215165945191](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220215165945191.png) 
+![image-20220215165945191](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220215165945191.png) 
 
 **盐是随机的，我们对盐进行加密，让盐不会被暴力破解**
 
@@ -64,7 +64,7 @@
 
 
 
-![image-20220216102350288](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216102350288.png) 
+![image-20220216102350288](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216102350288.png) 
 
 
 
@@ -112,7 +112,7 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 
 
-![image-20220216124814738](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216124814738.png) 
+![image-20220216124814738](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216124814738.png) 
 
 
 
@@ -120,9 +120,9 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 
 
-![image-20220216134558899](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216134558899.png) 
+![image-20220216134558899](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216134558899.png) 
 
-![image-20220216134626227](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216134626227.png) 
+![image-20220216134626227](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216134626227.png) 
 
 
 
@@ -142,17 +142,17 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 协商好加密之后，再向服务端的80端口发送请求
 
-![image-20220216135728253](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216135728253.png) 
+![image-20220216135728253](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216135728253.png) 
 
 
 
 首先 服务端下发证书到客户端，使用证书的CA私钥加密服务端的公钥，如果在中间环节被非法的代理服务器拦截住，通过CA证书的公钥解开了服务端下发到客户端的公钥(他拿到公钥想干坏事，窥探客户端发送给服务端的信息)，但是客户端使用Ca公钥解开之后(数据是使用服务端和客户端约定的**对称加密**的秘钥去加密的，非法代理服务器想要窥探我们的信息必须要获取到这个秘钥)，会使用Server端发送的**公钥**去给加密信息的秘钥去进行加密，虽然非法代理服务器获取  到了server的公钥，但是他没办法使用这个公钥去解密这个数据
 
-![image-20220216163525195](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216163525195.png)
+![image-20220216163525195](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216163525195.png)
 
 
 
-![image-20220216165820896](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216165820896.png) ![image-20220216165855566](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216165855566.png) 
+![image-20220216165820896](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216165820896.png) ![image-20220216165855566](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216165855566.png) 
 
 
 
@@ -171,7 +171,7 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 
 
-![image-20220216171104348](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216171104348.png) 
+![image-20220216171104348](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216171104348.png) 
 
 
 
@@ -181,7 +181,7 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 **302浏览器会自动跳转到location上面的地址，重定向**
 
-![image-20220216173955671](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216173955671.png) 
+![image-20220216173955671](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216173955671.png) 
 
 **浏览器的307协议不允许location脱离请求地址的范围，就是请求地址http必须只能访问https**
 
@@ -193,7 +193,7 @@ hash算法(公钥) = hash值  -> 公钥的签名/摘要
 
 没办法解决，只能在真实网站上给提示，**或者在服务端去规定某些接口，必须使用https的网址访问**
 
-![image-20220216174858997](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216174858997.png) 
+![image-20220216174858997](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216174858997.png) 
 
 ## OpenSSL
 
@@ -295,7 +295,7 @@ openssl.exe req -new -key c:/dev/server.key -out c:/dev/pub.csr
 
 
 
-![image-20220216223316111](D:\TyporaNote\马士兵教育\技术\SpringCloud\image-20220216223316111.png) 
+![image-20220216223316111](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220216223316111.png) 
 
 如何让不安全的https编程安全的
 

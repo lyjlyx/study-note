@@ -20,7 +20,7 @@ int main() {
 }
 ```
 
-![image-20221128192606306](image\image-20221128192606306.png) 
+![image-20221128192606306](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221128192606306.png) 
 
 
 
@@ -30,13 +30,13 @@ int main() {
 
 ### 关键字
 
-![image-20221128193125309](image\image-20221128193125309.png) 
+![image-20221128193125309](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221128193125309.png) 
 
 
 
 ### 常量和变量
 
-**![image-20221128193215790](image\image-20221128193215790.png) **
+**![image-20221128193215790](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221128193215790.png) **
 
 **一级指针、二级指针、三级指针**
 
@@ -47,19 +47,19 @@ int main() {
 - 在程序运行的过程中值不能被改变
 - 常量一般出现在表达式或赋值语句中
 
-![image-20221229224020072](image/image-20221229224020072.png) 
+![image-20221229224020072](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221229224020072.png) 
 
 #### 变量
 
-![image-20221229224218931](image/image-20221229224218931.png) 
+![image-20221229224218931](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221229224218931.png) 
 
-![image-20221229224339391](image/image-20221229224339391.png) 
+![image-20221229224339391](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221229224339391.png) 
 
 
 
 ### 整型
 
-![image-20221229224709459](image/image-20221229224709459.png) 
+![image-20221229224709459](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221229224709459.png) 
 
 
 
@@ -74,7 +74,7 @@ int main() {
 }
 ```
 
-![image-20221229225540021](image/image-20221229225540021.png) 
+![image-20221229225540021](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221229225540021.png) 
 
 long 类型是4  是因为我们的编译器是32位的。首先前提必须是64位的，如果是32位的，就算编译器是64位的，也是占4个字节（但是64位编译器在32位操作系统是不能运行的，只是举个例子）。
 

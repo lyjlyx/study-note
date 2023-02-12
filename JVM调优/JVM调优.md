@@ -4,15 +4,15 @@
 
 **Java跨平台的语言**
 
-![image-20220305173456848](image\image-20220305173456848.png)
+![image-20220305173456848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220305173456848.png)
 
 **JVM跨语言的平台**
 
-![image-20220305171246287](image\image-20220305171246287.png)
+![image-20220305171246287](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220305171246287.png)
 
 **任何语言只要能编译成class文件就能在JVM中运行**
 
-![image-20220305171321728](image\image-20220305171321728.png) 
+![image-20220305171321728](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220305171321728.png) 
 
 
 
@@ -23,11 +23,11 @@
 - 字节码指令集
 - 内存管理：栈、堆、方法区等
 
-![image-20220305172710812](image\image-20220305172710812.png)
+![image-20220305172710812](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220305172710812.png)
 
 ## JDK JRE JVM
 
-![image-20220305173208183](image\image-20220305173208183.png)
+![image-20220305173208183](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220305173208183.png)
 
 - JVM相当于是一个执行的平台
 - JRE运行时环境，包含核心类库，比如：Object、String......
@@ -43,15 +43,15 @@
 
 使用BinEd插件来打开16进制的.class文件
 
-![image-20220508131503301](image\image-20220508131503301.png) ![image-20220508132152648](image\image-20220508132152648.png) 
+![image-20220508131503301](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508131503301.png) ![image-20220508132152648](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508132152648.png) 
 
-![image-20220508132130797](image\image-20220508132130797.png) 
+![image-20220508132130797](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508132130797.png) 
 
 
 
 ### Class文件解读
 
-![image-20220508154552436](image\image-20220508154552436.png) 
+![image-20220508154552436](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508154552436.png) 
 
 
 
@@ -69,32 +69,32 @@
 
 
 
-![image-20220508141803985](image\image-20220508141803985.png) 
+![image-20220508141803985](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508141803985.png) 
 
  
 
-1. access_flags	![image-20220508134353939](image\image-20220508134353939.png) 
-2. ![image-20220508153638227](image\image-20220508153638227.png) 
+1. access_flags	![image-20220508134353939](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508134353939.png) 
+2. ![image-20220508153638227](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508153638227.png) 
 
 
 
 #### **this_class 当前class文件指向常量池里面的内容**
 
-![image-20220508134637011](image\image-20220508134637011.png) 
+![image-20220508134637011](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508134637011.png) 
 
 详细内容
 
-![image-20220508134703212](image\image-20220508134703212.png) 
+![image-20220508134703212](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508134703212.png) 
 
 
 
-![image-20220508135014885](image\image-20220508135014885.png) 
+![image-20220508135014885](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508135014885.png) 
 
 上图**访问标识**为什么是0X0021
 
-![image-20220508135146414](image\image-20220508135146414.png)
+![image-20220508135146414](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508135146414.png)
 
-![image-20220508135542445](image\image-20220508135542445.png) 
+![image-20220508135542445](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508135542445.png) 
 
 
 
@@ -106,39 +106,39 @@
 
 方法引用的信息
 
-![image-20220508144255256](image\image-20220508144255256.png) 
+![image-20220508144255256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508144255256.png) 
 
 
 
-![image-20220508145110994](image\image-20220508145110994.png) 
+![image-20220508145110994](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508145110994.png) 
 
-![image-20220508151044968](image\image-20220508151044968.png) 
+![image-20220508151044968](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508151044968.png) 
 
-![image-20220508140958774](image\image-20220508140958774.png) 
+![image-20220508140958774](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508140958774.png) 
 
-![image-20220508150327097](image\image-20220508150327097.png)
+![image-20220508150327097](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508150327097.png)
 
 
 
 此处有个笔误，但是不影响下面的分析
 
-![image-20220508143808876](image\image-20220508143808876.png) 
+![image-20220508143808876](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508143808876.png) 
 
-![image-20220508143654131](image\image-20220508143654131.png) 
-
-
+![image-20220508143654131](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508143654131.png) 
 
 
 
-![image-20220508143731319](image\image-20220508143731319.png) 
+
+
+![image-20220508143731319](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508143731319.png) 
 
 
 
 ##### 方法具体的实现
 
-![image-20220508154405283](image\image-20220508154405283.png) 
+![image-20220508154405283](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508154405283.png) 
 
-![image-20220508154353801](image\image-20220508154353801.png) 
+![image-20220508154353801](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508154353801.png) 
 
 
 
@@ -146,35 +146,35 @@
 
 ****
 
-![image-20220508155536394](image\image-20220508155536394.png) 
+![image-20220508155536394](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155536394.png) 
 
-![image-20220508155550498](image\image-20220508155550498.png) 
+![image-20220508155550498](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155550498.png) 
 
 
 
 **method中最终的是Code   执行的是哪条指令**
 
-![image-20220508155625843](image\image-20220508155625843.png) 
+![image-20220508155625843](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155625843.png) 
 
 
 
 2a  aload_0 (把this压栈)   b7  invokespecial(在下图中 invokespecial 调用了 位置为0001常量池的第一项[java.lang.object] 调用他的构造方法)
 
-![image-20220508160418006](image\image-20220508160418006.png) 
+![image-20220508160418006](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508160418006.png) 
 
-![image-20220508155734274](image\image-20220508155734274.png) 
+![image-20220508155734274](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155734274.png) 
 
-![image-20220508223252420](image\image-20220508223252420.png) 
+![image-20220508223252420](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508223252420.png) 
 
-![image-20220508155704896](image\image-20220508155704896.png) 
+![image-20220508155704896](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155704896.png) 
 
 b1就是return
 
-![image-20220508155910915](image\image-20220508155910915.png) 
+![image-20220508155910915](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508155910915.png) 
 
 
 
-![image-20220508160015970](image\image-20220508160015970.png) 
+![image-20220508160015970](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508160015970.png) 
 
 
 
@@ -184,7 +184,7 @@ b1就是return
 
 首先会调用父类的构造方法，然后把自己成员变量进行初始化
 
-![image-20220508163340089](image\image-20220508163340089.png) 
+![image-20220508163340089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508163340089.png) 
 
 **magic -> minor version -> major version -> constant_pool_count -> constant_pool->access flags -> this_class->super class->interface count -> interfaces -> fields_count -> fields -> methods_count -> methods_info ->attribute_count -> attribute(*Code)**
 
@@ -212,13 +212,13 @@ b1就是return
 
 ​	3.Initializing	静态变量的初始值
 
-![image-20220508165210955](image\image-20220508165210955.png) 
+![image-20220508165210955](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508165210955.png) 
 
 
 
 **JVM所有的class都是通过类加载器来加载到内存的**
 
-![image-20220508165740146](image\image-20220508165740146.png)
+![image-20220508165740146](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508165740146.png)
 
 **上图并不是一个继承关系**
 
@@ -226,7 +226,7 @@ b1就是return
 
 getClassLoader如果是null的话，那么这个类使用的类加载器就是最顶层的类加载器  Bootstrap  他是由C++实现的。
 
-![image-20220508171040509](image\image-20220508171040509.png) 
+![image-20220508171040509](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508171040509.png) 
 
 
 
@@ -268,7 +268,7 @@ class类对象在MetaSpace中
 
 **一个class需要被load到内存时候的执行过程，例如A.class，如果有自定义的CustomClassLoader就去自定义的CustomClassLoader去找，他内部维护了一个缓存，调用loadClass()方法看看有没有将A.class加载进去，如果加载进去了就返回，如果没有他并不是二话不说直接加载，而是去他的父加载器往上找，委托AppClassLoader，如果AppClassLoader的缓存中没有这个类，则继续委托ExtensionClassLoader找，如果ExtensionClassLoader还是没有则委托Bootstrap，因为Bootstrap是最顶级了，所以相当于这几个类加载器缓存中都没有A.class这个类。那么Bootstrap就往回再委托，Extension->AppClassLoader->CustomerClassLoader  当CustomerClassLoader真正的把A.class加载进去的时候才算成功，否则抛异常 ClassNotFoundException。**
 
-![image-20220508172830318](image\image-20220508172830318.png) 
+![image-20220508172830318](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508172830318.png) 
 
 **缓存可以认为是他自己内部维护的一个容器**
 
@@ -290,25 +290,25 @@ class类对象在MetaSpace中
 
 **Launcher**
 
-![image-20220508211317280](image\image-20220508211317280.png) 
+![image-20220508211317280](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508211317280.png) 
 
 
 
 ### ClassLoader源码解析
 
-![image-20220508212025148](image\image-20220508212025148.png)
+![image-20220508212025148](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508212025148.png)
 
-![image-20220508212957716](image\image-20220508212957716.png) 
+![image-20220508212957716](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508212957716.png) 
 
-![image-20220508212910105](image\image-20220508212910105.png) 
+![image-20220508212910105](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508212910105.png) 
 
 
 
-![image-20220508213215976](image\image-20220508213215976.png) 
+![image-20220508213215976](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508213215976.png) 
 
-![image-20220508213353202](image\image-20220508213353202.png) 
+![image-20220508213353202](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508213353202.png) 
 
-![image-20220508213456657](image\image-20220508213456657.png) 
+![image-20220508213456657](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508213456657.png) 
 
 
 
@@ -353,7 +353,7 @@ public class T002_CustomClassLoader extends ClassLoader {
 }
 ```
 
-![image-20220508214430838](image\image-20220508214430838.png) 
+![image-20220508214430838](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508214430838.png) 
 
 
 
@@ -363,7 +363,7 @@ public class T002_CustomClassLoader extends ClassLoader {
 
 
 
-### 编译器![image-20220508220230562](image\image-20220508220230562.png) 
+### 编译器![image-20220508220230562](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220508220230562.png) 
 
 
 
@@ -415,23 +415,23 @@ public class T002_CustomClassLoader extends ClassLoader {
 
 如何指定parent
 
-![image-20220509133555344](image\image-20220509133555344.png) 
+![image-20220509133555344](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509133555344.png) 
 
-![image-20220509133859861](image\image-20220509133859861.png)  
+![image-20220509133859861](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509133859861.png)  
 
 
 
   **默认的ClassLoader指定**
 
-![image-20220509134109254](image\image-20220509134109254.png) 
+![image-20220509134109254](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509134109254.png) 
 
-![image-20220509134140900](image\image-20220509134140900.png) 
+![image-20220509134140900](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509134140900.png) 
 
 
 
 **默认的就是AppClassloader** 
 
-![image-20220509134336387](image\image-20220509134336387.png) 
+![image-20220509134336387](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509134336387.png) 
 
 
 
@@ -451,7 +451,7 @@ public class T002_CustomClassLoader extends ClassLoader {
 
 **双亲委派不管是load多少次，他都会去已经加载过的这个类里面去找，如果找着了他就不会再重新加载**
 
-![image-20220509135525886](image\image-20220509135525886.png) 
+![image-20220509135525886](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509135525886.png) 
 
 
 
@@ -503,7 +503,7 @@ public class T002_CustomClassLoader extends ClassLoader {
 
 
 
-![image-20220509212122740](image\image-20220509212122740.png) 
+![image-20220509212122740](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509212122740.png) 
 
 ```sql
 --执行过程
@@ -514,7 +514,7 @@ public class T002_CustomClassLoader extends ClassLoader {
 
 
 
-![image-20220509212202429](image\image-20220509212202429.png) 
+![image-20220509212202429](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509212202429.png) 
 
 
 
@@ -540,15 +540,15 @@ new Object:申请内存->默认值->初始值
 
 ## 单例模式 双重检查
 
-![image-20220509214859108](image\image-20220509214859108.png) 
+![image-20220509214859108](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509214859108.png) 
 
 
 
 ## 硬件层数据一致性
 
-![image-20220509215622846](image\image-20220509215622846.png)
+![image-20220509215622846](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509215622846.png)
 
- ![image-20220509220037954](image\image-20220509220037954.png) 
+ ![image-20220509220037954](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509220037954.png) 
 
 
 
@@ -560,7 +560,7 @@ new Object:申请内存->默认值->初始值
 
 2、Intel 使用的是MESI协议实现的 
 
-![image-20220509220352514](image\image-20220509220352514.png) 
+![image-20220509220352514](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220509220352514.png) 
 
 
 
@@ -584,7 +584,7 @@ Invalid：**在我读的时候被别的CPU改过了**
 
 **位于同一缓存行的两个不同数据，被两个不同的CPU锁定，产生互相影响伪共享问题。**
 
-![image-20220510090844061](image\image-20220510090844061.png) 
+![image-20220510090844061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510090844061.png) 
 
 伪共享问题程序：JUC/c_028_FalseSharing
 
@@ -693,7 +693,7 @@ result:结果在10 左右
 进程已结束，退出代码为 0
 ```
 
-![image-20220510123005072](image\image-20220510123005072.png) 
+![image-20220510123005072](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510123005072.png) 
 
 **使用缓存行的对齐能够提高效率**
 
@@ -701,7 +701,7 @@ result:结果在10 左右
 
 ## 乱序问题
 
- ![image-20220510131241141](image\image-20220510131241141.png)
+ ![image-20220510131241141](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510131241141.png)
 
 
 
@@ -711,7 +711,7 @@ result:结果在10 左右
 
 WCBuffer  write combining:合并写操作
 
-![image-20220510131603793](image\image-20220510131603793.png) 
+![image-20220510131603793](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510131603793.png) 
 
 JUC/029_WriteCombing
 
@@ -788,7 +788,7 @@ public final class WriteCombining {
 
 结果：
 
-![image-20220510132246309](image\image-20220510132246309.png) 
+![image-20220510132246309](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510132246309.png) 
 
 
 
@@ -847,9 +847,9 @@ lfence  load fence
 
 mfence  mix fence
 
-![image-20220510133446339](image\image-20220510133446339.png) 
+![image-20220510133446339](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510133446339.png) 
 
-![image-20220510133806011](image\image-20220510133806011.png) 
+![image-20220510133806011](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510133806011.png) 
 
 
 
@@ -859,13 +859,13 @@ mfence  mix fence
 
  
 
-![image-20220510214008787](image\image-20220510214008787.png) 
+![image-20220510214008787](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510214008787.png) 
 
 
 
 ## Volatile实现细节
 
-![image-20220510214654452](image\image-20220510214654452.png) 
+![image-20220510214654452](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510214654452.png) 
 
 1、字节码层面
 
@@ -875,15 +875,15 @@ mfence  mix fence
 
 在volatile前面和后面加了屏障
 
-![image-20220510214839908](image\image-20220510214839908.png) 
+![image-20220510214839908](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510214839908.png) 
 
 volatile的读写操作都加上屏障0 
 
 3、OS和硬件层面
 
-![image-20220510215208641](image\image-20220510215208641.png) 
+![image-20220510215208641](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510215208641.png) 
 
-![image-20220510215111278](image\image-20220510215111278.png) 
+![image-20220510215111278](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220510215111278.png) 
 
 Windows lock指令实现
 
@@ -901,13 +901,13 @@ ACC_SYNCHRONIZED 修饰符
 
 synchronize生成之后的字节码：**monitorenter（监视器的进入）、monitorexit（监视器的退出）**
 
-![image-20220511091643949](image\image-20220511091643949.png) 
+![image-20220511091643949](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511091643949.png) 
 
 
 
 **synchronize(this){}块完了之后有一个exit，但是一旦catch到异常的时候，运行时异常我们不需要明确的写出来，这种异常的时候就会在exit**
 
-![image-20220511092007642](image\image-20220511092007642.png) 
+![image-20220511092007642](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511092007642.png) 
 
 2、JVM层面
 
@@ -917,7 +917,7 @@ synchronize生成之后的字节码：**monitorenter（监视器的进入）、m
 
 ​	**x86  lock comxch指令来实现的**
 
-![image-20220511092642198](image\image-20220511092642198.png) 
+![image-20220511092642198](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511092642198.png) 
 
 
 
@@ -925,7 +925,7 @@ synchronize生成之后的字节码：**monitorenter（监视器的进入）、m
 
 ## 排序规范   =====有时间可以去了解
 
- ![image-20220511093132906](image\image-20220511093132906.png) 
+ ![image-20220511093132906](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511093132906.png) 
 
 **as if serial：不管如何重排序，单线程执行的结果都不会改变**
 
@@ -933,7 +933,7 @@ synchronize生成之后的字节码：**monitorenter（监视器的进入）、m
 
 ## 对象的创建过程
 
-![image-20220511093821654](image\image-20220511093821654.png) 
+![image-20220511093821654](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511093821654.png) 
 
 1、具体参考  标题Class Loading Linking Initializing
 
@@ -941,7 +941,7 @@ synchronize生成之后的字节码：**monitorenter（监视器的进入）、m
 
 2、通过命令去观察虚拟机的配置
 
-![image-20220511131046487](image\image-20220511131046487.png) 
+![image-20220511131046487](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511131046487.png) 
 
 
 
@@ -951,13 +951,13 @@ synchronize生成之后的字节码：**monitorenter（监视器的进入）、m
 
 2、ClassPoint指针 
 
-![image-20220511131410433](image\image-20220511131410433.png) 
+![image-20220511131410433](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511131410433.png) 
 
 3、实例数据
 
 ​	引用类型：
 
-![image-20220511131528306](image\image-20220511131528306.png) 
+![image-20220511131528306](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511131528306.png) 
 
 4、Padding对齐，8的倍数
 
@@ -989,7 +989,7 @@ T.class文件要load到内存的时候是有一个agent机制在里面的。这�
 
 markword 8个字节 64位  每位代表的状态
 
-![image-20220511133737365](image\image-20220511133737365.png)
+![image-20220511133737365](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511133737365.png)
 
 
 
@@ -1001,7 +1001,7 @@ markword 8个字节 64位  每位代表的状态
 
 
 
-![image-20220511134427580](image\image-20220511134427580.png)
+![image-20220511134427580](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511134427580.png)
 
 因为分代年龄是4位，他最大的数是15
 
@@ -1019,13 +1019,13 @@ markword 8个字节 64位  每位代表的状态
 
 当一个对象计算过IdentityhashCode之后，不能进入偏向锁状态的解释
 
-![image-20220511135420584](image\image-20220511135420584.png) 
+![image-20220511135420584](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511135420584.png) 
 
 
 
 ## 对象怎么定位
 
-![image-20220511163929545](image\image-20220511163929545.png) 
+![image-20220511163929545](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511163929545.png) 
 
 T t = new T()
 
@@ -1042,7 +1042,7 @@ T t = new T()
 
 
 
-GC的时候再开始讲![image-20220511164701829](image\image-20220511164701829.png)
+GC的时候再开始讲![image-20220511164701829](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511164701829.png)
 
 
 
@@ -1096,7 +1096,7 @@ Method Area
 
 
 
- 每一个线程都有自己的Program Counter 都有自己的 Virtual Machine Stack 和 Netty Method Stack ，但是他们共享的都是堆，已经Method Area![image-20220511213304685](image\image-20220511213304685.png) 
+ 每一个线程都有自己的Program Counter 都有自己的 Virtual Machine Stack 和 Netty Method Stack ，但是他们共享的都是堆，已经Method Area![image-20220511213304685](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511213304685.png) 
 
  
 
@@ -1106,7 +1106,7 @@ Method Area
 
 一个线程栈里面装的是一个一个的栈帧，那么一个栈帧里面装的东西如下图
 
-![image-20220511213729161](image\image-20220511213729161.png)
+![image-20220511213729161](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511213729161.png)
 
 1、Local Variables  局部变量
 
@@ -1126,11 +1126,11 @@ Method Area
 
 **每一个方法对应一个栈帧**
 
-![image-20220511214408391](image\image-20220511214408391.png) 
+![image-20220511214408391](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511214408391.png) 
 
-![image-20220511215353842](image\image-20220511215353842.png) 
+![image-20220511215353842](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511215353842.png) 
 
-![image-20220511220328734](image\image-20220511220328734.png) 
+![image-20220511220328734](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511220328734.png) 
 
 
 
@@ -1152,7 +1152,7 @@ int i = 8;  的完成    1、2
 
 
 
-![image-20220511225315546](image\image-20220511225315546.png) 
+![image-20220511225315546](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220511225315546.png) 
 
 i++和++i唯一的区别就是把iinc 1 by 1放到了iload_1的前面去 
 
@@ -1172,11 +1172,11 @@ i++和++i唯一的区别就是把iinc 1 by 1放到了iload_1的前面去
 
 
 
-![image-20220512092011848](image\image-20220512092011848.png) 
+![image-20220512092011848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512092011848.png) 
 
 
 
-![image-20220512092153887](image\image-20220512092153887.png) 
+![image-20220512092153887](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512092153887.png) 
 
 为什么是istore_2？
 
@@ -1184,15 +1184,15 @@ i++和++i唯一的区别就是把iinc 1 by 1放到了iload_1的前面去
 
 **验证：**
 
-![image-20220512092605982](image\image-20220512092605982.png) 
+![image-20220512092605982](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512092605982.png) 
 
 
 
-![image-20220512123003152](image\image-20220512123003152.png)
+![image-20220512123003152](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512123003152.png)
 
 
 
-![image-20220512123557067](image\image-20220512123557067.png) 
+![image-20220512123557067](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512123557067.png) 
 
 new完了一个对象的地址，这个地址会压栈
 
@@ -1204,7 +1204,7 @@ invokespecial<init> 执行构造方法会把复制出来的上面那个对象地
 
 前四条是Hello_02 h = new Hello_02() 完成创建对象的操作
 
-![image-20220512131658043](image\image-20220512131658043.png) 
+![image-20220512131658043](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512131658043.png) 
 
 pop：(第二个为例)是因为在调用m1方法返回的时候，会往main方法的**栈顶**上放了一个100，在main方法调用完成之后，由于栈顶上有一个返回值，不管有没有用都直接往外弹，后再return
 
@@ -1214,7 +1214,7 @@ pop：(第二个为例)是因为在调用m1方法返回的时候，会往main方
 
 #### 递归
 
-![image-20220512132922669](image\image-20220512132922669.png)
+![image-20220512132922669](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512132922669.png)
 
 iconst_1 是把 1 这个值压栈
 
@@ -1230,7 +1230,7 @@ imul 值相乘
 
 <init> 指的是构造方法
 
-![image-20220512134637517](image\image-20220512134637517.png) 
+![image-20220512134637517](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512134637517.png) 
 
 
 
@@ -1254,7 +1254,7 @@ private 方法，  构造方法
 
 lambda表达式或者反射或者其他动态语言 Scala Kotlin，或者CGLib ASM，动态产生的class，会用到的指令
 
-![image-20220512214336733](image\image-20220512214336733.png) 
+![image-20220512214336733](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512214336733.png) 
 
 
 
@@ -1272,7 +1272,7 @@ lambda表达式或者反射或者其他动态语言 Scala Kotlin，或者CGLib A
 
 没有任何引用指向的对象都叫做垃圾
 
-![image-20220512220023329](image\image-20220512220023329.png) 
+![image-20220512220023329](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512220023329.png) 
 
 
 
@@ -1284,7 +1284,7 @@ lambda表达式或者反射或者其他动态语言 Scala Kotlin，或者CGLib A
 
 从根对象开始搜
 
-![image-20220512220219924](image\image-20220512220219924.png) 
+![image-20220512220219924](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512220219924.png) 
 
 到底哪些是根对象？
 
@@ -1304,7 +1304,7 @@ Clazz
 
 **程序启动的时候马上就需要的对象就叫做根对象**。
 
-![image-20220512220956610](image\image-20220512220956610.png) 
+![image-20220512220956610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512220956610.png) 
 
 
 
@@ -1320,11 +1320,11 @@ Clazz
 
 #### **标记清除**
 
-![image-20220512221828780](image\image-20220512221828780.png) 
+![image-20220512221828780](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512221828780.png) 
 
 
 
-![image-20220512222023506](image\image-20220512222023506.png) 
+![image-20220512222023506](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512222023506.png) 
 
 **算法相对简单，存活对象比较多的情况下效率高**
 
@@ -1344,13 +1344,13 @@ Clazz
 
 #### Copying
 
-![image-20220512222336035](image\image-20220512222336035.png) 
+![image-20220512222336035](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512222336035.png) 
 
 **内存一分为二，把有用的拷贝到一份，然后另一份全部清除掉**
 
 
 
-![image-20220512222435504](image\image-20220512222435504.png) 
+![image-20220512222435504](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512222435504.png) 
 
 优点：
 
@@ -1368,9 +1368,9 @@ Clazz
 
 把所有有用没用的都压缩到一边
 
-![image-20220512222704256](image\image-20220512222704256.png) 
+![image-20220512222704256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512222704256.png) 
 
-![image-20220512222952957](image\image-20220512222952957.png) 
+![image-20220512222952957](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220512222952957.png) 
 
 优点：
 
@@ -1388,7 +1388,7 @@ Clazz
 
 JVM Hotspot 用的是分带算法（分年轻代和老年代）
 
-![image-20220513132235640](image\image-20220513132235640.png) 
+![image-20220513132235640](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513132235640.png) 
 
 把内存分为新生代和老年代
 
@@ -1396,7 +1396,7 @@ eden区和surivivor两个区  比例为8：1：1
 
 
 
-![image-20220513132159719](image\image-20220513132159719.png)
+![image-20220513132159719](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513132159719.png)
 
 
 
@@ -1422,7 +1422,7 @@ eden区和surivivor两个区  比例为8：1：1
 
 ### 一个对象从出生到消亡
 
-![image-20220513092632676](image\image-20220513092632676.png) 
+![image-20220513092632676](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513092632676.png) 
 
 **一个对象产生之后是尝试在栈上分配的，栈上分配如果分配不下的话会进入到伊甸区，伊甸区经过一次垃圾回收之后，进入survivor1区，survivor1区再经过一次垃圾回收之后就进入到survivor2区，与此同时伊甸区的某些对象也跟着进入到了survivor2区，然后就是两个survivor区的互相进入，等什么时候年龄够了之后，就会进入到old区。**
 
@@ -1434,13 +1434,13 @@ eden区和surivivor两个区  比例为8：1：1
 
 至于为什么Eden区里面要用两个S区，关键在于，如果只有一个区，他把能干掉的都干掉之后会有空间碎片，要整理的话效率不好。就干脆弄两个S区，等某个S去的清理掉一部分之后，把活着的挨着排复制到另一个S区中
 
-![image-20220513094146250](image\image-20220513094146250.png) 
+![image-20220513094146250](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513094146250.png) 
 
 对的
 
 ### GC的概念
 
-![image-20220513093147124](image\image-20220513093147124.png)
+![image-20220513093147124](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513093147124.png)
 
 凡是在年轻代进行回收的，就叫做Minor GC/YGC，凡是在老年代或者是整个区域进行回收的，就叫做Major GC，FullGC
 
@@ -1510,7 +1510,7 @@ public class Test01_TLAB {
 }
 ```
 
-![image-20220513131054100](image\image-20220513131054100.png) 
+![image-20220513131054100](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513131054100.png) 
 
 栈上分配肯定会比堆上分配快很多，栈一弹出就没了，和垃圾回收没有任何的关系
 
@@ -1518,19 +1518,19 @@ public class Test01_TLAB {
 
 ## 对象如何进入老年代 ==========
 
-![image-20220513131406355](image\image-20220513131406355.png) 
+![image-20220513131406355](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513131406355.png) 
 
 
 
 S1+伊甸区 经过一次YGC拷贝到S2的时候如果超过了S2的50%了，那么这里面年龄最大的对象就会直接进入old区。
 
-![image-20220513131747789](image\image-20220513131747789.png) 
+![image-20220513131747789](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513131747789.png) 
 
 
 
-![image-20220513132036784](image\image-20220513132036784.png) 
+![image-20220513132036784](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513132036784.png) 
 
-![image-20220513132756457](image\image-20220513132756457.png) 
+![image-20220513132756457](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513132756457.png) 
 
 **分配担保**
 
@@ -1542,11 +1542,11 @@ YGC期间 survivor区空间不够了，通过空间担保直接进入老年代
 
 ## 常见的垃圾回收器
 
-![image-20220513132949412](image\image-20220513132949412.png) 
+![image-20220513132949412](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513132949412.png) 
 
 **常见垃圾回收器的组合**
 
-![image-20220513133226966](image\image-20220513133226966.png) 
+![image-20220513133226966](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513133226966.png) 
 
 Serial  是JDK诞生的时候就有的，指的是单线程的。
 
@@ -1596,9 +1596,9 @@ stop the world (STW)
 
 safe point 安全点
 
-![image-20220513133748015](image\image-20220513133748015.png) 
+![image-20220513133748015](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513133748015.png) 
 
-![image-20220513134001962](image\image-20220513134001962.png) 
+![image-20220513134001962](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513134001962.png) 
 
 
 
@@ -1606,11 +1606,11 @@ safe point 安全点
 
 Java不做任何设置的话默认的就是使用这两种
 
-![image-20220513134142515](image\image-20220513134142515.png) 
+![image-20220513134142515](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513134142515.png) 
 
 **多线程清理垃圾**
 
-![image-20220513134213682](image\image-20220513134213682.png) 
+![image-20220513134213682](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513134213682.png) 
 
 
 
@@ -1618,13 +1618,13 @@ Java不做任何设置的话默认的就是使用这两种
 
 Parallel New
 
-![image-20220513134426318](image\image-20220513134426318.png)
+![image-20220513134426318](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513134426318.png)
 
 
 
 他和Parallel Scavenge 的区别就是做了一些增强，以便和CMS配合使用(变种了一下)
 
-![image-20220513134921330](image\image-20220513134921330.png) 
+![image-20220513134921330](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220513134921330.png) 
 
 
 
@@ -1634,7 +1634,7 @@ concurrent make sweep  并发
 
 从线程的角度
 
-![image-20220514124909949](image\image-20220514124909949.png) 
+![image-20220514124909949](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514124909949.png) 
 
 **垃圾回收的线程和工作线程是同时进行的**
 
@@ -1656,15 +1656,15 @@ concurrent make sweep  并发
 
 当老年代分配不下的时候触发CMS了。
 
-![image-20220514131124082](image\image-20220514131124082.png) 
+![image-20220514131124082](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514131124082.png) 
 
 
 
 #### CMS的问题
 
-![image-20220514132754135](image\image-20220514132754135.png)
+![image-20220514132754135](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514132754135.png)
 
-![image-20220514132140534](image\image-20220514132140534.png) 
+![image-20220514132140534](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514132140534.png) 
 
 
 
@@ -1718,7 +1718,7 @@ FGC:**整体内存需要回收，当old区内存不够了再找别的区的地�
 
 CMS使用的是三色标记 + Incremental update
 
-![image-20220514145309308](image\image-20220514145309308.png) 
+![image-20220514145309308](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514145309308.png) 
 
 
 
@@ -1814,7 +1814,7 @@ CMS使用的是三色标记 + Incremental update
 2. 拷贝算法(copying) 没有碎片  浪费空间
 3. 标记压缩(markcompact) 没有碎片，效率偏低(两遍扫描，指针需要调整)
 
-![image-20220514202949099](image\image-20220514202949099.png) 
+![image-20220514202949099](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514202949099.png) 
 
 
 
@@ -1887,13 +1887,13 @@ public class HelloGC01 {
 
 
 
-![image-20220514211454839](image\image-20220514211454839.png) 
+![image-20220514211454839](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514211454839.png) 
 
 
 
 ### PS GC日志详解
 
-![image-20220514221947701](image\image-20220514221947701.png) 
+![image-20220514221947701](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514221947701.png) 
 
 heap dump部分：
 
@@ -1902,9 +1902,9 @@ eden space 5632K, 94% used [0x00000000ff980000,0x00000000ffeb3e28,0x00000000fff0
      起始地址->整体空间结束地址         后面的内存地址指的是，起始地址，使用空间结束地址，整体空间结束地址
 ```
 
-![image-20220514222431303](image\image-20220514222431303.png) 
+![image-20220514222431303](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514222431303.png) 
 
-![image-20220514223314510](image\image-20220514223314510.png) 
+![image-20220514223314510](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220514223314510.png) 
 
 total = eden + 1个survivor
 
@@ -1989,7 +1989,7 @@ G1的吞吐量可能比CMS少15%左右，但是G1的响应时间肯定是比 CMS
 
 ### 预规划案例  ============
 
-![image-20220515104228836](image\image-20220515104228836.png) 
+![image-20220515104228836](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515104228836.png) 
 
 找一天的高峰期，加入5:00~7:00，再找一个小时内的高峰期，1000订单/秒
 
@@ -2024,7 +2024,7 @@ G1的吞吐量可能比CMS少15%左右，但是G1的响应时间肯定是比 CMS
 
 ### 优化环境
 
-![image-20220515131856317](image\image-20220515131856317.png) 
+![image-20220515131856317](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515131856317.png) 
 
 1、为什么原网站会慢？
 
@@ -2090,7 +2090,7 @@ MetaSpace 受限于物理内存
 
 
 
-![image-20220515161231635](image\image-20220515161231635.png) 
+![image-20220515161231635](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515161231635.png) 
 
 
 
@@ -2176,9 +2176,9 @@ javac -d . T15_FullGC_Problem01.java
 
 4. top -Hp 观察进程中的线程，哪个线程CPU和内存占比高
 
-   ![image-20220515170023728](image\image-20220515170023728.png) 
+   ![image-20220515170023728](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515170023728.png) 
 
-    ![image-20220515170044570](image\image-20220515170044570.png) 
+    ![image-20220515170044570](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515170044570.png) 
 
 5. **jps定位具体java进程**
 
@@ -2186,17 +2186,17 @@ javac -d . T15_FullGC_Problem01.java
 
    jstack会把这个线程中的所有进行都列出来
 
-   ![image-20220515170517140](image\image-20220515170517140.png) 
+   ![image-20220515170517140](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515170517140.png) 
 
    
 
    eg：
 
-   ![image-20220515191832700](image\image-20220515191832700.png) 
+   ![image-20220515191832700](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515191832700.png) 
 
    waiting on <0x0000000088ca3310> (a java.lang.Object)  这个就是我们synchronize(o)的o对象
 
-   ![image-20220515191904610](image\image-20220515191904610.png) 
+   ![image-20220515191904610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515191904610.png) 
 
    因为他在等待这把锁的释放
 
@@ -2218,11 +2218,11 @@ javac -d . T15_FullGC_Problem01.java
 
    要是出了问题就更好的定位是哪个线程的状态有异常了
 
-   ![image-20220515192600470](image\image-20220515192600470.png) 
+   ![image-20220515192600470](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515192600470.png) 
 
 7. jinfo pid 
 
-   ![image-20220515194608494](image\image-20220515194608494.png) 
+   ![image-20220515194608494](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515194608494.png) 
 
 8. jstat -gc 动态观察gc情况 / 阅读GC日志发现频繁GC / arthas观察 / jconsole/jvisualVM/ Jprofiler（最好用）
    jstat -gc 4655 500 : 每个500个毫秒打印GC的情况
@@ -2256,7 +2256,7 @@ javac -d . T15_FullGC_Problem01.java
 
 #### jconsole远程连接
 
-![image-20220515195100868](image\image-20220515195100868.png) 
+![image-20220515195100868](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515195100868.png) 
 
 1. 程序启动加入参数：
 
@@ -2266,7 +2266,7 @@ javac -d . T15_FullGC_Problem01.java
    > java -Djava.rmi.server.hostname=192.168.17.11 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=11111 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false XXX
    > ```
 
-   ![image-20220515195019956](image\image-20220515195019956.png) 
+   ![image-20220515195019956](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515195019956.png) 
 
     
 
@@ -2296,7 +2296,7 @@ javac -d . T15_FullGC_Problem01.java
 
 这样可定位哪些个类导致了OOM
 
-![image-20220515195354505](image\image-20220515195354505.png) 
+![image-20220515195354505](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515195354505.png) 
 
 
 
@@ -2316,7 +2316,7 @@ javac -d . T15_FullGC_Problem01.java
 
 
 
-![image-20220515200326933](image\image-20220515200326933.png) 
+![image-20220515200326933](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220515200326933.png) 
 
 67节课面试怎么说====
 
@@ -2330,13 +2330,13 @@ javac -d . T15_FullGC_Problem01.java
 
 ## arthas 在线排查工具
 
-![image-20220516123036919](image\image-20220516123036919.png) 
+![image-20220516123036919](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516123036919.png) 
 
 命令：
 
 jvm
 
-![image-20220516123130338](image\image-20220516123130338.png) 
+![image-20220516123130338](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516123130338.png) 
 
 
 
@@ -2367,11 +2367,11 @@ http://ip:7000
 
 
 
-![image-20220516131058586](image\image-20220516131058586.png) 
+![image-20220516131058586](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516131058586.png) 
 
 
 
-![image-20220516131501072](image\image-20220516131501072.png)
+![image-20220516131501072](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516131501072.png)
 
 
 
@@ -2379,7 +2379,7 @@ http://ip:7000
 
 
 
-![image-20220516132358513](image\image-20220516132358513.png) 
+![image-20220516132358513](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516132358513.png) 
 
 
 
@@ -2387,7 +2387,7 @@ http://ip:7000
 
 **反编译：**
 
-![image-20220516132727008](image\image-20220516132727008.png)
+![image-20220516132727008](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516132727008.png)
 
 **jad反编译**
 
@@ -2399,27 +2399,27 @@ http://ip:7000
 
 实践
 
-![image-20220516133423926](image\image-20220516133423926.png) 
+![image-20220516133423926](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133423926.png) 
 
-![image-20220516133503939](image\image-20220516133503939.png) 
+![image-20220516133503939](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133503939.png) 
 
 
 
-![image-20220516133540227](image\image-20220516133540227.png) 
+![image-20220516133540227](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133540227.png) 
 
 **使用arthas查看代码**
 
-![image-20220516133613702](image\image-20220516133613702.png) 
+![image-20220516133613702](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133613702.png) 
 
-![image-20220516133652157](image\image-20220516133652157.png) 
-
-
-
-![image-20220516133711490](image\image-20220516133711490.png) 
+![image-20220516133652157](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133652157.png) 
 
 
 
-![image-20220516133725692](image\image-20220516133725692.png) 
+![image-20220516133711490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133711490.png) 
+
+
+
+![image-20220516133725692](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220516133725692.png) 
 
 使用他自己的ClassLoader来进行热替换
 
@@ -2435,21 +2435,21 @@ OOM产生的原因多种多样，有些程序未必产生OOM，不断FGC(CPU飙�
 
 http-header-size 设置得过大
 
-![image-20220517092050287](image\image-20220517092050287.png) 
+![image-20220517092050287](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092050287.png) 
 
-![image-20220517092101353](image\image-20220517092101353.png)
+![image-20220517092101353](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092101353.png)
 
-![image-20220517092202539](image\image-20220517092202539.png) 
+![image-20220517092202539](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092202539.png) 
 
-![image-20220517092229449](image\image-20220517092229449.png) 
+![image-20220517092229449](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092229449.png) 
 
 MAT截图
 
-![image-20220517092308035](image\image-20220517092308035.png) 
+![image-20220517092308035](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092308035.png) 
 
-![image-20220517092359826](image\image-20220517092359826.png) 
+![image-20220517092359826](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092359826.png) 
 
-![image-20220517092538627](image\image-20220517092538627.png) 
+![image-20220517092538627](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517092538627.png) 
 
 查看堆栈的时候发现是Http11OutputBuffer 这个对象占用的内存特别多，然后通过网上查找资料这个对象为什么占用了那么多，后来才发现不知道是谁把http-header-size参数改了，把他改得特别打，导致每个请求过来都分配了很大的空间
 
@@ -2457,25 +2457,25 @@ MAT截图
 
 **Distuptor有个可以设置链长度，如果过大，然后对象大，消费完不主动释放，会溢出**
 
-![image-20220517131922343](image\image-20220517131922343.png) 
+![image-20220517131922343](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517131922343.png) 
 
 
 
 ### lambda表达式导致方法区溢出的问题(Method Area)
 
-![image-20220517123433112](image\image-20220517123433112.png)
+![image-20220517123433112](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517123433112.png)
 
 每一个lambda表达式对象，都会在内存当中产生一个新的class。 很少发生
 
-![image-20220517123734230](image\image-20220517123734230.png) 
+![image-20220517123734230](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517123734230.png) 
 
-![image-20220517131714982](image\image-20220517131714982.png) 
+![image-20220517131714982](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517131714982.png) 
 
 栈溢出问题：
 
 -Xss设定栈的大小
 
-![image-20220517132515035](image\image-20220517132515035.png) 
+![image-20220517132515035](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517132515035.png) 
 
  第一种写法好，第二种写法很有可能造成垃圾回收期回收不掉的问题
 
@@ -2483,7 +2483,7 @@ MAT截图
 
 ### 重写finalize引发的频繁GC
 
-![image-20220517132611508](image\image-20220517132611508.png) 
+![image-20220517132611508](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517132611508.png) 
 
 为什么C++程序员会重写finalize？因为C++语言是自己手动回收的，(new   之后需要delete 才会调用**析构函数**)。
 
@@ -2499,7 +2499,7 @@ C++调用new语句的时候默认调用构造函数，调用delete的时候默�
 
 有人显示的调用了System.gc() (这个问题出现太low)
 
-![image-20220517133356273](image\image-20220517133356273.png) 
+![image-20220517133356273](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517133356273.png) 
 
 ### new 大量线程，会产生 native thread OOM(比较low)
 
@@ -2525,7 +2525,7 @@ CMS有两个毛病：一个是碎片化、一个是浮动垃圾
 
 GC roots 阶段是STW的，但是根对象不会有太多，所以STW的时间非常的短
 
-![image-20220517135443855](image\image-20220517135443855.png) 
+![image-20220517135443855](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517135443855.png) 
 
 **并发标记**(CMS Concurrent Mark)
 
@@ -2535,7 +2535,7 @@ GC roots 阶段是STW的，但是根对象不会有太多，所以STW的时间�
 
 **重新标记(CMS remark) ** 也会产生STW，但是被重新引用的对象其实不会太多，所以时间也不会太长
 
-![image-20220517135949696](image\image-20220517135949696.png)
+![image-20220517135949696](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517135949696.png)
 
 
 
@@ -2547,7 +2547,7 @@ GC roots 阶段是STW的，但是根对象不会有太多，所以STW的时间�
 
 ### 从线程角度来理解CMS
 
-![image-20220517140700024](image\image-20220517140700024.png) 
+![image-20220517140700024](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517140700024.png) 
 
 
 
@@ -2572,13 +2572,13 @@ colored pointers 颜色指针
 
 **G1是一种服务端应用使用的垃圾回收器，目标是用在多核、大内存的机器上，它在大多数情况下可以实现指定的GC暂停时间，同时还能保持较高的吞吐量。**
 
- **当他发现必须要进行GC回收的时候，他首先会收集Regions里边的存活对象最少的（Garbage First）**![image-20220517210821240](image\image-20220517210821240.png)
+ **当他发现必须要进行GC回收的时候，他首先会收集Regions里边的存活对象最少的（Garbage First）**![image-20220517210821240](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517210821240.png)
 
 
 
 每一块区域(Region)在逻辑上依然属于分代，除了Old、Survivor、Eden这三个区，还有一个Humongous大对象区（超过region 的50%），对象有可能会跨两个region
 
-![image-20220517212456389](image\image-20220517212456389.png) 
+![image-20220517212456389](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517212456389.png) 
 
 ======
 
@@ -2594,27 +2594,27 @@ colored pointers 颜色指针
 
 G1有好多个Card，有哪些Card需要被回收(垃圾最多的Card)，会被装到一个表格里，这个就叫做Collection Set
 
-![image-20220517212534750](image\image-20220517212534750.png)
+![image-20220517212534750](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517212534750.png)
 
 
 
-![image-20220517213920143](image\image-20220517213920143.png) 
+![image-20220517213920143](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517213920143.png) 
 
 问题：**里面的表是一个HashSet表记录着对象的引用，虽然可以使垃圾回收期不需要扫描整个堆了，但是占用的空间也就大了。所以ZGC里面就把这个废了**
 
 
 
-![image-20220517214434021](image\image-20220517214434021.png) 
+![image-20220517214434021](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517214434021.png) 
 
 
 
 **G1会自动调整新老年代的比例**
 
-![image-20220517215543111](image\image-20220517215543111.png) 
+![image-20220517215543111](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517215543111.png) 
 
 
 
-![image-20220517215714234](image\image-20220517215714234.png) 
+![image-20220517215714234](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517215714234.png) 
 
 *G1一定会产生FGC的，对象分配不下的时候就会产生，应该怎么办？
 
@@ -2624,11 +2624,11 @@ G1有好多个Card，有哪些Card需要被回收(垃圾最多的Card)，会被�
 
 3. 降低**MixedGC**触发的阈值，让MixedGC提早发生(默认是45%)     **MixedGC** 相当于是一个CMS
 
-   ![image-20220517220026698](image\image-20220517220026698.png) 
+   ![image-20220517220026698](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517220026698.png) 
 
    45%整个堆内存整体占用空间已经超过了45%，超过这个空间之后，默认就会启动MixedGC，这个值是可以自己调整的
 
-   ![image-20220517220128392](image\image-20220517220128392.png) 
+   ![image-20220517220128392](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517220128392.png) 
 
    
 
@@ -2646,15 +2646,15 @@ YGC     FGC
 
 ### *三色标记法
 
-![image-20220517221214827](image\image-20220517221214827.png) 
+![image-20220517221214827](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517221214827.png) 
 
 
 
 **漏标是指本来是可用对象，但是由于没有遍历到被当成garbage回收掉了**
 
-![image-20220517233410629](image\image-20220517233410629.png) 
+![image-20220517233410629](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517233410629.png) 
 
-![image-20220517233829386](image\image-20220517233829386.png) 
+![image-20220517233829386](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517233829386.png) 
 
 跟踪A指向D的增加或者跟踪B指向D的消失
 
@@ -2670,7 +2670,7 @@ SATB
 
 把这个引用保存，下次扫描还扫描这个引用
 
-![image-20220517233910546](image\image-20220517233910546.png)
+![image-20220517233910546](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220517233910546.png)
 
 **为什么G1使用SATB而不使用incremental update？**
 
@@ -2763,7 +2763,7 @@ CMS启动
 
 如果给G1指定了目标停顿时间 假如是20ms，如果一开始的时候比例是40%(10个块有4个块是Y区)，结果发现回收这么多块要50ms，那么G1会动态调整Y区的个数来达到要求时长的停顿目标为止
 
-![image-20220518133307892](image\image-20220518133307892.png)
+![image-20220518133307892](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220518133307892.png)
 
 ### G1日志详解
 
@@ -2998,8 +2998,8 @@ CMS启动
 
 使用quasar支持纤程
 
-![image-20220519110551021](image\image-20220519110551021.png) 
+![image-20220519110551021](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220519110551021.png) 
 
-![image-20220519111154225](image\image-20220519111154225.png) 
+![image-20220519111154225](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220519111154225.png) 
 
 ​	

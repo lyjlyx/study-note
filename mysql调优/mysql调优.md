@@ -1,6 +1,6 @@
 # MySQL调优
 
-![image-20220613212304894](image\image-20220613212304894.png) 
+![image-20220613212304894](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220613212304894.png) 
 
 
 
@@ -26,7 +26,7 @@
 
 第二范式在第一范式的基础上更近一层，第二范式需要确保数据库表中的每一列都和主键相关，而不能只与主键的某一部分相关(主要这对联合主键而言)
 
-![image-20220407224038935](image\image-20220407224038935.png) 
+![image-20220407224038935](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220407224038935.png) 
 
 
 
@@ -34,7 +34,7 @@
 
 **要求一个数据库表中不包含在其他表中已包含的非关键字信息**
 
-![image-20220407224432112](image\image-20220407224432112.png)
+![image-20220407224432112](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220407224432112.png)
 
 
 
@@ -64,7 +64,7 @@ CBO基于成本的优化
 
 ## 索引
 
-![image-20220406133042312](image\image-20220406133042312.png) 
+![image-20220406133042312](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220406133042312.png) 
 
 **索引一般存在什么地方？**
 
@@ -82,15 +82,15 @@ CBO基于成本的优化
 
 索引怎么加载，先去加载对应的文件，4k4k的读取。
 
-![image-20220406134231032](image\image-20220406134231032.png) 
+![image-20220406134231032](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220406134231032.png) 
 
 
 
-![image-20220406134404975](image\image-20220406134404975.png) 
+![image-20220406134404975](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220406134404975.png) 
 
 
 
-![image-20220410201553092](image\image-20220410201553092.png) 
+![image-20220410201553092](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410201553092.png) 
 
 **非叶子节点只存储key的值，没有value**
 
@@ -125,17 +125,17 @@ mysql索引的五种类型：主键索引、唯一索引、组合索引、普通
 
 第三个格子的4k空间已经满了，要插入53这个数据，因为数据是有序性的，所以需要把第三个格子分裂成不同的页数，把53排进去
 
-![image-20220410182250901](image\image-20220410182250901.png) 
+![image-20220410182250901](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410182250901.png) 
 
 页分裂
 
 第三个格子会造成浪费
 
-![image-20220410182454627](image\image-20220410182454627.png) 
+![image-20220410182454627](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410182454627.png) 
 
 如果又把53给删了
 
-![image-20220410182523819](image\image-20220410182523819.png) 
+![image-20220410182523819](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410182523819.png) 
 
 第三个格子和第四个格子可以进行合并
 
@@ -170,7 +170,7 @@ mysql索引的五种类型：主键索引、唯一索引、组合索引、普通
 
 ### mysql存储引擎的区别
 
-![image-20220410201655160](image\image-20220410201655160.png) 
+![image-20220410201655160](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410201655160.png) 
 
 **行锁比较细**
 
@@ -178,29 +178,29 @@ mysql索引的五种类型：主键索引、唯一索引、组合索引、普通
 
 ### 索引维护
 
-![image-20220410210301138](image\image-20220410210301138.png) 
+![image-20220410210301138](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410210301138.png) 
 
 
 
 ## MySQL架构
 
-![image-20220410210552541](image\image-20220410210552541.png) 
+![image-20220410210552541](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410210552541.png) 
 
 
 
 优化：RBO基于规则的优化，CBO基于成本的优化，要选择不同的优化策略，现在主要使用CBO
 
-![image-20220410211158452](image\image-20220410211158452.png)
+![image-20220410211158452](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410211158452.png)
 
 
 
 **不推荐使用查询缓存**
 
-![image-20220410211216545](image\image-20220410211216545.png)
+![image-20220410211216545](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410211216545.png)
 
-![image-20220410211328838](image\image-20220410211328838.png)
+![image-20220410211328838](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410211328838.png)
 
-![image-20220410211431774](image\image-20220410211431774.png) 
+![image-20220410211431774](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410211431774.png) 
 
 
 
@@ -218,7 +218,7 @@ binlog属于是服务端，所以不管是innodb也好还是myisam也好都可�
 
 ### RedoLog
 
-![image-20220410211813659](image\image-20220410211813659.png) 
+![image-20220410211813659](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410211813659.png) 
 
 WAL：write ahead log（预写日志）
 
@@ -240,13 +240,13 @@ WAL：write ahead log（预写日志）
 
 
 
-![image-20220410212127562](image\image-20220410212127562.png) 
+![image-20220410212127562](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410212127562.png) 
 
 
 
 以不同的方式进行溢写
 
-![image-20220410212447849](image\image-20220410212447849.png) 
+![image-20220410212447849](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410212447849.png) 
 
 
 
@@ -258,7 +258,7 @@ WAL：write ahead log（预写日志）
 
 **RedoLog**是固定大小的
 
-![image-20220611174045595](image\image-20220611174045595.png) 
+![image-20220611174045595](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220611174045595.png) 
 
 
 
@@ -274,7 +274,7 @@ WAL：write ahead log（预写日志）
 
 回滚日志
 
-![image-20220410213336728](image\image-20220410213336728.png) 
+![image-20220410213336728](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410213336728.png) 
 
 要不然全部执行成功，要不然全部执行失败
 
@@ -284,19 +284,19 @@ WAL：write ahead log（预写日志）
 
 服务端的日志文件
 
-![image-20220410213643577](image\image-20220410213643577.png) 
+![image-20220410213643577](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410213643577.png) 
 
 原始逻辑：既会记录我们的操作，也会记录我们的数据
 
 binlog是默认不开启的
 
-![image-20220410213946536](image\image-20220410213946536.png) 
+![image-20220410213946536](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410213946536.png) 
 
-![image-20220410214045697](image\image-20220410214045697.png) 
+![image-20220410214045697](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410214045697.png) 
 
 
 
-![image-20220410214320495](image\image-20220410214320495.png) 
+![image-20220410214320495](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410214320495.png) 
 
 **执行流程**
 
@@ -312,7 +312,7 @@ binlog是默认不开启的
 
 ### Redolog 的两阶段提交
 
-![image-20220410214854912](image\image-20220410214854912.png) 
+![image-20220410214854912](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220410214854912.png) 
 
 
 
@@ -322,7 +322,7 @@ binlog是默认不开启的
 
 连接器->语法词法分析器->优化器->执行器
 
-![image-20220411123440501](image\image-20220411123440501.png) 
+![image-20220411123440501](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411123440501.png) 
 
 explain  extended:过滤
 
@@ -332,7 +332,7 @@ id越大越先执行，id如果相同那么就按照顺序执行
 
 
 
-![image-20220411130905111](image\image-20220411130905111.png) 
+![image-20220411130905111](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411130905111.png) 
 
 SIMPLE简单查询，不包含子查询
 
@@ -340,7 +340,7 @@ PRIMARY 外层的查询会标记为PRIMARY
 
 DEPENDENT UNION    外部查询需要依赖于里面的值	
 
-![image-20220411131415814](image\image-20220411131415814.png) 
+![image-20220411131415814](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411131415814.png) 
 
 UNION RESULT：结果集合，从union表获取结果的select
 
@@ -348,19 +348,19 @@ SUBQUERY：在select或者列表中包含子查询(如果子查询中只有一�
 
 DERIVED：衍生、派生。from子句中出现的子查询，也叫做派生类，查询虚拟表
 
-![image-20220411132319484](image\image-20220411132319484.png) 
+![image-20220411132319484](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411132319484.png) 
 
 UNCACHEABLE UNION：表示union的查询结果不能被缓存
 
 UNCACHEABLE SUBQUERY：表示子查询的结果不能被缓存
 
-![image-20220411132452489](image\image-20220411132452489.png) 
+![image-20220411132452489](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411132452489.png) 
 
-![image-20220411132707676](image\image-20220411132707676.png) 
+![image-20220411132707676](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411132707676.png) 
 
-![image-20220411132938987](image\image-20220411132938987.png)
+![image-20220411132938987](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411132938987.png)
 
-![image-20220411133014248](image\image-20220411133014248.png) 
+![image-20220411133014248](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411133014248.png) 
 
 
 
@@ -370,7 +370,7 @@ AST(抽象语法树)
 
 calcite.apache.org
 
-![image-20220411133428449](image\image-20220411133428449.png) 
+![image-20220411133428449](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411133428449.png) 
 
 partitions(分区) 
 
@@ -378,17 +378,17 @@ partitions(分区)
 
 type(类型)
 
-![image-20220411133953762](image\image-20220411133953762.png) 
+![image-20220411133953762](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411133953762.png) 
 
-![image-20220411134120240](image\image-20220411134120240.png) 
+![image-20220411134120240](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411134120240.png) 
 
-![image-20220411134425738](image\image-20220411134425738.png) 
+![image-20220411134425738](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411134425738.png) 
 
-![image-20220411135251567](image\image-20220411135251567.png) 
+![image-20220411135251567](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411135251567.png) 
 
 一般不用
 
-![image-20220411215643092](image\image-20220411215643092.png)
+![image-20220411215643092](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220411215643092.png)
 
 
 
@@ -418,47 +418,47 @@ OLTP online transaction process、OLAP online analysis process 在线分析
 
 有两种锁的模式：表共享读锁(Table Read Lock)、表独占写锁(Table Write Lock)
 
-![image-20220412131420727](image\image-20220412131420727.png) 
+![image-20220412131420727](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412131420727.png) 
 
-![image-20220412131637226](image\image-20220412131637226.png) 
+![image-20220412131637226](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412131637226.png) 
 
-![image-20220412131626907](image\image-20220412131626907.png) 
+![image-20220412131626907](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412131626907.png) 
 
 
 
-![image-20220412131853196](image\image-20220412131853196.png) 
+![image-20220412131853196](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412131853196.png) 
 
-![image-20220412132041986](image\image-20220412132041986.png) 	
+![image-20220412132041986](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412132041986.png) 	
 
 
 
 为什么读锁会阻塞写操作？保障数据一致性，避免脏读。
 
-![image-20220412132601256](image\image-20220412132601256.png)
+![image-20220412132601256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412132601256.png)
 
 concurrent_insert 是AUTO
 
-![image-20220412134515264](image\image-20220412134515264.png) 
+![image-20220412134515264](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412134515264.png) 
 
 ### InnoDB锁
 
-![image-20220412200606838](image\image-20220412200606838.png) 
+![image-20220412200606838](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412200606838.png) 
 
 
 
 原子性：**undolog实现原子性，隔离性通过锁机制，持久性通过redolog实现，三者共同达成一致性的目标**
 
-![image-20220412202008617](image\image-20220412202008617.png) 
+![image-20220412202008617](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412202008617.png) 
 
 
 
-![image-20220412202104208](image\image-20220412202104208.png) 
+![image-20220412202104208](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412202104208.png) 
 
 
 
  mysql默认的隔离级别是：**可重复读**
 
-![image-20220412202335578](image\image-20220412202335578.png) 
+![image-20220412202335578](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412202335578.png) 
 
 **innoDB的行锁模型及加锁方法**
 
@@ -466,7 +466,7 @@ concurrent_insert 是AUTO
 
 **共享锁：**又称读锁，允许一个事务去读一行，组织其他事务获得相同数据集的排它锁，若事务T对数据对象A加上S锁，则事务T可以读A但不能修改A，其他事务只能在对A加S锁，而不能加X锁，直到T释放A上的S锁。这保证了其他事务可以读A，但在T释放A上的S锁之前不能对A做任何修改。
 
-![image-20220412202658711](image\image-20220412202658711.png) 
+![image-20220412202658711](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412202658711.png) 
 
 
 
@@ -474,7 +474,7 @@ mysql InnoDB引擎默认的修改数据语句：update、delete、insert都会�
 
 
 
-![image-20220412204253407](image\image-20220412204253407.png) 
+![image-20220412204253407](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412204253407.png) 
 
 
 
@@ -518,7 +518,7 @@ insert into tab_with_index values(1,'1'),(2,'2'),(3,'3'),(4,'4');
 |     select * from tab_with_indexwhere id = 1 for update      |                                                              |
 |                                                              |     select * from tab_with_indexwhere id = 2 for update;     |
 
-![image-20220412210633344](image\image-20220412210633344.png) 
+![image-20220412210633344](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412210633344.png) 
 
 3、由于mysql的行锁是针对索引加的锁，不是针对记录加的锁，所以虽然是访问不同行的记录，但是依然无法访问到具体的数据
 
@@ -598,7 +598,7 @@ insert into tab_with_index  values(1,'4');
 
 数据库并发场景有三种，分别为：
 
-![image-20220607214713260](image\image-20220607214713260.png) 
+![image-20220607214713260](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220607214713260.png) 
 
 
 
@@ -626,7 +626,7 @@ mvcc的实现原理主要是依赖于记录中的三个隐藏字段，undolog，
 
 
 
-![image-20220607223516030](image\image-20220607223516030.png) 
+![image-20220607223516030](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220607223516030.png) 
 
  
 
@@ -636,7 +636,7 @@ undolog被称之为回滚日志，表示在进行insert，delete，update操作�
 
 当进行insert操作的时候，产生的undolog只在事务回滚的时候需要，并且在事务提交之后可以被立刻丢弃
 
-![image-20220607224036606](image\image-20220607224036606.png) 
+![image-20220607224036606](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220607224036606.png) 
 
 
 
@@ -644,9 +644,9 @@ undolog被称之为回滚日志，表示在进行insert，delete，update操作�
 
 是事务进行快照读操作的时候产生的读视图，他最大的作用是用来做可见性判断的（之前做的修改能够对现在的读产生影响）。
 
-![image-20220607225522901](image\image-20220607225522901.png) 
+![image-20220607225522901](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220607225522901.png) 
 
-![image-20220607225532677](image\image-20220607225532677.png) 
+![image-20220607225532677](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220607225532677.png) 
 
 #### MVCC的整体处理流程
 
@@ -661,13 +661,13 @@ undolog被称之为回滚日志，表示在进行insert，delete，update操作�
 
 从上述表格中，我们可以看到，当事务2对某行数据执行了快照读，数据库为该行数据生成一个Read View视图，可以看到事务1和事务3还在活跃状态，事务4在事务2快照读的前一刻提交了更新，所以，在Read View中记录了系统当前活跃事务1，3，维护在一个列表中。同时可以看到up_limit_id的值为1，而low_limit_id为5，如下图所示：
 
-![image-20220608092803472](image\image-20220608092803472.png)
+![image-20220608092803472](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608092803472.png)
 
 在上述的例子中，只有事务4修改过该行记录，并在事务2进行快照读前，就提交了事务，所以该行当前数据的undolog如下所示：
 
-![image-20220608092815048](image\image-20220608092815048.png)
+![image-20220608092815048](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608092815048.png)
 
-![image-20220608092919414](image\image-20220608092919414.png)
+![image-20220608092919414](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608092919414.png)
 
 
 
@@ -675,9 +675,9 @@ undolog被称之为回滚日志，表示在进行insert，delete，update操作�
 
 ​		具体流程如下：先拿该行记录的事务ID（4）去跟Read View中的up_limit_id相比较，判断是否小于，通过对比发现不小于，所以不符合条件，继续判断4是否大于等于low_limit_id,通过比较发现也不大于，所以不符合条件，判断事务4是否处理trx_list列表中，发现不再次列表中，那么符合可见性条件，所以事务4修改后提交的最新结果对事务2 的快照是可见的，因此，事务2读取到的最新数据记录是事务4所提交的版本，而事务4提交的版本也是全局角度的最新版本。如下图所示：
 
-![image-20220608131952695](image\image-20220608131952695.png) 
+![image-20220608131952695](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608131952695.png) 
 
-![image-20220608131930625](image\image-20220608131930625.png)
+![image-20220608131930625](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608131930625.png)
 
 当上述的内容都看明白了的话，那么大家就应该能够搞清楚这几个核心概念之间的关系了，下面我们讲一个不同的隔离级别下的快照读的不同。
 
@@ -705,7 +705,7 @@ undolog被称之为回滚日志，表示在进行insert，delete，update操作�
 
 事务的隔离级别有四种：分别是读未提交、读已提交、可重复度、序列化。分别解决了脏读、幻读、不可重复读的问题
 
-![image-20220608132837017](image\image-20220608132837017.png) 
+![image-20220608132837017](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220608132837017.png) 
 
 SQL 标准定义了四个隔离级别：
 
@@ -726,7 +726,7 @@ SQL 标准定义了四个隔离级别：
 
 ## MySQL主从复制
 
-![image-20220412214027784](image\image-20220412214027784.png) 
+![image-20220412214027784](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412214027784.png) 
 
 ### 1、什么是mysql的主从复制？
 
@@ -734,21 +734,21 @@ SQL 标准定义了四个隔离级别：
 
 ### 2、mysql主从复制的原理
 
-![image-20220412215006817](image\image-20220412215006817.png) 
+![image-20220412215006817](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412215006817.png) 
 
-![image-20220412215711897](image\image-20220412215711897.png) 
+![image-20220412215711897](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412215711897.png) 
 
-![image-20220412215414646](image\image-20220412215414646.png) 
+![image-20220412215414646](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412215414646.png) 
 
 
 
-![image-20220412215810142](image\image-20220412215810142.png) 
+![image-20220412215810142](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220412215810142.png) 
 
 **一主一从、一主多从、主主复制、多主一从、联级复制**
 
 
 
-![image-20220413130950068](image\image-20220413130950068.png) 
+![image-20220413130950068](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413130950068.png) 
 
 
 
@@ -771,15 +771,15 @@ show slave status\G(注意没有分号)
 
 
 
- ![image-20220413131255506](image\image-20220413131255506.png) 
+ ![image-20220413131255506](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413131255506.png) 
 
 
 
-![image-20220413131648943](image\image-20220413131648943.png) 
+![image-20220413131648943](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413131648943.png) 
 
 
 
-![image-20220413132004804](image\image-20220413132004804.png) 
+![image-20220413132004804](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413132004804.png) 
 
 
 
@@ -811,9 +811,9 @@ show slave status\G(注意没有分号)
 
 mysql Proxy 不建议在生产环境中使用 不稳定
 
-![image-20220413133116996](image\image-20220413133116996.png) 
+![image-20220413133116996](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413133116996.png) 
 
-![image-20220413133228079](image\image-20220413133228079.png)
+![image-20220413133228079](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413133228079.png)
 
 ### 2、读写分离的配置
 
@@ -1123,11 +1123,11 @@ http://www.mycat.org.cn/
 
 配置
 
-![image-20220413135855016](image\image-20220413135855016.png)
+![image-20220413135855016](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413135855016.png)
 
-![image-20220413135905560](image\image-20220413135905560.png) 
+![image-20220413135905560](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413135905560.png) 
 
-![image-20220413140052382](image\image-20220413140052382.png)
+![image-20220413140052382](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413140052382.png)
 
 
 
@@ -1143,7 +1143,7 @@ http://www.mycat.org.cn/
 
 使用performance schema来更加容易的监控mysql
 
-![image-20220326200014369](image\image-20220326200014369.png) 
+![image-20220326200014369](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326200014369.png) 
 
 
 
@@ -1168,9 +1168,9 @@ show profile all
 #show profile在慢慢的被淘汰，5版本可以放心用
 ```
 
-![image-20220326205324445](image\image-20220326205324445.png) 
+![image-20220326205324445](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326205324445.png) 
 
-![image-20220326205352523](image\image-20220326205352523.png) 
+![image-20220326205352523](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326205352523.png) 
 
 
 
@@ -1186,7 +1186,7 @@ mysql性能模块
 show databases 列表中就有 performance schema  里面包含了87张表
 ```
 
-![image-20220326215057319](image\image-20220326215057319.png) 
+![image-20220326215057319](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326215057319.png) 
 
 mysql默认开启 performance schema
 
@@ -1196,7 +1196,7 @@ mysql默认开启 performance schema
 
 > mysql支持的存储引擎有 InnoDb、MyISAM、Memory(不支持持久化)
 
-![image-20220326215605623](image\image-20220326215605623.png) 
+![image-20220326215605623](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326215605623.png) 
 
 performance_schema中的事件与写入二进制日志中的事件是不一样的：这个数据库中的所有表的数据是不会进行持久化的，不会往磁盘里面存储，放到内存中。当mysql服务关闭后数据自动清空，下次开始的时候会重新监控服务，重新填充数据。
 
@@ -1206,9 +1206,9 @@ performance_schema中的事件与写入二进制日志中的事件是不一样�
 
 #### performance_schema表的分类
 
-![image-20220326220918507](image\image-20220326220918507.png) 
+![image-20220326220918507](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326220918507.png) 
 
-![image-20220326221053598](image\image-20220326221053598.png) 
+![image-20220326221053598](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326221053598.png) 
 
 
 
@@ -1255,9 +1255,9 @@ DDPC、C3P0、Druid
 
   存储的具体的数据文件
 
-![image-20220326225659378](image\image-20220326225659378.png) 
+![image-20220326225659378](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326225659378.png) 
 
-![image-20220326230037765](image\image-20220326230037765.png) 
+![image-20220326230037765](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220326230037765.png) 
 
 
 
@@ -1298,7 +1298,7 @@ char、varchar、text、blob
 3. varchar(5)与varchar(255)保存同样的内容，硬盘存储空间相同，但内存空间占用不同，是指定的大小。
 4. varchar在mysql5.6之前变更长度，或者从255以下变更到255以上时，都会导致锁表
 
-![image-20220327195202134](image\image-20220327195202134.png) 
+![image-20220327195202134](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327195202134.png) 
 
 
 
@@ -1308,7 +1308,7 @@ char、varchar、text、blob
 
 2、磁盘预读(每次在进行数据提取的时候，虽然我只需要读取一个字节的数据，但是操作系统会把这一个字节所在块里面的4k都进来，因为有可能这4k中可能存在我下次要取的数据，所以就读出来)
 
-![image-20220327200246819](image\image-20220327200246819.png) 
+![image-20220327200246819](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327200246819.png) 
 
 
 
@@ -1322,11 +1322,11 @@ mysql把每个BLOB和TEXT值当作一个独立的对象处理。
 
 #### 实际类型的优化_时间戳
 
-![image-20220327201912497](image\image-20220327201912497.png) 
+![image-20220327201912497](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327201912497.png) 
 
-![image-20220327201929093](image\image-20220327201929093.png) 
+![image-20220327201929093](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327201929093.png) 
 
-![image-20220327202042401](image\image-20220327202042401.png) 
+![image-20220327202042401](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327202042401.png) 
 
 
 
@@ -1338,9 +1338,9 @@ mysql把每个BLOB和TEXT值当作一个独立的对象处理。
 
 有时候可以使用枚举类来代替常用的字符串类型，mysql存储枚举类型会非常的紧凑，会根据列表值的数据压缩到一个或两个字节中，mysql在内部会将每个值在列表中的位置保存为整数，并且在表的.frm文件中保存"数字-字符串"映射关系的查找表
 
-![image-20220327203638662](image\image-20220327203638662.png) 
+![image-20220327203638662](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327203638662.png) 
 
-![image-20220327203705979](image\image-20220327203705979.png) 
+![image-20220327203705979](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327203705979.png) 
 
 
 
@@ -1358,15 +1358,15 @@ mysql把每个BLOB和TEXT值当作一个独立的对象处理。
 
 ## 合理适用范式和反范式
 
-![image-20220327211214238](image\image-20220327211214238.png) 
+![image-20220327211214238](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327211214238.png) 
 
-![image-20220327211639148](image\image-20220327211639148.png) 
+![image-20220327211639148](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327211639148.png) 
 
 **范式设计**
 
-![image-20220327212012616](image\image-20220327212012616.png) 
+![image-20220327212012616](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327212012616.png) 
 
-![image-20220327212111441](image\image-20220327212111441.png) 
+![image-20220327212111441](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327212111441.png) 
 
 **列不可分、不能存在传递依赖、表里面其他列的值必须依赖于其他列的主键**
 
@@ -1384,7 +1384,7 @@ mysql把每个BLOB和TEXT值当作一个独立的对象处理。
 
 - 推荐使用代理主键
 
-  ![image-20220327212818643](image\image-20220327212818643.png)
+  ![image-20220327212818643](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327212818643.png)
 
 
 
@@ -1392,13 +1392,13 @@ mysql把每个BLOB和TEXT值当作一个独立的对象处理。
 
 mysql如果设置成了utf-8的话，就只能存储两个字符的中文 
 
-![image-20220327213336120](image\image-20220327213336120.png)
+![image-20220327213336120](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327213336120.png)
 
 
 
 ## 存储引擎的选择
 
-![image-20220327213738360](image\image-20220327213738360.png) 
+![image-20220327213738360](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327213738360.png) 
 
 
 
@@ -1406,7 +1406,7 @@ mysql如果设置成了utf-8的话，就只能存储两个字符的中文
 
 **存储引擎之间的区别**
 
-![image-20220327213843784](image\image-20220327213843784.png)
+![image-20220327213843784](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220327213843784.png)
 
 
 
@@ -1416,7 +1416,7 @@ mysql如果设置成了utf-8的话，就只能存储两个字符的中文
 
 ## 适当的数据冗余
 
- ![image-20220328123542714](image\image-20220328123542714.png) 
+ ![image-20220328123542714](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220328123542714.png) 
 
 **物化视图**
 
@@ -1446,23 +1446,23 @@ SQL语句提前执行出来的结果提前的放到一张物理表里面
 
 如何判断执行的过程，如何去优化
 
-![image-20220329132143107](image\image-20220329132143107.png)
+![image-20220329132143107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220329132143107.png)
 
 **详细查看：mysql执行计划.md**
 
 
 
-![image-20220329133346942](image\image-20220329133346942.png) 
+![image-20220329133346942](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220329133346942.png) 
 
 
 
 range是最低要满足的一个标准，表示的是范围查询，最好能达到ref
 
-![image-20220329133619476](image\image-20220329133619476.png) 
+![image-20220329133619476](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220329133619476.png) 
 
 
 
- ![image-20220329133721427](image\image-20220329133721427.png) 
+ ![image-20220329133721427](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220329133721427.png) 
 
 possible_keys在执行当前查询语句的时候有可能会用到的查询索引、key表示实际应用的业务索引是哪个。
 
@@ -1484,7 +1484,7 @@ hash表-> 散列算法，hash表其实也有一些问题的，我们要想要把
 
 二叉树会造成我们对应的树节点过深，越深以为着IO次数越多
 
-![image-20220413194735085](image\image-20220413194735085.png) 
+![image-20220413194735085](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413194735085.png) 
 
 
 
@@ -1498,11 +1498,11 @@ AVL二插平衡树树在插入数据的时候会进行一个旋转操作，他�
 
 通过加入变色的行为来减少旋转的次数，任何一条单分支里面不能出现两个红色节点
 
-![image-20220413195149328](image\image-20220413195149328.png) 
+![image-20220413195149328](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413195149328.png) 
 
-![红黑树](image\红黑树.png)
+![红黑树](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/%E7%BA%A2%E9%BB%91%E6%A0%91.png)
 
-![image-20220413203838514](image\image-20220413203838514.png) 
+![image-20220413203838514](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413203838514.png) 
 
 
 
@@ -1517,7 +1517,7 @@ AVL二插平衡树树在插入数据的时候会进行一个旋转操作，他�
 5. 分支节点至少拥有m/2颗子树(除根节点和叶子节点外都是分支节点)
 6. 所有叶子节点都在同一层，每一个节点最多可以有m-1个key，并且以升序排列
 
-![image-20220413204959760](image\image-20220413204959760.png) 
+![image-20220413204959760](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413204959760.png) 
 
 只允许我们的叶子节点中存储数据，而非叶子节点不存储数据只存key
 
@@ -1531,7 +1531,7 @@ AVL二插平衡树树在插入数据的时候会进行一个旋转操作，他�
 
 **InnoDB数据和索引是放一起的，MyISAM数据和索引是分开来存放的**
 
-![image-20220413211725575](image\image-20220413211725575.png) 
+![image-20220413211725575](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413211725575.png) 
 
 **当使用InnoDB这种存储引擎的时候，他所对应的一个叶子节点中存储的就是实际的一整行数据。**
 
@@ -1539,7 +1539,7 @@ AVL二插平衡树树在插入数据的时候会进行一个旋转操作，他�
 
 
 
-![image-20220413211828789](image\image-20220413211828789.png)
+![image-20220413211828789](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220413211828789.png)
 
 ****
 
@@ -1579,7 +1579,7 @@ AVL二插平衡树树在插入数据的时候会进行一个旋转操作，他�
 
 如何建组合索引
 
-![image-20220414132817762](image\image-20220414132817762.png) 
+![image-20220414132817762](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414132817762.png) 
 
 使用
 name age    age建立组合索引，因为name在磁盘中占用的磁盘空间更大，单独为name创建一个索引会占用更多的磁盘空间。
@@ -1604,29 +1604,29 @@ https://baijiahao.baidu.com/s?id=1716515482593299829&wfr=spider&for=pc
 
 ## 索引匹配方式
 
-![image-20220414201348991](image\image-20220414201348991.png) 
+![image-20220414201348991](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414201348991.png) 
 
-​	![image-20220414201505061](image\image-20220414201505061.png) 
+​	![image-20220414201505061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414201505061.png) 
 
- **最左前缀匹配**![image-20220414203849610](image\image-20220414203849610.png) 
+ **最左前缀匹配**![image-20220414203849610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414203849610.png) 
 
-![image-20220414203854877](image\image-20220414203854877.png) 
+![image-20220414203854877](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414203854877.png) 
 
 
 
 ### 哈希索引
 
-![image-20220414205045622](image\image-20220414205045622.png) 
+![image-20220414205045622](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414205045622.png) 
 
 
 
 **哈希冲突：如何避免？**
 
-![image-20220414205651071](image\image-20220414205651071.png) 
+![image-20220414205651071](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414205651071.png) 
 
 CRC32做哈希
 
- ![image-20220414210812026](image\image-20220414210812026.png) 
+ ![image-20220414210812026](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414210812026.png) 
 
 
 
@@ -1634,7 +1634,7 @@ CRC32做哈希
 
 **聚簇索引：不是单独的索引类型，而是一种数据存储的方式，指的是数据行相邻的键值紧凑的存储在一起**
 
-![image-20220414211323663](image\image-20220414211323663.png) 
+![image-20220414211323663](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414211323663.png) 
 
 **非聚簇索引：数据文件跟索引文件分开存放**
 
@@ -1642,7 +1642,7 @@ CRC32做哈希
 
 ### 覆盖索引
 
-![image-20220414212115555](image\image-20220414212115555.png) 
+![image-20220414212115555](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220414212115555.png) 
 
 
 
@@ -1650,15 +1650,15 @@ CRC32做哈希
 
 **覆盖索引：我们在查询的数据是我们对应的一个索引列的话，这个地方就会出现我们的覆盖索引**
 
-![image-20220415092716221](image\image-20220415092716221.png) 
+![image-20220415092716221](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220415092716221.png) 
 
 
 
-![image-20220415131207083](image\image-20220415131207083.png) 
+![image-20220415131207083](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220415131207083.png) 
 
 
 
-![image-20220415131633552](image\image-20220415131633552.png) 
+![image-20220415131633552](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220415131633552.png) 
 
 
 
@@ -1668,41 +1668,41 @@ alter talbe citydemo add key(city(7))
 -- 注意：前缀索引是第一种能使索引更小更快的有效方法，但是也包含缺点：mysql无法使用前缀索引做order by 和group by
 ```
 
-![image-20220415133729825](image\image-20220415133729825.png) 
+![image-20220415133729825](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220415133729825.png) 
 
 hyperloglog
 
 
 
-![image-20220415134901630](image\image-20220415134901630.png) 
+![image-20220415134901630](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220415134901630.png) 
 
-![image-20220416102627592](image\image-20220416102627592.png) 
+![image-20220416102627592](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416102627592.png) 
 
 Using index condition 使用了索引的某些相关查询
 
 
 
-![image-20220416103210645](image\image-20220416103210645.png) 
+![image-20220416103210645](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416103210645.png) 
 
 
 
-![image-20220416103221397](image\image-20220416103221397.png)
+![image-20220416103221397](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416103221397.png)
 
  Using filesort：意味着并没有用到索引进行排序，要使用额外的文件进行排序操作。因为如果第一个值是一个范围查找的话，最左前缀匹配的时候，不管后面的条件是否是我们需要的他都不会进行一个查找，都失效了
 
-![image-20220416103529094](image\image-20220416103529094.png) 
+![image-20220416103529094](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416103529094.png) 
 
 当我们创建组合索引的时候，他默认情况下是一个升序排序，所以后面在进行排序的时候这些列的排序方式都必须跟索引是一模一样的，如果跟索引不一样就不会用这个条件了。
 
-![image-20220416103725037](image\image-20220416103725037.png) 
+![image-20220416103725037](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416103725037.png) 
 
 组合索引中group by  一个desc 一个asc就没办法进行排序
 
-![image-20220416103843746](image\image-20220416103843746.png) 
+![image-20220416103843746](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416103843746.png) 
 
 
 
-![image-20220416104343241](image\image-20220416104343241.png) 
+![image-20220416104343241](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416104343241.png) 
 
 #### 总结：
 
@@ -1714,9 +1714,9 @@ Using index condition 使用了索引的某些相关查询
 
 他们都能使用索引，但是推荐使用in
 
-![image-20220416105543810](image\image-20220416105543810.png) 
+![image-20220416105543810](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416105543810.png) 
 
-![image-20220416105729223](image\image-20220416105729223.png) 
+![image-20220416105729223](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416105729223.png) 
 
 
 
@@ -1744,9 +1744,9 @@ index name 和 index age 有什么区别吗？
 
 ### 强制类型转换会全表扫描
 
-![image-20220416115135482](image\image-20220416115135482.png) 
+![image-20220416115135482](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416115135482.png) 
 
-![image-20220416115457850](image\image-20220416115457850.png) 
+![image-20220416115457850](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416115457850.png) 
 
 
 
@@ -1768,11 +1768,11 @@ index name 和 index age 有什么区别吗？
 
 在使用inner join的时候最好把表连接列设置成索引
 
-![join的多种方式 (3).jpg](image\join的多种方式(3).jpg)
+![join的多种方式 (3).jpg](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/join%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E5%BC%8F(3).jpg)
 
 A join B并不会一定是先查A再关联B，mysql会有他自己的一套优化。我们可以通过constraint来强制他必须先A再B。(最好是小表匹配join大表)
 
-![image-20220416151104698](image\image-20220416151104698.png) 
+![image-20220416151104698](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220416151104698.png) 
 
 
 
@@ -1823,9 +1823,9 @@ limit在过滤的时候相当于是有一个指针，一行一行的遍历，他
 
 ### 索引监控
 
-![image-20220417211539999](image\image-20220417211539999.png) 
+![image-20220417211539999](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220417211539999.png) 
 
-![image-20220417211622715](image\image-20220417211622715.png) 	
+![image-20220417211622715](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220417211622715.png) 	
 
 
 
@@ -1843,29 +1843,29 @@ InnoDB实际上锁的是索引，所以他既支持行锁，也支持表锁。
 
 **自增锁、间隙锁**
 
-![image-20220418212904605](image\image-20220418212904605.png) 
+![image-20220418212904605](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220418212904605.png) 
 
-![image-20220418213153549](image\image-20220418213153549.png) 
-
-
-
-![image-20220419132039512](image\image-20220419132039512.png) 
+![image-20220418213153549](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220418213153549.png) 
 
 
 
-![image-20220419132108774](image\image-20220419132108774.png) 
+![image-20220419132039512](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419132039512.png) 
 
-![image-20220419132419040](image\image-20220419132419040.png) 
+
+
+![image-20220419132108774](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419132108774.png) 
+
+![image-20220419132419040](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419132419040.png) 
 
 查询缓存在8.0的时候已经淘汰掉了
 
-![image-20220419133448628](image\image-20220419133448628.png) 
+![image-20220419133448628](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419133448628.png) 
 
 
 
 ### 优化器策略
 
-![image-20220419134104294](image\image-20220419134104294.png)
+![image-20220419134104294](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419134104294.png)
 
 **优化器最有效的查询方式是：CBO、RBO**
 
@@ -1886,21 +1886,21 @@ show status like 'last_query_cost';
 
 
 
-![image-20220419205549010](image\image-20220419205549010.png) 
+![image-20220419205549010](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419205549010.png) 
 
 
 
-![image-20220419205812802](image\image-20220419205812802.png) 
+![image-20220419205812802](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419205812802.png) 
 
 执行存储过程或者用户自定义函数的成本
 
 
 
-![image-20220419210309164](image\image-20220419210309164.png) 
+![image-20220419210309164](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419210309164.png) 
 
 
 
-![image-20220419210658539](image\image-20220419210658539.png) 
+![image-20220419210658539](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419210658539.png) 
 
 索引和列是否可以为空通常可以帮助mysql优化这类表达式：例如，要找到某一列的最小值，只需要查询索引的最左端的记录即可，不需要全文扫描比较。
 
@@ -1916,19 +1916,19 @@ system>const>ref>range>index>all
 
 **等值传播：如果两个列的值通过等式关联，那么mysql能够把其中一个列的where条件传递到另一个上。**
 
-![image-20220419212524403](image\image-20220419212524403.png) 
+![image-20220419212524403](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419212524403.png) 
 
  	
 
 优化该SQL：能不能只扫描几行的rows 
 
-![image-20220419231004513](image\image-20220419231004513.png) 
+![image-20220419231004513](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419231004513.png) 
 
 
 
 ### 关联与排序优化
 
-![image-20220419232715529](image\image-20220419232715529.png) 
+![image-20220419232715529](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220419232715529.png) 
 
 
 
@@ -1936,9 +1936,9 @@ system>const>ref>range>index>all
 
 MySQL优化器优化过后的效果，可能比我们强制执行的效果会更好 
 
-![image-20220425133648331](image\image-20220425133648331.png) 
+![image-20220425133648331](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425133648331.png) 
 
-![image-20220425133736662](image\image-20220425133736662.png) ![image-20220425134133487](image\image-20220425134133487.png) 
+![image-20220425133736662](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425133736662.png) ![image-20220425134133487](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425134133487.png) 
 
 **单次查询：先读取查询所需要的所有列，然后再根据给定列进行排序，最后直接返回排序结果，此方式只需要一次顺序IO读取所有的数据，而无需任何的随机IO，问题在于查询列忒儿多的时候，会占用大量的存储空间，无法存储大量的数据。**
 
@@ -1952,17 +1952,17 @@ MySQL优化器优化过后的效果，可能比我们强制执行的效果会更
 
 #### 优化count查询
 
-![image-20220425210639263](image\image-20220425210639263.png) 
+![image-20220425210639263](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425210639263.png) 
 
 MySQL中是没有区别的，总有人认为myisam的count函数比较快，这是有前提条件的，只有没有任何where条件的count(*)才是比较快的。
 
 使用近似值
 
-![image-20220425210958861](image\image-20220425210958861.png) 
+![image-20220425210958861](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425210958861.png) 
 
 
 
-![image-20220425211039894](image\image-20220425211039894.png) 
+![image-20220425211039894](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220425211039894.png) 
 
 #### 优化关联查询
 
@@ -1996,11 +1996,11 @@ MySQL中是没有区别的，总有人认为myisam的count函数比较快，这�
 
 
 
-![image-20220506221743329](image\image-20220506221743329.png) 
+![image-20220506221743329](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220506221743329.png) 
 
 
 
-![image-20220506222123582](image\image-20220506222123582.png) 
+![image-20220506222123582](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220506222123582.png) 
 
 
 
@@ -2010,7 +2010,7 @@ MySQL中是没有区别的，总有人认为myisam的count函数比较快，这�
 
 **@**：
 
-![image-20220506222240275](image\image-20220506222240275.png) 
+![image-20220506222240275](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220506222240275.png) 
 
 
 
@@ -2022,11 +2022,11 @@ MySQL中是没有区别的，总有人认为myisam的count函数比较快，这�
 
 ### 优化limit分页
 
-![image-20220506223216794](image\image-20220506223216794.png) 
+![image-20220506223216794](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220506223216794.png) 
 
 示例：
 
-![image-20220506222954791](image\image-20220506222954791.png) 
+![image-20220506222954791](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220506222954791.png) 
 
 **优化此类查询的最简单的办法就是尽可能的使用覆盖索引，而不是查询所有列**
 
@@ -2034,11 +2034,11 @@ MySQL中是没有区别的，总有人认为myisam的count函数比较快，这�
 
 扫描行数为1000                                                                         扫描行数为110
 
-![image-20220507090400501](image\image-20220507090400501.png) ![image-20220507090410709](image\image-20220507090410709.png) 
+![image-20220507090400501](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507090400501.png) ![image-20220507090410709](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507090410709.png) 
 
 
 
-![image-20220507090352825](image\image-20220507090352825.png) 
+![image-20220507090352825](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507090352825.png) 
 
 
 
@@ -2050,7 +2050,7 @@ MySQL中是没有区别的，总有人认为myisam的count函数比较快，这�
 
 #### ====行转列====
 
-![image-20220507090941858](image\image-20220507090941858.png) 
+![image-20220507090941858](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507090941858.png) 
 
 
 
@@ -2101,21 +2101,21 @@ mysql> select @last_week;
 
 
 
-![image-20220507131344862](image\image-20220507131344862.png) 
+![image-20220507131344862](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507131344862.png) 
 
-![image-20220507131220622](image\image-20220507131220622.png) 
-
-
-
-![image-20220507131955987](image\image-20220507131955987.png) 
+![image-20220507131220622](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507131220622.png) 
 
 
 
+![image-20220507131955987](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507131955987.png) 
 
 
-![image-20220507132225519](image\image-20220507132225519.png) 
 
-![image-20220507132550834](image\image-20220507132550834.png)
+
+
+![image-20220507132225519](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507132225519.png) 
+
+![image-20220507132550834](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507132550834.png)
 
 之前如果没有自定义变量的话 order by确实是最后执行的，但实际上第二条SQL场景的时候，order by是优先执行的，所以要慎用
 
@@ -2151,7 +2151,7 @@ mysql> select @last_week;
    1. innodb的单个索引的互斥访问  ====
    2. ext3文件系统inode锁竞争 ====   
 
-   ![image-20220507140538253](image\image-20220507140538253.png) 
+   ![image-20220507140538253](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507140538253.png) 
 
 5. 可以备份和恢复一个独立的分区
 
@@ -2189,15 +2189,15 @@ mysql> select @last_week;
 
 
 
-![image-20220507211406453](image\image-20220507211406453.png) 
+![image-20220507211406453](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507211406453.png) 
 
 4个分区
 
-![image-20220507213023379](image\image-20220507213023379.png) 
+![image-20220507213023379](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507213023379.png) 
 
 子分区
 
-![image-20220507213506230](image\image-20220507213506230.png) 
+![image-20220507213506230](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507213506230.png) 
 
 ​	分区会按照我们指定的规则把数据插入到对应的数据文件中，而且那些数据文件不一定是在同一台机器上存储的，可以分配在不同的服务器上。
 
@@ -2205,11 +2205,11 @@ mysql> select @last_week;
 
 **全量扫描数据，不要任何索引**
 
-![image-20220507214529747](image\image-20220507214529747.png) 
+![image-20220507214529747](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507214529747.png) 
 
 **索引数据，并分离热点**
 
-![image-20220507214720783](image\image-20220507214720783.png) 
+![image-20220507214720783](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507214720783.png) 
 
 **并不是所有人都能查到冷数据的，他需要一个权限的分配**
 
@@ -2221,7 +2221,7 @@ mysql> select @last_week;
 
 ## 在使用分区表的时候需要注意的问题
 
-![image-20220507214933297](image\image-20220507214933297.png) 
+![image-20220507214933297](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220507214933297.png) 
 
 
 

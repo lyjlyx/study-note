@@ -113,17 +113,17 @@ public interface ConsumerApi {
 
 基于线程池的隔离
 
-![image-20220127163717635](image\image-20220127163717635.png) 
+![image-20220127163717635](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220127163717635.png) 
 
 
 
-![image-20220129135812448](image\image-20220129135812448.png) 
+![image-20220129135812448](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220129135812448.png) 
 
 
 
 
 
-![image-20220129140347090](image\image-20220129140347090.png) 
+![image-20220129140347090](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220129140347090.png) 
 
 
 
@@ -140,7 +140,7 @@ public interface ConsumerApi {
 
 单节点应用不推荐使用这种的模式，最好是要有业务阻塞的这种业务处理最好用这种模式处理。
 
-![image-20220129143638300](image\image-20220129143638300.png) 
+![image-20220129143638300](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220129143638300.png) 
 
 
 
@@ -223,11 +223,11 @@ http://localhost:90/hystrix
 
 ### 概念和功能
 
-![image-20220204162759685](image\image-20220204162759685.png) 
+![image-20220204162759685](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220204162759685.png) 
 
 
 
-![image-20220204162810796](image\image-20220204162810796.png)  
+![image-20220204162810796](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220204162810796.png)  
 
 
 
@@ -235,7 +235,7 @@ http://localhost:90/hystrix
 
 好处：灵活处理
 
-![image-20220204163521253](image\image-20220204163521253.png) 
+![image-20220204163521253](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220204163521253.png) 
 
 
 
@@ -334,7 +334,7 @@ zuul.routes.xx.path=/xx/**
 zuul.routes.xx.url=http://loethin.com
 ```
 
-![image-20220208134440173](image\image-20220208134440173.png)
+![image-20220208134440173](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208134440173.png)
 
 
 
@@ -581,15 +581,15 @@ spring.boot.admin.client.url=http://localhost:8080
 
 **password**
 
-![image-20220208154246891](image\image-20220208154246891.png) 
+![image-20220208154246891](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208154246891.png) 
 
-![image-20220208154609259](image\image-20220208154609259.png) 
+![image-20220208154609259](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208154609259.png) 
 
 
 
 **当停止服务的时候 admin会通过邮件发送报告**
 
-![image-20220208155054151](image\image-20220208155054151.png) 
+![image-20220208155054151](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208155054151.png) 
 
 
 
@@ -756,23 +756,23 @@ public class MessageInfo {
 
 在钉钉群中创建一个只能机器人，并设置关键词
 
-![image-20220208203538490](image\image-20220208203538490.png)
+![image-20220208203538490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208203538490.png)
 
 
 
 **会生成webhook地址，将地址中的token放到URL中**
 
-![image-20220208203802532](image\image-20220208203802532.png) 
+![image-20220208203802532](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208203802532.png) 
 
 **停止服务后钉钉消息没有发送成功，后台抛异常**
 
-![image-20220208204137490](image\image-20220208204137490.png) 
+![image-20220208204137490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208204137490.png) 
 
 **是因为我们设置的关键字没有在内容中**
 
-![image-20220208204751965](image\image-20220208204751965.png) 
+![image-20220208204751965](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208204751965.png) 
 
-![image-20220208204803618](image\image-20220208204803618.png) 
+![image-20220208204803618](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208204803618.png) 
 
 
 
@@ -804,7 +804,7 @@ public class MessageInfo {
 2. config  server。从 1 读取配置。
 3. config client。是 config server 的客户端 消费配置。
 
-![img](image\222.png)
+![img](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/222.png)
 
 
 
@@ -817,7 +817,7 @@ public class MessageInfo {
 
 
 
-![image-20220208211937450](image\image-20220208211937450.png) 
+![image-20220208211937450](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208211937450.png) 
 
 ## SpringCloudConfig和Github单机搭建和配置命名规则
 
@@ -825,7 +825,7 @@ public class MessageInfo {
 
 **创建一个新的git分支**
 
-![image-20220208214648757](image\image-20220208214648757.png) 
+![image-20220208214648757](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220208214648757.png) 
 
 ### 匹配规则
 
@@ -889,13 +889,13 @@ config.info="config-dev,v1"
 
 **直接使用@Value去远程读取配置文件的时候会报该注入失败，原因是配置文件的约定名需要叫bootstrap.properties，这样才能在我们注入之前去远程加载配置文件**
 
-![image-20220209125117371](image\image-20220209125117371.png) 
+![image-20220209125117371](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209125117371.png) 
 
-![image-20220209125123838](image\image-20220209125123838.png) 
+![image-20220209125123838](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209125123838.png) 
 
 **每次修改配置文件之后客户端都得重新启动，我们可以使用@RefreshScope注解到Controller上**
 
-![image-20220209132859456](image\image-20220209132859456.png) 
+![image-20220209132859456](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209132859456.png) 
 
 **再使用actuator**
 
@@ -918,13 +918,13 @@ management.endpoints.web.exposure.include=*
 
 **actuator配置之后我们就会有一个refresh端点的，我们需要去请求这个端点地址(要用post请求)，他就会给我们重新加载配置**
 
-![image-20220209133440522](image\image-20220209133440522.png) 
+![image-20220209133440522](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209133440522.png) 
 
 
 
-![image-20220209133627049](image\image-20220209133627049.png) 
+![image-20220209133627049](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209133627049.png) 
 
-![image-20220209133638405](image\image-20220209133638405.png) 
+![image-20220209133638405](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209133638405.png) 
 
 **但是他只更改单节点的配置，比如consumer有94和93 ，我们使用http://localhost:93/actuator/refresh这个地址去刷新的话就只有93更新了**
 
@@ -1001,7 +1001,7 @@ http://localhost:91/actuator/bus-refresh
 
 
 
-![image-20220209164707125](image\image-20220209164707125.png) 
+![image-20220209164707125](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209164707125.png) 
 
 
 
@@ -1009,15 +1009,15 @@ http://localhost:91/actuator/bus-refresh
 
 
 
-![image-20220209164953632](image\image-20220209164953632.png) 
+![image-20220209164953632](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209164953632.png) 
 
-![image-20220209165227180](image\image-20220209165227180.png) 
+![image-20220209165227180](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209165227180.png) 
 
 
 
 **还可以在总线配置上actuator和bus(就是Config-Center,记得将端点都打开)**
 
-![image-20220209170031611](image\image-20220209170031611.png) 
+![image-20220209170031611](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209170031611.png) 
 
 ```json
 {"_links":{"self":{"href":"http://localhost:70/actuator","templated":false},"archaius":{"href":"http://localhost:70/actuator/archaius","templated":false},"beans":{"href":"http://localhost:70/actuator/beans","templated":false},"caches-cache":{"href":"http://localhost:70/actuator/caches/{cache}","templated":true},"caches":{"href":"http://localhost:70/actuator/caches","templated":false},"health":{"href":"http://localhost:70/actuator/health","templated":false},"health-path":{"href":"http://localhost:70/actuator/health/{*path}","templated":true},"info":{"href":"http://localhost:70/actuator/info","templated":false},"conditions":{"href":"http://localhost:70/actuator/conditions","templated":false},"configprops":{"href":"http://localhost:70/actuator/configprops","templated":false},"bus-env":{"href":"http://localhost:70/actuator/bus-env","templated":false},"bus-env-destination":{"href":"http://localhost:70/actuator/bus-env/{destination}","templated":true},"env":{"href":"http://localhost:70/actuator/env","templated":false},"env-toMatch":{"href":"http://localhost:70/actuator/env/{toMatch}","templated":true},"integrationgraph":{"href":"http://localhost:70/actuator/integrationgraph","templated":false},"loggers":{"href":"http://localhost:70/actuator/loggers","templated":false},"loggers-name":{"href":"http://localhost:70/actuator/loggers/{name}","templated":true},"heapdump":{"href":"http://localhost:70/actuator/heapdump","templated":false},"threaddump":{"href":"http://localhost:70/actuator/threaddump","templated":false},"metrics":{"href":"http://localhost:70/actuator/metrics","templated":false},"metrics-requiredMetricName":{"href":"http://localhost:70/actuator/metrics/{requiredMetricName}","templated":true},"scheduledtasks":{"href":"http://localhost:70/actuator/scheduledtasks","templated":false},"mappings":{"href":"http://localhost:70/actuator/mappings","templated":false},"refresh":{"href":"http://localhost:70/actuator/refresh","templated":false},"bus-refresh":{"href":"http://localhost:70/actuator/bus-refresh","templated":false},"bus-refresh-destination":{"href":"http://localhost:70/actuator/bus-refresh/{destination}","templated":true},"features":{"href":"http://localhost:70/actuator/features","templated":false},"service-registry":{"href":"http://localhost:70/actuator/service-registry","templated":false},"bindings-name":{"href":"http://localhost:70/actuator/bindings/{name}","templated":true},"bindings":{"href":"http://localhost:70/actuator/bindings","templated":false},"channels":{"href":"http://localhost:70/actuator/channels","templated":false}}}
@@ -1025,7 +1025,7 @@ http://localhost:91/actuator/bus-refresh
 
 **直接请求总线来完成远端服务配置文件的更新**
 
-![image-20220209170156519](image\image-20220209170156519.png) 
+![image-20220209170156519](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220209170156519.png) 
 
 
 

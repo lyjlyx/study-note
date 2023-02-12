@@ -1,8 +1,6 @@
 # Spring面试
 
-![image-20220310224800807](image/image-20220310 224800807.png) 
-
-![image-20220310134944241](image/image-20220310134944241.png)
+![image-20220310134944241](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220310134944241.png)
 
 
 

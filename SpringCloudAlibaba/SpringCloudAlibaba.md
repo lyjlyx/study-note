@@ -71,11 +71,11 @@ public class PersonService {
 
 
 
-![image-20220217230921229](image\image-20220217230921229.png) 
+![image-2022021723092122 9](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220217230921229.png) 
 
 启动之后所有的日志都会写到这个路径下
 
-![image-20220217230855072](image/image-20220217230855072.png) 
+![ ](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220217230855072.png) 
 
 
 
@@ -124,7 +124,7 @@ java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject
 
 **配置流量监控**
 
-![image-20220218124954845](image/image-20220218124954845.png) 
+![image-2022 0218124954845](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218124954845.png) 
 
 **配置文件**
 
@@ -141,9 +141,9 @@ spring.cloud.sentinel.transport.dashboard=localhost:8080
 
 **注册上来了**
 
-![image-20220218125510784](image/image-20220218125510784.png) 
+![image-20220218 125510784](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218125510784.png) 
 
-![image-20220218125407224](image/image-20220218125407224.png) 
+![image-20220218125407224](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218125407224.png) 
 
 
 
@@ -166,9 +166,9 @@ spring.cloud.sentinel.transport.dashboard=localhost:8080
 
 
 
-![image-20220218131527012](image/image-20220218131527012.png) 
+![image-20220218 131527012](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218131527012.png) 
 
-![image-20220218131538019](image/image-20220218131538019.png) 
+![image-20220  218131538019](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218131538019.png) 
 
 ### springboot配置
 
@@ -202,7 +202,7 @@ spring.cloud.sentinel.datasource.ds.nacos.ruleType=flow
 
 nacos自动下发的限流规则
 
-![image-20220218131605368](image/image-20220218131605368.png)
+![image-202202181 31605368](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218131605368.png)
 
 
 
@@ -210,11 +210,11 @@ nacos自动下发的限流规则
 
 **nacos配置阈值为3**
 
-![image-20220218131715862](image/image-20220218131715862.png) 
+![image-20220218131715 862](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218131715862.png) 
 
 dashboard实时拉取
 
-![image-20220218131730801](image/image-20220218131730801.png) 
+![image-2 0220218131730801](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220218131730801.png) 
 
 
 
@@ -252,7 +252,7 @@ bucket数组默认120个限制
 
 **先拿到当前写入的时间戳 去掉毫秒  % 数组总长度 = 具体的数组里**
 
-![image-20220219000036301](image/image-20220219000036301.png) 
+![image-20220 219000036301](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219000036301.png) 
 
 **平滑**
 
@@ -270,7 +270,7 @@ sentinel以一秒为一个单位，把他切割成两个部分，每一部分都
 
 ## QPS隔离与线程隔离
 
-![image-20220219101608205](image/image-20220219101608205.png) 
+![image-202202 19101608205](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219101608205.png) 
 
 
 
@@ -280,7 +280,7 @@ sentinel设置的限流规则可以关联请求
 
 
 
- ![image-20220219104116089](image/image-20220219104116089.png) 
+ ![image-20220 219104116089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219104116089.png) 
 
 
 
@@ -294,9 +294,9 @@ RT(Response Time)
 
 ## 降级
 
-![image-20220219111504159](image/image-20220219111504159.png) 
+![ ](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219111504159.png) 
 
-![image-20220219112842174](image/image-20220219112842174.png) 
+![image-202 20219112842174](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219112842174.png) 
 
 
 
@@ -312,7 +312,7 @@ RT(Response Time)
 
 
 
-![image-20220219113839505](image/image-20220219113839505.png) 
+![image-20220219113 839505](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219113839505.png) 
 
 
 
@@ -320,7 +320,7 @@ RT(Response Time)
 
 ## 异常比例与异常数
 
-![image-20220219114425146](image/image-20220219114425146.png) 
+![image-20220219 114425146](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219114425146.png) 
 
 ## 热点限流
 
@@ -356,7 +356,7 @@ Sentinel 系统自适应限流从整体维度对应用入口流量进行控制�
 - Token Client：集群流控客户端，用于向所属 Token Server 通信请求 token。集群限流服务端会返回给客户端结果，决定是否限流。
 - Token Server：即集群流控服务端，处理来自 Token Client 的请求，根据配置的集群规则判断是否应该发放 token（是否允许通过）。
 
-![image](image/65305357-8f39bc80-dbb5-11e9-96d6-d1111fc365a9.png)
+![ima ge](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/65305357-8f39bc80-dbb5-11e9-96d6-d1111fc365a9.png) 
 
 
 
@@ -366,7 +366,7 @@ Sentinel 系统自适应限流从整体维度对应用入口流量进行控制�
 
 2. 单击均摊模式
 
-![image-20220219193025950](image/image-20220219193025950.png) 
+![ ](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219193025950.png) 
 
 
 
@@ -384,7 +384,7 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 
 Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 Nacos 是构建以“服务”为中心的现代应用架构(例如微服务范式、云原生范式)的服务基础设施。
 
-![nacos_landscape.png](image/29102804_XygY.png)
+![nacos_lan dscape.png](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/29102804_XygY.png)
 
 
 
@@ -395,7 +395,7 @@ Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 N
 - 优势大图：展示 Nacos 核心竞争力
 - 战略大图：要从战略到战术层面讲 Nacos 的宏观优势
 
-![img](https://nacos.io/img/nacosMap.jpg)
+![img ](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/nacosMap.jpg)
 
 **配置中心与注册中心压测报告**
 
@@ -466,7 +466,7 @@ public class MainController {
 
 ### eureka
 
-![img](image/aaca0b10-36c0-11ea-83e2-610758492683)
+![ ](C:%5CProgram%20Files%5CWorkSpace%5Cstudy%5Cstudy-note%5CSpringCloudAlibaba%5Cimage%5Caaca0b10-36c0-11ea-83e2-610758492683)
 
 网上很多人说 Eureka 闭源，其实没有，只是 Eurkea 2.x 分支不再维护，官方依然在积极地维护 Eureka 1.x，Spring Cloud 还是使用的 1.x 版本的 Eureka
 
@@ -616,7 +616,7 @@ Nginx
 
 
 
-![image-20220219205833760](image/image-20220219205833760.png) 
+![ ](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219205833760.png) 
 
 
 
@@ -628,7 +628,7 @@ Nginx
 
 配置文件库
 
-![image-20220219223459138](image/image-20220219223459138.png) 
+![image-202 20219223459138](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220219223459138.png) 
 
 
 

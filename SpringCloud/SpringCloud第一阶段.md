@@ -127,7 +127,7 @@ SpringCloud OpenFeign
 Netflix Feign
 ```
 
-![image-20220118202423612](image/image-20220118202423612.png) 
+![image-20220118202423612](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220118202423612.png) 
 
 
 
@@ -166,7 +166,7 @@ Spring Integration
 Apache Camel
 ```
 
-![image-20220118205311519](image/image-20220118205311519.png) 
+![image-20220118205311519](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220118205311519.png) 
 
 ```
 SpringData JPA
@@ -241,39 +241,39 @@ eureka节点没有主从关系，每个节点都是可写入数据的，他们�
 
 **Eureka会有数据一致性问题**
 
-![image-20220119130608908](image/image-20220119130608908.png) 
+![image-20220119130608908](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119130608908.png) 
 
 **eureka有多网卡绑定机制**
 
 ## 配置主机名
 
-![image-20220119224252467](image/image-20220119224252467.png) 
+![image-20220119224252467](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119224252467.png) 
 
 
 
 
 
-![image-20220119225854075](image/image-20220119225854075.png) 
+![image-20220119225854075](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119225854075.png) 
 
-![image-20220119225907444](image/image-20220119225907444.png) 
+![image-20220119225907444](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119225907444.png) 
 
 **上图所示，euk2和euk1虽然都注册上来了  但是他们的状态都是unavailable-replicas不可用的副本，具体原因是出在哪呢？**
 
 **原因：所有的集群副本的都是基于他有一个相同的分组，他们需要有一个唯一标识(类似于负载均衡的道理)，他们的application的name得是一样的。**
 
-![image-20220119231536204](image/image-20220119231536204.png) 
+![image-20220119231536204](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119231536204.png) 
 
 **如下图application.name的名字得是一样的**
 
-![image-20220119231612865](image/image-20220119231612865.png)  
+![image-20220119231612865](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119231612865.png)  
 
 
 
-![image-20220119231948259](image/image-20220119231948259.png) 
+![image-20220119231948259](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119231948259.png) 
 
 
 
-![image-20220119231916837](image/image-20220119231916837.png)
+![image-20220119231916837](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220119231916837.png)
 
 **如果换成是两个服务器的话，hostname可以配置成ip**
 
@@ -356,19 +356,19 @@ Eureka客户端从服务器获取注册表信息并将其缓存在本地。
 
 ### 元数据
 
-![image-20220120211651543](image/image-20220120211651543.png) 
+![image-20220120211651543](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220120211651543.png) 
 
-![image-20220120211637010](image/image-20220120211637010.png) 
+![image-20220120211637010](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220120211637010.png) 
 
 
 
 ### EurekaClient
 
- **使用discoverClient接口提供的api调用eureka方法**![image-20220121124559267](image/image-20220121124559267.png) 
+ **使用discoverClient接口提供的api调用eureka方法**![image-20220121124559267](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121124559267.png) 
 
 
 
-![image-20220121124630321](image/image-20220121124630321.png) 
+![image-20220121124630321](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121124630321.png) 
 
 ```json
 结果：
@@ -424,17 +424,17 @@ Eureka客户端从服务器获取注册表信息并将其缓存在本地。
 ]
 ```
 
-![image-20220121124916274](image/image-20220121124916274.png) 
+![image-20220121124916274](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121124916274.png) 
 
 
 
 使用EurekaClient来调用获取InstanceInfo对象来获取eureka注册的服务信息 
 
-![image-20220121130127358](image/image-20220121130127358.png) 
+![image-20220121130127358](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121130127358.png) 
 
-![image-20220121130709482](image/image-20220121130709482.png) 
+![image-20220121130709482](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121130709482.png) 
 
-![image-20220121130853597](image/image-20220121130853597.png) 
+![image-20220121130853597](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121130853597.png) 
 
 ```java
 package com.mashibing.eurekaserver.eurekaprovider;
@@ -519,7 +519,7 @@ public class MainController {
 }
 ```
 
-![image-20220121132106374](image/image-20220121132106374.png) 
+![image-20220121132106374](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121132106374.png) 
 
 ```java
 @GetMapping("/ribbon")
@@ -542,7 +542,7 @@ public class MainController {
 
 eureka如果网络不达或者是服务不可用的时候可以向eureka把该台机器修改为down
 
-![image-20220121133406610](image/image-20220121133406610.png) 
+![image-20220121133406610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220121133406610.png) 
 
 ### 作业
 
@@ -638,13 +638,13 @@ management.endpoints.web.exposure.include=*
 management.endpoint.shutdown.enabled=true
 ```
 
-![image-20220123152115728](image/image-20220123152115728.png) 
+![image-20220123152115728](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123152115728.png) 
 
 **只支持post请求，不支持get请求**
 
-![image-20220123152240848](image/image-20220123152240848.png) 
+![image-20220123152240848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123152240848.png) 
 
-![image-20220123152256398](image/image-20220123152256398.png) 
+![image-20220123152256398](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123152256398.png) 
 
 
 
@@ -709,13 +709,13 @@ public class HealthStatusService implements HealthIndicator{
 
 上线
 
-![image-20220123153954997](image/image-20220123153954997.png) 
+![image-20220123153954997](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123153954997.png) 
 
 下线：
 
-![image-20220123154044353](image/image-20220123154044353.png) 
+![image-20220123154044353](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123154044353.png) 
 
-![image-20220123154108113](image/image-20220123154108113.png)
+![image-20220123154108113](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123154108113.png)
 
 ## Eureka安全配置
 
@@ -728,21 +728,21 @@ spring.security.user.password=123
 
  现在是单节点了，所以要把这两个配置要解开，不向别人注册 也不拉去别人的信息
 
-![image-20220123161403127](image/image-20220123161403127.png) 
+![image-20220123161403127](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123161403127.png) 
 
 
 
-![image-20220123161623676](image/image-20220123161623676.png) 
+![image-20220123161623676](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123161623676.png) 
 
 
 
 加完之后服务就没有连接权限了
 
-![image-20220123161741964](image/image-20220123161741964.png)
+![image-20220123161741964](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123161741964.png)
 
 在连接地址中加自己的账号密码就能连接了
 
-![image-20220123161909642](image/image-20220123161909642.png)
+![image-20220123161909642](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123161909642.png)
 
 
 
@@ -783,15 +783,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 **基于客户端的负载均衡**
 
-![image-20220123164029723](image/image-20220123164029723.png)
+![image-20220123164029723](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123164029723.png)
 
 **基于服务器的负载均衡** 
 
-![image-20220123164316825](image/image-20220123164316825.png) 
+![image-20220123164316825](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123164316825.png) 
 
 
 
-![image-20220123170640646](image/image-20220123170640646.png) 
+![image-20220123170640646](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123170640646.png) 
 
 
 
@@ -799,7 +799,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 **注解方式**
 
-![image-20220123212904122](image/image-20220123212904122.png) 
+![image-20220123212904122](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123212904122.png) 
 
 **手动写负载均衡策略**
 
@@ -865,7 +865,7 @@ Ribbon可以和服务注册中心Eureka一起工作，从服务注册中心获�
 
 添加LoadBalanced注解，这样ribbon就会帮我们转化地址
 
-![image-20220123220800132](image/image-20220123220800132.png) 
+![image-20220123220800132](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123220800132.png) 
 
 ### 依赖注入
 
@@ -905,7 +905,7 @@ Rest服了风格的api接口规范
 
 **要先将资源定义出来**
 
-![image-20220123230712671](image/image-20220123230712671.png) 
+![image-20220123230712671](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123230712671.png) 
 
 **针对单表  不再重复 crud  SpringData Rest**
 
@@ -921,13 +921,13 @@ SpringCloud基于http协议的，可以做异构平台，跨语言
 
 2、异构平台(可以调不同语言的服务，跨平台的重要性)
 
-![image-20220123232008534](image/image-20220123232008534.png) 
+![image-20220123232008534](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123232008534.png) 
 
 3、可插拔式的服务(类似于长连接请求之间的依赖性太高了，而http请求每次请求的服务地址还不一定，无状态服务)，解决了网络的不可靠
 
-![image-20220123232356793](image/image-20220123232356793.png) 
+![image-20220123232356793](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123232356793.png) 
 
-![image-20220123232422089](image/image-20220123232422089.png) 
+![image-20220123232422089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220123232422089.png) 
 
 4、几乎没有配置文件，基本上都是靠约定
 
@@ -1208,7 +1208,7 @@ Feign默认所有带参数的请求都是Post，想要使用指定的提交方�
 
 
 
-![image-20220125125629976](image/image-20220125125629976.png) 
+![image-20220125125629976](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220125125629976.png) 
 
 
 

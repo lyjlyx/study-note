@@ -18,7 +18,7 @@ systemctl disable firewalld.service
 
 **分布式应用程序的分布式协调服务**
 
-![image-20220109224849764](image/image-20220109224849764.png) 
+![image-20220109224849764](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109224849764.png) 
 
 1. 主从形式的单节点应用的leader肯定会挂
 2. 导致服务不可用
@@ -36,7 +36,7 @@ systemctl disable firewalld.service
 
 
 
-![image-20220109225342335](image/image-20220109225342335.png) 
+![image-20220109225342335](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220109225342335.png) 
 
 
 
@@ -110,7 +110,7 @@ export ZOOKEEPER_HOME=/opt/mashibing/zookeeper-3.5.9
 
 ## Zookeeper安装
 
-![image-20220113123625793](image/image-20220113123625793.png) 
+![image-20220113123625793](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220113123625793.png) 
 
 
 
@@ -120,14 +120,14 @@ export ZOOKEEPER_HOME=/opt/mashibing/zookeeper-3.5.9
 netstat -natp | egrep '(2888|3888)'
 ```
 
-![image-20220113124244238](image/image-20220113124244238.png) 
+![image-20220113124244238](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220113124244238.png) 
 
 ```
 3888：选主投票用的
 2888：leader接收writer请求的时候用的
 ```
 
-![image-20220113125013048](image/image-20220113125013048.png) 
+![image-20220113125013048](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220113125013048.png) 
 
 # Zookeeper-2
 
@@ -221,7 +221,7 @@ zookeeper更新一定是走两阶段的
 
 client向Follower发送了一个写操作,写操作转发给leader，leader创建一个zxid8，leader会给他的各个follower发起第一阶段将zxid8的信息写到他们的日志中（在leader中维护了一个发送队列），follower会回送一个ack的确认信息，这个时候leader自己也会 有一个ok，这个时候消息就是(3/2)+1已经过半了，第二阶段就是发送write写到内存中去，虽然第二个follower没有返回ok给leader，但是因为消息过半通过了，所以leader也会给他发write的事情，所以只要数据最终是一致的就行（write写完也会回一个ok），最后leader会返回over-ok。
 
-![image-20220711132111479](D:\TyporaNote\马士兵教育\技术\zookeeper\Zookeeper.assets\image-20220711132111479.png) 
+![image-20220711132111479](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220711132111479.png) 
 
 
 
@@ -229,13 +229,13 @@ client向Follower发送了一个写操作,写操作转发给leader，leader创�
 
 **如果leader一旦挂掉了怎么办？**
 
-![image-20220711142845942](D:\TyporaNote\马士兵教育\技术\zookeeper\Zookeeper.assets\image-20220711142845942.png) 
+![image-20220711142845942](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220711142845942.png) 
 
-![image-20220711143020142](D:\TyporaNote\马士兵教育\技术\zookeeper\Zookeeper.assets\image-20220711143020142.png) 
+![image-20220711143020142](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220711143020142.png) 
 
 当leader4挂了之后，03节点的Zid还是7，但是是03先发现leader挂了的，03将票投出去给01、02，自己票数+1，当01和02收到票的之后就会用这个票进行比较，通过zxid直接淘汰掉03的票
 
-![image-20220711143204162](D:\TyporaNote\马士兵教育\技术\zookeeper\Zookeeper.assets\image-20220711143204162.png) 
+![image-20220711143204162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220711143204162.png) 
 
 收票者否定了对方，并且将自己的票发回去，
 
@@ -450,7 +450,7 @@ public class App {
 
 
 
-![image-20220116162456184](image/image-20220116162456184.png) 
+![image-20220116162456184](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220116162456184.png) 
 
 
 
@@ -490,7 +490,7 @@ public class App {
 
 
 
-![image-20220113132526635](image/image-20220113132526635.png) 
+![image-20220113132526635](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220113132526635.png) 
 
 
 

@@ -1,6 +1,6 @@
 
 
-![image-20211225160410348](image/image-20211225160410348.png)
+![image-20211225160410348](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211225160410348.png)
 
 
 
@@ -12,7 +12,7 @@
 
 ### 非外键约束
 
-![image-20211225162037407](image/image-20211225162037407.png)
+![image-20211225162037407](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20211225162037407.png)
 
 自增约束只能添加到列（列级约束）后面   不是表约束
 

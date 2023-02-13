@@ -3796,6 +3796,40 @@ BeanPostProcessor所针对的处理对象是bean对象
 
 
 
+对于要合并处理BeanDefinition的时候要做的处理工作。
+
+postProcessMergedBeanDefinition合并BeanDefinition，合并相关bean 的定义信息
+
+![image-20230213143244656](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213143244656.png) 
+
+清空BeanDefinition信息
+
+![image-20230213143437389](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213143437389.png)
+
+**为什么要合并？ 是因为我们在存在一个BeanDefinition的时候一个bean他是可能存在父类的，有时候我们需要把父类和子类的一些信息进行相关的合并操作。**
+
+
+
+寻找整个里面存在的构造器
+
+![image-20230213145025595](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213145025595.png)
+
+解决循环依赖问题
+
+![image-20230213145018338](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213145018338.png)
+
+
+
+![image-20230213145651804](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213145651804.png)
+
+
+
+
+
+
+
+
+
 
 
 

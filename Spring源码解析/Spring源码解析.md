@@ -3840,9 +3840,23 @@ postProcessMergedBeanDefinition合并BeanDefinition，合并相关bean 的定义
 
 ### 回顾及initMessageSource
 
+
+
+初始化消息资源
+
 ![image-20220912190644681](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220912190644681.png) 
 
 该方法会在SpringMVC的时候通过国际化的代码重点讲。
+
+![image-20230213225250449](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213225250449.png)
+
+![image-20230213225953338](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213225953338.png) 
+
+![image-20230213230034299](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213230034299.png) 
+
+
+
+![image-20230213230342533](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230213230342533.png)
 
 
 

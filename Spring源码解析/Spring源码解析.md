@@ -4239,6 +4239,12 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 
 
+![image-20230214202135412](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214202135412.png)
+
+![image-20230214202121315](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214202121315.png) 
+
+与之前的BFPP和BPP是一样的处理，可以创建对象集合也可以创建名字集合，通过名字集合遍历进行实例化填充进去的这样两种方式
+
 
 
 后续的源码处理也是这样子的
@@ -4247,11 +4253,39 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 
 
+![image-20230214202549194](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214202549194.png) 
+
+
+
+![image-20230214202818196](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214202818196.png) 
+
+
+
+修改bean顺序
+
+可以通过beanFactory.addBeanPostProcessor方法来修改顺序，或者删了再加都行
+
+
+
+
+
+![image-20230214203412750](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214203412750.png) 
+
+
+
+事件源来发布事件
+
 ![image-20220918185440413](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918185440413.png) 
 
-![image-20220918185555906](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918185555906.png) 
+![image-20230214203626540](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214203626540.png)
+
+![image-20230214203722966](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214203722966.png)
 
 
+
+定义了实体的具体执行过程
+
+不管是使用上面的方式还是下面的方式，最终调用的方法都是invokeListener
 
 ![image-20220918185823413](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918185823413.png) 
 

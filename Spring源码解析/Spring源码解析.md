@@ -3898,6 +3898,155 @@ postProcessMergedBeanDefinition合并BeanDefinition，合并相关bean 的定义
 
 
 
+### 观察者模式代码演示
+
+
+
+```java
+package com.msb.secondobserve;
+
+/**
+ * 被观察者，可能会被n多个观察者观察
+ *
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:39
+ */
+public interface SObserable {
+
+	public void addObserver(SObserver observer);
+
+	public void deleteObserver(SObserver observer);
+
+	void notifyObserver(String str);
+}
+
+package com.msb.secondobserve;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:41
+ */
+public interface SObserver {
+
+	public void make(String str);
+
+}
+
+package com.msb.secondobserve;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:52
+ */
+public class SGoodMan implements SObserver{
+	@Override
+	public void make(String str) {
+		System.out.println("开始行动------------" + str);
+	}
+}
+
+package com.msb.secondobserve;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:53
+ */
+public class SGoodMan2 implements SObserver {
+	@Override
+	public void make(String str) {
+		System.out.println("goodman2开始行动-----------" + str);
+	}
+}
+
+
+package com.msb.secondobserve;
+
+import java.util.ArrayList;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:41
+ */
+public class SBadMan implements SObserable {
+
+	private ArrayList<SObserver> observers = new ArrayList<>();
+
+	@Override
+	public void addObserver(SObserver observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void deleteObserver(SObserver observer) {
+		observers.remove(observer);
+	}
+
+	@Override
+	public void notifyObserver(String str) {
+		for (SObserver sObserver : observers) {
+			sObserver.make(str);
+		}
+	}
+
+	public void run() {
+		System.out.println("罪犯要逃跑了");
+		this.notifyObserver("追击罪犯");
+
+	}
+
+
+	public void play() {
+		System.out.println("罪犯在玩");
+		this.notifyObserver("不要做任何事情");
+	}
+}
+
+
+package com.msb.secondobserve;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/14 8:54
+ */
+public class Test {
+	public static void main(String[] args) {
+		//创建被观察者
+		SBadMan sBadMan = new SBadMan();
+		//创建观察者
+		SGoodMan sGoodMan = new SGoodMan();
+		SGoodMan2 sGoodMan2 = new SGoodMan2();
+
+
+		//向被观察者中添加观察者
+		sBadMan.addObserver(sGoodMan);
+		sBadMan.addObserver(sGoodMan2);
+
+		//等待某些罪犯出发行为
+		sBadMan.run();
+	}
+}
+
+
+==========================================================
+结果:
+罪犯要逃跑了
+开始行动------------追击罪犯
+goodman2开始行动-----------追击罪犯
+
+```
+
+
+
+
+
+
+
 ### 事件驱动
 
 在传统的观察者模式中会有两个对象，一个是 被观察者，还有一个观察者就可以了。

@@ -4171,23 +4171,39 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 
 
+**ApplicationEvent**
+
+![image-20230214194946970](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214194946970.png)
+
+
+
+首先创建多播器对象
+
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214195801110.png) 
+
 
 
 
 
  **在这之前我们没有定义过applicationEventMulticaster**
 
-![image-20220918175358751](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918175358751.png) 
+![image-20230214200433170](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214200433170.png)
 
 
 
-SimpleApplicationEventMulticaster的父类中有一个add方法，方法中会添加监听器类。
-
-![image-20220918175909044](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918175909044.png) 
-
-![image-20220918175936457](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918175936457.png) 
+**SimpleApplicationEventMulticaster的父类 AbstractApplicationEventMulticaster类中有一个add方法，方法中会添加监听器类。**
 
 
+
+![image-20230214200912249](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214200912249.png)
+
+
+
+![image-20230214200937840](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214200937840.png)
+
+
+
+![image-20230214201004437](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214201004437.png)
 
 
 
@@ -4197,11 +4213,15 @@ SimpleApplicationEventMulticaster的父类中有一个add方法，方法中会�
 
 
 
+
+
+向多波器注册进去已有的监听器registerListeners
+
 ![image-20220918180911968](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918180911968.png) 
 
 
 
-
+**完成监听器的添加操作**
 
 ![image-20220918181224080](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918181224080.png) 
 
@@ -4211,7 +4231,15 @@ SimpleApplicationEventMulticaster的父类中有一个add方法，方法中会�
 
 ![image-20220918181208533](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918181208533.png) 
 
-![image-20220918181442934](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918181442934.png)
+![image-20230214201755549](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214201755549.png) 
+
+
+
+![image-20230214201951471](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214201951471.png) 
+
+
+
+
 
 后续的源码处理也是这样子的
 

@@ -4049,19 +4049,55 @@ goodman2开始行动-----------追击罪犯
 
 ### 事件驱动
 
+![image-20230214131431164](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214131431164.png)
+
+![image-20230214131 408222](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214131408222.png)
+
+```java
+package com.msb.secondobserve.test02;
+
+import java.util.Observable;
+
+/**
+ * @author LYX
+ * @description Java util里面的观察者类
+ * @date 2023/2/14 8:59
+ */
+public class SBadMan extends Observable {
+
+	@Override
+	public void notifyObservers() {
+		super.notifyObservers();
+	}
+}
+
+```
+
+
+
+原生的观察者模式其实很好理解，但是Spring中的观察者，加了他自己的东西
+
+
+
 在传统的观察者模式中会有两个对象，一个是 被观察者，还有一个观察者就可以了。
 
 
 
 Spring中定义了   
 
-事件、监听器、多播器、事件源
+事件（被观察者的动作）、监听器、多播器、事件源
+
+
+
+![image-20230214131709489](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214131709489.png) 
 
 
 
 #### 事件
 
-Event，把被观察者具体要执行的动作拿出来当做了一个事件   
+Event，把被观察者具体要执行的动作拿出来当做了一个事件  
+
+ 
 
 **具体要执行的动作**
 
@@ -4079,11 +4115,17 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 #### 多播器
 
+可能会有n多个的监听器，多播器是为了通知n多个监听器去执行处理
+
 把被观察者遍历观察者通知消息的操作拿出来委托给一个多播器来进行消息通知，或者说通知观察者进行不同的操作。
+
+替换原来的for循环
 
 
 
 #### 事件源
+
+发表时间的源头。
 
 谁来调用或者执行发布具体的事件。
 
@@ -4091,17 +4133,15 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 **将普通的观察者模式解耦**
 
-
-
 把事件先定义出来，把事件能做什么操作拿出来。把监听器作为一个观察者，后面由监听器单独来处理观察者要做的一些处理操作，多播器来完成我们的处理操作，相当于原来被观察者中的for循环。事件源来进行发布事件。
 
 
 
-**逻辑执行过程：**
+**时间驱动逻辑执行过程：**
 
 1、事件源来发布不同的事件
 
-2、当发布事件之后会调用多播器的方法来进行事件广播操作，由多播器去触发具体的监听器去执行操作
+2、事件源发布之后本来应该交给监听器来执行监听操作的，但是 当发布事件之后会调用多播器的方法来进行事件广播操作，由多播器去触发具体的监听器去执行操作
 
 3、监听器接收到具体的事件之后，可以验证匹配是否能够处理当前事件，如果可以，直接处理，如果不行，不做任何操作。
 
@@ -4111,13 +4151,13 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 1、**提前准备好N多个事件**
 
-2、初始化多播器（创建多播器对象，此多播器对象中应该包含一个监听器的集合）  initApplicationEventMulticaster
+2、**初始化多播器（创建多播器对象，此多播器对象中应该包含一个监听器的集合）  initApplicationEventMulticaster**
 
-3、准备好一系列的监听器    
+3、**准备好一系列的监听器**    
 
-4、向多播器中注册进去已有的监听器   registerListeners
+4、**向多播器中注册进去已有的监听器   registerListeners**
 
-5、准备事件发布，来通知多播器循环调用监听器进行相关的逻辑处理工作   publishEvent 
+5、**准备事件发布，来通知多播器循环调用监听器进行相关的逻辑处理工作   publishEvent** 
 
 
 
@@ -4125,7 +4165,17 @@ Event，把被观察者具体要执行的动作拿出来当做了一个事件
 
 
 
- 在这之前我们没有定义过applicationEventMulticaster
+
+
+### 事件驱动代码演示
+
+
+
+
+
+
+
+ **在这之前我们没有定义过applicationEventMulticaster**
 
 ![image-20220918175358751](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220918175358751.png) 
 

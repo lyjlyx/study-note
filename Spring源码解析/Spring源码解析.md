@@ -3864,6 +3864,12 @@ postProcessMergedBeanDefinition合并BeanDefinition，合并相关bean 的定义
 
 
 
+![image-20230214082705650](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214082705650.png) 
+
+
+
+
+
 原始观察者模式     被观察者、观察者
 
 被观察者中需要存储一个观察者的一个集合，执行不同方法的时候要调用观察者的方法进行处理
@@ -3875,6 +3881,14 @@ postProcessMergedBeanDefinition合并BeanDefinition，合并相关bean 的定义
  
 
 ![image-20220916085353845](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220916085353845.png) 
+
+
+
+ 被观察者---------------------------------------->观察者
+
+应该存储一个观察者集合						执行不同方法的时候，要调用观察者的方法进行处理
+
+![image-20230214083255747](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230214083255747.png) 
 
 
 

@@ -4363,89 +4363,11 @@ SpringApplicationRunListener在前面有进行实例化操作
 
 
 
+![image-20230216083330543](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216083330543.png)
 
+![image-20230216083354257](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216083354257.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image-20230216083457292](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216083457292.png)
 
 
 

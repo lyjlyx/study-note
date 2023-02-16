@@ -4465,11 +4465,46 @@ Converter：一对一的类型转换；GenericConverter：一对多的类型转�
 
 
 
-自定义添加Converter官网实例：
+conditional 是有要多他进行条件判断，进行一个match的判断
+
+![image-20230216131733216](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216131733216.png)
+
+
+
+
+
+**自定义  添加Converter官网实例：**
 
 ![image-20220919105253914](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919105253914.png) 
 
-![image-20220919110022522](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919110022522.png) 
+![image-20230216194140239](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216194140239.png)
+
+```java
+	<!--该对象交由Spring来进行管理-->
+	<!--	<bean class="com.msb.MyBeanFactoryPostProcessor"></bean>-->
+	<bean id="studentConverter" class="com.msb.secondselfConverter.StudentConverter"/>
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<ref bean="studentConverter"/>
+			</set>
+		</property>
+	</bean>
+```
+
+
+
+![image-20230216194242605](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216194242605.png)
+
+
+
+![image-20230216194832936](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216194832936.png) 
+
+![image-20230216195516765](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216195516765.png) 
+
+
+
+![image-20230216200006519](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216200006519.png) 
 
 
 
@@ -4480,6 +4515,72 @@ Converter：一对一的类型转换；GenericConverter：一对多的类型转�
 
 
 ![image-20220919153058354](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919153058354.png)
+
+
+
+
+
+### prelnstantiateSingletons类
+
+![image-20230216200150255](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216200150255.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

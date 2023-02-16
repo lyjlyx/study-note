@@ -4375,29 +4375,89 @@ SpringApplicationRunListener在前面有进行实例化操作
 
 ## Spring的bean创建流程（一）
 
+
+
 ### finishBeanFactoryInitialization类
 
+完成整个bean的实例化环节
+
 ![image-20220919101507782](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919101507782.png) 
+
+
 
 **getBean->doGetBean->createBean->doCreateBean**
 
 
 
-哪些地方调用了getBean()  
+在这个方法之前哪些地方调用了getBean()  ？
 
-BeanFactoryPostProcessor、BeanPostProcessor
+**BeanFactoryPostProcessor、BeanPostProcessor**
+
+
 
 ![image-20220919102424574](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919102424574.png) 
 
 
 
- 转换器提前储备![image-20220919102555906](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919102555906.png)
+ 
+
+![image-20230216084551067](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216084551067.png)
+
+
+
+**转换服务**
+
+![image-20230216085300535](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216085300535.png) 
+
+
+
+ 转换器提前储备![image-20220919102555906](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919102555906.png) 
+
+![image-20230216085410415](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216085410415.png) 
+
+**这些转换器都是Spring预先给我们提供好的**
+
+
+
+![image-20230216085703504](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216085703504.png) 
+
+
 
 
 
 Spring给我提供了三个converter转换的父类接口，我们可以通过这些接口来自定义类型转换
 
 ![image-20220919103504270](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919103504270.png) 
+
+
+
+**自定义实现的时候需要用哪一个接口**
+
+由S类型的数据，转换成T类型的数据
+
+![image-20230216085902305](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216085902305.png)
+
+ 
+
+**两个以上的对应类型转换**
+
+![image-20230216090038281](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216090038281.png) 
+
+
+
+![image-20230216090051243](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216090051243.png)
+
+![image-20230216090122623](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216090122623.png) 
+
+
+
+多对多
+
+![image-20230216090432038](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216090432038.png) 
+
+我们对应的一个子类型
+
+![image-20230216090455249](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216090455249.png)
 
 
 

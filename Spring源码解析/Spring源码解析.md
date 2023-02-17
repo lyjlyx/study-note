@@ -4522,9 +4522,19 @@ conditional 是有要多他进行条件判断，进行一个match的判断
 
 ### prelnstantiateSingletons类
 
-![image-20230216200150255](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216200150255.png)
 
 
+![image-20230216200150255](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216200150255.png) 
+
+![image-20230216210859570](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216210859570.png) 
+
+
+
+BenDefinition
+
+​	GenericBeanDefinition
+
+​	RootBeanDefinition
 
 
 

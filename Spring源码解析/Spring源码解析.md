@@ -4536,20 +4536,41 @@ BenDefinition
 
 ​	RootBeanDefinition
 
+
 ![image-20230216211258348](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216211258348.png) 
 
+![image-20230217085024622](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085024622.png) 
+
+![image-20230217085131720](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085131720.png)
 
 
+
+
+mergedBeanDefinitions集合里面有值，那么证明他是在前面就已经放进去了，是在BDRPP里面放的
+
+![image-20230217085239200](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085239200.png)
 
 
 ### finishBeanFactoryInitialization类
 
+![image-20230217085401892](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085401892.png)
+
+
+![image-20230217085421533](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085421533.png)
+
+![image-20230217085507961](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085507961.png) 
 
 
 放缓存里，后续就不再需要经历一遍过程了。
 
 ![image-20230217125832061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217125832061.png)
 
+mergedBeanDefinition一开始是没值的，从invokeBeanFactoryPostProcessors 进去
+
+
+当第一次进来的时候mergedBeanDefinition 是什么值都没有的，意味着我们没有办法从缓存里面取了，意味着我们必须要自己去创建了
+
+**不管怎么创建或者在哪里创建，我们最终都是要拿到的是RootBeanDefinition这个对象，必须要包含或者合并完父容器相关类型的数据，不然后续没有办法进行计算**
 
 
 getMergedBeanDefinition方法的调用是一个递归的过程
@@ -4566,14 +4587,23 @@ getMergedBeanDefinition方法的调用是一个递归的过程
 
 ![image-20230217130721499](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130721499.png)
 
+![image-20230217085731523](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085731523.png) 
+
+
+
+![image-20230217085906325](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085906325.png)
+
+![image-20230217090121340](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217090121340.png) 
 
 
 Spring中用了很多map结构，为了提高效率，把一些对象进行了缓存，不需要在后面再重复获取
 
 
+![image-20230217090706057](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217090706057.png)
 
+![image-20230217090130750](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217090130750.png)
 
-
+![image-20230217090312401](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217090312401.png)
 
 
 

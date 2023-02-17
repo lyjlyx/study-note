@@ -4551,6 +4551,9 @@ mergedBeanDefinitions集合里面有值，那么证明他是在前面就已经�
 ![image-20230217085239200](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085239200.png)
 
 
+
+
+
 ### finishBeanFactoryInitialization类
 
 ![image-20230217085401892](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217085401892.png)
@@ -4607,10 +4610,13 @@ Spring中用了很多map结构，为了提高效率，把一些对象进行了�
 
 
 
+### 缓存会不会引起缓存的泄露和getMergedLocalBeanDefinition
 
-### 缓存会不会引起缓存的泄露和getMerged
+
 
 缓存对象的时候，要缓存怎么样的对象？
+
+我们需要考虑好场景
 
 如果对象的属性值一直都在变化，我们不要对他进行缓存
 
@@ -4618,13 +4624,25 @@ Spring中用了很多map结构，为了提高效率，把一些对象进行了�
 
 
 
+使用缓存是为了提高代码的利用率和效率，这只是一个思想，我们不能硬套
+
+
+
+为什么要这样设计？为什么要取父的定义，取子的可以吗？
+
+
+
 **刚刚在进行使用的时候，使用了递归的方式调用，问题是递归的过程是怎么样的？**
 
-先从缓存中获取，缓存中有，直接返回。缓存中没有，提前创建。
+1、先从缓存中获取，缓存中有，直接返回。
+
+2、缓存中没有，提前创建。
+
+如果beanDefinitionMap中有包含parent的时候，我们就会把parent提前创建好，等到后面要使用的时候就可以直接拿去用了，不需要重新创建了。
 
 
 
-**getMergedLocalBeanDefinition->他的意义在于，在实例化之前，要把所有的基础的BeanDefinition对象，转换成RootBeanDefinition对象进行缓存，后续再马上需要实例化的时候直接获取定义信息，而定义信息中如果包含父类，那么必须要先创建父类才能有子类，父类如果没有的话子类怎么创建。**
+**getMergedLocalBeanDefinition -> 他的意义在于，在实例化之前，要把所有的基础的BeanDefinition对象，转换成RootBeanDefinition对象进行缓存，后续在马上需要实例化的时候直接获取定义信息，而定义信息中如果包含父类，那么必须要先创建父类才能有子类，父类如果没有的话子类怎么创建。**
 
 
 

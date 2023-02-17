@@ -4536,55 +4536,39 @@ BenDefinition
 
 ​	RootBeanDefinition
 
+![image-20230216211258348](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230216211258348.png) 
 
 
 
 
 
+### finishBeanFactoryInitialization类
 
 
 
+放缓存里，后续就不再需要经历一遍过程了。
+
+![image-20230217125832061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217125832061.png)
 
 
 
+getMergedBeanDefinition方法的调用是一个递归的过程
+
+![image-20230217130613894](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130613894.png)
+
+![image-20230217130625570](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130625570.png)
+
+![image-20230217130638511](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130638511.png)
+
+![image-20230217130652055](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130652055.png)
+
+![image-20230217130709029](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130709029.png)
+
+![image-20230217130721499](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230217130721499.png)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Spring中用了很多map结构，为了提高效率，把一些对象进行了缓存，不需要在后面再重复获取
 
 
 

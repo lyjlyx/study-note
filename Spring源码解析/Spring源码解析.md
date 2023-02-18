@@ -4652,15 +4652,37 @@ Spring中用了很多map结构，为了提高效率，把一些对象进行了�
 
 ### BeanFactory和FactoryBean
 
-都是对象工厂，用来创建具体对象的。
 
-如果使用BeanFactory的接口那么必须要严格遵守SpringBean的生命周期，从实例化、到初始化、到invokeAwareMethod.invokeInitMethod、before、after.......，此流程非常复杂且麻烦，如果需要一种更加便捷简单的方式创建，则需要使用FactoryBean这个接口，不需要遵循此创建的顺序。
+
+必须要满足 非抽象、单例、非懒加载 这几个条件才会去创建
+
+![image-20230218220806060](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218220806060.png)
+
+![image-20230218215956179](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218215956179.png) 
+
+
+
+**BeanFactory和FactoryBean**
+
+**都是对象工厂，用来创建具体对象的。**
+
+
+
+如果使用BeanFactory的接口那么必须要严格遵守SpringBean的生命周期接口，从实例化、到初始化、再到invokeAwareMethod.invokeInitMethod、before、after.......，像这样的一系列流程我们都必须要遵守。
+
+此流程非常复杂且麻烦，如果需要一种更加便捷简单的方式创建，则需要使用FactoryBean这个接口，不需要遵循此创建的顺序。
 
 
 
 #### FactoryBean
 
+
+
+有3个方法getObjectType、isSingleton、getObject
+
 ![image-20220919155355939](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919155355939.png) 
+
+
 
 getObjectType：返回类型
 
@@ -4672,6 +4694,29 @@ getObject：直接返回对象
 
 ![image-20220919155924362](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919155924362.png) 
 
+```java
+public class SecondMyFactoryBean implements FactoryBean<User> {
+	@Override
+	public User getObject() throws Exception {
+		return new User();
+	}
+
+	@Override
+	public Class<?> getObjectType() {
+		return User.class;
+	}
+
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
+}
+```
+
+
+
+
+
 定义好之后如何交给Spring进行控制？
 
 ![image-20220919160158430](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919160158430.png) 
@@ -4680,13 +4725,29 @@ getObject：直接返回对象
 
 
 
-&地址符
+```xml
+	<bean id="myFactoryBean" class="com.msb.secondFactoryBean.SecondMyFactoryBean">
+	</bean>
 
-![image-20220919161402392](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919161402392.png) 
+```
+
+![image-20230218222834159](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218222834159.png)
+
+
+
+直接如上面那样获取是没用的，他会获取不到，我们需要添加& 地址符才能够获取，但是为什么呢 ？
+
+![image-20230218222935472](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218222935472.png)
+
+![image-20230218222958012](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218222958012.png) 
 
 **当使用FactoryBean接口来创建对象的时候，我一共创建了几个对象？**
 
-两个，一个是实现了FactoryBean接口的子类对象，二是通过getObject方法返回的对象
+两个，第一个对象是实现了FactoryBean接口的子类对象，第二个是通过getObject方法返回的对象
+
+
+
+两个对象是由谁来管理？我们自己还是Spring？
 
 
 
@@ -4698,7 +4759,9 @@ getObject：直接返回对象
 
 ![image-20220919162052955](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919162052955.png) 
 
+创建对象为MyFactoryBean了（SecondMyFactoryBean只是我学习的次数，统一不看前面的次数）
 
+![image-20230218223443073](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230218223443073.png) 
 
 
 

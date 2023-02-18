@@ -135,7 +135,7 @@ PlaceholderConfigurerSupport 替换占位符用
 
 **我们要将实例化和初始化这两个区分开来，他们不是同一个东西。**
 
-.
+
 
 Spring实例化创建对象
 

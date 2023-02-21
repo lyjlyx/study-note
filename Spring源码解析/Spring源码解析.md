@@ -4377,7 +4377,7 @@ SpringApplicationRunListener在前面有进行实例化操作
 
 
 
-### finishBeanFactoryInitialization类
+### finishBeanFactoryInitialization方法
 
 完成整个bean的实例化环节
 
@@ -4937,7 +4937,27 @@ System.out.println(user.getName());
 
 ## Spring的bean创建流程（二）
 
-new、反射、factoryMethod、supplier
+
+
+
+
+
+
+### 回顾
+
+ ![image-20230220193338088](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230220193338088.png)
+
+#### finishBeanFactoryInitialization
+
+
+
+getBean->doGetBean->createBean->doCreateBean
+
+
+
+在Spring中创建对象的方式有这几种：new、反射、**factoryMethod、supplier**
+
+
 
 **如果一个bean对象实现了FactoryBean接口，那么在整个spring的生命周期中会创建两个对象，第一个标识实现了FactoryBean接口的子类，由Spring帮我们创建，会调用getObject方法来返回一个对象，此对象的创建过程就是由getObjectForBeanInstance方法调用实现的。**
 
@@ -4947,11 +4967,51 @@ new、反射、factoryMethod、supplier
 
 
 
-![image-20220919194207333](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919194207333.png) 
+如果一个bean对象实现了FactoryBean接口，那么在整个Spring的生命周期中会创建两个对象，第一个表示实现了FactoryBean接口的子类，由Spring帮我们创建，此对象的创建过程是由getObjectForBeanInstance()方法来调用实现的。
 
-我们做操作的时候可以每次都根据beanName获取新的RootBeanDefinition，但是一种更有效率的方式是在第一次处理的时候放到缓存中，之后可以对缓存中的对象进行获取，不需要每次都创建新的。
+![image-20230221083318097](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221083318097.png) 
+
+
+
+在SpringMVC中父子容器的概念才很多
+
+![image-20230221083834706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221083834706.png) 
+
+但是如果我们包含父子容器了，应该干什么事呢？
+
+如果子里面没有就去父里面找。
+
+
+
+将创建好的和没创建好的放到不同的集合里面
+
+![image-20230221084059024](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221084059024.png) 
+
+![image-20230221084138739](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221084138739.png) 
+
+
+
+![image-20230221084320071](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221084320071.png)
+
+**我们做操作的时候可以每次都根据beanName获取新的RootBeanDefinition，但是一种更有效率的方式是在第一次处理的时候放到缓存中，之后可以对缓存中的对象进行获取，不需要每次都创建新的。**
+
+**可以在第一次处理的时候就放到缓存中，之后可以对缓存中的对象进行获取，不需要每次都创建新的。**
 
 ![image-20220919194201331](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919194201331.png) 
+
+
+
+mergedBeanDefinitions在前面BFPP那块也有添加东西进去，通过getBeanNameForType 的时候赋值的。
+
+![image-20230221084522829](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221084522829.png)
+
+
+
+stale判断当前对象是否是新鲜值，如果是的话就直接用，不是的话就进行合并，变成新鲜的对象。
+
+
+
+
 
 
 

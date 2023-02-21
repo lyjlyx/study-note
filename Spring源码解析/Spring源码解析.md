@@ -5017,7 +5017,21 @@ stale判断当前对象是否是新鲜值，如果是的话就直接用，不是
 
 ### getDependsOn和创建bean的实例对象
 
+
+
+![image-20230221084934476](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221084934476.png) 
+
+bean在创建的时候依赖于某个类
+
+![image-20230221085605145](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221085605145.png) 
+
+
+
+正常我们定义了多少个bean，就需要有几个bean 的创建，理论上来说他们谁先谁后是没有什么关系的，但是如果这个bean需要依赖于其他bean的时候怎么办？是不是意味着，其他bean必须要优先于当前bean来创建，就意味着要先创建好，创建好之后我们在看下面的bean 应该做如何的处理工作。
+
 ![image-20220919194934511](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919194934511.png) 
+
+
 
 
 
@@ -5025,13 +5039,35 @@ stale判断当前对象是否是新鲜值，如果是的话就直接用，不是
 
 **新生状态->开始创建->创建过程中->创建结束**
 
+![image-20230221090109654](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221090109654.png) 
+
+![image-20230221085954942](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221085954942.png) 
+
+调用getObject() 执行函数式接口方法
+
+![image-20230221090328987](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221090328987.png)
 
 
-实例化-> 填充属性-> 执行aware接口方法->执行init方法->执行后置处理器方法
+
+**新生状态->开始创建->创建过程中->创建结束后->完整对象**
+
+**实例化-> 填充属性-> 执行aware接口方法->执行init方法->执行后置处理器方法**
 
 
 
 ![image-20220919200141504](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220919200141504.png) 
+
+
+
+![image-20230221091234536](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221091234536.png) 
+
+
+
+
+
+
+
+
 
 
 

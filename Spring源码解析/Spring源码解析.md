@@ -5063,9 +5063,45 @@ bean在创建的时候依赖于某个类
 
 
 
+![image-20230221130933465](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221130933465.png)
 
 
 
+![image-20230221131022082](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221131022082.png)
+
+
+
+doPrivileged 权限验证 这个方法再java.sql的DriverManager中也有使用，他们这套实现机制都是一模一样的。
+
+![image-20230221131611247](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221131611247.png)
+
+![image-20230221131735608](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221131735608.png)
+
+![image-20230221131901206](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221131901206.png) 
+
+
+
+![image-20230221132007499](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132007499.png) 
+
+![image-20230221132145595](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132145595.png)
+
+beanDefinition检查
+
+![](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132247071.png)
+
+![image-20230221132517002](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132517002.png)
+
+当我们拥有Class这个对象的时候，我们就可以对当前的对象里面的属性进行任意的修改了。
+
+![image-20230221132557735](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132557735.png)
+
+
+
+![image-20230221132845145](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132845145.png)
+
+
+
+![image-20230221132908761](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221132908761.png)
 
 
 
@@ -5074,6 +5110,12 @@ bean在创建的时候依赖于某个类
 
 
 ### lookup-method、replace-method
+
+
+
+**prepareMethodOverrides()**
+
+
 
 ```java
 public class Fruit {

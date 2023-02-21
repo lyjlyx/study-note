@@ -5107,13 +5107,19 @@ beanDefinition检查
 
 
 
+### 创建Bean的实例对象
 
 
-### lookup-method、replace-method
+
+#### lookup-method、replace-method
 
 
 
 **prepareMethodOverrides()**
+
+![image-20230221195652789](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221195652789.png)
+
+![image-20230221195221948](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221195221948.png) 
 
 
 
@@ -5144,6 +5150,72 @@ public abstract class FruitPlate {
 
 ![image-20220920082910532](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920082910532.png) 
 
+此代码为第二遍的配置：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="apple" class="com.msb.secondlookup.SApple">
+
+	</bean>
+	<bean id="banana" class="com.msb.secondlookup.SBanana">
+
+	</bean>
+	<bean id = "fruitplate1" class="com.msb.secondlookup.SFruitPlate">
+		<lookup-method name="getFruit" bean="apple"></lookup-method>
+	</bean>
+	<bean id = "fruitplate2" class="com.msb.secondlookup.SFruitPlate">
+		<lookup-method name="getFruit" bean="banana"></lookup-method>
+	</bean>
+</beans>
+```
+
+```java
+public class STestMethodOverride {
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("sMethodOverride.xml");
+		SFruitPlate fruitplate1 = (SFruitPlate)ac.getBean("fruitplate1");
+		fruitplate1.getFruit();
+		SFruitPlate fruitplate2 = (SFruitPlate)ac.getBean("fruitplate2");
+		fruitplate2.getFruit();
+	}
+}
+```
+
+result:
+
+```
+> Task :spring-debug:STestMethodOverride.main()
+I got Fruit
+I got SApple
+I got Fruit
+I got Banana
+w: Detected multiple Kotlin daemon sessions at build\kotlin\sessions
+
+```
+
+
+
+**Spring中默认的对象都是单例的，Spring会在一级缓存中持有该对象，方便下次直接获取，那么如果是原型作用于的话，会创建一个信的对象**
+
+**如果想在一个单例模式的bean下引用一个原型模式的bean，该怎么办？**
+
+**所以在此时，就需要引用lookup-method标签来解决此问题**
+
+
+
+解析lookup-method标签
+
+![image-20230221201917687](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221201917687.png) 
+
+这里是false 他到底是怎么弄的呢？
+
+![image-20230221202117362](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202117362.png) 
+
+
+
 **验证及准备覆盖方法，lookup-method、replace-method**
 **当需要配置的bean对象中包含了lookup-method和replace-method标签的时候，会产生覆盖操作**
 
@@ -5157,7 +5229,51 @@ catch (BeanDefinitionValidationException ex) {
 }
 ```
 
+FruitPlate才是使用的对象
+
+![image-20230221202255031](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202255031.png) 
+
+![image-20230221202325442](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202325442.png) 
+
+![image-20230221202344152](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202344152.png) 
+
+![image-20230221202405568](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202405568.png) 
+
+![image-20230221202508259](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202508259.png) 
+
+
+
+**获取实例化策略**
+
+getInstantiationStrategy()
+
+![image-20230221202959607](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221202959607.png) 
+
+![image-20230221203028785](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203028785.png) 
+
+![image-20230221203043477](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203043477.png) 
+
+当我们获取完实例化策略 ，才能进行实例化
+
+![image-20230221203113487](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203113487.png) 
+
+
+
+![image-20230221203137576](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203137576.png) 
+
+
+
+
+
 ![image-20220920083850613](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920083850613.png) 
+
+
+
+![image-20230221203249134](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203249134.png)
+
+![image-20230221203411776](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203411776.png) 
+
+
 
 ![image-20220920083840655](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920083840655.png) 
 
@@ -5171,15 +5287,15 @@ catch (BeanDefinitionValidationException ex) {
 
 
 
+**当需要配置的bean对象中包含了lookup-method和replace-method标签的时候会产生覆盖操作。**
+
+
+
 **当把bean设置为原型模式的时候**
 
 ![image-20220920090110450](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090110450.png) 
 
 spring会通过拦截器的方式，在我们每次需要的时候都会去创建最新的对象，而不会把原型对象缓存起来。
-
-
-
-
 
 ![image-20220920090721156](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090721156.png)  ![image-20220920090704432](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090704432.png) 
 

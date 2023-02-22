@@ -5269,9 +5269,27 @@ getInstantiationStrategy()
 
 
 
-![image-20230221203249134](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203249134.png)
+![image-20230222082429933](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222082429933.png)
+
+![image-20230222082444931](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222082444931.png) 
+
+
+
+![image-20230221203249134](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203249134.png) 
+
+
+
+![image-20230222082652173](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222082652173.png) 
+
+
 
 ![image-20230221203411776](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230221203411776.png) 
+
+![image-20230222082824511](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222082824511.png) 
+
+
+
+![image-20230222083551494](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222083551494.png) 
 
 
 
@@ -5279,27 +5297,77 @@ getInstantiationStrategy()
 
 
 
-![image-20220920084527376](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920084527376.png) 
+fruitPlate返回的就是一个动态代理的对象
+
+![image-20230222083851245](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222083851245.png) 
+
+该如何调用里面的方法呢？
 
 
 
-![image-20220920084655746](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920084655746.png) 
+![image-20230222083927210](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222083927210.png) 
 
 
+
+执行getFruit方法的时候直接跳到了CglibSubclassingInstantiationStrategy类中的intercept方法中了
+
+![image-20230222083945790](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222083945790.png)  
+
+
+
+![image-20230222084058735](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222084058735.png)
+
+
+
+lo中返回的是对应对象的名称，然后再调用getBean方法执行对应bean里面的方法
+
+![image-20230222084312921](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222084312921.png) 
+
+
+
+验证获取到的对象是否是同一个，是同一个
+
+![image-20230222084457512](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222084457512.png) 
+
+ 
 
 **当需要配置的bean对象中包含了lookup-method和replace-method标签的时候会产生覆盖操作。**
 
 
 
-**当把bean设置为原型模式的时候**
+**当把bean设置为原型模式（多例）的时候，用的还是同一个吗？**
 
 ![image-20220920090110450](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090110450.png) 
+
+**看调用了几次getBean（lo里面的getBean）**
+
+
+
+第一次创建的对象
+
+![image-20230222085351333](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222085351333.png) 
+
+第二次创建的对象
+
+![image-20230222085543641](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222085543641.png) 
+
+
+
+lookup-method多例的时候：我们在引用的时候当前这个对象是在调用某个具体的方法的时候创建的，这个对象不会被缓存掉，每次走的都是最新的对象创建的流程，而不会有缓存对象的存在。
+
+**通过拦截器的方式，在我们每次需要的时候都去创建最新的对象，而不会把原型对象缓存起来**
+
+
 
 spring会通过拦截器的方式，在我们每次需要的时候都会去创建最新的对象，而不会把原型对象缓存起来。
 
 ![image-20220920090721156](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090721156.png)  ![image-20220920090704432](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920090704432.png) 
 
-所以需要配置lookup-method才能使得每次获取的都是最新的。
+
+
+如果没有配置lookup-method标签，我们能引用这个对象吗？
+
+**所以需要配置lookup-method才能使得每次获取的都是最新的。**
 
 
 

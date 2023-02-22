@@ -5111,7 +5111,7 @@ beanDefinition检查
 
 
 
-#### lookup-method、replace-method
+#### lookup-method
 
 
 
@@ -5353,7 +5353,7 @@ lo中返回的是对应对象的名称，然后再调用getBean方法执行对�
 
 
 
-lookup-method多例的时候：我们在引用的时候当前这个对象是在调用某个具体的方法的时候创建的，这个对象不会被缓存掉，每次走的都是最新的对象创建的流程，而不会有缓存对象的存在。
+lookup-method多例的时候：**我们在引用的时候当前这个对象是在调用某个具体的方法的时候创建的，这个对象不会被缓存到，每次走的都是最新的对象创建的流程，而不会有缓存对象的存在。**
 
 **通过拦截器的方式，在我们每次需要的时候都去创建最新的对象，而不会把原型对象缓存起来**
 
@@ -5365,23 +5365,111 @@ spring会通过拦截器的方式，在我们每次需要的时候都会去创�
 
 
 
-如果没有配置lookup-method标签，我们能引用这个对象吗？
-
-**所以需要配置lookup-method才能使得每次获取的都是最新的。**
 
 
 
-题外话：
+
+
+
+一个单例对象 如果没有配置lookup-method标签，我们能引用这个对象吗？
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="apple" class="com.msb.secondlookup.SApple">
+		<property name="sBanana" ref="banana"></property>
+	</bean>
+	<bean id="banana" class="com.msb.secondlookup.SBanana" scope="prototype">
+	</bean>
+</beans>
+```
+
+```java
+public class SApple extends SFruit{
+
+	private SBanana sBanana;
+
+	public SBanana getsBanana() {
+		return sBanana;
+	}
+
+	public void setsBanana(SBanana sBanana) {
+		this.sBanana = sBanana;
+	}
+
+	public SApple() {
+		System.out.println("I got SApple");
+	}
+}
+```
+
+Apple本身是单例的，但是他里面引用了原型模式的Banana
+
+![image-20230222130406870](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222130406870.png) 
+
+result:
+
+```
+com.msb.secondlookup.SBanana@38425407
+com.msb.secondlookup.SBanana@38425407
+```
+
+![image-20230222130626063](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222130626063.png)
+
+result:
+
+```
+com.msb.secondlookup.SBanana@3e694b3f
+com.msb.secondlookup.SBanana@3e694b3f
+```
+
+
+
+**从结果来看两个获取的是一样的对象**
+
+**所以不行，需要配置lookup-method才能使得每次获取的都是最新的。**
+
+**虽然banana是一个原型的，按照道理来说应该是每次都创建新的，但是在创建apple对象的时候这个apple会被缓存，那就意味着banana也会被缓存。**
+
+**所以当我们配了lookup-method的时候，配上多例，每次在执行方法的时候用的都是新的东西**
+
+
+
+#### replace-method
+
+![image-20230222130955770](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222130955770.png) 
+
+![image-20230222131003717](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222131003717.png)
+
+后续改一下配置文件就行了。
+
+
+
+**如果一个对象是单例，一个对象不是单例是多例，而每次想获取的时候想要保证获取的都是新的对象，这种情况下用多例是解决不了的，所以当我们引入lookup-method的时候，虽然我们是property原型模式，但是可以保证每次用的都是一个新的对象。**
+
+
+
+#### 题外话BFPP中的类ConfigurationClassPostProcessor的postProcessorBeanFactory方法：
+
+postProcessorBeanFactory方法在实现的时候有调用enhanceConfigurationClasses方法
 
 ![image-20220920091400212](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920091400212.png) 
 
+![image-20230222131746521](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222131746521.png) 
+
+![image-20230222131823490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222131823490.png) 
+
+在这里为什么要使用动态代理的方式实现？
+
+其实是跟@Bean标签有关系的。
+
+![image-20220920091533317](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920091533317.png)
 
 
-![image-20220920091533317](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220920091533317.png) 
 
-为什么在spring中有那么多的cglib
-
-
+ 为什么在spring中有那么多的cglib
 
 
 

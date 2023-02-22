@@ -5479,9 +5479,69 @@ postProcessorBeanFactory方法在实现的时候有调用enhanceConfigurationCla
 
 ## Spring的bean创建流程（三）
 
+
+
+整个bean的创建过程
+
+**getBean->doGetBean->createBean->doCreateBean**
+
+
+
 ### doGetBean方法
 
- ![image-20220926164924340](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220926164924340.png)
+
+
+invokeBeanFactoryPostProcessors的时候会调用doGetBean
+
+![image-20230222195252182](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222195252182.png) 
+
+ 
+
+自定义的BRPP
+
+![image-20230222195547786](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222195547786.png)
+
+getSingleton
+
+![image-20230222195746833](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222195746833.png)
+
+
+
+![image-20230222195932226](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222195932226.png) 
+
+
+
+![image-20230222195917145](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222195917145.png) 
+
+
+
+执行getObject，调用lambda表达式里面的方法，调用createBean()
+
+![image-20220926164924340](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220926164924340.png)
+
+
+
+![image-20230222200046991](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222200046991.png) 
+
+![image-20230222200227174](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222200227174.png) 
+
+
+
+
+
+![image-20230222200445107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222200445107.png)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

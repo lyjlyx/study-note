@@ -5527,7 +5527,13 @@ getSingleton
 
 
 
+BeanPostProcessor
 
+![image-20230222200614795](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222200614795.png) 
+
+
+
+看当前这个类是否有InstantiationAwareBeanPostProcessor这个接口
 
 ![image-20230222200445107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230222200445107.png)
 

@@ -5543,7 +5543,11 @@ BeanPostProcessor
 
 
 
+### 实例化实现方法
 
+自定义InitiationAwareBeanPostProcessor
+
+ 
 
 
 

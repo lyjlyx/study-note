@@ -5547,120 +5547,95 @@ BeanPostProcessor
 
 自定义InitiationAwareBeanPostProcessor
 
- 
-
-
-
-
-
-
-
-### 如何创建对象
-
-![image-20221007162554728](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007162554728.png) 
-
 ```java
-public class BeforeInstantiation {
+public class SBeforeInstantiation {
 
 	public void doSomeThing() {
-		System.out.println("执行 do some thing......");
+		System.out.println("执行" + this.getClass().getName() + "的doSomething方法...");
 	}
 
 }
 ```
 
 ```java
-public class MyInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
+package com.msb.sResolveBeforeInstantiation;
 
-	/**
-	 * 实例化之前
-	 *
-	 * @param beanClass the class of the bean to be instantiated
-	 * @param beanName  the name of the bean
-	 * @return
-	 * @throws BeansException
-	 */
+import com.msb.resolveBeforeInstantiation.BeforeInstantiation;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.PropertyValues;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.cglib.proxy.Enhancer;
+
+/**
+ * @author LYX
+ * @description
+ * @date 2023/2/23 8:29
+ */
+public class SMyInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
+
+
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-
-		System.out.println("beanName" + beanName + "----执行postProcessBeforeInstantiation");
-
-		//使用cglib实现动态代理。
+		System.out.println("beanName: " + beanName + "执行实例化之前 postProcessBeforeInstantiation 方法");
 		if (beanClass == BeforeInstantiation.class) {
+			// 通过cglib生成动态代理
 			Enhancer enhancer = new Enhancer();
 			enhancer.setSuperclass(beanClass);
-			enhancer.setCallback(new MyMethodInterceptor());
-			BeforeInstantiation bi = (BeforeInstantiation) enhancer.create();
-			System.out.println("创建代理对象:" + bi);
-			return bi;
+			// 设置回调方法
+			enhancer.setCallback(new SMyMethodInterceptor());
+			SBeforeInstantiation sBeforeInstantiation = (SBeforeInstantiation) enhancer.create();
+			System.out.println("创建代理对象" + sBeforeInstantiation);
+			return sBeforeInstantiation;
 		}
 		return null;
 	}
 
 	/**
-	 * 实例化之后
-	 *
-	 * @param bean     the bean instance created, with properties not having been set yet
+	 * 实例化之后做的事情
+	 * @param bean the bean instance created, with properties not having been set yet
 	 * @param beanName the name of the bean
 	 * @return
 	 * @throws BeansException
 	 */
 	@Override
 	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-
-		System.out.println("beanName" + beanName + "----------执行postProcessAfterInstantiation方法");
+		System.out.println("beanName: " + beanName + "执行实例化之后 postProcessAfterInstantiation 方法");
 		return false;
 	}
 
-	/**
-	 * 初始化之前
-	 *
-	 * @param bean     the new bean instance
-	 * @param beanName the name of the bean
-	 * @return
-	 * @throws BeansException
-	 */
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("beanName" + beanName + "----------执行postProcessBeforeInitialization方法");
-
+		System.out.println("beanName: " + beanName + "初始化之前 postProcessBeforeInitialization 方法");
 		return bean;
 	}
 
-	/**
-	 * 初始化之后
-	 *
-	 * @param bean     the new bean instance
-	 * @param beanName the name of the bean
-	 * @return
-	 * @throws BeansException
-	 */
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("beanName" + beanName + "----------执行postProcessAfterInitialization方法");
+		System.out.println("beanName: " + beanName + "初始化之后 postProcessAfterInitialization 方法");
 		return bean;
 	}
-
 
 	@Override
 	public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-		System.out.println("beanName" + beanName + "----------执行postProcessProperties方法");
+		// 属性值的处理
+		System.out.println("beanName: " + beanName + "执行 postProcessProperties 方法");
 		return pvs;
 	}
 
 }
+
 ```
 
 ```java
-public class MyMethodInterceptor implements MethodInterceptor {
+public class SMyMethodInterceptor implements MethodInterceptor {
+
+
 	@Override
 	public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-
 		System.out.println("目标方法执行之前：" + method);
-		Object o1 = methodProxy.invokeSuper(o, objects);
+		Object o1 = methodProxy.invoke(o, objects);
 		System.out.println("目标方法执行之后：" + method);
 		return o1;
-
 	}
 }
 ```
@@ -5668,14 +5643,26 @@ public class MyMethodInterceptor implements MethodInterceptor {
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean class="com.msb.resolveBeforeInstantiation.BeforeInstantiation" id="beforeInstantiation"/>
-	<bean class="com.msb.resolveBeforeInstantiation.MyInstantiationAwareBeanPostProcessor" id="awareBeanPostProcessor"/>
 
+	<bean id="sBeforeInstantiation" class="com.msb.sResolveBeforeInstantiation.SBeforeInstantiation"/>
+	<bean id="sMyInstaitiationAwareBeanPostProcessor" class="com.msb.sResolveBeforeInstantiation.SMyInstantiationAwareBeanPostProcessor"/>
 </beans>
 ```
+
+```java
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("sResolveBeforeInstantiation.xml");
+		BeforeInstantiation bean = ac.getBean(BeforeInstantiation.class);
+		bean.doSomeThing();
+	}
+```
+
+
+
+### 如何创建对象
 
 
 
@@ -5685,19 +5672,43 @@ public class MyMethodInterceptor implements MethodInterceptor {
 
 ![image-20221007162928035](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007162928035.png) 
 
+
+
+![image-20230223132732777](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223132732777.png) 
+
+
+
 **我们自定义的BeanPostProcessor，Spring并不会提前帮我们生成代理对象，会按照doCreateBean的方式去严格去创建**
 
+![image-20230223193446951](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223193446951.png)
 
+![image-20230223193530692](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223193530692.png) 
 
-完成了registerBeanPostProcessors的注册之后，后面就会有我们自己定义的BPP了。会在最后一个方法finishBeanFactoryInitialization中创建，也还是通过doCreateBean的方式创建。
+ 
 
-
+if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors())  这个判断是进不去的，所以resolbeBeforeInstantiation()方法没有处理bean，直接返回的。
 
 这里会判断我们当前执行的逻辑中是否包含了有可能提前创建对象的BeanPostProcessors。
 
 是否会执行doCreateBean取决于在之前定义的BPP里面是否包含了提前创建Bean对象这么 一个BPP，如果不包含才往下走。
 
-![image-20221007164531690](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007164531690.png) 
+![image-20230223193601141](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223193601141.png)
+
+![image-20230223193743888](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223193743888.png)
+
+我们自定义的BPP他并不会帮我生成代理对象，而是按照严格的步骤往下走。
+
+
+
+**完成了registerBeanPostProcessors的注册之后，后面的对象就会有InstantiationAware对象了。**
+
+**后面就会有我们自己定义的BPP了。会在最后一个方法finishBeanFactoryInitialization中创建，也还是通过doCreateBean的方式创建。**
+
+
+
+![image-20230223194003326](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230223194003326.png) 
+
+
 
 后面加到一级缓存中的是一个代理对象。
 

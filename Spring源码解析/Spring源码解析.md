@@ -5710,15 +5710,79 @@ if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors())  这个判�
 
 
 
-后面加到一级缓存中的是一个代理对象。
+使用beforeInstantiation的bean
+
+![image-20230224083214415](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083214415.png) 
+
+![image-20230224083307768](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083307768.png)
 
 
+
+![image-20230224083416053](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083416053.png) 
+
+
+
+调用实例化之前的方法
+
+![image-20230224083509349](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083509349.png) 
+
+![image-20230224083611726](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083611726.png) 
+
+
+
+![image-20230224083740498](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083740498.png)
+
+进入到我们自定义的实例对象 实例化之前的方法 
+
+![image-20230224083756286](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083756286.png)
+
+生成动态代理的对象
+
+![image-20230224083916098](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083916098.png)
+
+
+
+当前这个bean已经创建成功了
+
+![image-20230224083958451](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224083958451.png) 
+
+
+
+对象创建完毕 下面的doGetBean就可以不用执行了，直接返回bean对象
+
+![image-20230224084149725](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224084149725.png) 
+
+
+
+加到一级缓存里面去，加到一级缓存的对象是代理对象
+
+![image-20230224085108698](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085108698.png)
+
+![image-20230224085215893](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085215893.png)
+
+![image-20230224085305769](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085305769.png)
+
+![image-20230224085318178](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085318178.png)
+
+
+
+创建代理对象的代码放到before或者after里面是没有区别的把？
+
+有区别，如果放到after里面执行的话这个bean是没有对象的
+
+![image-20230224085423454](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085423454.png)
+
+如果bean没有对象了，那后置处理方法就不会进行执行了。所以必须放在之前。
+
+
+
+判断当前执行逻辑里面是否包含了提前创建好bean对象这样的一个BeanPostProcessor，如果不包含就接着往下走。
 
 如果这边不使用动态代理生成对象有什么问题吗？
 
 ![image-20221007165241177](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007165241177.png) 
 
-如果不使用动态代理的话就不能使用拦截方法了，因为我们设置了一个Interceptor()，我们例子中所对应的方法doSomething就不会调用了。但是new出来的对象还是会被spring管理，还是会往一级缓存放，但是在方法调用的时候就不会有这些前置处理的逻辑了。
+**如果不使用动态代理的话就不能使用拦截方法了，因为我们设置了一个Interceptor()回调方法，我们例子中所对应的方法doSomething就不会调用了。但是new出来的对象还是会被spring管理，还是会往一级缓存放，但是在方法调用的时候就不会有这些前置处理的逻辑了。**
 
 
 
@@ -5730,7 +5794,15 @@ if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors())  这个判�
 4. FactoryBean的方式创建对象（调用getObject方法）。
 5. 通过supplier（供给器）创建对象。
 
+![image-20230224085954701](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224085954701.png) 
 
+##### factoryMethod
+
+
+
+factorybean和factorymethod表示的其实是两种不同的创建方式，一种是实例工厂，一种是静态工厂。
+
+![image-20230224090050396](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230224090050396.png)
 
 实例工厂、静态工厂
 
@@ -5738,7 +5810,7 @@ if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors())  这个判�
 
 
 
-**supplier方式创建对象**
+##### **supplier方式创建对象**
 
 ![image-20221007170801916](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007170801916.png)
 

@@ -5814,7 +5814,7 @@ factorybean和factorymethod表示的其实是两种不同的创建方式，一�
 
 ![image-20221007170801916](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007170801916.png)
 
- 
+ instanceSupplier 现在是空的，如果我想执行的话该怎么执行呢？如何给他赋值呢？
 
 ![image-20221007170910156](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221007170910156.png) 
 

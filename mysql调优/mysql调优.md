@@ -1,5 +1,13 @@
 # MySQL调优
 
+
+
+**索引不生效的问题：**
+
+![img](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/2022080215084833.png) 
+
+
+
 ![image-20220613212304894](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220613212304894.png) 
 
 

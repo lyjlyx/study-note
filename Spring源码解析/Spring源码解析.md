@@ -6106,6 +6106,10 @@ public class STestSupplier {
 </beans>
 ```
 
+运行结果
+
+![image-20230228090733960](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228090733960.png) 
+
 
 
 

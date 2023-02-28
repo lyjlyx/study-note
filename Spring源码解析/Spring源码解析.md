@@ -6114,27 +6114,172 @@ public class STestSupplier {
 
 
 
+### 创建实例包的过程
+
+![image-20230228131310699](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228131310699.png) 
+
+#### supplier创建对象
+
+![image-20230228130706849](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130706849.png)
+
+
+
+为什么是null？
+
+![image-20230228130741375](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130741375.png) 
+
+当前Bean不是User这个Bean
+
+![image-20230228130812539](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130812539.png) 
+
+![image-20230228130837425](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130837425.png) 
+
+
+
+![image-20230228130857810](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130857810.png) 
+
+
+
+supplier调用的时候其实是调用我们的lambda方法 instance = instanceSupplier.get();
+
+![image-20230228130929109](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130929109.png)
+
+![image-20230228131018332](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228131018332.png) 
+
+![image-20230228131002988](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228131002988.png) 
+
+**用supplier与FactoryBean 有相似之处。**
+
+**FactoryBean：抽象出一个接口规范，所有的对象必须要通过getObject方法来获取--->接口规范实现**
+
+**supplier：随便定义创建对象的方法，不止局限于getObject--->只是beanDefinition的一个属性值（instanceSupplier）**
+
+
+
+#### factoryMethod创建对象 
+
+
+
+ ![image-20230228131329966](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228131329966.png) 
+
+
+
+![image-20230228131658720](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228131658720.png) 
 
 
 
 
 
+SPersonStaticFactory
+
+```java
+public class SPersonStaticFactory {
+
+	public static SPerson getPerson(String name) {
+		SPerson sPerson = new SPerson();
+		sPerson.setId(1);
+		sPerson.setName(name);
+		return sPerson;
+	}
+
+}
+```
+
+SPersonInstanceFactory
+
+```java
+public class SPersonInstanceFactory {
+
+	public SPerson getPerson(String name) {
+		SPerson sPerson = new SPerson();
+		System.out.println("factory");
+		sPerson.setId(1);
+		sPerson.setName(name);
+		return sPerson;
+	}
+
+}
+```
+
+SPerson
+
+```java
+public class SPerson {
+
+	private int id;
+	private String name;
+	private int age;
+	private String gender;
 
 
+	@Override
+	public String toString() {
+		return "SPerson{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", age=" + age +
+				", gender='" + gender + '\'' +
+				'}';
+	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public int getAge() {
+		return age;
+	}
 
+	public void setAge(int age) {
+		this.age = age;
+	}
 
+	public String getGender() {
+		return gender;
+	}
 
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+}
+```
 
+SFactoryMethod.xml
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--  静态工厂	-->
+ 	<bean id="sPerson1" class="com.msb.Sfactorymethod.SPersonStaticFactory" factory-method="getPerson">
+		<!--	constructor-arg 可以为方法指定的参数	-->
+		<constructor-arg value="ermazi"/>
+	</bean>
+	<bean id="sPersonInstanceFactory" class="com.msb.Sfactorymethod.SPersonInstanceFactory"/>
+ 	<!--
+ 	实例工厂
+ 	factory-bean:指定使用哪个工厂实例
+ 	factory-method:指定使用按个工厂实例的方法
+ 	-->
+	<bean id="sPerson2" class="com.msb.Sfactorymethod.SPerson" factory-bean="sPersonInstanceFactory" factory-method="getPerson">
+		<constructor-arg value="zhuzhuzhu"/>
+	</bean>
 
-
-
-
+</beans>
+```
 
 
 

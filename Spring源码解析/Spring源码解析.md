@@ -6008,6 +6008,166 @@ public class PersonStaticFactory {
 
 
 
+
+
+### 实例化
+
+BeanDefinition接口有两个很重要的子类，一个是GenericBeanDefinition、一个是RootBeanDefinition
+
+![image-20230228083843851](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228083843851.png) 
+
+
+
+GenericBeanDefinition中没有setSupplier类似的方法，那么我们要去RootBeanDefinition中查看，RootBeanDefinition中也没类似方法，但是他有一个子类 AbstractBeanDefinition
+
+![image-20230228084140563](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228084140563.png) 
+
+![image-20230228084225304](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228084225304.png) 
+
+
+
+对应类图，我们可以看到GenericBeanDefinition也有集成AbstractBeanDefinition这个抽象类，所以我们在操作相关实现的时候就要对他进行强转，强转成GenericBeanDefinition类型的类
+
+![image-20230228084412752](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228084412752.png) 
+
+![image-20230228084642180](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228084642180.png)
+
+SUser.class
+
+```java
+public class SUser {
+	private String name;
+	public SUser() {
+	}
+
+	public SUser(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "SUser{" +
+				"name='" + name + '\'' +
+				'}';
+	}
+}
+```
+
+```java
+public class SSupplierBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+	@Override
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		BeanDefinition sUser = beanFactory.getBeanDefinition("sUser");
+		GenericBeanDefinition gb = (GenericBeanDefinition) sUser;
+		gb.setInstanceSupplier(SCreateSupplier::createUser);
+		gb.setBeanClass(SUser.class);
+	}
+}
+```
+
+```java
+public class SCreateSupplier {
+	public static SUser createUser() {
+		return new SUser("lisi");
+	}
+}
+```
+
+main
+
+```java
+public class STestSupplier {
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("Ssupplier.xml");
+		SUser bean = ac.getBean(SUser.class);
+		System.out.println(bean.getName());
+	}
+}
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sUser" class="com.msb.Ssupplier.SUser">
+	</bean>
+	<bean class="com.msb.Ssupplier.SSupplierBeanFactoryPostProcessor"/>
+
+</beans>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ![instantiateUsingFactoryMethod大致流程](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/instantiateUsingFactoryMethod%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B.jpg)
 
 

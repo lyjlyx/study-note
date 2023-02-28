@@ -6281,33 +6281,83 @@ SFactoryMethod.xml
 </beans>
 ```
 
+```java
+public class STestFactoryMethod {
+
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("SFactoryMethod.xml");
+		SPerson person = ac.getBean("sPerson1", SPerson.class);
+		System.out.println(person);
+		SPerson sPerson2 = ac.getBean("sPerson2", SPerson.class);
+		System.out.println(sPerson2);
+	}
+
+}
+```
 
 
 
+**在整个容器中，他会帮我们创建几个bean对象**
+
+3个，person、personInstanceFactory、person2。
+
+![image-20230228195425380](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228195425380.png)
+
+![image-20230228195459624](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228195459624.png) 
 
 
 
+创建构造器的处理器   
+
+![image-20230228195610984](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228195610984.png)
 
 
 
+person2走的
+
+![image-20230228200415996](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228200415996.png)
+
+person1走的
+
+![image-20230228195949546](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228195949546.png)
 
 
 
+![image-20230228200905330](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228200905330.png) 
 
 
 
+反射获取
+
+![image-20230228200922236](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228200922236.png)
+
+![image-20230228200938052](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228200938052.png) 
+
+会把包含的所有父类方法都获取出来
+
+![image-20230228201019456](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201019456.png)
+
+遍历完之后只剩一个
+
+![image-20230228201112493](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201112493.png)
+
+进行实例化
+
+![image-20230228201408140](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201408140.png)
 
 
 
+![image-20230228201435734](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201435734.png)
 
 
 
+执行factoryMethod.invoke()方法，调用getPerson()
+
+![image-20230228201519864](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201519864.png)
 
 
 
-
-
-
+![image-20230228201719572](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228201719572.png)
 
 
 

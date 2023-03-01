@@ -6449,6 +6449,12 @@ person1走的
 
 
 
+**构造器注入和普通属性注入是一样的吗**？
+
+一样的，只是构造器注入的时候我们需要选择要使用的构造器是哪一个
+
+
+
 
 
 ### 创建构造器实例
@@ -6536,8 +6542,10 @@ public class SPerson {
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="sPerson" class="com.msb.Sfactorymethod.SPerson" scope="prototype">
-		<property name="id" value="123"/>
-		<property name="name" value="zhangsangou"/>
+<!--		<property name="id" value="123"/>-->
+<!--		<property name="name" value="zhangsangou"/>-->
+		<constructor-arg name="id" value="123123"/>
+		<constructor-arg name="name" value="玩儿吗"/>
 	</bean>
 </beans>
 ```
@@ -6546,17 +6554,61 @@ public class SPerson {
 
 
 
-
-
 ### 讲解构造器的过程
+
+![image-20230301195714773](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301195714773.png) 
+
+
+
+自动装配的方式
 
 ![image-20221008084902565](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221008084902565.png) 
 
 ![image-20221008084845440](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221008084845440.png) 
 
- 
+![image-20230301195854777](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301195854777.png)
+
+ ![image-20230301200246745](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301200246745.png)
 
 ![image-20221009084632736](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221009084632736.png) 
+
+![image-20230301200313734](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301200313734.png) 
+
+
+
+如果参数和构造器都为空的话，应该把当前对象或者说这个类里面的所有构造器都取出来看看到底哪个是匹配的。
+
+![image-20230301201142515](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301201142515.png)
+
+相当于是候选构造器
+
+![image-20230301201302630](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301201302630.png) 
+
+
+
+![image-20230301203002351](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301203002351.png)
+
+
+
+下次再获取的时候可以从缓存中取
+
+![image-20230301203351240](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301203351240.png)
+
+
+
+
+
+设计巧妙的步骤  这个排序非常重要，他是通过我们获取的参数结果来排序的，比如参数是：2、1、0  当2被匹配到了，后面的就不需要再去处理了
+
+![image-20230301203517015](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301203517015.png)
+
+
+
+
+
+
+
+
 
 
 

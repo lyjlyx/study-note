@@ -6407,7 +6407,13 @@ person1走的
 
 ![image-20221008084332283](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221008084332283.png) 
 
+![image-20230301193740628](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301193740628.png) 
+
 ![image-20221008084408366](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221008084408366.png) 
+
+
+
+![image-20230301193847005](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301193847005.png) 
 
 
 
@@ -6417,6 +6423,10 @@ person1走的
 
 ![image-20230301131437248](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131437248.png) 
 
+![image-20230301194009134](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301194009134.png)
+
+
+
 
 
 **我们在进行实例化的时候我们必须要找到我们指定的构造函数是哪一个，一个类里面可以定义无限个构造函数，所以在前面ConstructResolve的时候来判断我们使用的构造函数是哪一个，来进行具体的执行，在前面已经给他缓存起来了。**
@@ -6425,7 +6435,21 @@ person1走的
 
 
 
-![image-20230301131605818](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131605818.png)
+![image-20230301131605818](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131605818.png) 
+
+
+
+两个person对象因为scope为prototype的缘故，所以第二个对象还会再走一遍第一个对象的逻辑，前一个person的构造方法会缓存下来
+
+![image-20230301194554857](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301194554857.png) 
+
+
+
+![image-20230301194131589](C:%5CUsers%5C97151%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230301194131589.png)
+
+
+
+
 
 ### 创建构造器实例
 
@@ -6517,6 +6541,10 @@ public class SPerson {
 	</bean>
 </beans>
 ```
+
+
+
+
 
 
 

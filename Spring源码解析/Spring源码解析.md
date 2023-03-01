@@ -6431,19 +6431,90 @@ person1走的
 
 
 
+```java
+public class SPerson {
+
+	private int id;
+	private String name;
+	private int age;
+	private String gender;
+
+	public SPerson() {
+	}
+
+	public SPerson(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "SPerson{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", age=" + age +
+				", gender='" + gender + '\'' +
+				'}';
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+}
+```
+
+
+
+```java
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("sPerson.xml");
+		SPerson sPerson = ac.getBean("sPerson", SPerson.class);
+		System.out.println(sPerson);
+		SPerson sPerson2 = ac.getBean("sPerson", SPerson.class);
+		System.out.println(sPerson2);
+
+	}
+```
+
 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id = "person" class="com.msb.init.Person" scope="prototype">
-		<constructor-arg name="id" value="1"/>
-		<constructor-arg name="name" value="lisi"/>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="sPerson" class="com.msb.Sfactorymethod.SPerson" scope="prototype">
+		<property name="id" value="123"/>
+		<property name="name" value="zhangsangou"/>
 	</bean>
-
 </beans>
 ```
 

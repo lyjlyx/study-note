@@ -6419,7 +6419,7 @@ person1走的
 
 
 
-**我们在进行实例化的时候我们必须要找到我们指定的构造函数是哪一个，一个类里面可以定义无限个构造函数，所以在前面ConstructResolve的时候来判断我们使用的构造函数是哪一个，来进行具体的执行**
+**我们在进行实例化的时候我们必须要找到我们指定的构造函数是哪一个，一个类里面可以定义无限个构造函数，所以在前面ConstructResolve的时候来判断我们使用的构造函数是哪一个，来进行具体的执行，在前面已经给他缓存起来了。**
 
 ![image-20230301131552244](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131552244.png) 
 
@@ -6428,6 +6428,10 @@ person1走的
 ![image-20230301131605818](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131605818.png)
 
 ### 创建构造器实例
+
+
+
+
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

@@ -6411,6 +6411,22 @@ person1走的
 
 
 
+
+
+如果supplier和factoryMethod执行的过程都没有创建具体的对象，就需要通过反射的方式来创建对象了
+
+![image-20230301131437248](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131437248.png) 
+
+
+
+**我们在进行实例化的时候我们必须要找到我们指定的构造函数是哪一个，一个类里面可以定义无限个构造函数，所以在前面ConstructResolve的时候来判断我们使用的构造函数是哪一个，来进行具体的执行**
+
+![image-20230301131552244](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131552244.png) 
+
+
+
+![image-20230301131605818](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301131605818.png)
+
 ### 创建构造器实例
 
 ```xml

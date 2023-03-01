@@ -6120,6 +6120,8 @@ public class STestSupplier {
 
 #### supplier创建对象
 
+![image-20230301085310677](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301085310677.png)
+
 ![image-20230228130706849](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230228130706849.png)
 
 
@@ -6361,13 +6363,31 @@ person1走的
 
 
 
-
-
-
-
-
+##### factoryMethod创建对象流程图
 
 ![instantiateUsingFactoryMethod大致流程](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/instantiateUsingFactoryMethod%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B.jpg)
+
+
+
+
+
+##### **细节**
+
+
+
+创建参数的数组，可看可不看
+
+![image-20230301085614417](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230301085614417.png)
+
+
+
+不管当前的工厂是静态工厂还是实力工厂也好，最终我们都是要明确的知道getPerson这个方法到底是哪一个，因为我们只有明确知道是哪个方法之后我们才能更好的调用，并且生成具体的对象。
+
+
+
+
+
+
 
 
 

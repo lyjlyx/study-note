@@ -6614,6 +6614,10 @@ public class SPerson {
 
 ### 构造器实例化和工厂实例化有什么区别
 
+
+
+
+
 ![image-20221009085952388](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221009085952388.png) 
 
 

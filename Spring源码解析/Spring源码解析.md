@@ -6618,13 +6618,113 @@ public class SPerson {
 
 
 
-![image-20221009085952388](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221009085952388.png) 
+![image-20230302082327042](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302082327042.png) 
+
+上面和下面所处理的东西是一样的东西，但是调用的方法不一样
+
+![image-20230302082511428](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302082511428.png)
+
+![image-20230302082527470](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302082527470.png)
 
 
 
 要满足这个条件他才能识别得到
 
 ![image-20221010084452142](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221010084452142.png) 
+
+
+
+
+
+### BeanPostProcessor
+
+
+
+![image-20230302083333120](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083333120.png) 
+
+![image-20230302083343935](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083343935.png)
+
+![image-20230302083312840](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083312840.png)
+
+
+
+#### **SmartInstantiationAwareBeanPostProcessor**
+
+![image-20230302083546550](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083546550.png) 
+
+决定使用哪个构造器
+
+![image-20230302083604494](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083604494.png)
+
+
+
+**AutowiredAnnotationBeanPostProcessor**
+
+![image-20230302083629128](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083629128.png)
+
+ ![image-20230302083756251](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083756251.png)
+
+获取构造器集合
+1、如果有多个Autowired，required为true  不管有没有默认构造方法，会报异常
+2、如果只有一个Autowired，required为false  没有默认构造方法，会报警告
+ 其他情况都可以，但是以有Autowired的构造方法优先，然后才是默认构造方法。
+
+![image-20230302084907943](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302084907943.png)
+
+一个类使用多个Autowired来看看是否会报错
+
+![image-20230302085218840](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085218840.png) 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.msb"/>
+
+	<bean id="sPerson" class="com.msb.Sfactorymethod.SPerson" scope="prototype">
+<!--		<property name="id" value="123"/>-->
+<!--		<property name="name" value="zhangsangou"/>-->
+		<constructor-arg name="id" value="123123"/>
+		<constructor-arg name="name" value="玩儿吗"/>
+	</bean>
+</beans>
+```
+
+会报错
+
+![image-20230302085653315](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085653315.png) 
+
+
+
+```
+Exception in thread "main" org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sPerson': Invalid autowire-marked constructor: public com.msb.Sfactorymethod.SPerson(). Found constructor with 'required' Autowired annotation already: public com.msb.Sfactorymethod.SPerson(int,java.lang.String)
+```
+
+
+
+这样就不会报错
+
+![image-20230302085922212](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085922212.png)
+
+![image-20230302090201202](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302090201202.png)
+
+其实不是扫描的问题，其实是要看识别注解的东西是否生效了注解。
+
+![image-20230302085443794](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085443794.png)
+
+![image-20230302085458182](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085458182.png)
+
+要看AutowiredAnnotationBeanPostProcessor
+
+![image-20230302085516782](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302085516782.png)
+
+ determineCandidateConstructors筛选构造方法
+**从bean的后置处理器中为自动装配寻找构造方法，有且仅有一个有参构造或者有且仅有@Autowired注解构造。**
+
+
 
 
 

@@ -6833,13 +6833,15 @@ findPrimaryConstructor   @Primary注解
 
 
 
-
+#### BeanWrapper
 
 对象在创建完成之后是在堆里面开辟了块空间，开辟完空间之后还需要进行属性的填充
 
 所以要先将实例对象进行一个包装，再进行属性的类型转换等等操作
 
 ![image-20221011125328716](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011125328716.png) 
+
+
 
 
 
@@ -6850,6 +6852,38 @@ findPrimaryConstructor   @Primary注解
 
 
 ![image-20221011152727977](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011152727977.png) 
+
+
+
+执行完成之后，我们的实例化就已经完成了
+
+![image-20230303131530277](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303131530277.png)
+
+
+
+后续该进行初始化了
+
+
+
+#### @PostConstruct
+
+![image-20230303132053108](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303132053108.png)
+
+
+
+![image-20230303132144929](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303132144929.png) 
+
+
+
+
+
+实例化前后
+
+初始化前后
+
+属性值的处理
+
+![image-20230303132336914](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303132336914.png)
 
 
 

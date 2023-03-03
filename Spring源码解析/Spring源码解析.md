@@ -6726,6 +6726,24 @@ Exception in thread "main" org.springframework.beans.factory.BeanCreationExcepti
 
 
 
+**autowireConstructor 还会对当前取到的构造器进行一个筛选工作**
+
+![image-20230302090503744](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302090503744.png)
+
+
+
+![image-20230302090707867](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302090707867.png)
+
+![image-20230302090720663](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302090720663.png)
+
+看子类
+
+findPrimaryConstructor   @Primary注解
+
+![image-20230302090736701](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302090736701.png)
+
+**不管如何解析，最终的目的都是为了取得对应的构造器，取到构造器就直接返回了，不用再执行最下面的instantiateBean 方法了**
+
 
 
 
@@ -6736,21 +6754,58 @@ Exception in thread "main" org.springframework.beans.factory.BeanCreationExcepti
 
 
 
+普通的类在进行实例化的时候是必然要通过反射的方式来进行调用的
+
+ getInstantiationStrategy().instantiate(mbd, beanName, this);
+
+![image-20230303083951061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303083951061.png)
+
+
+
+该实例化接口表示三种不同的实例化方式
+1、通过无参构造方法进行实例化
+
+2、通过指定参数的构造方法进行实例化
+
+3、通过工厂方法进行实例化
+
+![image-20230303084315891](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303084315891.png)
+
+
+
 ![image-20221011123046704](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123046704.png) 
 
+![image-20230303084457023](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303084457023.png)
 
 
-![image-20221011123124362](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123124362.png) 
+
+子类SimpleInstantiationStrategy实现了三种的实例化方案
+
+![image-20221011123124362](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123124362.png)
+
+ CglibSubclassingInstantiationStrategy 为SimpleInstantiationStrategy的子类实现 
 
 ![image-20221011123552405](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123552405.png) 
 
 ![image-20221011123653772](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123653772.png) 
 
-![image-20221011123713152](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011123713152.png) 
+![image-20230303084802870](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303084802870.png) 
+
+
+
+通过cglib的方式来进行具体的创建
+
+![image-20230303084926391](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303084926391.png) 
+
+ ![image-20230303085047010](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303085047010.png)
 
 
 
 #### 实例化策略
+
+
+
+
 
 1、Simple实例化策略
 

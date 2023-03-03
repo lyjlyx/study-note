@@ -6889,7 +6889,146 @@ findPrimaryConstructor   @Primary注解
 
 ![image-20221011153026704](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011153026704.png) 
 
+![image-20230303132524350](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303132524350.png) 
 
+
+
+**MergedBeanDefinitionPostProcessor都有统一的前缀AnnotationBeanPostProcessor，就是用来处理我们一些相关注解的描述的**
+
+![image-20230303132728583](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303132728583.png) 
+
+
+
+![image-20230303200507585](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303200507585.png) 
+
+
+
+LifecycleMetadata生命周期的元数据，从初始化到销毁就是一个生命的周期。
+
+![image-20230303200533769](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303200533769.png)
+
+![image-20230303200706087](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303200706087.png) 
+
+![image-20230303200720241](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303200720241.png) 
+
+
+
+**要找到某个对象他的初始化method是什么，销毁的method是什么**
+
+![image-20230303200850860](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303200850860.png)
+
+
+
+![image-20230303201037148](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303201037148.png)
+
+
+
+**遍历当前类，找到当前类所定义的注解有哪些**
+
+
+
+**@PostConstruct**
+
+用来修饰一个非静态的void方法
+
+
+
+**@PreDestory**
+
+bean被关闭的时候执行被这个注解修饰的方法
+
+
+
+操作实例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+   <context:component-scan base-package="com.msb"/>
+</beans>
+```
+
+```JAVA
+package com.msb;
+
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+/**
+ * TODO
+ *
+ * @author Karry
+ * @date 2023-03-03  20:16
+ */
+@Component("sPostConstructPerson")
+public class SPostConstructPerson {
+
+	private Integer id;
+	private String name;
+
+	public SPostConstructPerson() {
+		System.out.println("执行SPostConstructPerson的无参构造方法");
+	}
+
+	public SPostConstructPerson(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	@PreDestroy
+	public void destroy() {
+		System.out.println("执行 SPostConstructPerson 的 destroy方法");
+	}
+
+	@PostConstruct
+	public void init() {
+		System.out.println("SPostConstructPerson 的 init方法");
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+```
+
+```java
+public class SPostConstructTest {
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("STest.xml");
+		SPostConstructPerson spostConstructPerson = ac.getBean("sPostConstructPerson", SPostConstructPerson.class);
+		System.out.println(spostConstructPerson);
+		ac.close();
+	}
+}
+```
+
+结果
+
+```
+> Task :spring-debug:SPostConstructTest.main()
+执行SPostConstructPerson的无参构造方法
+SPostConstructPerson 的 init方法
+com.msb.SPostConstructPerson@70e38ce1
+执行 SPostConstructPerson 的 destroy方法
+```
 
 
 
@@ -6901,15 +7040,57 @@ findPrimaryConstructor   @Primary注解
 
 什么时候Destroy会被执行？
 
-![image-20221011154531256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011154531256.png) 
+![image-20221011154531256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011154531256.png)
 
-![image-20221011155058538](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011155058538.png) 
+
+
+
+
+
+
+解析执行流程 以person对象为例
+
+![image-20230303204419962](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204419962.png)
+
+![image-20230303204501511](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204501511.png)
+
+![image-20230303204625673](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204625673.png)
+
+ 
+
+![image-20230303204647162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204647162.png)
+
+
+
+![image-20230303204707154](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204707154.png) 
+
+
+
+ 
+
+![image-20230303204741090](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204741090.png) 
+
+ 
+
+Arrays.asList(this.initAnnotationType, this.destroyAnnotationType)  里面的执行结果是@PostConstruct和@PreDestroy这两个注解
+
+![image-20221011155058538](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011155058538.png)
 
 ![image-20221011155047612](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011155047612.png) 
 
+![image-20221011155401833](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011155401833.png)
+
+ 
+
+![image-20230303204914260](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303204914260.png)
+
+得到方法进行遍历判断，方法上面是否添加的@PostConstruct或者@PreDestroy注解
+
+![image-20230303205002054](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303205002054.png)
 
 
-![image-20221011155401833](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221011155401833.png) 
+
+![image-20230303205031843](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303205031843.png)
 
 
 
@@ -6920,6 +7101,58 @@ findPrimaryConstructor   @Primary注解
 
 
 **metadata其实只是中间数据，最后还是要把数据都写会BeanDefinition，在整个bean的创建过程中BeanDefinition是贯彻始终的**
+
+在这里的时候init方法和destroy方法是还没有调用执行的。
+
+![image-20230303210619026](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303210619026.png)
+
+![image-20230303210632082](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303210632082.png)
+
+![image-20230303210802714](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303210802714.png)
+
+
+
+**在哪里调用init和destroy方法？**
+
+![image-20230303211515682](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211515682.png)
+
+![image-20230303211505783](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211505783.png)
+
+![image-20230303211534723](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211534723.png)
+
+![image-20230303211553668](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211553668.png) 
+
+![image-20230303211609423](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211609423.png)
+
+**最终会调用的方法**
+
+![image-20230303211354335](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211354335.png)
+
+
+
+ **initAnnotationType和destroyAnnotationType 是在什么时候进行@PostConstruct和@PreDestroy赋值的呢？**
+
+![image-20230303211741265](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211741265.png)
+
+![image-20230303211837370](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303211837370.png) 
+
+
+
+
+
+![image-20230303212012493](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303212012493.png) 
+
+![image-20230303212036019](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303212036019.png)
+
+往BeanDefinition对象注册
+
+![image-20230303212106610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303212106610.png) 
+
+
+
+
+
+
 
 
 

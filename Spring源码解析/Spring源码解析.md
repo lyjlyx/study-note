@@ -7200,21 +7200,49 @@ spring通过postProcessMergedBeanDefinition方法找出所有需要注入的字�
 
 ### checkConfigMembers
 
+将我们当前的访问修饰符等等注册到BeanDefinition里面去，方便后续调用
+
+![image-20230307131152334](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307131152334.png)
+
 方便后续的BeanDefinition能够进行直接的调用操作
 
 ![image-20220626135034073](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626135034073.png) 
 
+![image-20230307131250692](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307131250692.png)
 
+
+
+@PostConsturce、@PreDestroy注解的处理方式其实跟@Resource的处理方式是一样的
 
 ![image-20220626135204938](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626135204938.png) 
+
+find->build
+
+
 
 
 
 ###  buildResourceMetadata
 
-![image-20221013085005584](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221013085005584.png) 
+![image-20221013085005584](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221013085005584.png)
+
+![image-20230307131717256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307131717256.png)
+
+ 
 
 ![image-20220626135517800](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626135517800.png) 
+
+
+
+do while 是为了遍历查找父类     只是最基本的识别，并没有完成注入的工作
+
+![image-20230307131937149](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307131937149.png) 
+
+![image-20230307132523734](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307132523734.png) 
+
+![image-20230307132534590](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307132534590.png) 
+
+
 
 
 

@@ -7146,9 +7146,13 @@ Arrays.asList(this.initAnnotationType, this.destroyAnnotationType)  里面的执
 
 ![image-20230303212106610](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303212106610.png) 
 
+把数据设置到BeanDefinition中
 
+![image-20230303213132951](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303213132951.png)
 
+![image-20230303213254099](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303213254099.png) 
 
+![image-20230303213330197](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230303213330197.png)
 
 
 

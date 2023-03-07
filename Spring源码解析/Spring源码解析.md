@@ -6638,8 +6638,6 @@ public class SPerson {
 
 ### BeanPostProcessor
 
-
-
 ![image-20230302083333120](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083333120.png) 
 
 ![image-20230302083343935](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230302083343935.png)
@@ -7156,9 +7154,11 @@ Arrays.asList(this.initAnnotationType, this.destroyAnnotationType)  里面的执
 
 
 
+## Spring的bean创建流程(五)
 
 
-## BeanPostProcessor
+
+### BeanPostProcessor
 
 
 
@@ -7168,23 +7168,25 @@ spring通过postProcessMergedBeanDefinition方法找出所有需要注入的字�
 
 ![image-20220626133731851](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626133731851.png) 
 
-![image-20220626134232118](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134232118.png) 
 
 
+![image-20220626134625971](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134625971.png)
 
-![image-20220626134419761](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134419761.png) 
+![image-20220626134837174](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134837174.png)
 
+为什么initAnnotationType 指的就是@PostConstruct，而destroyAnnotationType 指的是@PreDestroy，他是在哪里完成的一个赋值的工作。
 
+![image-20230307085850299](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307085850299.png)
 
+![image-20230307090102102](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307090102102.png)
 
+ 
 
-![image-20220626134625971](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134625971.png) 
+![image-20230307090341918](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230307090341918.png)
 
+ 
 
-
-
-
- ![image-20220626134837174](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626134837174.png) 
+ 
 
 
 

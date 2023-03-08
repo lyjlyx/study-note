@@ -7254,9 +7254,27 @@ CommonAnnotationBeanPostProcessor（@PostConstruct、@PreDestroy、@Resource）
 
 ### AutowiredAnnotationBeanPostProcessor
 
+加载注解的相关解析配置工作
 
+CommonAnnotationBeanPostProcessor
+
+->@Resource
+
+->InitDestroyAnnotationBeanPostProcessor
+
+​		->@PreDestroy
+
+​		->@PostConstruct
 
 ![image-20221013085247164](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221013085247164.png) 
+
+
+
+AutowiredAnnotationBeanPostProcessor
+
+->@Autowired
+
+->@Value
 
 
 
@@ -7264,13 +7282,19 @@ CommonAnnotationBeanPostProcessor（@PostConstruct、@PreDestroy、@Resource）
 
 先find、再build
 
-![image-20220626141358428](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626141358428.png) 
+![image-20230308082716591](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308082716591.png) 
 
-![image-20220626141408811](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626141408811.png) 
-
-![image-20220626141433686](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626141433686.png) 
+ ![image-20230308082735188](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308082735188.png)
 
 
+
+开始进行相关的识别工作
+
+![image-20230308082814183](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308082814183.png) 
+
+
+
+autowiredAnnotationTypes中包含了两个注解值@Autowired、@Value
 
 ![image-20221017162807612](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017162807612.png) 
 
@@ -7278,11 +7302,13 @@ CommonAnnotationBeanPostProcessor（@PostConstruct、@PreDestroy、@Resource）
 
 
 
-调用构造器将相应注解注册到集合中
+调用构造器将相应注解@Autowired和@Value注册到集合中，还有@Inject
 
 ![image-20221017162936624](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017162936624.png) 
 
 ![image-20220626141600322](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626141600322.png) 
+
+![image-20230308083316414](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308083316414.png)
 
 
 
@@ -7294,33 +7320,59 @@ CommonAnnotationBeanPostProcessor（@PostConstruct、@PreDestroy、@Resource）
 
 
 
-inject是按照类型来注入的。
+**inject**是按照类型来注入的。
 
+将当前值设置到field里面去
 
+![image-20230308083745475](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308083745475.png)
 
-![image-20221017163704917](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017163704917.png) 
+![image-20221017163704917](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017163704917.png)
+
+ 
 
 ![image-20221017164206768](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017164206768.png) 
 
-![image-20220626141920036](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626141920036.png) 
+
+
+![image-20230308083928304](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308083928304.png)
+
+![image-20230308083946594](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308083946594.png)
 
 
 
-![image-20220626142534334](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626142534334.png) 
+resolveDependency就是从容器或者工厂里面获取对应的依赖值的
+
+![image-20230308084109369](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308084109369.png)
 
 
 
-**区分哪些是被注解处理的和哪些是被xml文件处理的**
+为什么要在中间加下图的这一步操作呢？有什么意义？
+
+**初始化处理完之后，后面就需要进行初始化操作了，区分哪些是被注解处理的和哪些是被xml文件处理的**
 
 ![image-20221017164655594](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221017164655594.png) 
 
 
 
-
-
 如果配置冲突了呢？
 
- 
+验证会出现什么问题
+
+![image-20230308084804111](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308084804111.png)
+
+ ![image-20230308084817013](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308084817013.png)
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### 初始化和循环依赖
 

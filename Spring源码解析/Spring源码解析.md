@@ -7362,15 +7362,11 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
  ![image-20230308084817013](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308084817013.png)
 
+不会报错 使用了xml类型的注入
 
+![image-20230308085102258](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308085102258.png)
 
-
-
-
-
-
-
-
+**当出现两个相同名称实例，spring会覆盖其中一个，xml优先级高于注解；xml中同时配置两个相同id的bean，直接校验不通过报错**
 
 
 

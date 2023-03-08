@@ -7372,6 +7372,10 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 ### 初始化和循环依赖
 
+**如何去处理循环依赖？**
+
+
+
 ![image-20221021082943197](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221021082943197.png) 
 
 
@@ -7380,7 +7384,9 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 
 
-A对象中有B对象的属性，B对象中有A对象的属性
+**A对象中有B对象的属性，B对象中有A对象的属性**
+
+![image-20230308090044691](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230308090044691.png) 
 
 ![image-20220626180428673](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220626180428673.png) 
 

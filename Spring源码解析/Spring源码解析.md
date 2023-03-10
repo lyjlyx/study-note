@@ -7672,21 +7672,31 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 ![image-20230310194818887](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194818887.png)
 
-
-
-给属性赋值
-
-
-
-分类：
-
-1、基本数据类型：直接完成赋值操作
-
-2、引用类型：先从容器中获取具体的对象值，如果有，直接赋值，如果没有就创建
+![image-20230310195320889](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310195320889.png)
 
 
 
-注入的方式：
+**给属性赋值**
+
+**分类**：
+
+1、基本数据类型：
+
+​	**直接完成赋值操作**
+
+​		4类8种基本数据类型------->这里面需要考虑到类型转换的问题
+
+2、引用类型：
+
+​	**先从容器中获取具体的对象值，如果有，直接赋值，如果没有就创建**
+
+
+
+**数组、list、set、map、properties（但是他不算是基本数据类型）既可以放基本数据类型，也可以放引用数据类型**
+
+
+
+**注入的方式**（他是属于引用类型的）：
 
 1、不注入
 
@@ -7696,7 +7706,21 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 4、按照构造器完成注入
 
+​	注入的方式
 
+![image-20230310195504874](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310195504874.png) 
+
+
+
+**属性填充**
+
+![image-20230310200010143](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200010143.png)
+
+
+
+### populatebean属性方法
+
+![image-20230310200143706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200143706.png)
 
 #### populateBean()
 

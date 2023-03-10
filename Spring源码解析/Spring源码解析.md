@@ -7823,17 +7823,27 @@ public class TestPopulate {
 }
 ```
 
-到doCreateBean方法中开始 进入到populateBean()方法
-
-![image-20221024161424008](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221024161424008.png) 
 
 
+**到doCreateBean方法中开始 进入到populateBean()方法**
 
-![image-20221024161458540](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221024161458540.png) 
+![image-20230310201052003](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201052003.png)
+
+![image-20230310201521314](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201521314.png)
+
+
+
+提前代理对象 ![image-20230310201617194](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201617194.png)
+
+
+
+这块是给我们自己去实现的，其他的类都是返回true不做任何的处理
+
+![image-20230310201751580](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201751580.png)
+
+
 
 可以在postProcessAfterInstantiation方法中改变bean对象的属性值
-
-
 
 ![image-20221024161835877](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221024161835877.png) 
 

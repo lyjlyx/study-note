@@ -7628,15 +7628,51 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 
 
+## spring的bean创建流程(六)
+
+
+
+### Spring的bean创建流程图和知识点
+
+![image-20230310193452009](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310193452009.png) 
+
+![image-20230310194320756](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194320756.png)
+
+如果能够进入到该if判断中，不管当前对象是否需要创建一个代理类，最终都会往三级缓存里面放东西。后续需要就会调用，不需要就不调用
+
+![image-20230310194351645](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194351645.png)
+
+
+
+ this.allowCircularReferences 再最开始的时候有用到
+
+![image-20230310194502893](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194502893.png) 
+
+![image-20230310194624847](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194624847.png)
+
+
+
+![image-20230310194656588](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194656588.png) 
+
+
+
+在这里面设置了我们具体的值，我们可以自己进行修改
+
+![image-20230310194710330](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194710330.png)
 
 
 
 
-## Spring的bean创建流程图和知识点
+
+### 填充属性
 
 
 
-### populateBean 填充bean的属性
+非常重要的两个方法：populateBean、initializeBean
+
+![image-20230310194818887](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310194818887.png)
+
+
 
 给属性赋值
 

@@ -8009,15 +8009,27 @@ systemEnvironment是一个map结构
 
 #### byType
 
-
+![image-20230312164407075](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312164407075.png)
 
 ![image-20221025084540317](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221025084540317.png) 
 
-为什么包装类可以作为类型转换器？
+
+
+在前面autowireByName的时候有一个registerDependentBean方法与他类似
+
+![image-20230312164723903](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312164723903.png) 
+
+![image-20230312164954605](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312164954605.png)
+
+![image-20230312165051111](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312165051111.png) 
+
+
+
+
+
+**为什么包装类可以作为类型转换器？**
 
 因为BeanWrapper里面有一个具体的实现接口 TypeConverter
-
-
 
 ![image-20221025085127424](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221025085127424.png) 
 
@@ -8025,11 +8037,21 @@ systemEnvironment是一个map结构
 
 ![image-20221026083840507](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026083840507.png) 
 
-![image-20221026083833578](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026083833578.png) 
+![image-20221026083833578](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026083833578.png)
+
+
+
+  查找与type匹配的候选bean对象，构建成Map key=bean名,val = Bean对象
 
 ![image-20221026084126398](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026084126398.png) 
 
-结果值的判断
+
+
+**这一步是结果值的判断**
+
+获取当前的单例对象，并且把当前结果放到candidates中
+
+![image-20230312172731580](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312172731580.png) 
 
 
 
@@ -8039,11 +8061,37 @@ systemEnvironment是一个map结构
 
  
 
-按照类型注入的时候所以在当前容器中存在的map结构都能够找到
+![image-20230312173106798](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312173106798.png) 
+
+
+
+**会注入进去，按照类型注入的时候所有在当前容器中存在的map结构都能够找到**
 
 ![image-20221026085252994](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026085252994.png) 
 
-![image-20221026084828170](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221026084828170.png)
+
+
+![image-20230312173421308](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312173421308.png)
+
+
+
+按照类型进行注入的时候，他会按照类型进行注入，在当前容器中存在的key v的键值对我们都能够找到，只要是map类型就能匹配到，匹配到了就能够放进去。
+
+![image-20230312173535390](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312173535390.png) 
+
+ 
+
+按照类型进行注入的时候他只能获取一个具体的对象结果，如果按照是多个的 话根本不知道获取哪一个，而对应map的时候里面放的value又是一层map，把他给区分开了。
+
+![image-20230312173927194](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312173927194.png) 
+
+
+
+所以map的话最好不要按照类型进行注入，因为他会多出很多东西来
+
+
+
+**所以我们再进行bean注入的时候，需要确定好当前业务需要的是什么再选择注入的方式，如果我们需要的是某个指定的对象的话就用name，如果我们需要类型的话就用type，但是像map这种类型注入的时候可能会有很多奇怪的对象，这个需要注意**
 
 
 

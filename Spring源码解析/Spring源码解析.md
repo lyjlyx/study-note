@@ -7841,6 +7841,10 @@ public class TestPopulate {
 
 ![image-20230310201751580](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201751580.png)
 
+![image-20230310201936282](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310201936282.png)
+
+
+
 
 
 可以在postProcessAfterInstantiation方法中改变bean对象的属性值
@@ -7861,9 +7865,145 @@ public class TestPopulate {
 
 ![image-20221024163854574](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221024163854574.png) 
 
+
+
+
+
+###  propertyvalues的使用
+
+![image-20230312141254061](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312141254061.png) 
+
+
+
+PropertyValue的类图相对来说是比较复杂的
+
+ ![image-20230312141408960](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312141408960.png)
+
+![image-20230312141437296](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312141437296.png)
+
+
+
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="person3" class="com.msb.populatebean.Person">
+		<property name="id" value="666"/>
+		<property name="name" value="qewrwqe"/>
+	</bean>
+	<bean id="spopulateBeanPerson" class="com.msb.sPopulateBean.SpopulateBeanPerson" autowire="byName"/>
+	<bean id="spopulateBeanPerson2" class="com.msb.sPopulateBean.SpopulateBeanPerson" autowire="byType"/>
+
+	<bean id="address" class="com.msb.populatebean.Address">
+		<property name="province" value="福建"/>
+		<property name="city" value="龙岩"/>
+		<property name="town" value="长汀"/>
+	</bean>
+</beans>
+```
+
+
+
+ **当前bean的PropertyValue是默认没有值的的，但是如果你在xml上有定义给他赋值就会有，他才会帮我们封装**
+
+![image-20230312142131272](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312142131272.png) 
+
+![image-20230312142234778](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312142234778.png) 
+
+
+
+![image-20230312142603221](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312142603221.png) 
+
+
+
+根据名字、类型进行自动装配。
+
+![image-20230312143327823](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312143327823.png)
+
+
+
+他怎么才能知道哪些属性要自动装配呢？
+
 #### byName
 
 ![image-20221024164234533](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221024164234533.png) 
+
+ 
+
+
+
+**区分引用类型还是基本数据类型**
+
+![image-20230312144010110](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144010110.png)
+
+
+
+获取当前对象的所有属性值
+
+![image-20230312144035882](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144035882.png)
+
+ 
+
+ pd.getWriteMethod()：获取具体对象的时候我们要判断里面有没有get set方法
+
+![image-20230312144327429](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144327429.png) 
+
+判断是否基本数据类型。
+
+![image-20230312144335147](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144335147.png) 
+
+
+
+返回的都是非简单类型（非基本数据类型）属性
+
+![image-20230312144530467](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144530467.png) 
+
+![image-20230312144826604](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144826604.png)
+
+
+
+执行创建bean的一套流程
+
+![image-20230312144858247](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312144858247.png) 
+
+
+
+创建依赖关系
+
+![image-20230312145017874](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312145017874.png) 
+
+
+
+![image-20230312145214080](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312145214080.png) 
+
+获取到具体的依赖关系
+
+![image-20230312145250913](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312145250913.png)
+
+
+
+为什么要存储上面的依赖关系？
+
+**如果只创建了一次其实这个依赖关系没什么用，但是如果多次的话就有意义了，后续可以根据具体key直接获取，而且他是放到DefaultSingletonBeanRegistry里面，这个类里面放的是三级缓存，把对应依赖关系都提前存好了。**
+
+
+
+map结构的数据再当前容器中已经存在了
+
+systemEnvironment是一个map结构
+
+![image-20230312145901365](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312145901365.png) 
+
+![image-20230312145728462](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312145728462.png)
+
+所以当前的map结构是不能存进去的，因为他是byName的
+
+
+
+![image-20230312150040493](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230312150040493.png)
 
 
 
@@ -7907,7 +8047,7 @@ public class TestPopulate {
 
 
 
-### propertydes ciptor数组
+### propertydesciptor数组
 
 
 

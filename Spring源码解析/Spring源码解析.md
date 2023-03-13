@@ -8167,19 +8167,37 @@ PersonDao->PersonService->PersonController
 
 ### 创建bean对象的核心方法
 
-**getBean-> doGetBean -> createBean -> doCreateBean -> createBeanInstance -> populateBean**
+**创建bean对象的核心方法有哪些：**
+
+**getBean-> doGetBean -> createBean -> doCreateBean -> createBeanInstance（进行实例化的） -> populateBean（填充具体的属性值）**
+
+![image-20230313211452367](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313211452367.png)
 
 
 
+**personController->personService->personDao**
+
+第一次在执行的时候肯定是先去创建personController这个对象，对他进行实例化。personController实例化完成之后就会执行populateBean()方法了，在执行populateBean()的时候会执行personService实例化,personService实例化完成之后会执行personService的populateBean方法，这个时候就又会执行personDao的实例化，personDao实例化完成之后就会执行personDao的populateBean。从哪进去，他就会回到哪。
 
 
 
+![image-20230313221326321](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313221326321.png)
+
+![image-20230313221340507](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313221340507.png)
+
+![image-20230313221352565](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313221352565.png)
 
 
 
+![image-20230313221653915](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313221653915.png)
 
 
 
+应用属性值，对当前值进行解析
+
+![image-20230313221855628](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313221855628.png)
+
+![image-20230313222008530](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313222008530.png)
 
 
 

@@ -8095,7 +8095,73 @@ systemEnvironment是一个map结构
 
 
 
-### propertydesciptor数组
+### PropertyDescriptor数组
+
+![image-20230313202727135](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313202727135.png)
+
+
+
+postPropertyProperties方法在我们实现了InstantiationAwareBeanPostProcessor 接口的时候可以重写这个方法。
+
+![image-20230313203205911](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313203205911.png)
+
+实现InstantiationAwarePostProcessor接口
+
+![image-20230313203335004](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313203335004.png)
+
+可以对当前的对象中的值进行修改的操作。
+
+![image-20230313203507636](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313203507636.png)
+
+![image-20230313203606533](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313203606533.png)
+
+![image-20230313203629479](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313203629479.png)
+
+
+
+
+
+案例描述：
+
+![image-20230313204258383](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313204258383.png) 
+
+![image-20230313204612882](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313204612882.png) ![image-20230313204623760](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313204623760.png)
+
+![image-20230313204249425](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313204249425.png)
+
+
+
+这个时候personController的personService属性为null
+
+![image-20230313204550842](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313204550842.png)
+
+![image-20230313210037343](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210037343.png)
+
+![image-20230313205939861](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313205939861.png)
+
+![image-20230313210204966](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210204966.png)
+
+![image-20230313210224521](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210224521.png) 
+
+![image-20230313210306745](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210306745.png)
+
+![image-20230313210335703](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210335703.png)
+
+
+
+![image-20230313210714630](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210714630.png)
+
+![image-20230313210730708](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313210730708.png)
+
+![image-20230313211018162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313211018162.png) 
+
+PersonDao->PersonService->PersonController
+
+要把personDao创建完成之后后续的才能够继续创建
+
+
+
+![image-20230313211206500](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230313211206500.png)
 
 
 

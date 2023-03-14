@@ -8243,7 +8243,43 @@ PersonDao->PersonService->PersonController
 
 ### 遍历属性
 
+name的value为空也需要进行处理
+
+![image-20230314193407815](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314193407815.png)
+
+
+
 ![image-20221116084553892](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221116084553892.png) 
+
+
+
+resolve ValueIfNecessary ![image-20230314193730777](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314193730777.png)
+
+比对判断了非常多的类型
+
+![image-20230314193751715](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314193751715.png)
+
+
+
+![image-20230314193942041](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314193942041.png)
+
+
+
+将值解析完成之后放到我们之前准备好的深拷贝的集合里面，到后面统一进行处理
+
+![image-20230314194307554](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314194307554.png)
+
+
+
+针对引用类型，进行具体值对象的创建过程
+
+![image-20230314194717198](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314194717198.png)
+
+
+
+**整体类似于一个递归的过程**
+
+
 
 
 

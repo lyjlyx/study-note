@@ -8201,15 +8201,45 @@ PersonDao->PersonService->PersonController
 
 
 
-## Spring的bean创建流程七
+## Spring的bean创建流程(七)
 
 
 
 ### Spring的bean创建流程applypropertyvalues方法讲解
 
-### ![image-20221115083618424](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221115083618424.png)
+![image-20230314083147077](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314083147077.png) 
+
+为什么applyPropertyValues的代码会非常多？
+
+因为我们在定义一个类的时候我们根本没办法预判到当前这个类存在多少属性，并且知道属性是什么类型的，所以必须吧这些点都考虑全面。
+
+
+
+![image-20230314084352168](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314084352168.png)
 
  
+
+![image-20230314084611007](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314084611007.png) 
+
+
+
+
+
+![image-20230314084746685](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314084746685.png)
+
+![image-20230314084838899](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314084838899.png)
+
+
+
+为了不影响原来封装好了的集合里面的属性值。
+
+后面的值或者属性不管怎么进行类型转换，都不会影响原来封装好的集合里面的对象属性值
+
+![image-20230314084936157](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230314084936157.png)
+
+
+
+
 
 ### 遍历属性
 

@@ -8287,6 +8287,12 @@ resolve ValueIfNecessary ![image-20230314193730777](https://lyx-study-note-image
 
 
 
+![image-20230315083714012](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315083714012.png) 
+
+先创建A对象，A对象经过get A之后先对A队形进行实例化，实例化完成之后填充属性，填充属性的时候发现需要一个引用类型的对象，所以下一步该引用对象B也跟A对象一样经过get 再实例化 （或者直接从容器中取）
+
+
+
 sourceMap
 
 ![image-20221118090424126](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221118090424126.png) 

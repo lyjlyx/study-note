@@ -8375,7 +8375,7 @@ setPropertyValues才是开始真正的赋值工作
 
 ![image-20230315213059726](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315213059726.png)
 
-### ![image-20230315213302042](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315213302042.png)populateBean属性功能
+![image-20230315213302042](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315213302042.png)populateBean属性功能
 
 
 

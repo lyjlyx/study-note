@@ -8285,6 +8285,8 @@ resolve ValueIfNecessary ![image-20230314193730777](https://lyx-study-note-image
 
 ### 创建对象的流程
 
+A->实例化->初始化->填充属性->判断是否是引用类型...
+
 
 
 ![image-20230315083714012](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315083714012.png) 
@@ -8293,9 +8295,79 @@ resolve ValueIfNecessary ![image-20230314193730777](https://lyx-study-note-image
 
 
 
+实例化、初始化、填充属性，有的话容器里面拿没有的话就创建，这些过程一直在递归循环。没办法具体循环递归几次，根据我们配置来决定的。
+
+不管是new还是反射都是根据对应的构造方法来创建对象的。
+
+ 
+
+![image-20230315200656924](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315200656924.png) 
+
+ 交由valueResolver根据pv解析出originalValue所封装的对象
+
+![image-20230315201010545](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201010545.png) 
+
+![image-20230315200944256](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315200944256.png)
+
+
+
+又调用了resolveValueIfNecessary()方法
+
+![image-20230315201111084](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201111084.png) 
+
+![image-20230315201125018](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201125018.png)
+
+![image-20230315201348547](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201348547.png) 
+
+
+
+保证创建的对象都是独立唯一的
+
+![image-20230315201541011](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201541011.png) 
+
+
+
+创建Bean的对象。 
+
+![image-20230315201644967](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201644967.png)
+
+
+
+调整当前bean 的名称
+
+![image-20230315201424822](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201424822.png)
+
+
+
+大递归嵌套小递归
+
+![image-20230315201952607](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315201952607.png)
+
+上图流程是list的处理过程，其实还有set、Map....其他的集合的处理过程，也是类似的。
+
 sourceMap
 
 ![image-20221118090424126](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221118090424126.png) 
+
+
+
+给当前的propertys里面任何一种数据类型做一个匹配工作
+
+![image-20230315203109250](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203109250.png) 
+
+
+
+setPropertyValues才是开始真正的赋值工作
+
+![image-20230315203214003](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203214003.png)
+
+
+
+![image-20230315203303149](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203303149.png) 
+
+
+
+获取属性的访问权限 getPropertyAccessorForPropertyPath(propertyName)![image-20230315203454991](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203454991.png)
 
 
 

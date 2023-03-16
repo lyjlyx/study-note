@@ -7720,7 +7720,40 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 ### populatebean属性方法
 
-![image-20230310200143706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200143706.png)
+
+
+populateBean
+
+​						->调用postProcessAfterInstantiation此方法来完成属性的赋值工作
+
+
+
+![image-20230316084202277](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316084202277.png)
+
+![image-20230310200143706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200143706.png) 
+
+调用InstantiationAwarBeanPostProcessor方法
+
+
+
+
+
+```java
+	@Override
+	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+		System.out.println(" 调用了 SPersonInstantiationAwareBeanPostProcessor 的  postProcessAfterInstantiation 方法");
+		SPerson sPerson = null;
+		if (bean instanceof SPerson) {
+			sPerson = (SPerson) bean;
+			sPerson.setName("狗贼");
+			return true;
+		} else {
+			return false;
+		}
+	}
+```
+
+
 
 #### populateBean()
 

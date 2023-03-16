@@ -7720,40 +7720,7 @@ resolveDependency就是从容器或者工厂里面获取对应的依赖值的
 
 ### populatebean属性方法
 
-
-
-populateBean
-
-​						->调用postProcessAfterInstantiation此方法来完成属性的赋值工作
-
-
-
-![image-20230316084202277](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316084202277.png)
-
-![image-20230310200143706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200143706.png) 
-
-调用InstantiationAwarBeanPostProcessor方法
-
-
-
-
-
-```java
-	@Override
-	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-		System.out.println(" 调用了 SPersonInstantiationAwareBeanPostProcessor 的  postProcessAfterInstantiation 方法");
-		SPerson sPerson = null;
-		if (bean instanceof SPerson) {
-			sPerson = (SPerson) bean;
-			sPerson.setName("狗贼");
-			return true;
-		} else {
-			return false;
-		}
-	}
-```
-
-
+![image-20230310200143706](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230310200143706.png)
 
 #### populateBean()
 
@@ -8404,11 +8371,27 @@ setPropertyValues才是开始真正的赋值工作
 
 
 
-获取set方法，执行set方法（反射的方式）
+![image-20230315203616888](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203616888.png)
 
-![image-20230315213059726](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315213059726.png)
 
-![image-20230315213302042](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315213302042.png)populateBean属性功能
+
+![image-20230315203958897](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315203958897.png)
+
+![image-20230315204013977](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230315204013977.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+### populateBean属性功能
 
 
 

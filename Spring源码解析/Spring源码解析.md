@@ -8395,31 +8395,83 @@ setPropertyValues才是开始真正的赋值工作
 
 
 
+![image-20230316131438438](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316131438438.png)
+
+
+
 ![image-20221121140840796](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121140840796.png) 
 
 ![image-20221121140824030](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121140824030.png) 
 
-1、如上里面的例子：调用postProcessAfterInstantiation方法来完成属性的赋值工作，可以直接终止后续的值处理工作，也可以让后续的属性直接完成覆盖操作，取决于自己。（一般没人这么干）
 
-​	postProcessAfterInstantiation
 
-2、根据配置文件的Autowire属性来决定使用名称注入还是类型注入
 
-​	autowireByType
 
-​	autowireByName
+**当 postProcessAfterInstantiation方法为true的时候，他还会继续往下执行代码，如果往下走的话就会继续走属性的处理，并且会走到applyPropertyValues方法，该方法会把属性值覆盖掉（因为里面有调用set方法）**
 
-3、将对象中定义的@Autowired注解进行解析，并完成对象或者属性的注入
+![image-20230316131513541](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316131513541.png)
 
-​	postProcessProperties -> AutowiredAnnotationBeanPostProcessor
+![image-20230316131612142](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316131612142.png) 
 
-4、根据property标签定义的属性值，完成各种属性值的解析和赋值工作
+![image-20230316131945897](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316131945897.png) 
 
-​	applyPropertyValues
+![image-20230316132014989](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316132014989.png) 
+
+**调用postProcessAfterInstantiation方法来完成属性的赋值工作，可以直接终止后续的值处理工作，也可以让后续的属性来完成覆盖操作，都取决于我们自己，是返回false还是返回true**
+
+![image-20230316132146219](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316132146219.png)
+
+
+
+**1、如上里面的例子：调用postProcessAfterInstantiation方法来完成属性的赋值工作，可以直接终止后续的值处理工作，也可以让后续的属性直接完成覆盖操作，取决于自己。（一般没人这么干）**
+
+​	**postProcessAfterInstantiation**()
+
+**2、根据配置文件的Autowire属性来决定使用名称注入还是类型注入**
+
+​	**autowireByType()**
+
+​	**autowireByName()**
+
+**3、将对象中定义的@Autowired注解进行解析，并完成对象或者属性的注入**
+
+​	**postProcessProperties() -> AutowiredAnnotationBeanPostProcessor-> inject()**
+
+**4、根据property标签定义的属性值，完成各种属性值的解析和赋值工作**
+
+​	**applyPropertyValues()**
 
 
 
 ![image-20221121142409046](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121142409046.png) 
+
+
+
+**为什么不把bean缓存到pvs里面， 这样就可以直接通过缓存直接调用了？**
+
+populateBean方法中都是使用pvs这个对象来进行赋值的，但是他并没有修改我们的mbd(MergedBeanDefinition)。
+
+![image-20230316132742338](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316132742338.png)
+
+各个对象在创建的时候我们都要保存的时候最原始的BeanDefinition对象，所以是元数据，为了相互独立不要产生影响，不要想着把他改变。
+
+类似deepCopy集合，创建了一个深拷贝对象，也是为了不影响原来的值。
+
+![image-20230316133158976](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316133158976.png) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

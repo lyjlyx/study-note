@@ -8469,6 +8469,14 @@ populateBean方法中都是使用pvs这个对象来进行赋值的，但是他�
 
 ![image-20230316195919715](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230316195919715.png)
 
+![image-20230317130426657](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317130426657.png) 
+
+![image-20230317130524048](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317130524048.png) 
+
+
+
+![image-20230317130535323](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317130535323.png) 
+
 
 
 1、执行调用Aware接口对应的方法
@@ -8481,31 +8489,110 @@ populateBean方法中都是使用pvs这个对象来进行赋值的，但是他�
 
 2、执行before的初始化方法
 
-​	1.ApplicationContextAwareProcessor
+​	1.在ApplicationContextAwareProcessor 接口中实现处理
 
-​	2.CommonAnnotationBeanPostProcessor	->	InitDestroyAnnotationBeanPostProcessor	->	@PostConstructor
+​	2. 在CommonAnnotationBeanPostProcessor接口中实现	->	InitDestroyAnnotationBeanPostProcessor包含了两个注解	->	@PostConstructor
 
-​																																												@PreDestroy
+​																																																									  @PreDestroy
 
-3、调用执行init-method    
+3、调用执行init-method     
 
-​	1.实现类initializingBean接口之后调用afterPropertiesSet方法
+​		1.实现了initializingBean接口之后调用afterPropertiesSet方法
 
-​	2.调用执行用户自定义的初始化方法 init-method
+​		2.调用执行用户自定义的初始化方法 init-method
 
 4、执行after的初始化方法
 
-​	AbstractAutoProxyCreator	-> AOP
+​				AbstractAutoProxyCreator	->  主要是实现AOP这个功能
+
+
+
+@PostConstruct在调用的时候也定义了init-method方法，而后面也会调用init-method方法，那么如果两边都定义了的话，init-method会调用几次？
+
+只有一次，初始化方法不可能打印两次的。那么如何做限制定义他只能执行一次？应该是添加了标记为标注。
+
+
+
+当我们处理@PostConstruct和@PreDestroy注解的时候都会执行相关的register方法
+
+![image-20230317131030586](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131030586.png)
+
+在check方法里面完成的注册
+
+![image-20230317131056165](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131056165.png) 
+
+ 
+
+![image-20230317131112967](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131112967.png)
+
+其中包含了这个集合属性 externallyManagedInitMethods
+
+![image-20230317131208252](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131208252.png)
+
+回到initializeBean方法->invokeInitMethod-> invokeCustomerInitMethod
+
+![image-20230317131410238](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131410238.png)
+
+![image-20230317131518462](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131518462.png)
+
+if语句中有一个判断
+
+![image-20230317131618833](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131618833.png)
+
+与上两个注解处理的一样，都是处理同一个具体的属性值，类似于一个缓存
+
+![image-20230317131638241](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131638241.png)
 
 
 
 
 
+invokeAwareMethods
 
+![image-20230317131725327](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131725327.png)
+
+![image-20230317131921190](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317131921190.png) 
+
+
+
+invokeAwareMethods为什么只处理这三个方法呢？ 
 
 ![image-20221121202024105](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121202024105.png) 
 
-![image-20221121202014678](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121202014678.png) 
+
+
+**因为前面已经忽略了三个了**
+
+ ![image-20230317132055306](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132055306.png) 
+
+![image-20230317132112721](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132112721.png) 
+
+![image-20230317132154013](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132154013.png) 
+
+找DefaultListableBeanFactory的父类构造方法
+
+![image-20230317132201526](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132201526.png) 
+
+这三个方法刚刚好对应invokeAwareMethods方法里的执行
+
+![image-20230317132238226](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132238226.png)
+
+
+
+
+
+ 这几个是在ApplicationContextAwareProcessor中处理的
+
+![image-20230317132413501](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132413501.png)
+
+![image-20230317132452656](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132452656.png)
+
+分为了两次 
+
+如果自定义实现类中实现了这6个接口，他是通过我们的BeanPostProcessor的前置处理方法来实现的。
+并不是在我们的invokeMethodAware里面进行相关的实现
+
+![image-20230317132532516](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230317132532516.png) 
 
 
 
@@ -8513,7 +8600,11 @@ populateBean方法中都是使用pvs这个对象来进行赋值的，但是他�
 
 
 
-### beanfactory功能
+### Beanfactory功能
+
+
+
+BeanFactory接口大体分为两个分支
 
 BeanFactory：
 

@@ -8614,31 +8614,95 @@ BeanFactory：
 
 ​		2.ConfigurableBeanFactory
 
-​	3、ApplicationContext
+​	2、ApplicationContext
 
 ​		1.ClassPathXmlApplicationContext
 
-​		2.AnnotationconfigApplicationContext
+​		2.AnnotationConfigApplicationContext
 
 ​		3.FileSystemApplicationContext
 
+![image-20230320154604089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154604089.png) 
+
+![image-20230320154758660](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154758660.png)
+
+![image-20230320154808496](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154808496.png)
+
+ ![image-20230320154847995](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154847995.png)
+
+![image-20230320154909065](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154909065.png)
+
+下面的ignore是属于beanFactory里面的东西的
+
+![image-20230320154934469](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154934469.png)
 
 
-![image-20221121204207438](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221121204207438.png) 
+
+这块相当于是ConfigurableBeanFactory部分的分类
+
+![image-20230320154956162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320154956162.png)
+
+![image-20230320155029586](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320155029586.png)
+
+
+
+![image-20230320155354054](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320155354054.png)
+
+
+
+![image-20230320160330391](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320160330391.png)
+
+![image-20230320160620748](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320160620748.png) 
+
+
+
+CommonAnnotationBeanPostProcessor对应的处理是@PostConstruct、@PreDestroy、@Resource对应的 注解扫描和解析工作
+
+AutowiredAnnotationBeanPostProcessor 对应的是@Autowired注解的扫描
+
+ApplicationListenerDetector  查看是否属于ApplicationListener这个接口
 
 
 
 
 
- ![image-20221122084748743](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122084748743.png) 
+![image-20221122084748743](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122084748743.png) 
 
- ![image-20221122085049725](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122085049725.png) ![image-20221122085025132](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122085025132.png) 
+ ![image-20230320161441336](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320161441336.png)
+
+![image-20230320162118195](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320162118195.png) 
+
+虽然在代码块中遍历了很多次，但是大部分都是直接返回一个bean对象，如果需要做处理，就需要我们自定义做扩展实现了。
+
+![image-20230320163742646](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320163742646.png) 
+
+
+
+相关实现  这里报红因为ApplicationListenerDetector访问修饰符问题，但是意思就是那个意思。
+
+![image-20230320164238497](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320164238497.png)
+
+
+
+![image-20221122085049725](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122085049725.png) ![image-20221122085025132](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122085025132.png) 
 
 对象实现该接口，允许最后一次对对象里面的属性进行修改
 
 ![image-20221122085238789](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221122085238789.png) 
 
 
+
+执行验证所有的configuration配置，并且进行最终的初始化工作，在返回对象之前允许我们最后再改一次，可以最终修改bean 的属性值
+
+![image-20230320164711430](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320164711430.png)
+
+![image-20230320165023462](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320165023462.png) 
+
+![image-20230320165031865](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320165031865.png)
+
+
+
+![image-20230320164454850](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320164454850.png)
 
 
 

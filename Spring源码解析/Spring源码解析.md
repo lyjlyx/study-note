@@ -8700,13 +8700,31 @@ ApplicationListenerDetector  查看是否属于ApplicationListener这个接口
 
 ![image-20230320165031865](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320165031865.png)
 
+![image-20230320165442681](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320165442681.png)
+
+
+
 
 
 ![image-20230320164454850](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320164454850.png)
 
 
 
-## Spring的bean创建流程总结及循环依赖问题 （四）
+执行完initializeBean方法之后相当于我们获取到了完整对象了，后面就需要把他加入的缓存里面去，方便我们后续对他进行拿取
+
+![image-20230320165712341](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230320165712341.png)
+
+
+
+如果使用@Bean我们自己new的对象交给Spring管理，Spring会帮我们调用initializeBean这个方法吗？
+
+
+
+
+
+
+
+## Spring的bean创建流程总结及循环依赖问题
 
 
 
@@ -8714,7 +8732,31 @@ ApplicationListenerDetector  查看是否属于ApplicationListener这个接口
 
 
 
-![image-20221125085003366](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221125085003366.png) 
+往三级缓存添加具体属性值的时候，添加的判断。
+
+![image-20221125085003366](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221125085003366.png)
+
+ 
+
+earlySingletonReference只有检测到有循环依赖的情况下他才会不为空
+
+![image-20230321083522407](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321083522407.png)
+
+
+
+实际依赖的bean是否是空的
+
+![image-20230321083711472](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321083711472.png) 
+
+
+
+为了后续在进行对象销毁的时候，进行调用的东西
+
+![image-20230321083820544](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321083820544.png)
+
+
+
+是否适合被销毁
 
 ![image-20221125084949350](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221125084949350.png) 
 

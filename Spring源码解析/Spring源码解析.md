@@ -8766,9 +8766,27 @@ earlySingletonReference只有检测到有循环依赖的情况下他才会不为
 
 ### Bean生命周期讲解
 
+1、xml注解解析
+
+2、创建容器对象obtainFreshBeanFactory 
+
+​	2.1、创建容器DefaultListableBeanFactory
+
+​	2.2、设置某些属性值
+
+​	2.3、加载配置文件，loadBeanDefinitions
+
+​			2.3.1、为了解析配置文件，先把他转换成一个Document对象
+
+​				2.3.1.1、Document中有一个对应的元素Element
+
+​					2.3.1.1.1、Element分为两种类型，赋值之后会对对应元素进行解析：1、parseDefaultElement（bean标签）；2、parseCustomerElement（自定义的、aop开头的、context）标签的解析；
+
+​				**2.3.1、2.3.1.1、2.3.1.1.1完成之后就是一个BeanDefinition对象，虽然解析出来了一个BeanDefinition，但是他是归属于GenericBeanDefinition，跟父容器进行合并（后续调用才会出发），最终得到的是RootBeanDefinition**
 
 
-定义好xml文件，自定义java类之后
+
+**定义好xml文件，自定义java类之后**
 
 xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListableBeanFactory
 
@@ -8776,53 +8794,91 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 ​																						->加载配置文件loadBeanDefinitions
 
-![image-20221207222707946](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221207222707946.png) 
+![image-20221207222707946](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221207222707946.png)
+
+![image-20230321131548703](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321131548703.png) 
 
 ![image-20221207222916107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221207222916107.png) 
 
-prepareBeanFactory   给容器工厂设置些属性值
+**1、prepareBeanFactory   给容器工厂设置某些属性值（比如：SPEL表达式、忽略注入的接口、注册的BeanPostProcessor）**
+
+**2、invokeBeanFactoryPostProcessor->调用执行BFPP，可以修改或者引入其他的BeanDefinition，但是需要注意的是BFPP针对的操作对象是BeanFactory  ->例如ConfigurationClassPostProcessor（ImportResource、ComponentScan、Bean......）用来完成对相关注解的解析工作**
+
+**3、registerBeanPostProcessor------>实例化BPP-----> 完成BeanPostProcessor的注册工作，方便后续在实例化完成之后调用before和after方法**
+
+**4、finishBeanFactoryInitialization -----> 完成对对象的创建工作 ------->先从容器中找，找不到再创建----> 将需要创建的bean对象放到数组中，挨个进行创建**
+
+**5、finishBeanFactoryInitialization------> 完成对对象的创建工作---先从容器中找，找不到再创建--->将需要创建的bean对象放到数组中，挨个进行创建**
+
+![image-20230321200809173](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321200809173.png)
 
 
 
-invokeBeanFactoryPostProcessor->调用执行BFPP，可以修改或者引入其他的BeanDefinition，但是需要注意的是BFPP针对的操作对象是BeanFactory  ->  ConfigurationClassPostProcessor用来完成对相关注解的解析工作
+**getBean----->doGetBean**
+
+![image-20230321201128565](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201128565.png) 
+
+ ![image-20230321201424258](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201424258.png)
 
 
 
-registerBeanPostProcessor ---实例化BPP---> 完成BeanPostProcessor的注册工作，方便后续在实例化完成之后调用before和after方法
+**进行具体的实例化操作----->createBean---->doCreateBean--------->createBeanInstance----> Supplier**
+
+​																																					**------>factoryMethod**
+
+​																																					 **------>通过反射的方式创建**
+
+​																																					 **-------> BPP动态代理的方式(在前面步骤做的)**
+
+ 
+
+![image-20230321201544936](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201544936.png)
+
+**createBeanInstance-------> applyMergedBeanDefinitionPostProcessors   注册生命周期接口（对于@PostConstruct和@PreDestroy和@Resource和@Autowired和@Value等相关注解的解析操作）**
+
+ 
 
 
 
-finishBeanFactoryInitialization  -> 完成对对象的创建工作 ----先从容器中找，找不到再创建----> 将需要创建的bean对象放到数组中，挨个进行创建
+![image-20230321201757308](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201757308.png)
 
 
 
-getBean -------> doGetBean
+**applyMergedBeanDefinitionPostProcessors   ----->populateBean 完成了填充属性的步骤 ------>填充属性**
 
-
-
-
-
-进行具体的实例化操作----->createBean---->doCreateBean--------->createBeanInstance----> Supplier
-
-​																																					------>factoryMethod
-
-​																																					 ------>通过反射的方式创建
-
-​																																					 -------> BPP代理的方式
-
----> applyMergedBeanDefinitionPostProcessors   注册生命周期接口（对于@PostConstruct和@PreDestroy和@Resource和@Autowired和@Value等相关注解的解析操作）
-
-
-
------>populateBean    填充属性
-
-
+​																										**------>创建需要依赖的bean对象 -----> getBean ---->doGetBean---->MergedBeanDefinition......**
 
 
 
 
 
+![image-20230321202441038](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321202441038.png)
 
+populateBean --------> initializeBean  --------> 进行初始化工作--------> invokeAwareMethod --------->  BeanNameAware
+
+​																																							----------->BeanClassLoaderAware
+
+​																																							----------->BeanFactoryAware
+
+​																----------->执行BPP的before方法------------>ApplicationAwarePostProcessor-------->继续实现某些Aware接口的set方法
+
+​																														-----------> CommonAnnotationBeanPostProcessor(PostConstruct、PreDestroy)
+
+​																----------->invokeInitMethod-------------->是否实现InitializationBean接口----------> afterPropertiesSet----->最后一次修改我们的属性值
+
+​																												------------->执行用户自定义的init-method方法
+
+​																----------->执行BeanPostProcessor的after方法  -------> aop
+
+ 
+
+initializeBean ---------> 获取对象来进行相关操作
+
+销毁流程--------------->DestructionAwareBeanPostProcessor -> postProcessBeforeDestruction
+
+销毁流程--------------->DisposableBean
+
+销毁流程--------------->自定义 destroyMethod
 
 
 

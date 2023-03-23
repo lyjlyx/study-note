@@ -8766,9 +8766,13 @@ earlySingletonReference只有检测到有循环依赖的情况下他才会不为
 
 ### Bean生命周期讲解
 
+从xml或者注解开始，创建基本的对象
+
+
+
 1、xml注解解析
 
-2、创建容器对象obtainFreshBeanFactory 
+2、创建容器对象obtainFreshBeanFactory （里面包含了几个基本的操作）
 
 ​	2.1、创建容器DefaultListableBeanFactory
 

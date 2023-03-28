@@ -8770,7 +8770,7 @@ earlySingletonReference只有检测到有循环依赖的情况下他才会不为
 
 
 
-1、xml注解解析
+1、xml注解解析 ，**定义好xml文件，自定义java类之后**
 
 2、创建容器对象obtainFreshBeanFactory （里面包含了几个基本的操作）
 

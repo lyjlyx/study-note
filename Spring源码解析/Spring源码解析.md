@@ -8766,6 +8766,8 @@ earlySingletonReference只有检测到有循环依赖的情况下他才会不为
 
 ### Bean生命周期讲解
 
+
+
 从xml或者注解开始，创建基本的对象
 
 
@@ -8818,13 +8820,17 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 
 
+**进行具体实例化操作要进行对象的创建了，最终会走到createBean()中去。createBean()再往下走就是doCreateBean**
+
+
+
 **getBean----->doGetBean**
 
 ![image-20230321201128565](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201128565.png) 
 
  ![image-20230321201424258](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201424258.png)
 
-
+​																																							在进行创建的时候包含了很多种的方式
 
 **进行具体的实例化操作----->createBean---->doCreateBean--------->createBeanInstance----> Supplier**
 

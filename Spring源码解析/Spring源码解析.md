@@ -8830,13 +8830,17 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
  ![image-20230321201424258](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201424258.png)
 
-​																																							在进行创建的时候包含了很多种的方式
+
+
+当有了RootBeanDefinition之后在通过他进行具体的实例化操作。	
+
+​																													用来创建具体的实例化对象	在进行创建的时候包含了很多种的方式
 
 **进行具体的实例化操作----->createBean---->doCreateBean--------->createBeanInstance----> Supplier**
 
-​																																					**------>factoryMethod**
+​																																					**------>  factoryMethod**
 
-​																																					 **------>通过反射的方式创建**
+​																																					  **------>通过反射的方式创建**
 
 ​																																					 **-------> BPP动态代理的方式(在前面步骤做的)**
 
@@ -8844,7 +8848,7 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 ![image-20230321201544936](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321201544936.png)
 
-**createBeanInstance-------> applyMergedBeanDefinitionPostProcessors   注册生命周期接口（对于@PostConstruct和@PreDestroy和@Resource和@Autowired和@Value等相关注解的解析操作）**
+**createBeanInstance完成之后  -------> applyMergedBeanDefinitionPostProcessors   注册生命周期接口（对于@PostConstruct和@PreDestroy和@Resource和@Autowired和@Value等相关注解的解析操作）**
 
  
 
@@ -8854,9 +8858,9 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 
 
-**applyMergedBeanDefinitionPostProcessors   ----->populateBean 完成了填充属性的步骤 ------>填充属性**
+**applyMergedBeanDefinitionPostProcessors   ----->populateBean()给具体属性值赋值，完成了填充属性的步骤 ------>填充属性**
 
-​																										**------>创建需要依赖的bean对象 -----> getBean ---->doGetBean---->MergedBeanDefinition......**
+​																										**------>*创建需要依赖的bean对象(里面也会执行创建bean的过程，循环依赖也是在这里触发的) -----> getBean ---->doGetBean---->MergedBeanDefinition......**
 
 
 
@@ -8864,43 +8868,57 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 ![image-20230321202441038](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230321202441038.png)
 
-populateBean --------> initializeBean  --------> 进行初始化工作--------> invokeAwareMethod --------->  BeanNameAware
-
-​																																							----------->BeanClassLoaderAware
-
-​																																							----------->BeanFactoryAware
-
-​																----------->执行BPP的before方法------------>ApplicationAwarePostProcessor-------->继续实现某些Aware接口的set方法
-
-​																														-----------> CommonAnnotationBeanPostProcessor(PostConstruct、PreDestroy)
-
-​																----------->invokeInitMethod-------------->是否实现InitializationBean接口----------> afterPropertiesSet----->最后一次修改我们的属性值
-
-​																												------------->执行用户自定义的init-method方法
-
-​																----------->执行BeanPostProcessor的after方法  -------> aop
-
- 
-
-initializeBean ---------> 获取对象来进行相关操作
-
-销毁流程--------------->DestructionAwareBeanPostProcessor -> postProcessBeforeDestruction
-
-销毁流程--------------->DisposableBean
-
-销毁流程--------------->自定义 destroyMethod
 
 
+![image-20230330084726157](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330084726157.png)
+
+**populateBean -------->initializeBean--------> 进行初始化工作--------> invokeAwareMethod--------->  BeanNameAware**
+
+​																																							**----------->BeanClassLoaderAware**
+
+​																																							**----------->BeanFactoryAware**
+
+![image-20230330084758048](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330084758048.png)
+
+​																**----------->执行BPP的before方法------------>ApplicationAwarePostProcessor-------->继续实现某些Aware接口的set方法**
+
+​																														**-----------> **
+
+![image-20230330085114116](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330085114116.png)
+
+**CommonAnnotationBeanPostProcessor(PostConstruct、PreDestroy)**
+
+​																**----------->invokeInitMethod-------------->是否实现InitializingBean接口接口----------> **
+
+**调用afterPropertiesSet----->最后一次修改我们的属性值**
+
+​																												**------------->执行用户自定义的init-method方法**
+
+![image-20230330085218355](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330085218355.png)
+
+​																**----------->执行BeanPostProcessor的after方法  -------> aop**
+
+****
+
+**initializeBean ---------> 获取对象来进行相关操作**
+
+**销毁流程--------------->DestructionAwareBeanPostProcessor -> postProcessBeforeDestruction**
+
+**销毁流程--------------->DisposableBean**
+
+**销毁流程--------------->自定义 destroyMethod**
+
+![image-20230330085317485](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330085317485.png)
 
 
 
 
 
+![image-20230330090110667](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230330090110667.png)
 
 
 
-
-
+![11Bean的生命周期](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/11Bean的生命周期.jpg)
 
 
 

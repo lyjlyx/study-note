@@ -8924,7 +8924,13 @@ xml注解->创建容器对象obtainFreshBeanFactory->创建容器DefaultListable
 
 
 
+### 循环依赖问题
 
+Spring中使用了三级缓存来解决循环依赖的问题
+
+三级缓存放在了**DefaultSingletonBeanRegistry**
+
+![image-20230331084212691](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230331084212691.png)
 
 
 

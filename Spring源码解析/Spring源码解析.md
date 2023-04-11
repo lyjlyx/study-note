@@ -8938,6 +8938,170 @@ Spring中使用了三级缓存来解决循环依赖的问题
 
 
 
+**此时图中是一个闭环，如果想解决这个问题，那么久必须要保证不会出现第二次创建A对象这个步骤，也就是说从容器中获取A的时候必须要能够获取到。**
+
+**在Spring缓存中，对象的创建是可以分为实例化和初始的，实例化好但是未完成初始化的对象是可以直接给其他对象引用的，所以此时可以做一件事情，把完成实例化但是未完成初始化的对象提前暴露出来，让其他对象能够进行引用，就完成了这个闭环的解环操作。**
+
+**这也就是常规说的提前暴露对象（缓存对象中放着， 一、二、三级缓存）**
+
+![image-20230410140326503](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410140326503.png)
+
+![image-20230410142611306](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410142611306.png) ![image-20230410142618741](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410142618741.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="a" class="com.msb.cycle.A">
+		<property name="b" ref="b"/>
+	</bean>
+
+	<bean id="b" class="com.msb.cycle.B">
+		<property name="a" ref="a"/>
+	</bean>
+</beans>
+```
+
+
+
+![image-20230410142604278](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410142604278.png)
+
+![image-20230410142654342](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410142654342.png)
+
+
+
+从这里开始创建我们的bean对象
+
+![image-20230410142730008](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410142730008.png)
+
+
+
+![image-20230410194250994](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230410194250994.png) 
+
+getSingleton 从一级缓存中判断一下有没有这个值
+
+![image-20230411083510278](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411083510278.png)
+
+
+
+![image-20230411083636799](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411083636799.png)
+
+![image-20230411083729678](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411083729678.png)
+
+![image-20230411083744619](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411083744619.png)
+
+
+
+![image-20230411083825704](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411083825704.png)
+
+
+
+调用反射的方式来创建一个具体的bean对象，并且把这个bean对象放到一个BeanWrapper包装类里面
+
+![image-20230411084000837](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084000837.png)
+
+
+
+![image-20230411084040581](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084040581.png) 
+
+
+
+三级缓存中存放的是：
+
+k: a
+
+v:lambda表达式对象   ->  () -> getEarlyBeanReference(beanName, mbd, bean)
+
+![image-20230411084114309](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084114309.png)
+
+
+
+填充属性
+
+![image-20230411084334942](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084334942.png) 
+
+直接到填充属性的最后一步
+
+![image-20230411084350192](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084350192.png)
+
+![image-20230411084501537](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084501537.png)
+
+每一次属性值填充都会对其进行相关类型的一个判断，有叫runtimeReference，也有BeanNameHolder的
+
+![image-20230411084708885](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084708885.png)
+
+  resolveValueIfNecessary
+
+![image-20230411084749761](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084749761.png)
+
+![image-20230411084812011](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084812011.png)
+
+从容器中获取B对象
+
+![image-20230411084952481](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411084952481.png)
+
+ isSingletonCurrentlyInCreation用来标记当前对象是否是在创建过程中
+
+![image-20230411085031787](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085031787.png)
+
+![image-20230411085150490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085150490.png)
+
+
+
+在这个方法中调佣的时候添加进去的
+
+![image-20230411085220777](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085220777.png)
+
+
+
+B对象执行createSingleton步骤
+
+![image-20230411085305497](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085305497.png)
+
+
+
+![image-20230411085431957](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085431957.png)
+
+
+
+获取属性A
+
+![image-20230411085618997](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085618997.png)
+
+
+
+从容器中获取a对象
+
+![image-20230411085807866](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085807866.png)
+
+三级缓存中放的不是bean对象，放的是beanName和lambda表达式
+
+现在a对象是正在被创建过程中的状态
+
+![image-20230411085939792](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411085939792.png)
+
+
+
+调用函数式接口
+
+![image-20230411090256821](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411090256821.png)
+
+![image-20230411090511346](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411090511346.png) 
+
+
+
+获取到一个完整的B对象
+
+![image-20230411090727427](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411090727427.png)
+
+
+
+![image-20230411090846782](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411090846782.png)
+
+![image-20230411090530888](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230411090530888.png)
 
 
 
@@ -8945,6 +9109,41 @@ Spring中使用了三级缓存来解决循环依赖的问题
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![循环依赖问题](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/循环依赖问题.jpg)
 
 
 

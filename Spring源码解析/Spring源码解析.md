@@ -9201,6 +9201,55 @@ getSingleton
 
 但是如果里面包含代理会怎么样？
 
+添加动态代理类
+
+```java
+package com.msb.cycle;
+
+public class Logger {
+   public void recordBefore() {
+      System.out.println("recordBefore");
+   }
+   public void recordAfter() {
+      System.out.println("recordAfter");
+   }
+}
+```
+
+
+
+xml配置
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+   <bean id="a" class="com.msb.cycle.A">
+      <property name="b" ref="b"/>
+   </bean>
+
+   <bean id="b" class="com.msb.cycle.B">
+      <property name="a" ref="a"/>
+   </bean>
+
+   <bean id="logger" class="com.msb.cycle.Logger"/>
+   <aop:config>
+      <aop:aspect id="logger" ref="logger">
+         <aop:pointcut expression="execution(* com.msb.cycle.*.*(..))" id="method"/>
+         <aop:before method="recordBefore" pointcut-ref="method"/>
+         <aop:after method="recordAfter" pointcut-ref="method"/>
+      </aop:aspect>
+   </aop:config>
+</beans>
+```
+
+
+
+
+
 
 
 
@@ -9214,7 +9263,9 @@ Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCrea
 
 ```
 
+在此处报错
 
+![image-20230413090508329](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413090508329.png)
 
 
 

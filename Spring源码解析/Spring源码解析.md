@@ -9149,27 +9149,70 @@ B对象执行createSingleton步骤
 
 
 
+### 如何改变源码中的三级缓存
+
+
+
+如何改变源码中的三级缓存引用关系，将三级缓存改成二级缓存？改哪些代码？
+
+1、在doCreateBean中有添加lambda表达式到三级缓存的代码要改成直接放到二级缓存。
+
+doCreateBean中先实例化
+
+![image-20230413083937726](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413083937726.png) 
+
+添加进三级缓存中
+
+![image-20230413084000011](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084000011.png)
+
+2、直接改getSingleton方法，将三级缓存的操作去掉
+
+getSingleton
+
+![image-20230413084111670](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084111670.png)
+
+
+
+将三个缓存都改成public
+
+![image-20230413084325917](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084325917.png)
+
+![image-20230413084541560](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084541560.png)
+
+
+
+去除三级缓存的添加，直接添加到二级缓存中
+
+![image-20230413084408393](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084408393.png)
+
+
+
+把原来的getSingleton方法注释掉，重写getSingleton方法
+
+![image-20230413084905253](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413084905253.png)
+
+
+
+从验证结果可以得出二级缓存可以解决循环依赖的问题。
+
+![image-20230413085225829](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413085225829.png)
+
+
+
+但是如果里面包含代理会怎么样？
 
 
 
 
 
+执行报错
 
+![image-20230413090341979](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230413090341979.png)
 
+```
+Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'a': Bean with name 'a' has been injected into other beans [b] in its raw version as part of a circular reference, but has eventually been wrapped. This means that said other beans do not use the final version of the bean. This is often the result of over-eager type matching - consider using 'getBeanNamesForType' with the 'allowEagerInit' flag turned off, for example.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 

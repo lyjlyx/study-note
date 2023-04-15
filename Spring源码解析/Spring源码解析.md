@@ -9271,15 +9271,33 @@ Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCrea
 
 
 
+![image-20230414194125545](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194125545.png)
+
+从图中可以看出A对象才是动用了三级缓存的对象。
 
 
 
+![image-20230414194454979](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194454979.png)
+
+取出a的lambda表达式之后，还调用一个方法 getEarlyBeanReference()
+
+![image-20230414194459891](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194459891.png)
+
+![image-20230414194338941](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194338941.png) 
+
+![image-20230414194535250](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194535250.png)
+
+实现类Autoproxy很关键
+
+![image-20230414194546281](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194546281.png)
 
 
 
+将代码恢复到改动的时候的代码
 
+我们发现我们所需要的beaNames变成了7个，里面有跟proxy相关的对象
 
-
+![image-20230414194900652](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194900652.png)
 
 
 

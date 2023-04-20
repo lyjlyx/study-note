@@ -9279,6 +9279,8 @@ Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCrea
 
 ![image-20230414194454979](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194454979.png)
 
+
+
 取出a的lambda表达式之后，还调用一个方法 getEarlyBeanReference()
 
 ![image-20230414194459891](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194459891.png)
@@ -9286,6 +9288,10 @@ Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCrea
 ![image-20230414194338941](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194338941.png) 
 
 ![image-20230414194535250](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230414194535250.png)
+
+ibp.getEarlyBeanReference方法中所对应的实现类有两个一个是AbstractAutoProxyCreator、InstantiationAwareBeanPostProcessor实现类。
+
+
 
 实现类Autoproxy很关键
 
@@ -9301,7 +9307,7 @@ Exception in thread "main" org.springframework.beans.factory.BeanCurrentlyInCrea
 
 
 
-
+ 
 
 
 

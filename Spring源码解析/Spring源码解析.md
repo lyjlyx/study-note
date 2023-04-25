@@ -9359,27 +9359,77 @@ ibp.getEarlyBeanReference方法中所对应的实现类有两个一个是Abstrac
 
 
 
+当有了当前A对象的时候，我们的b引用其实是有两个
+
+![image-20230425085245757](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425085245757.png)
 
 
 
+![image-20230425085329314](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425085329314.png)
 
 
 
+在整个容器的生命周期中，我们可能会存在几个同名的bean对象？
+
+A@1947、cglibA@3620
+
+![image-20230425085452769](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425085452769.png)
+
+B@2469、cglibB3279
+
+分别都有了两个具体的对象，一个是普通对象一个是代理对象。
 
 
 
+代理对象什么时候生成的？
+
+在BPP.after()中生成
 
 
 
+检查我们的依赖关系
+
+![image-20230425085808935](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425085808935.png)
+
+通过依赖关系检查出，我们当前的bean存在两个不同的版本version，不能进行创建
+
+![image-20230425085852803](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425085852803.png)
 
 
 
+#### 解决这个问题的方法就是加三级缓存
+
+为什么？
+
+在获取具体的对象的时候直接生成对应的代理对象。
+
+原先生成了A@1947，但是B在引用的时候不会引用A@1947，而是会直接引用cglibA@3620
+
+**只有在获取的时候通过lambda表达式动态生成。**
+
+所以B在进行引用的时候我们直接调用lambda来直接进行引用，而不能再使用原来的对象了。
 
 
 
+在整个三级缓存中，对象仅能存在一份。
 
 
 
+要么返回的是一个原始对象，要么返回的是getEarlyBeanReference()生成代理对象。 
+
+![image-20230425091010535](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230425091010535.png)
+
+
+
+为什么三级缓存不能解决构造方法产生的循环依赖？
+
+因为实例化和初始化放在一块儿了。
+
+
+
+用了三级缓存，也会存在A和cglibA对象吧？
+
+是会存在两个，但是三级缓存中只会放一个，一开始确实会创建一个普通的A对象，但是生成代理的时候会把A对象给覆盖掉，而且三级缓存里面不会既存在A的普通对象和A的代理对象，只会有一个。
 
 
 

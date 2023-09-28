@@ -44,6 +44,18 @@ regex 被匹配字符串|正则表达式 #校验正则表达式是否正确，�
 
 
 
+使用sngrep来抓包sip协议来解释sip协议的概念。
+
+![image-20230927163101551](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230927163101551.png) 
+
+其中左边的183.是一端的SIP地址，另一端是172.的sip协议地址，规范写法如下：sip:你的号码@ip:port
+
+![image-20230927164147642](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230927164147642.png)
+
+ 
+
+
+
 
 
 

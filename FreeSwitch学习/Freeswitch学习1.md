@@ -1,5 +1,11 @@
 # FreeSwitch学习
 
+开源freeswitch管理界面
+
+```
+https://github.com/laoyin/freeswitch_admin_ui.git
+```
+
 ## 一、常用总结
 
 ### 1、常用命令
@@ -790,6 +796,360 @@ struct switch endpoint interface {
 ```
 
 直接翻译endpoint有时候很难解释Freeswitch的设计，所以这里吧freeswitch进行解读，我们看到的每一个endpoint都需要实现以上endpoint interface接口，包括mod_sofia实现的sip协议。
+
+包含接口名称、io_routines、state_handler。这几个非常中药柜基本能监视endpoint在freeswitch中的功能。其中io_routines
+
+```
+在计算机网络中，"endpoint"通常指的是与网络连接的设备或节点，例如电脑、手机、或是服务器等。每个endpoint都有一个唯一的地址，这样网络上的其他设备就能找到并与它进行通信。
+在编程和web开发中，"endpoint"可能指的是一个URL，其中一个应用程序可以访问和与之交互的。例如，如果你有一个API（应用程序接口），每个功能（如获取数据、更新数据、删除数据等）可能都有一个独立的URL，这些URL就被称为"endpoints"。例如，`https://api.example.com/users`可能是一个用于获取用户信息的endpoint。
+在网络安全中，"endpoint"通常指的是任何可以接入网络的设备，如电脑、手机、平板电脑和服务器等。这些设备可能成为攻击的目标，因此需要特别关注endpoint的安全。
+总的来说，"endpoint"的具体含义取决于上下文，但大多数情况下，它指的是网络通信的起点或终点。
+```
+
+
+
+```c
+struct switch io routines {
+  /*creates an outgoing session from given session, callerprofile */
+  switch_io_outgoing_channel_t outgoing_channel;
+  /*! read a frame from a session */
+  switch_io_read_frame_t read frame
+  /*! write a frame to a session */
+  switch_io_write_frame_t write_frame;
+  /*!send a kill signal to the session's channel */
+  switch_io_kill_channel_t kill_channel;
+  /*!send a string of DTMF digits to a session's channel */
+  switch_io send dtmf t send_dtmf;
+  /*! receive a message from another session */
+  switch_io_receive_message_t receive_message;
+  /*!queue a message for another session */
+  switch_io_receive_event_t receive_event;
+  /*! change a sessions channel state */
+  switch_io_state_change t state_change;
+  /*! read a video frame from a session */
+  switch_io_read_video_frame_t read_video_frame;
+  /*! write a video frame to a session */
+  switch_io_write_video_frame_t write_video_frame;
+  /*read a video frame from a session */
+  switch_io_read_text_frame_t read_text_frame;
+  /*! write a video frame to a session */
+  switch_io_write_text_frame_t write_text_frame;
+  /*! change a sessions channel run state */
+  switch_io_state_run_t state_run;
+  /*!get sessions jitterbuffer */
+  switch_io_get_jb_t get_jb;
+  void *padding[10];
+}
+```
+
+就包含了一通电话的流程，发起一通电话你得实现outgoing_channel方法，电话接通后媒体如何读取和发送，你得实现read_freame和wirte_frame等。
+
+
+
+而mod_sofia实现的是基于sip协议的endpoint，因为我们想要接通和拨打电话，一定和mod_sofia密切相关。
+
+**为了支持各类媒体协议，Freeswitch独立除了codec对应接口，实现对应的媒体处理。**
+
+
+
+为了支持呼叫之后通过可定义的方式进行接通、转接、执行各类命令，Freeswitch把这里中间的过程称之为dialplan，即拨号计划。
+
+为了进行消息通知，freeswitch实现了event接口，可以实现各类事件的生产-消费模型。
+
+
+
+为了支持插件语言，freeswitch实现了各类第三方语言编译器，解释器。能够在Freeswitch执行对应的脚本语言，包括Python、lua、Java等等。
+
+
+
+
+
+#### 拨号计划
+
+就是我们常说的通话路由，通过拨号计划，Freeswitch将对应的channel专项固定的处理。拨号计划并不是脚本语言，他的目标是简单帮你找到你需要的应用。我们可以把他简单的叫做通话路由规则。
+
+
+
+freeswitch默认是多环境拨号计划，默认情况为public和default。
+
+
+
+其中public context 主要是开放给所有非认证请求，而default默认必须是需要注册的分机用户才能呼叫。
+
+你可以把他和profile对应起来，但是并不是完全一一对应。比如默认internal和external profile。
+
+
+
+比如：你创建一个sip_profile文件
+
+```xml
+<profile name="your_sip_profile">
+	<param name="context" value="your_sip_profile_context"/>
+</profile>
+```
+
+
+
+对应的路由规则xml文件，可以通过context来区分
+
+```xml
+<context name="your_sip_profile_context">
+	<extension name="yourextension1">
+		<condition field="destination_number" expression="^1001$">
+			<action application="bridge" data="user/1001"/>
+		</condition>
+	</extension>
+</context>
+```
+
+每一个context下都可以创建多个<extension>表示不同的规则路由。
+
+condition表示条件，expression和正则表达式进行结合，就可以创建很多有意思的电话路由。
+
+
+
+#### 一、sip对接运营商网管线路
+
+a:在profile中创建gateway，用以描述指定运营商sip地址ip和端口，以及认证消息
+
+```xml
+<profile>
+	<settings>
+		...
+	</settings>
+	<gateways>
+		<gateway name = "outbound">
+			<param name="realm" value="ip:port"/>
+			<param name="register" value="false"/>
+		</gateway>
+	</gateways>
+</profile>
+```
+
+b:外呼出去的简单dialplan
+
+```xml
+<extension name="call_out">
+	<condition field="destination_number" expression="(^[0-1][0-9]{10,11}$)">
+		<action application="log" data="22~~~~~~~~~~${call_id_number}"/>
+		<action application="set" data="call_teimout=20"/>
+		<action application="bridge" data="{origination_caller_id_number=yournumber**,hangup_after_bridge=true}sofia/gateway/outbound/$1"/>
+		<action application="set" data="test=${hangup_cause}"/>
+		<action application="log" data="1 A-leg hangup_cause:${hangup_cause}"/>
+	</condition>
+</extension>
+```
+
+正则表达式``(^[0-1][0-9]{10,11}$)``表示0或者1开头，然后0-9之间的数字可以出现10-11次。
+
+下方$1代表的是整个这个正  则表达式括号内的数字，即你呼叫的号码
+
+
+
+#### 二、电话录音
+
+```xml
+<extension name="test-route1">
+	<condition field="destination_number" expression="(^99030135$)">
+		<action application="set" data="RECORD_COPYRIGHT=(C)2011"/>
+		<action application="set" data="RECORD_SOFTWARE=FreeSWITCH"/>
+		<action application="log" data="RECORD_ARTIST=FreeSWITCH"/>
+		<action application="set" data="RECORD_COMMENT=FreeSWITCH"/>
+		<action application="set" data="RECORD_DATE=${strftime(%Y-%m-%d %H:%M)}"/>
+		<action application="record_session" data="/data/recordings/archive/${call_uuid}.wav"/>
+		<action application="bridge" data="user/99030135"/>
+	</condition>
+</extension>
+```
+
+电话录音application,使用record_session应用，同时使用${}来表达Freeswitch的通道变量。
+
+
+
+#### 三、dialplan转接ivr
+
+比如你定义了自己的ivr后。
+
+![image-20231031182634005](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031182634005.png) 
+
+![image-20231031182643860](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031182643860.png) 
+
+那我们的diaplan应该怎么写
+
+ ![image-20231031191943250](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031191943250.png) 
+
+
+
+![image-20231031191952477](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031191952477.png) 
+
+
+
+#### 四、diaplan转接lua、Python等等脚本
+
+![image-20231031192018584](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031192018584.png) 
+
+这里需要注意对应的diaplan.lua脚本应该放入在script目录下
+
+
+
+#### 五、使用curl等等application
+
+freeswitch的diaplan拥有很多复杂的功能，比如anti-acion与action的配置，condition嵌套condition，这些都可以在《Freeswitch权威指南》中有详细介绍。
+
+但是这边仍然希望能够将复杂的逻辑交于代码实现，那么就可以借助curl来实现很多好玩的diaplan。
+
+使用curl，首先得load_mod_curl，然后我们写
+
+![image-20231031192441001](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031192441001.png) 
+
+我们可以通过http请求将对应的数据发送给我们写的后端服务，然后通过esl进行command形式来实现我们想要的目的。
+
+因此复杂的diaplan使用curl是一个非常好的选择，当然你可以尝试lua、Python等等脚本去实现。
+
+
+
+#### 六、使用lua、Python脚本语言
+
+使用脚本语言lua、python来做复杂的diaplan是一个非常好的选择，当然这需要掌握lua、python脚本语法。
+
+这里就不多赘述。
+
+
+
+### Java ESL连接
+
+我们通常用客户端形式连接到freeswitch，使用的是Java语言
+
+pom依赖
+
+```xml
+<dependency>
+    <groupId>org.freeswitch.esl.client</groupId>
+    <artifactId>org.freeswitch.esl.client</artifactId>
+    <version>0.9.2</version>
+</dependency>
+```
+
+然后就可以在服务中进行创建esl inbound 方式连接到freeswitch。
+
+![image-20231031194434673](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231031194434673.png)
+
+使用client连接后，监听``IEslEventListener``后，就可以监听各类通道事件了。
+
+通常的通道事件，create、answer、bridge、hangup等
+
+```
+CHANNEL_CREATE, //通道创建事件
+HEARTBEAT,//心跳包
+SESSION_HEARTBEAT,
+CHANNEL_ANSWER,
+CHANNEL_HANGUP_COMPLETE,
+PLAYBACK_STOP
+```
+
+
+
+创建完成的client，可以发送同步命令和异步命令两种方式。
+
+```
+sendAsyncApiCommand
+sendSyncApiCommand
+```
+
+
+
+有了这两个方法，我们可以通过Java程序来操作各类freeswitch命令，达到自己的目标。比如使用uuid_transfer进行转接：
+
+```
+String command = "uuid_transfer" + uuid + "-bleg" + extension;
+EslMessage result = freeswitchClient.sendAsyncApiCommand(command, "");
+```
+
+esl可以做很多有意思的功能，比如为了节约客服的宝贵时间，批量给客户进行外呼，等客户接通后转接给空闲的坐席。
+
+还比如，使用esl进行各类命令控制，callcenter的坐席上下线状态的动态控制，强制转接、监听进行质检。只要你想到的各类命令，通过一门语言进行esl链接，能够非常好的完成你的目标。
+
+当然我们也可以使用其他语言的esl连接，包括c、python、golang等等。
+
+
+
+### freeswitch 测试
+
+#### 1、测试外呼是否正常
+
+```
+orgiginate {origination_caller_id_number=网关落地号码}
+sofia/gateway/outbound/手机号 &echo
+```
+
+echo应用是奖你的声音回传给你
+
+
+
+#### 2、sngrep
+
+安装sngrep后，通过sngrep命令监听sip信息，定位Ip端口是否正常，sip ip是否有问题。
+
+![image-20231101142329566](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101142329566.png) 
+
+![image-20231101164844942](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101164844942.png) 
+
+#### 3、tcpdump
+
+使用tcpdump进行抓包，将抓取的数据包使用wireshark进行分析
+
+抓包后导入到wireshark，那么如何进行分析sip消息呢？非常简单，在Filter中输入框输入sip即可。
+
+![image-20231101165026802](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165026802.png) 
+
+当然使用wireshark分析虽然比Freeswitch里面开启siptrace on 便捷，但仍然比不上sngrep命令，不过wireshark分析sdp、rtp等等拥有更好的能力。
+
+在主菜单选择-Telephone-> VOIP Calls。
+
+![image-20231101165153241](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165153241.png) 
+
+选择对应的电话，可以清晰的看到电话的基础信息。
+
+![image-20231101165232104](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165232104.png) 
+
+点击flow sequence，马上就可以看见可视化的sip信息
+
+![image-20231101165303363](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165303363.png) 
+
+而对于rtp协议来说，wireshark不仅仅提供分析工具，还能够进行播放
+
+![image-20231101165400325](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165400325.png) 
+
+
+
+#### 4、fail2ban
+
+fail2ban非常好用，我们可以使用他来拦截恶意的请求。
+
+
+
+扫描
+
+ubuntu、debian系统直接apt install fail2ban即可。
+
+然后需要再freeswitch的各个sip profile里面配置
+
+```
+<param name="log-auth-failures" value="true"/>
+```
+
+一旦注册失败会产生如下日志：
+![image-20231101165536491](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231101165536491.png) 
+
+
+
+
+
+
+
+
+
+
 
 
 

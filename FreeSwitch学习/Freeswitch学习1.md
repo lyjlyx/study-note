@@ -1143,9 +1143,32 @@ ubuntu、debian系统直接apt install fail2ban即可。
 
 
 
+#### 5、分机号添加流程
 
+```
+https://blog.csdn.net/angellee1988/article/details/101615596
+```
 
+FreeSwitch默认设置了20个用户，如果需要更多的用户，那么只需要简单的三步就可以完成。
 
+在conf/directory/default/中增加一个用户配置文件
+修改拨号计划（Dialplan）使其它用户可以呼叫它
+重新加载配置使其生效
+要添加用户Jason，分机号是1020，只需要到conf/directory/default目录下，将1000.xml拷贝到1020.xml，然后打开1020.xml，将所有1000都改为1020，并把effective_caller_id_name的值改为Jason，然后保存退出。
+
+如：<variable name="effective_caller_id_name" value="Jason"/>
+
+接下来，打开 conf/dialplan/default.xml，找到
+
+```
+ <condition fied=“destionation_number” expression=“^(10[01][0-9]) $” > 行，将其改为：
+
+<condition field=“destionation_number” expresstion=“^(10[01][0-9]|1020) $” >
+```
+
+保存退出，回到控制台，然后执行reloadxml命令或按快捷键F6，使新的配置生效，那么新用户1020便添加成功。
+
+如果你在某个运营商拥有SIP账号，就可以配置拨打外部电话。
 
 
 

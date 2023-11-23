@@ -1174,17 +1174,39 @@ FreeSwitch默认设置了20个用户，如果需要更多的用户，那么只�
 
 
 
+fs开发使用esl连接报错
+
+```
+ mod_event_socket.c:2663 IP ::ffff:10.120.2.237 Rejected by acl "loopback.auto"
+```
+
+解决：
+
+```xml
+#在event_socket.conf.xml配置文件中，取消该行注释：
+<param name="apply-inbound-acl" value="loopback.auto"/>
+#在acl.conf.xml中增加：
+<list name="loopback.auto" default="allow">
+<node type="allow" cidr="172.31.20.0/32"/>
+</list>
+```
 
 
 
+安装fusiob pbx的时候报错
 
+```
+[root@dev-lspace02 centos]# ./install.sh
+-bash: ./install.sh: /bin/sh^M: bad interpreter: No such file or directory
+```
 
+解决：
 
-
-
-
-
-
+```
+编辑install.sh标本
+在里面执行
+:set ff=unix
+```
 
 
 

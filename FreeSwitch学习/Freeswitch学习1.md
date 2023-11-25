@@ -1193,6 +1193,14 @@ fs开发使用esl连接报错
 
 
 
+### Fusion pbx安装
+
+PBX是private Branch Exchange的缩写，他是组织内使用的专用电话系统，可以根据特定组织的需要进行定制，来自组织的PBX用户可以在他们之间进行内部通信，也可以与外部世界进行外部通信。通过诸如VOIP（IP语音）、ISDN（综合服务数字网络）或模拟等渠道促进外部通信
+
+使用PBX电话系统的优势在于可以获得比物理线路更多的电话、用户之间的免费通话以及呼叫队列、数字接线员、呼叫转移、语音邮件和通话记录等等海量的功能。PBX电话系统的一些实例包括Freeswitch、3CX、Elastix、FreePBX和Asterisk。
+
+
+
 安装fusiob pbx的时候报错
 
 ```
@@ -1211,6 +1219,12 @@ fs开发使用esl连接报错
 
 
 
+
+### freeswitch常见问题整理
+
+```
+http://aizuda.com/article/1089440
+```
 
 
 

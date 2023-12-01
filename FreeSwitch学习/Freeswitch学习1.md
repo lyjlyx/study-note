@@ -1230,11 +1230,32 @@ http://aizuda.com/article/1089440
 
 
 
+```
+https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 401 - Unauthorized
+```
+
+
+
+```
+https://kling.cn/detail/62cfe6716e277.html
+```
+
+
+
+```
+echo "lren" > /etc/yum/vars/signalwireusername
+echo "pat_VcjJ8BHwyd3woyRzrmjHhtp8 " > /etc/yum/vars/signalwiretoken
+```
 
 
 
 
 
+```
+https://www.jianshu.com/p/ea01c731f28b
+```
+
+![image-20231129152724848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231129152724848.png)
 
 
 

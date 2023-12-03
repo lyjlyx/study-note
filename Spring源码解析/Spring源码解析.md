@@ -30,11 +30,19 @@ spring源码的实现过程
 
 ## IOC如何处理
 
+解析处理xml或properties或yaml文件
+
 容器中定义好一些bean之后可以通过getBean()直接获取的
 
 
 
-定义规范、方便扩展。BeanDefinitionReader接口加载对应的Bean定义信息，解析处理环节
+中间要做一个抽象层来做解析处理的工作，该抽象层做一些定义、指定规范方便扩展的功能，如果后续要实现解析处理操作的时候直接实现当前接口就行了。
+
+
+
+**BeanDefinitionReader接口加载对应的Bean定义信息，解析处理环节**
+
+![image-20231201214038206](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231201214038206.png)
 
 
 
@@ -48,7 +56,7 @@ spring源码的实现过程
 
 **Spring中bean是否是单例的？**
 
-由scope指定
+由scope属性来指定。
 
 
 

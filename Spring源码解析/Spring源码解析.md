@@ -151,8 +151,6 @@ BeanPostProcessor：增强bean信息
 
 PlaceholderConfigurerSupport 替换占位符用，可以从一个其他的资源文件里面进行一些替换。
 
-
-
 ![image-20231212195321323](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212195321323.png) 
 
 ![image-20220624163716127](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624163716127.png)
@@ -167,21 +165,33 @@ PlaceholderConfigurerSupport 替换占位符用，可以从一个其他的资源
 
 
 
+**实例化环节：给堆里面开辟一个空间，对象的属性值都是默认值**
+
+**初始化环节：给属性设置值，填充属性，然后执行初始化方法，执行init-method方法**
+
+
+
 Spring实例化创建对象
 
 ![image-20220624164719160](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624164719160.png) 
 
 一定是构造器执行完成之后才会去调用init-method方法的
 
-**实例化环节，给堆里面开辟一个空间**
+![image-20231212200031957](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212200031957.png)
 
+上面几个步骤共同组成的环节叫创建对象。
 
+![image-20231212200149183](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212200149183.png) 
 
+ ![image-20231212200200925](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212200200925.png) 
 
+![image-20231212200215077](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212200215077.png) 
+
+**执行构造器算实例化的过程**
+
+**init-method是在构造器完成之后才会执行的。**
 
 ### 初始化
-
-
 
 填充属性
 

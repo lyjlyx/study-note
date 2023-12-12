@@ -100,6 +100,12 @@ BeanDefinition到实例化的过程中是通过反射的方式来完成的，使
 
 
 
+在整个中间过程中，我们想要一个beanDefinition转化成一个实例对象中间要有很多很复杂的过程的。
+
+这些过程是想在程序的运行过程中，我们可以改变这些bean的定义信息的。
+
+
+
 **BeanDefinition实例化生成具体对象**
 
 
@@ -117,25 +123,37 @@ BeanDefinition到实例化的过程中是通过反射的方式来完成的，使
 
 
 
-如果想随时修改BeanDefinition怎么办？
+**如果想随时修改BeanDefinition怎么办？**
 
-一、就要使用**BeanFactoryPostProcessor**
+就要使用**BeanFactoryPostProcessor**
 
 
-
-BeanFactoryPostProcessor、BeanPostProcessor这两个接口是不一样的，产生的作用也是不一样的，但是他们有一个统一的目的，就是后置处理（增强）器
-
- 
 
 PostProcessor分为两类：**BeanFactoryPostProcessor、BeanPostProcessor**
+
+
+
+需要区分这两个接口BeanFactoryPostProcessor、BeanPostProcessor这两个接口是不一样的，产生的作用也是不一样的，但是他们有一个统一的目的，就是后置处理（增强）器
+
+BeanFactoryPostProcessor：增强beanDefinition的信息
+
+BeanPostProcessor：增强bean信息
+
+都是在原来的信息基础信息智商做一些增强扩展。
 
 ![image-20220624163420007](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624163420007.png)
 
 ![image-20220624163457210](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624163457210.png) 
 
-例子：
 
-PlaceholderConfigurerSupport 替换占位符用
+
+**例子：**
+
+PlaceholderConfigurerSupport 替换占位符用，可以从一个其他的资源文件里面进行一些替换。
+
+
+
+![image-20231212195321323](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231212195321323.png) 
 
 ![image-20220624163716127](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624163716127.png)
 

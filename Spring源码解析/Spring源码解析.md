@@ -606,23 +606,54 @@ BFPP
 
 ## 实例化前期工作
 
+在当前bean创建之前我们要进行相关的调用
+
+实例化并且注册所有的BeanPostProcessor实例
+
+也是一个相关的准备工作
+
+![image-20231219131447579](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219131447579.png) 
+
+![image-20231219131535880](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219131535880.png) 
 
 
 
+国际化相关实现（不重要）
+![image-20231219131653802](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219131653802.png)
+
+
+
+![image-20231219131816969](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219131816969.png) 
+
+![image-20231219131830876](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219131830876.png) 
+
+
+
+实例化所有剩下的非懒加载的单例对象
 
 ![image-20221225222325911](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225222325911.png)
 
+![image-20231219132030719](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219132030719.png) 
 
 
-![image-20221225222754088](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225222754088.png) 
 
-![image-20221225222805161](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225222805161.png) 
+看看有没有这BeanFactoryPostProcessor的处理器(类似于PropertySourcesPlaceholderConfigurer${})
+
+![image-20231219132124130](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219132124130.png) 
 
 
+
+
+
+ 织入Aware
+
+![image-20231219132300144](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219132300144.png)
+
+
+
+freezeConfiguration如果我们某些bean不需要再进行相关的修改操作了，可以放到freeze里面去
 
 ![image-20221225223101064](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223101064.png) 
-
-
 
 
 

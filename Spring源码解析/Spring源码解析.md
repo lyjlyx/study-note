@@ -661,17 +661,32 @@ freezeConfiguration如果我们某些bean不需要再进行相关的修改操作
 
 
 
-![image-20221225223155162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223155162.png) 
+RootBeanDefiniton
 
-![image-20221225223333034](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223333034.png) 
+GenericBeanDefinition
+
+![image-20221225223155162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223155162.png)
 
 
+
+把父类和子类的beanDefinition都进行一个整合 
+
+![image-20231219191302893](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219191302893.png) 
+
+
+
+判断当前的bean是否实现FactoryBean接口
 
 ![image-20221225223426358](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223426358.png) 
 
 
+getBean
 
 ![image-20221225223457416](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225223457416.png) 
+
+![image-20231219191703064](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219191703064.png) 
+
+
 
 
 
@@ -681,19 +696,67 @@ freezeConfiguration如果我们某些bean不需要再进行相关的修改操作
 
 
 
+getSingleton是个关键点。Spring每次在创建对象的时候都会去判断一、二、三级缓存中是否包含这些对象，如果包含的话就直接能获取到。
+
 ![image-20221225224036105](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225224036105.png) 
+
+三级缓存
+
+![image-20231219192142802](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219192142802.png)
+
+
+
+dependsOn
+
+用法类似于：如果我们定义了A、B、C正常的实例化是ABC这样的顺序来
+
+但是如果写了一个A DependsOn BC 那么在实例化的过程就是 要实例化A的时候先实例化B，再实例化C，最后才实例化A
+
+![image-20231219192437474](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219192437474.png)
+
+
 
 ![image-20221225224119703](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225224119703.png) 
 
-![image-20221225224228379](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225224228379.png) 
+
+
+创建bean的实例化对象
+
+![image-20231219192714216](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219192714216.png) 
+
+
+
+ lambda表达式回调getObject()方法
+
+![image-20231219192921393](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219192921393.png) 
+
+
+
+![image-20221225224228379](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225224228379.png)  
+
+
+
+整体的时候或者是初始化环节都是在doCreateBean中完成的
 
 ![image-20221225224250902](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221225224250902.png) 
+
+![image-20231219193101802](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219193101802.png) 
 
 
 
 
 
 ## 实例化
+
+ 
+
+反射的性能虽然没有直接new的好，但是他更加的灵活，耦合性不高，并且反射要在调用次数多的情况下才会有性能上的差异，我们只使用几次是不会有太大的变动的。
+
+**不要抛开剂量谈毒性**
+
+
+
+通过反射的方式进行实例化操作。
 
 
 
@@ -709,9 +772,15 @@ doCreateBean()
 
 
 
-
-
 反射的灵活性非常的高，反射如果只是使用几次是不会性能低的，如果重复调用了万级次数的话才会体现出来。
+
+反射性能图
+
+![image-20231219193440715](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219193440715.png) 
+
+
+
+![image-20231219193616237](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219193616237.png) 
 
 ![image-20220625193415403](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220625193415403.png)  
 
@@ -721,11 +790,15 @@ doCreateBean()
 
 ![image-20221226163431840](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221226163431840.png) 
 
-
-
 ![image-20221226163422137](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221226163422137.png) 
 
+![image-20231219193858694](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219193858694.png) 
 
+![image-20231219193952152](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231219193952152.png) 
+
+
+
+instantiate()
 
 ![image-20221226163615210](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221226163615210.png)
 

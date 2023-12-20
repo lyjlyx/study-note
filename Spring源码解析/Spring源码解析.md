@@ -802,7 +802,9 @@ instantiate()
 
 ![image-20221226163615210](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20221226163615210.png)
 
-实例化只完成一件事情，在堆中创建一快空间，当前对象的属性值都是默认值。
+
+
+**实例化只完成一件事情，在堆中创建一快空间，当前对象的属性值都是默认值。**
 ![image-20220829093801107](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220829093801107.png) 
 
 

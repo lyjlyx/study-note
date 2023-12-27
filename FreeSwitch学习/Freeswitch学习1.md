@@ -312,7 +312,6 @@ https://zhuanlan.zhihu.com/p/603961809?utm_id=0&wd=&eqid=af2256e100010bfc0000000
 
 ```
 https://www.cnblogs.com/wuchangsoft/p/16730896.html
-
 ```
 
 1、在安装前先安装相关依赖
@@ -1231,10 +1230,9 @@ http://aizuda.com/article/1089440
 
 
 ```
-https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 401 - Unauthorized
+https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml:
+[Errno 14] HTTPS Error 401 - Unauthorized
 ```
-
-
 
 ```
 https://kling.cn/detail/62cfe6716e277.html
@@ -1255,7 +1253,7 @@ echo "pat_VcjJ8BHwyd3woyRzrmjHhtp8 " > /etc/yum/vars/signalwiretoken
 https://www.jianshu.com/p/ea01c731f28b
 ```
 
-![image-20231129152724848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231129152724848.png)
+![image-20231129152724848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231129152724848.png) 
 
 
 

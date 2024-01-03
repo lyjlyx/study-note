@@ -1173,6 +1173,72 @@ FreeSwitch默认设置了20个用户，如果需要更多的用户，那么只�
 
 
 
+Freeswitch库编译异常问题解决
+
+```
+https://www.jianshu.com/p/ea01c731f28b
+```
+
+![image-20231129152724848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231129152724848.png) 
+
+
+
+
+
+
+
+### Freeswitch常见问题整理
+
+
+
+启动Freeswitch命令：
+
+```
+freeswitch -nc -nonat
+```
+
+关闭Freeswitch：
+
+```
+freeswitch -stop
+```
+
+控制台连接命令：
+
+```
+fs_cli -H 10.120.2.108 -P 8021 -p lspace97531
+```
+
+
+
+#### FreeSWITCH 常见问题
+
+```
+http://aizuda.com/article/1089440
+```
+
+
+
+#### FreeSWITCH命令大全
+
+```
+https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml:
+[Errno 14] HTTPS Error 401 - Unauthorized
+```
+
+```
+https://kling.cn/detail/62cfe6716e277.html
+```
+
+```
+echo "lren" > /etc/yum/vars/signalwireusername
+echo "pat_VcjJ8BHwyd3woyRzrmjHhtp8 " > /etc/yum/vars/signalwiretoken
+```
+
+
+
+
+
 fs开发使用esl连接报错
 
 ```
@@ -1180,6 +1246,8 @@ fs开发使用esl连接报错
 ```
 
 解决：
+
+/usr/local/freeswitch/conf/autoload_configs
 
 ```xml
 #在event_socket.conf.xml配置文件中，取消该行注释：
@@ -1189,6 +1257,22 @@ fs开发使用esl连接报错
 <node type="allow" cidr="172.31.20.0/32"/>
 </list>
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1214,66 +1298,6 @@ PBX是private Branch Exchange的缩写，他是组织内使用的专用电话系
 在里面执行
 :set ff=unix
 ```
-
-
-
-
-
-### freeswitch常见问题整理
-
-```
-http://aizuda.com/article/1089440
-```
-
-
-
-
-
-```
-https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml:
-[Errno 14] HTTPS Error 401 - Unauthorized
-```
-
-```
-https://kling.cn/detail/62cfe6716e277.html
-```
-
-
-
-```
-echo "lren" > /etc/yum/vars/signalwireusername
-echo "pat_VcjJ8BHwyd3woyRzrmjHhtp8 " > /etc/yum/vars/signalwiretoken
-```
-
-
-
-
-
-```
-https://www.jianshu.com/p/ea01c731f28b
-```
-
-![image-20231129152724848](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20231129152724848.png) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

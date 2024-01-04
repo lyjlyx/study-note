@@ -1219,7 +1219,9 @@ http://aizuda.com/article/1089440
 
 
 
-#### FreeSWITCH命令大全
+
+
+### Freeswitch安装和下载地址
 
 ```
 https://freeswitch.signalwire.com/repo/yum/centos-release/7/x86_64/repodata/repomd.xml:
@@ -1262,20 +1264,6 @@ fs开发使用esl连接报错
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Fusion pbx安装
 
 PBX是private Branch Exchange的缩写，他是组织内使用的专用电话系统，可以根据特定组织的需要进行定制，来自组织的PBX用户可以在他们之间进行内部通信，也可以与外部世界进行外部通信。通过诸如VOIP（IP语音）、ISDN（综合服务数字网络）或模拟等渠道促进外部通信
@@ -1298,6 +1286,30 @@ PBX是private Branch Exchange的缩写，他是组织内使用的专用电话系
 在里面执行
 :set ff=unix
 ```
+
+
+
+### Freeswitch+OpenSips对接操作步骤
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

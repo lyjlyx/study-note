@@ -340,6 +340,32 @@ echo "pat_VcjJ8BHwyd3woyRzrmjHhtp8 " > /etc/yum/vars/signalwiretoken
 
 
 
+### 坐席配置和坐席默认密码修改
+
+坐席默认放到目录：/usr/local/freeswitch/conf/directory/default
+
+![image-20240103163124515](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240103163124515.png) 
+
+坐席的默认密码为：1234，在目录/usr/local/freeswitch/conf中的vars.xml
+
+![image-20240103163158432](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240103163158432.png) 
+
+
+
+### 两方说话听不见的问题
+
+进入到/usr/local/freeswitch/conf/sip_profiles目录
+
+修改external.xml
+
+![image-20240103175839181](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240103175839181.png) 
+
+把这两个ip改为实际的ip
+
+![image-20240103180029182](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240103180029182.png) 
+
+
+
 
 
 ## Freeswitch操作命令汇总

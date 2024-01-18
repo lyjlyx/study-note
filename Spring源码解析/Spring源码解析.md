@@ -1517,6 +1517,8 @@ loadBeanDefinition方法从String[]->String->Resource[]->Resource，最终将Res
 
 ![image-20230106212608771](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106212608771.png)  
 
+到底是使用parseDefaultElement()解析还是使用parseCustomElement()进行解析是取决于我们用的是标签是默认命名空间的，还是自定义命名空间的
+
 ![image-20230106215311603](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106215311603.png) 
 
 一行一行的在读xml配置文件
@@ -1539,11 +1541,20 @@ loadBeanDefinition方法从String[]->String->Resource[]->Resource，最终将Res
 
 
 
+processBeanDefinition：
+
+BeanDefinitionHolder是BeanDefinition对象的封装类，封装了BeanDefinition，bean的名字和别名，用它来完成IOC容器的注册
+得到这个BeanDefinitionHolder就意味着BeanDefinition是通过BeanDefinitionParserDelegate对xml元素的信息按照spring的bean规则进行
+
 ![image-20230106220033687](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106220033687.png) 
 
 
 
-![image-20230106220121490](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106220121490.png) 
+
+
+
+
+
 
 
 

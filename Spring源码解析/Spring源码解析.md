@@ -1552,21 +1552,39 @@ BeanDefinitionHolder是BeanDefinition对象的封装类，封装了BeanDefinitio
 
 
 
+![image-20240117203426112](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240117203426112.png)
+
+![image-20240117203518714](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240117203518714.png) 
 
 
 
+parseBeanDefinitionElement方法里面也还有一个同名方法，但是并不是递归，因为参数不同，是重载。
 
+![image-20240118194402531](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240118194402531.png)
 
+ 
+
+对bean元素进行详细的解析
 
 ![image-20230106230849753](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106230849753.png)
+
+
+
+当我们把上面的属性id、parent、或者ClassName这些属性解析完之后，其实我们已经就可以把它放到beanDefinition里面创建beanDefinition对象了。因为beanDefinition最主要的目的是为了进行实例化操作，实例化其实有了class之后就可以进行实例化了（反射）。
+
+![image-20240118195017984](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240118195017984.png) 
+
+ 
 
 ![image-20230106231505515](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106231505515.png) 
 
 
 
+GenericBeanDefinition里面也包含了非常多的关键信息
+
 **GenericBeanDefinition**和**RootBeanDefinition**是一个平级的关系
 
-![image-20230106231549409](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106231549409.png) 
+![image-20240118200017083](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240118200017083.png) 
 
 
 

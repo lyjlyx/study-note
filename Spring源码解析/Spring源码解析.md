@@ -1582,17 +1582,29 @@ parseBeanDefinitionElement方法里面也还有一个同名方法，但是并不
 
 GenericBeanDefinition里面也包含了非常多的关键信息
 
-**GenericBeanDefinition**和**RootBeanDefinition**是一个平级的关系
+**GenericBeanDefinition**和**RootBeanDefinition**是一个平级的关系，他们两个同样集成于**AbstractBeanDefinition**。
 
 ![image-20240118200017083](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240118200017083.png) 
 
 
 
+后续的parse就是为了完成设置某些值的属性工作。
+
 ![image-20230106232146838](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106232146838.png) 
 
 ![image-20230106232850812](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106232850812.png) 
 
+
+
 ![image-20230106232859687](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106232859687.png) 
+
+
+
+当三个属性都存在的情况下应该用谁的，正常来说我们只要取第一个就行，我们只要识别到对应的构造方法是哪个直接用就行了，但是有时候是三种情况都存在的情况该怎么办。
+
+![image-20240122212629359](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240122212629359.png) 
+
+
 
 ![image-20230106233505952](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106233505952.png) 
 

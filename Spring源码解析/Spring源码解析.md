@@ -1606,13 +1606,31 @@ GenericBeanDefinition里面也包含了非常多的关键信息
 
 
 
+![image-20240122212802815](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240122212802815.png)
+
 ![image-20230106233505952](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106233505952.png) 
+
+
+
+![image-20240122212917876](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240122212917876.png) 
+
+
+
+如果标签及定义了ref值，又定义了value值他们是不能同时存在的
+
+![image-20240122213315483](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240122213315483.png)
+
+
 
 ![image-20230106233659150](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20230106233659150.png) 
 
+![image-20240122213402654](C:/Users/97151/AppData/Roaming/Typora/typora-user-images/image-20240122213402654.png)
+
 后续都是一些数据的解析工作，其实都是差不多的，没必要深究。
 
+每种元素都有其对应的解析工作
 
+![image-20240122213543529](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240122213543529.png)
 
 
 

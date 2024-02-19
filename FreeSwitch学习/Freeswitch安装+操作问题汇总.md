@@ -498,21 +498,49 @@ yum install mysql-devel
 
 ![image-20240218152228857](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240218152228857.png) 
 
+执行
+
+```
+yum provides *microhttpd.h*
+```
+
+```
+yum install libmicrohttpd-devel-0.9.33-2.el7.x86_64 
+```
+
+重新make menuconfig
 
 
 
+进入OpenSips目录修改数据配置
+
+```
+ cd /usr/local/etc/opensips/
+ vi opensipsctlrc
+```
+
+![image-20240218182741224](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240218182741224.png) 
 
 
 
+配置OpenSips
 
+```
+cd /usr/local/sbin/
+osipsconfig
+```
 
+依次选择–> Generate OpenSIPS Script –> Residential Script–> Configure Residential Script 选中（选择键为空格键）
 
+```
+[*] USE_AUTH
+[*] USE_DBACC
+[*] USE_DBUSERLOC
+[*] USE_DIALOG
+```
 
-
-
-
-
-
+返回，选择 –> Generate Residential Script 回车，生成新的配置文件（在/usr/local/etc/opensips/目录下）
+拷贝和替换原有配置文件：
 
 
 

@@ -376,6 +376,14 @@ opensips是需要依赖mysql社区版本的，所以我们要先安装mysql-comm
 
 基本安装命令
 
+**主要参考这个连接**
+
+```
+https://blog.51cto.com/u_13560480/5917696
+```
+
+辅助：
+
 ```
 https://blog.csdn.net/weixin_45505313/article/details/129218305
 ```
@@ -482,7 +490,7 @@ res.c:26:19: 致命错误：mysql.h：没有那个文件或目录
  #include <mysql.h>
 ```
 
-![image-20240218151634233](C:/Users/97151/AppData/Roaming/Typora/typora-user-images/image-20240218151634233.png) 
+![image-20240218151634233](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240218151634233.png) 
 
 
 
@@ -542,13 +550,42 @@ osipsconfig
 返回，选择 –> Generate Residential Script 回车，生成新的配置文件（在/usr/local/etc/opensips/目录下）
 拷贝和替换原有配置文件：
 
+```
+cd /usr/local/etc/opensips/
+mv opensips.cfg opensips.cfg.old
+mv opensips_residential_20xxx.cfg opensips.cfg
+```
 
+修改OpenSips.cfg配置文件
 
+```
+vi opensips.cfg
+```
 
+```
+listen=udp:127.0.0.1:5060 修改为listen=udp:本机ip:5060
+```
 
+配置文件里面也还有mysql相关配置也需要修改
 
+![image-20240221104553653](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240221104553653.png) 
 
+修改完数据库配置后使用opensipsdbctl新建数据库：
 
+```
+cd /usr/local/sbin
+opensipsdbctl create
+```
+
+![image-20240221103255122](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240221103255122.png)
+
+ 输入gbk
+
+![image-20240221103308615](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240221103308615.png) 
+
+全部输入y
+
+![image-20240221103410954](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240221103410954.png) 
 
 
 

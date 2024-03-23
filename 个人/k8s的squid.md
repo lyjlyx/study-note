@@ -80,15 +80,122 @@ KUBECONFIG=/data/cicd/kubeconfig/kube-config-test helm upgrade -i squid-scrm-qyw
 
 
 
+这个时候squid已经建好了，我们使用k8s容器命令可以看到有对应命名的squid启动
+
+![image-20240323173136359](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173136359.png) 
 
 
 
+这个时候在tke集群上也能搜到相关服务
+
+![image-20240323173209486](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173209486.png)
 
 
 
+我们需要给指定服务器打上squid的标签
+
+![image-20240323173236622](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173236622.png) 
+
+找台外网服务器将相关标签打上
+
+![image-20240323173404815](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173404815.png)
+
+![image-20240323173418581](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173418581.png)
 
 
 
+这样就完成了相关的squid配置，相关应用使用，这个对象调用请求就可以从绑定的服务器IP出去了
+
+```java
+package vip.lspace.diga.qywx;
+
+import org.apache.http.HttpHost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.policy.SimpleRetryPolicy;
+import org.springframework.retry.support.RetryTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+@Component
+public class RestTemplateQywxConfig {
+
+    @Value("${http_proxy_qywx:}")
+    private String proxyHost;
+
+    @Bean
+    public RestTemplate restQywxTemplate() {
+        ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient());
+        return new RestTemplate(requestFactory);
+    }
+
+    /**
+     * Apache HttpClient
+     *
+     * @return HttpClient
+     */
+    private HttpClient httpClient() {
+        // 支持HTTP、HTTPS
+        Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+            .register("http", PlainConnectionSocketFactory.getSocketFactory())
+            .register("https", SSLConnectionSocketFactory.getSocketFactory())
+            .build();
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
+        connectionManager.setMaxTotal(200);
+        connectionManager.setDefaultMaxPerRoute(100);
+        connectionManager.setValidateAfterInactivity(2000);
+        HttpHost httpHost = new HttpHost(proxyHost, 80);
+        RequestConfig requestConfig = RequestConfig.custom()
+            // 服务器返回数据(response)的时间，超时抛出read timeout
+            .setSocketTimeout(65000)
+            // 连接上服务器(握手成功)的时间，超时抛出connect timeout
+            .setConnectTimeout(15000)
+            // 从连接池中获取连接的超时时间，超时抛出ConnectionPoolTimeoutException
+            .setConnectionRequestTimeout(15000)
+            .setProxy(httpHost)
+            .build();
+
+        return HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).setConnectionManager(connectionManager).build();
+    }
+
+    @Bean
+    public RetryTemplate retryTemplate() {
+        RetryTemplate retryTemplate = new RetryTemplate();
+        //新建RetryPolicy  也就是判断是否重新执行的机制
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
+        //配置的重试次数   //一直重新执行 3次
+        retryPolicy.setMaxAttempts(3);
+        retryTemplate.setRetryPolicy(retryPolicy);
+        //新建BackOffPolicy机制  也就是重新执行时的相关设置
+        ExponentialBackOffPolicy exponentialBackOffPolicy = new ExponentialBackOffPolicy();
+        //执行操作的时间间隔
+        exponentialBackOffPolicy.setInitialInterval(2 * 1000);
+        //分别设置指数增长的倍数  则四次分别为 2，8，512，……
+        exponentialBackOffPolicy.setMultiplier(2);
+        //最大的间隔时间  为40秒
+        exponentialBackOffPolicy.setMaxInterval(40 * 1000);
+        retryTemplate.setBackOffPolicy(exponentialBackOffPolicy);
+        return retryTemplate;
+    }
+
+}
+```
+
+![image-20240323173615100](C:/Users/97151/AppData/Roaming/Typora/typora-user-images/image-20240323173615100.png)
 
 
 

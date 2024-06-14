@@ -106,6 +106,18 @@ KUBECONFIG=/data/cicd/kubeconfig/kube-config-test helm upgrade -i squid-scrm-qyw
 
 
 
+
+
+### Kubesphere
+
+![image-20240608121930287](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608121930287.png)
+
+![image-20240608121957930](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608121957930.png)
+
+![image-20240608122007614](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608122007614.png)
+
+### 腾讯云
+
 这个时候在tke集群上也能搜到相关服务
 
 ![image-20240323173209486](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240323173209486.png)
@@ -225,25 +237,106 @@ public class RestTemplateQywxConfig {
 
 
 
+## 记开发环境squid异常问题
 
+因为项目中的message容器没跑起来，查看报错原因是因为squid连接不上的问题（省略message报错）
 
+我们通过`` kpod -o wide |grep squid``发现squi对应的容器一直处于Pending状态
 
+![image-20240608172936630](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608172936630.png) 
 
+查看squid相关详情``kubectl describe pod squid-7f655ccccc-xrzgn --namespace lspace-dev``
 
+![image-20240608173049144](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608173049144.png) 
 
+ 
 
+当时错误判断以为是squid的helm问题，所以对其helm进行了相关的重装，**具体步骤看上面的操作**
 
+但是重装完成之后发现新的squid的一直是ImagePullBackOff状态
 
+![image-20240608173407956](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608173407956.png) 
 
+查看describe
 
+![image-20240608173451931](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608173451931.png)
 
+![image-20240608173710440](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608173710440.png)
 
+发现是镜像拉取失败，以为是镜像源的问题（**其实就是公司网络太慢镜像源问题**）
 
+重新设置了docker的镜像源
 
+参考地址
 
+```
+https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+```
 
+![image-20240608174106151](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608174106151.png) 
 
+但是并没有什么用，该拉取下来还是拉取不下来，刚刚好公司有自己的腾讯云的私有仓库，我们先把地址换成腾讯云的镜像仓库地址看看能不能Pull下来。
 
+```
+ docker pull mirror.ccs.tencentyun.com/honestica/squid:4.69
+```
+
+![image-20240608175404427](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175404427.png) 
+
+发现ping不通mirror.ccs.tencentyun.com（**应该是个人版问题**），所以用我们自己的私有镜像仓库地址看看，可以ping通
+
+![image-20240608175511006](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175511006.png) 
+
+那就直接先进行登录，生成登录链接
+
+![image-20240608175546703](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175546703.png) 
+
+登录成功，但是还是拉不下来
+
+![image-20240608175621327](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175621327.png)
+
+在私有仓中查询了一下没有发现对应的squid相关的镜像（但是我们之前用的个人版是有的）
+
+**所以具体思路就是先从个人版拉取相关镜像，先在测试服务器（测试服务器是腾讯云的，所以不会有网络的困扰，很快）**
+
+查询对应的squid镜像名字
+
+![image-20240608175839641](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175839641.png) 
+
+ 将对应的镜像名称打上tag标签，然后push到私有仓中
+
+```
+docker tag honestica/squid:4.69 docker-bj.tencentcloudcr.com/lspace/squid:4.69
+docker push docker-bj.tencentcloudcr.com/lspace/squid:4.6
+```
+
+![image-20240608180000131](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608180000131.png) 
+
+![image-20240608175924019](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608175924019.png) 
+
+镜像仓库中有了
+
+![image-20240608180057136](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608180057136.png)
+
+随后我们回到开发服务器
+
+根据相关的仓库地址把相关的tag拉下来
+
+```
+docker pull docker-bj.tencentcloudcr.com/lspace/squid:4.69
+```
+
+打上标签，就行了
+
+```
+docker tag docker-bj.tencentcloudcr.com/lspace/squid:4.69 honestica/squid:4.69
+```
+
+![image-20240608180254101](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608180254101.png) 
+
+查看详情，发现拉取成功了
+
+![image-20240608180407072](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240608180407072.png) 
 
 
 

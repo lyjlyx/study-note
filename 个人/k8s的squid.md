@@ -340,7 +340,17 @@ docker tag docker-bj.tencentcloudcr.com/lspace/squid:4.69 honestica/squid:4.69
 
 
 
+开发环境中安装squid的命令
 
+在执行这个命令之前需要给对应代理的机器添加squid的标签
+
+![image-20240802181211151](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20240802181211151.png) 
+
+
+
+```
+helm install squid lifen-charts/squid --version 0.4.3  --set-string nodeSelector.squid="true" -n lspace-dev
+```
 
 
 

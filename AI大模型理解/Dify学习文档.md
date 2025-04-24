@@ -112,9 +112,16 @@ Zero-Shot CoT（没有示例）
 
 
 
+系统提示词参考
+![image-20250403144830089](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20250403144830089.png) 
 
+用户提示词1
 
+![image-20250403144852723](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20250403144852723.png)
 
+用户提示词2
+
+![image-20250403144911749](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20250403144911749.png)
 
 
 

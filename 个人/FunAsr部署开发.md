@@ -377,6 +377,8 @@ df -h
 
 ### **1. 确保已安装 GPU 版 PyTorch**
 
+
+
 FunASR 依赖 PyTorch（GPU 版），首先验证是否正确安装：
 
 ```
@@ -391,6 +393,12 @@ pip install torch==2.1.2 torchaudio==2.1.2 --index-url https://download.pytorch.
 
 ### **2. 安装 FunASR（GPU 版本）**
 
+下载加速
+
+```
+source /etc/network_turbo
+```
+
 #### **方法 1：直接安装（推荐）**
 
 ```
@@ -398,6 +406,18 @@ pip install "funasr[gpu]" -f https://modelscope.cn/packages/funasr/releases.html
 ```
 
 这会自动安装 GPU 依赖（如 `onnxruntime-gpu`）。
+
+```
+pip install modelscope torch torchaudio
+```
+
+api包安装
+
+```
+pip install uvicorn fastapi sqlalchemy pydantic_settings pymysql 
+```
+
+
 
 # 查看所有环境
 ```
@@ -413,7 +433,7 @@ conda activate funasr_env
 
 
 
-# 确认当前 Python 环境
+# 安装Funasr建议操作
 ```
 which python
 pip list | grep funasr
@@ -435,17 +455,7 @@ miniconda3安装
 https://cloud.tencent.com/developer/article/1769751?policyId=1004
 ```
 
-openweb-ui掉了的话要重装
 
-```
-pip install open-webui
-```
-
-后台启动
-
-```
-nohup open-webui serve --port 6006 > openwebui.log 2>&1 &
-```
 
 ```
 pip install "funasr[gpu]" -f https://modelscope.cn/packages/funasr/releases.html --target=/root/autodl-tmp/databak/data/pip
@@ -468,6 +478,51 @@ pip install uvicorn fastapi sqlalchemy pydantic_settings pymysql
 ```
 
 
+
+### 安装nginx
+
+
+
+```
+sudo apt update
+sudo apt install build-essential libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev
+wget http://nginx.org/download/nginx-1.25.2.tar.gz
+```
+
+
+
+```
+tar -zxvf nginx-1.25.2.tar.gz
+cd nginx-1.25.2
+```
+
+
+
+编译源码
+
+```
+make
+sudo make install
+```
+
+如果报错
+
+```
+(base) root@autodl-container-664048b698-1491c188:~/autodl-tmp/nginx-1.25.2# make
+make: *** No targets specified and no makefile found.  Stop.
+```
+
+执行下面的命令
+
+```
+./configure --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid --with-http_ssl_module
+```
+
+启动nginx
+
+```
+service nginx start
+```
 
 
 
@@ -1903,6 +1958,22 @@ if __name__ == "__main__":
 ```
 
 
+
+
+
+### OpenWebUi
+
+openweb-ui掉了的话要重装（可忽略）
+
+```
+pip install open-webui
+```
+
+后台启动
+
+```
+nohup open-webui serve --port 6006 > openwebui.log 2>&1 &
+```
 
 
 

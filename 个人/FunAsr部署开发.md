@@ -1319,6 +1319,8 @@ if __name__ == "__main__":
 
 **当前如果并发量太高的还是有点顶不住，所以需要再开一个节点处理任务才处理得过来**
 
+#### 2025-07-01版本
+
 主任务
 
 ```python
@@ -1958,6 +1960,608 @@ if __name__ == "__main__":
 ```
 
 
+
+
+
+#### 2025-08-01版本
+
+```python
+import logging
+import sys
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
+import os
+import psutil
+import torch
+import gc
+import numpy as np
+from scipy.io import wavfile
+import re
+import concurrent.futures
+
+# 日志配置，务必放在所有import之前
+log_formatter = logging.Formatter(
+    "%(asctime)s %(levelname)s %(filename)s:%(lineno)d %(message)s"
+)
+
+# 控制台日志
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(log_formatter)
+
+# 按天切分的文件日志，保留7天
+file_handler = TimedRotatingFileHandler(
+    "audio_recognition_api.log",
+    when="midnight",           # 每天0点切分
+    interval=1,
+    backupCount=7,             # 保留最近7天日志
+    encoding="utf-8",
+    utc=False
+)
+file_handler.setFormatter(log_formatter)
+
+logging.basicConfig(
+    level=logging.INFO,
+    handlers=[console_handler, file_handler]
+)
+
+logger = logging.getLogger(__name__)
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import time
+import os
+import tempfile
+from pathlib import Path
+from funasr import AutoModel
+from pydub import AudioSegment
+import httpx
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+import sqlite3
+import threading
+import requests
+import pymysql
+import uuid
+import shutil
+
+# 添加数据库锁
+db_lock = threading.Lock()
+# 添加全局处理状态标志
+is_processing = False
+processing_lock = threading.Lock()
+
+def get_db_connection():
+    """获取数据库连接，设置超时和WAL模式"""
+    conn = sqlite3.connect(SQLITE_DB_PATH, timeout=30.0)
+    conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA synchronous=NORMAL")
+    conn.execute("PRAGMA temp_store=memory")
+    conn.execute("PRAGMA mmap_size=268435456")
+    return conn
+
+def reset_processing_tasks_on_startup():
+    """应用启动时将所有processing状态的任务重置为pending"""
+    try:
+        with db_lock:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute('UPDATE tasks SET status = "pending" WHERE status = "processing"')
+            affected_rows = cursor.rowcount
+            conn.commit()
+            conn.close()
+            if affected_rows > 0:
+                logger.info(f"应用启动时重置了{affected_rows}个processing任务为pending")
+    except Exception as e:
+        logger.error(f"启动时重置processing任务失败: {e}")
+
+# 应用启动时执行任务重置
+reset_processing_tasks_on_startup()
+
+app = FastAPI()
+
+TEMP_ROOT = Path("/root/autodl-tmp/FunASR/develop/wav_data")
+# TEMP_ROOT = Path("D:/wav_data")
+TEMP_ROOT.mkdir(parents=True, exist_ok=True)
+# 数据库文件路径
+SQLITE_DB_PATH = "tasks.db"
+
+class RecognitionRequest(BaseModel):
+    callRecordId: int
+    fileUrl: str
+    channelCode: str
+    applyNo: str
+    modelChannel: str
+    callbackUrl: str
+    doubaoEndpoint: str
+
+def download_audio_from_url_sync(url, call_record_id, save_path=None):
+    """同步下载音频文件到本地，文件名唯一，并检测文件格式"""
+    try:
+        response = requests.get(url, timeout=10, stream=True)
+        response.raise_for_status()
+        
+        if save_path is None:
+            temp_dir = TEMP_ROOT / f"funasr_temp_{call_record_id}_{uuid.uuid4().hex[:8]}"
+            temp_dir.mkdir(exist_ok=True)
+            # 先下载为临时文件，不指定扩展名
+            temp_file = temp_dir / f"downloaded_audio_{call_record_id}.tmp"
+        else:
+            temp_file = save_path
+            temp_dir = temp_file.parent
+            
+        # 下载文件
+        with open(temp_file, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        
+        logger.info(f"音频文件下载完成: {temp_file}, 大小: {temp_file.stat().st_size} bytes")
+        
+        # 检测文件格式
+        detected_format = detect_audio_format(temp_file)
+        logger.info(f"检测到的音频格式: {detected_format}")
+        
+        # 检测并转换文件格式
+        final_wav_path = temp_dir / f"converted_audio_{call_record_id}.wav"
+        if convert_to_wav(temp_file, final_wav_path):
+            # 删除临时文件
+            temp_file.unlink()
+            return str(final_wav_path), temp_dir
+        else:
+            # 转换失败，删除临时文件
+            if temp_file.exists():
+                temp_file.unlink()
+            return None, temp_dir
+            
+    except Exception as e:
+        logger.error(f"下载音频文件失败: {e}")
+        return None, None
+
+def convert_to_wav(input_file, output_file):
+    """将音频文件转换为WAV格式"""
+    try:
+        # 使用pydub自动检测格式并转换
+        audio = AudioSegment.from_file(input_file)
+        
+        # 检查音频基本信息
+        logger.info(f"原始音频信息: 时长={len(audio)}ms, 采样率={audio.frame_rate}Hz, 声道={audio.channels}")
+        
+        # 检查音频是否太短
+        if len(audio) < 100:  # 少于100ms
+            logger.error(f"音频文件太短: {len(audio)}ms")
+            return False
+        
+        # 转换为16kHz采样率的WAV格式
+        audio = audio.set_frame_rate(16000)
+        
+        # 如果是单声道，转换为立体声（左右声道相同）
+        if audio.channels == 1:
+            audio = AudioSegment.from_mono_audiosegments(audio, audio)
+        
+        # 导出为WAV格式
+        audio.export(output_file, format="wav")
+        logger.info(f"音频转换成功: {output_file}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"音频格式转换失败: {e}")
+        return False
+
+def split_stereo_audio(input_file, left_output_file, right_output_file, sample_rate=16000):
+    audio = AudioSegment.from_wav(input_file)
+    left = audio.split_to_mono()[0].set_frame_rate(sample_rate)
+    right = audio.split_to_mono()[1].set_frame_rate(sample_rate)
+    left.export(left_output_file, format="wav")
+    right.export(right_output_file, format="wav")
+
+# def ensure_wav_16k1ch(input_file, output_file):
+#     """
+#     自动将音频转换为16kHz、单声道、WAV格式
+#     """
+#     audio = AudioSegment.from_file(input_file)
+#     audio = audio.set_frame_rate(16000).set_channels(1)
+#     audio.export(output_file, format="wav")
+#     return output_file
+
+def recognize_audio(asr_model, audio_file):
+    results = asr_model.generate(input=audio_file)
+    return results
+
+async def async_recognize_audio(asr_model, audio_file):
+    loop = asyncio.get_event_loop()
+    with ThreadPoolExecutor() as pool:
+        result = await loop.run_in_executor(pool, recognize_audio, asr_model, audio_file)
+    return result
+
+def validate_audio_file(audio_path):
+    """验证音频文件是否有效"""
+    try:
+        if not Path(audio_path).exists():
+            logger.error(f"音频文件不存在: {audio_path}")
+            return False
+            
+        file_size = Path(audio_path).stat().st_size
+        if file_size < 1024:  # 小于1KB
+            logger.error(f"音频文件太小: {file_size} bytes")
+            return False
+            
+        # 尝试读取音频文件
+        audio = AudioSegment.from_wav(audio_path)
+        
+        # 检查基本参数
+        if len(audio) < 100:  # 少于100ms
+            logger.error(f"音频时长太短: {len(audio)}ms")
+            return False
+            
+        if audio.frame_rate != 16000:
+            logger.error(f"采样率不正确: {audio.frame_rate}Hz，期望16000Hz")
+            return False
+            
+        if audio.channels < 1:
+            logger.error(f"声道数异常: {audio.channels}")
+            return False
+            
+        logger.info(f"音频文件验证通过: {audio_path}, 时长={len(audio)}ms, 采样率={audio.frame_rate}Hz, 声道={audio.channels}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"音频文件验证失败: {audio_path}, 错误: {e}")
+        return False
+
+def log_resource_usage():
+    process = psutil.Process(os.getpid())
+    logger.info(f"内存占用: {process.memory_info().rss / 1024 / 1024:.2f} MB, 打开文件数: {process.num_fds()}")
+
+# 在全局只加载一次模型
+asr_model = AutoModel(
+    model="iic/speech_paraformer-large-vad-punc_asr_nat-zh-cn-16k-common-vocab8404-pytorch",
+    vad_model="fsmn-vad",
+    punc_model="ct-punc",
+    vad_kwargs={"max_single_segment_time": 30000},
+    device="cuda:0",
+    spk_mode="punc_segment",
+    sentence_timestamp=True,
+    en_post_proc=True
+)
+
+def cleanup_resources():
+    gc.collect()
+    torch.cuda.empty_cache()
+
+def resource_cleanup_loop(interval=300):
+    while True:
+        cleanup_resources()
+        logger.info("定期资源清理完成")
+        time.sleep(interval)
+
+cleanup_thread = threading.Thread(target=resource_cleanup_loop, daemon=True)
+cleanup_thread.start()
+
+@app.get("/health")
+def health_check():
+    mem = psutil.Process().memory_info().rss / 1024 / 1024
+    return {"status": "ok", "memory_MB": mem, "threads": threading.active_count()}
+
+@app.post("/recognize-audio")
+async def recognize_audio_endpoint(request: RecognitionRequest):
+    logger.info(f"收到新任务请求: callRecordId={request.callRecordId}, fileUrl={request.fileUrl}")
+    
+    with db_lock:
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    callRecordId INTEGER UNIQUE,
+                    fileUrl TEXT,
+                    channelCode TEXT,
+                    applyNo TEXT,
+                    modelChannel TEXT,
+                    callbackUrl TEXT,
+                    doubaoEndpoint TEXT,
+                    status TEXT
+                )
+            ''')
+            try:
+                cursor.execute('''
+                    INSERT INTO tasks (callRecordId, fileUrl, channelCode, applyNo, modelChannel, callbackUrl, doubaoEndpoint, status)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    request.callRecordId,
+                    request.fileUrl,
+                    request.channelCode,
+                    request.applyNo,
+                    request.modelChannel,
+                    request.callbackUrl,
+                    request.doubaoEndpoint,
+                    "pending"
+                ))
+                conn.commit()
+                logger.info(f"任务入库成功: callRecordId={request.callRecordId}")
+            except sqlite3.IntegrityError:
+                logger.warning(f"任务已存在: callRecordId={request.callRecordId}")
+                return {"message": f"任务已存在，callRecordId={request.callRecordId}"}
+            finally:
+                conn.close()
+            return {"message": "任务已入库，稍后回调结果"}
+        except Exception as e:
+            logger.error(f"任务入库失败: callRecordId={request.callRecordId}, error={e}")
+            raise HTTPException(status_code=500, detail=f"入库失败: {e}")
+
+@app.get("/process-pending-tasks")
+def process_pending_tasks():
+    global is_processing
+    
+    # 检查是否已经在处理中
+    with processing_lock:
+        if is_processing:
+            logger.info("任务处理中，跳过本次调用")
+            return {"message": "任务处理中，请稍后再试"}
+        is_processing = True
+    
+    try:
+        logger.info("开始处理pending任务")
+        
+        with db_lock:
+            try:
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                cursor.execute('SELECT id FROM tasks WHERE status = "pending"')
+                task_ids = [row[0] for row in cursor.fetchall()]
+                logger.info(f"本次待处理任务数: {len(task_ids)}")
+                if not task_ids:
+                    conn.close()
+                    logger.info("无待处理任务")
+                    return {"message": "无待处理任务"}
+                cursor.executemany('UPDATE tasks SET status = "processing" WHERE id = ?', [(tid,) for tid in task_ids])
+                conn.commit()
+                cursor.execute(f'SELECT * FROM tasks WHERE id IN ({",".join(["?"]*len(task_ids))})', task_ids)
+                tasks = cursor.fetchall()
+                conn.close()
+            except Exception as e:
+                logger.error(f"获取任务时出错: {e}")
+                raise HTTPException(status_code=500, detail=f"获取任务时出错: {e}")
+        
+        processed = 0
+        failed = 0
+
+        logger.info("ASR模型加载完成")
+
+        for task in tasks:
+            task_id, callRecordId, fileUrl, channelCode, applyNo, modelChannel, callbackUrl, doubaoEndpoint, status = task
+            logger.info(f"开始处理任务: id={task_id}, callRecordId={callRecordId}")
+            temp_dir = None
+            try:
+                logger.info("准备下载音频")
+                input_file, temp_dir = download_audio_from_url_sync(fileUrl, callRecordId)
+                logger.info("音频下载完成")
+                if input_file is None:
+                    raise Exception("无法下载音频文件")
+                logger.info(f"音频下载成功: {input_file}")
+
+                # 直接用下载下来的音频文件作为输入
+                standard_wav = input_file  # input_file 就是下载下来的文件路径
+                
+                # 验证音频文件有效性
+                if not validate_audio_file(standard_wav):
+                    raise Exception("音频文件验证失败")
+                
+                left_audio = temp_dir / f"left_channel_{callRecordId}.wav"
+                right_audio = temp_dir / f"right_channel_{callRecordId}.wav"
+                logger.info("准备分离音频")
+                split_stereo_audio(standard_wav, left_audio, right_audio)
+                logger.info("音频分离完成")
+                logger.info(f"音频分离成功: left={left_audio}, right={right_audio}")
+
+                # 验证分离后的音频文件
+                if not validate_audio_file(str(left_audio)):
+                    raise Exception("左声道音频文件验证失败")
+                if not validate_audio_file(str(right_audio)):
+                    raise Exception("右声道音频文件验证失败")
+
+                logger.info(f"左声道文件: {left_audio}, 右声道文件: {right_audio}")
+                # check_audio_valid(left_audio)
+                # check_audio_valid(right_audio)
+
+                logger.info("准备左声道识别")
+                try:
+                    left_result = recognize_audio(asr_model, str(left_audio))
+                except Exception as e:
+                    logger.error(f"左声道识别失败: {e}")
+                    left_result = f"VAD识别失败: {e}"
+                    if is_fatal_index_error(e):
+                        with db_lock:
+                            conn = get_db_connection()
+                            cursor = conn.cursor()
+                            cursor.execute('UPDATE tasks SET status = "failed" WHERE id = ?', (task_id,))
+                            conn.commit()
+                            conn.close()
+                        failed += 1
+                        cleanup_resources()
+                        check_and_restart_if_oom(force_restart=True)
+                        continue
+                try:
+                    right_result = recognize_audio(asr_model, str(right_audio))
+                except Exception as e:
+                    logger.error(f"右声道识别失败: {e}")
+                    right_result = f"VAD识别失败: {e}"
+                    if is_fatal_index_error(e):
+                        with db_lock:
+                            conn = get_db_connection()
+                            cursor = conn.cursor()
+                            cursor.execute('UPDATE tasks SET status = "failed" WHERE id = ?', (task_id,))
+                            conn.commit()
+                            conn.close()
+                        failed += 1
+                        cleanup_resources()
+                        check_and_restart_if_oom(force_restart=True)
+                        continue
+
+                logger.info(f"识别完成: left_result={str(left_result)[:100]}, right_result={str(right_result)[:100]}")
+                processing_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                callback_data = {
+                    "taskId": str(task_id),
+                    "callRecordId": callRecordId,
+                    "status": "success",
+                    "processingTime": processing_time,
+                    "leftChannelResult": str(left_result),
+                    "rightChannelResult": str(right_result),
+                    "errorMessage": "",
+                    "channelCode": channelCode,
+                    "applyNo": applyNo,
+                    "modelChannel": modelChannel,
+                    "doubaoEndpoint": doubaoEndpoint
+                }
+
+                logger.info(f"回调数据: {callback_data}")
+
+                response = requests.post(callbackUrl, json=callback_data)
+                response.raise_for_status()
+                logger.info(f"回调成功: {callbackUrl}")
+
+                with db_lock:
+                    conn = get_db_connection()
+                    cursor = conn.cursor()
+                    cursor.execute('UPDATE tasks SET status = "completed" WHERE id = ?', (task_id,))
+                    conn.commit()
+                    conn.close()
+                processed += 1
+            except Exception as e:
+                with db_lock:
+                    conn = get_db_connection()
+                    cursor = conn.cursor()
+                    cursor.execute('UPDATE tasks SET status = "failed" WHERE id = ?', (task_id,))
+                    conn.commit()
+                    conn.close()
+                logger.error(f"任务处理失败: id={task_id}, callRecordId={callRecordId}, error={e}")
+                failed += 1
+            finally:
+                if temp_dir and temp_dir.exists():
+                    shutil.rmtree(temp_dir, ignore_errors=True)
+                    logger.info(f"已清理临时目录: {temp_dir}")
+                log_resource_usage()
+                cleanup_resources()
+
+        logger.info(f"本次处理完成，成功：{processed}，失败：{failed}")
+        return {"message": f"处理完成，成功：{processed}，失败：{failed}"}
+    
+    finally:
+        # 确保处理完成后重置状态
+        with processing_lock:
+            is_processing = False
+        logger.info("任务处理状态已重置")
+
+def cleanup_resources():
+    gc.collect()
+    try:
+        torch.cuda.empty_cache()
+    except Exception:
+        pass
+
+def check_and_restart_if_oom(memory_limit_mb=16000, force_restart=False):
+    """
+    检查内存占用，或收到致命错误时强制重启
+    """
+    process = psutil.Process(os.getpid())
+    mem_mb = process.memory_info().rss / 1024 / 1024
+    logger.info(f"当前内存占用: {mem_mb:.2f} MB")
+    if force_restart or mem_mb > memory_limit_mb:
+        logger.error(f"触发自动重启（force={force_restart}，内存={mem_mb:.2f}MB）！")
+        try:
+            # 重启前将processing任务重置为pending
+            with db_lock:
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                cursor.execute('UPDATE tasks SET status = "pending" WHERE status = "processing"')
+                conn.commit()
+                conn.close()
+        except Exception as e:
+            logger.error(f"重启前重置processing任务失败: {e}")
+        try:
+            import torch
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
+        os.execv(sys.executable, [sys.executable] + sys.argv)
+
+def is_fatal_index_error(e):
+    """
+    判断是否为 index xxx is out of bounds for dimension 0 with size xxx 且两数相等的致命错误
+    或 'list index out of range' 这类致命错误
+    """
+    msg = str(e)
+    # 检查 index out of bounds
+    match = re.search(r'index (\d+) is out of bounds for dimension 0 with size (\d+)', msg)
+    if match:
+        idx, size = int(match.group(1)), int(match.group(2))
+        if idx == size:
+            return True
+    # 检查 list index out of range
+    if "list index out of range" in msg:
+        return True
+    return False
+
+def recognize_audio_with_timeout(asr_model, audio_file, timeout=60):
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(recognize_audio, asr_model, audio_file)
+        return future.result(timeout=timeout)
+
+@app.get("/processing-status")
+def get_processing_status():
+    """获取当前任务处理状态"""
+    with db_lock:
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute('SELECT COUNT(*) FROM tasks WHERE status = "pending"')
+            pending_count = cursor.fetchone()[0]
+            cursor.execute('SELECT COUNT(*) FROM tasks WHERE status = "processing"')
+            processing_count = cursor.fetchone()[0]
+            cursor.execute('SELECT COUNT(*) FROM tasks WHERE status = "completed"')
+            completed_count = cursor.fetchone()[0]
+            cursor.execute('SELECT COUNT(*) FROM tasks WHERE status = "failed"')
+            failed_count = cursor.fetchone()[0]
+            conn.close()
+            
+            return {
+                "is_processing": is_processing,
+                "pending_tasks": pending_count,
+                "processing_tasks": processing_count,
+                "completed_tasks": completed_count,
+                "failed_tasks": failed_count,
+                "total_tasks": pending_count + processing_count + completed_count + failed_count
+            }
+        except Exception as e:
+            logger.error(f"获取处理状态失败: {e}")
+            return {"error": str(e)}
+
+def detect_audio_format(file_path):
+    """检测音频文件的实际格式"""
+    try:
+        with open(file_path, 'rb') as f:
+            header = f.read(16)
+            
+        # 检测常见音频格式的文件头
+        if header.startswith(b'RIFF') and b'WAVE' in header:
+            return "WAV"
+        elif header.startswith(b'ID3') or header.startswith(b'\xff\xfb') or header.startswith(b'\xff\xf3'):
+            return "MP3"
+        elif header.startswith(b'\x00\x00\x00\x20ftypmp4') or header.startswith(b'\x00\x00\x00\x18ftyp'):
+            return "MP4"
+        elif header.startswith(b'OggS'):
+            return "OGG"
+        elif header.startswith(b'fLaC'):
+            return "FLAC"
+        else:
+            return f"UNKNOWN (header: {header.hex()})"
+            
+    except Exception as e:
+        return f"ERROR: {e}"
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=2000)
+```
 
 
 

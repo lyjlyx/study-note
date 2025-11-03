@@ -2589,6 +2589,132 @@ nohup open-webui serve --port 6006 > openwebui.log 2>&1 &
 
 
 
+### 语音转文字角色识别
+
+使用架构
+
+Funasr 和 iic/speech_paraformer-large-vad-punc-spk_asr_nat-zh-cn 模型，模型参考``https://modelscope.cn/models/iic/speech_paraformer-large-vad-punc-spk_asr_nat-zh-cn``
+
+
+
+
+
+
+
+```
+pip install python-multipart 
+pip install funasr modelscope torch torchaudio numpy scipy pydub librosa soundfile
+pip install Resemblyzer 
+```
+
+
+
+install_dependencies.py
+
+```
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+依赖包安装脚本
+"""
+
+import subprocess
+import sys
+import os
+
+def install_package(package):
+    """安装单个包"""
+    try:
+        print(f"正在安装 {package}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        print(f"✓ {package} 安装成功")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"✗ {package} 安装失败: {e}")
+        return False
+
+def main():
+    """主函数"""
+    print("FunASR声纹识别系统依赖安装")
+    print("=" * 50)
+    
+    # 基础依赖包
+    packages = [
+        "torch>=1.13.0",
+        "torchaudio>=0.13.0", 
+        "numpy>=1.21.0",
+        "scipy>=1.9.0",
+        "requests>=2.28.0",
+        "pydub>=0.25.1",
+        "librosa>=0.9.2",
+        "soundfile>=0.10.3",
+        "ffmpeg-python>=0.2.0"
+    ]
+    
+    # FunASR和ModelScope
+    funasr_packages = [
+        "funasr>=1.0.0",
+        "modelscope>=1.9.0"
+    ]
+    
+    # Web界面依赖
+    web_packages = [
+        "fastapi>=0.68.0",
+        "uvicorn>=0.15.0",
+        "python-multipart>=0.0.5"
+    ]
+    
+    print("1. 安装基础依赖...")
+    for package in packages:
+        install_package(package)
+    
+    print("\n2. 安装FunASR和ModelScope...")
+    for package in funasr_packages:
+        install_package(package)
+    
+    print("\n3. 安装Web界面依赖...")
+    for package in web_packages:
+        install_package(package)
+    
+    print("\n" + "=" * 50)
+    print("依赖安装完成！")
+    print("\n下一步:")
+    print("1. 启动声纹注册界面: python voiceprint_web_interface.py")
+    print("2. 运行分角色识别: python audio_distinguish_roles.py")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

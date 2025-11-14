@@ -57,6 +57,7 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 安装Docker Community Edition（docker-ce）：
 
 ```
+curl -Iv https://download.docker.com/linux/centos/gpg
 sudo yum install -y docker-ce
 ```
 
@@ -97,7 +98,7 @@ https://www.cnblogs.com/jiyuchen1/p/18744711
 
 ```
  git clone https://githubfast.com/langgenius/dify.git  
- git checkout 
+ git checkout xxx
 ```
 
 也可以手动去官网下载  可以选择最新版本的
@@ -108,10 +109,15 @@ https://www.cnblogs.com/jiyuchen1/p/18744711
 cd dify-1.6.0
 cd docker
 cp .env.example .env                                     # 复制一份默认的配置文件，把.env.example  复制为 .env
+ Docker Compose 1.x 版本中使用
+ docker-compose -f docker-compose.yaml up -d
+ Docker Compose 2.x 版本之后
 docker compose -f docker-compose.yaml up -d              # 使用docker compose方式安装
 ```
 
-
+```
+docker login docker-bj.tencentcloudcr.com --username 100026887664 --password eyJhbGciOiJSUzI1NiIsImtpZCI6IkREWjM6NVZLSTpQRFJBOk5DM0w6TEVQWTpaM0hGOkRYVEI6S0g2UDoyTU1GOjNBVFk6UExTVjpaWlZIIn0.eyJvd25lclVpbiI6IjE4MjMxOTcwOSIsIm9wZXJhdG9yVWluIjoiMTAwMDI2ODg3NjY0IiwidG9rZW5JZCI6ImQ0YTJiZGM2dW5wdnNnNnA4M3MwIiwiZXhwIjoyMDc4Mjg4MDUzLCJuYmYiOjE3NjI5MjgwNTMsImlhdCI6MTc2MjkyODA1M30.UZjKXyhBN56Ee6tAgfJRYvxGqMaCFd7fP2qC230kSG2AvcNILu9EX_HIkpkeDwuqgLtiK-PTRb6GRcmnMCJb3QuWSGsQDI1QJq7EQWr8aD-DSDyAsokgi_NYDOA-mH4eYps4ceQADxwXd8qEbzG7ebFVWvOTZhzDFgJL-v3FJfE5msy3CGZPhfB-lEAwGwmIeWHmw0iOVoW6AX5EhEbvl4lIbMG_U6s4RoDAbaOsWtSRnPsTFD-Ne-y5wqiiMeOQZdRJhsy6MA0woaTc-COgVG30bFeo5I8mg_7nyFSxU92N2jf5BRSsTLbF5nuNQyeJ_VjV5gZP3o7ddKyRG1F2JQ
+```
 
 执行命令的时候发现连接超时报错
 

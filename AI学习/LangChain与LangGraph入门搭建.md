@@ -138,6 +138,105 @@ LangChain运行并行执行多个链或多个Agent，可以使用可以使用`Ru
 
 #### LangGraph
 
+LangGraph天然支持并行处理节点，只要这些节点没有依赖关系（例如，一个LLM的输出不能作为下一个节点的输入）。这就意味着**多个Agent可以同时运行**，前提是他们不是相互依赖的节点。
+
+此外，LangGraph也支持：
+
+- 使用``RunnableParallel``运行多个Graph
+- 通过Python的``asyncio``库并行调用工具
+
+
+
+### 重试逻辑和错误处理
+
+#### LangChain
+
+LangChain的错误处理需要开发者显示定义，可以通过：
+
+- 在链中引入重试逻辑（Retry Logic）
+- 在Agent中处理工具调用失败的情况
+
+
+
+#### LangGraph
+
+LangGraph可以直接在工作流中嵌入错误处理逻辑，方法是将错误处理作为一个独立的节点。
+
+- 当某热任务失败的时候，**可以跳转到另一个错误处理节点**，或者在当前节点进行重试。
+- 失败的节点会被单独重试，而不是整个工作流重新执行。
+- 这样，图可以从失败的地方继续执行，而不需要从头开始
+
+
+
+如果你的任务涉及多个步骤和工具调用，这种错误处理机制可能会非常的重要
+
+
+
+### 总结
+
+我们可以：
+
+- 仅适用LangChain
+- 仅适用LangGraph
+- 同时使用LangChain和LangGraph
+
+此外，你可以将**LangGraph的图结构编排能力**和其他的Agent框架结合，例如：将AutoGen的Agent作为LangGraph的节点。
+
+**LangChain和LangGraph各有优势，选择合适的工具可能会让人感到困惑，我们应该在什么情况下使用？**
+
+### 仅使用LangChain
+
+你需要快速构建AI工作流，例如：
+
+- 线性任务（Linear Tasks）：文档检索、文本生成、摘要等预定义的工作流。
+- AIAgent需要动态决策，但你不需要对复杂流程进行精细控制。
+
+
+
+### 仅使用LangGraph
+
+你的应用场景需要非线性工作流，例如：
+
+- 任务涉及**多个组件的动态交互**
+- 需要**条件判断、复杂的分支逻辑、错误处理或并行执行**
+- 你愿意自行实现LangChain未提供的部分功能
+
+
+
+### 同时使用LangChain和LangGraph
+
+你希望：
+
+- 利用LangChain现成的抽象能力（例如：RAG组件、记忆等等）
+- 同时使用LangGraph的非线性编排能力
+
+两者结合，**可以充分发挥各自的优势**，打造更加灵活和强大的AI工作流。
+
+
+
+## 一个简单的LangChain项目
+
+首先创建一个自己的虚拟环境
+
+```
+ #创建虚拟环境
+ python -m venv easy-llm
+ #激活虚拟环境
+ .\easy-llm\Scripts\activate
+```
+
+接入模型为千问max模型，所以需要安装相关依赖
+
+```
+pip install qwen-agent qwen datasets matplotlib
+```
+
+如果按照qwen失败，可以尝试升级一下pip
+
+```
+pip install --upgrade pip
+```
+
 
 
 

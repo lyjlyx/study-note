@@ -2175,9 +2175,9 @@ SPel表达式处理流程：
 
 ![image-20220905093545193](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220905093545193.png) 
 
-问题：ResourceEditorRegistrar为什么能找到CustomerEditorConfigurer这个类
+问题：ResourceEditorRegistrar为什么能找到CustomEditorConfigurer这个类
 
-因为CustomerEditorConfigurer实现了BeanFactoryPostProcessor
+因为CustomEditorConfigurer实现了BeanFactoryPostProcessor
 
 ![image-20220905093935162](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220905093935162.png) 
 

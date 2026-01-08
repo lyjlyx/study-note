@@ -139,7 +139,7 @@ BeanFactoryPostProcessor：增强beanDefinition的信息
 
 BeanPostProcessor：增强bean信息
 
-都是在原来的信息基础信息智商做一些增强扩展。
+都是在原来的信息基础信息之上做一些增强扩展。
 
 ![image-20220624163420007](https://lyx-study-note-image.oss-cn-shenzhen.aliyuncs.com/img/image-20220624163420007.png)
 
